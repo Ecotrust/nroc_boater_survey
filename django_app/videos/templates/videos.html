@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h4 style="margin:14px;">Videos</h4>
+{% for video in video_list %}
+<p class="video-link">
+        <a href="{{video.urlname}}" target="_blank">
+        <img src="{{video.image.url}}" align="left" />
+                        <span>{{video.title}}</span> - 
+                        {{video.description}}
+        </a>
+</p>
+{% endfor %}
+
+{% endblock %}
