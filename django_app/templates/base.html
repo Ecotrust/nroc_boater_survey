@@ -2,15 +2,33 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-<head>
+  <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Language" content="en-us" />
-    <title>Oregon Coast Survey</title>
-    {% block head %}    
+    <title>{% block title %}{% if title %}{{ title }}{% else %}Web Survey Tool{% endif %}{% endblock %}</title>
+    <meta name="description" content=" " />
+    <meta name="keywords" content=" " />
+    <meta name="robots" content="index, follow" /> 
+    <link rel="shortcut icon" href="/media/images/favicon.ico" />
+    {% block styles %}
+    <link href="/site-media/css/base.css" rel="stylesheet" type="text/css" media="screen" />
     {% endblock %}
-</head>
-<body>
-    {% block content %}
+    {% block js %}
     {% endblock %}
+  </head>
+  
+  <body {% block body_attribs %}{% endblock %}>
+  <div id="wrap">
+  {% block header %}
+  <div id="header">
+    <a href='/'>Banner goes here</a>
+  </div>
+  {% endblock %}
+  <div id="main">  
+	<div id="content">
+	  {% block content %}
+	  {% endblock %}
+	</div>
+  </div>
 </body>
 </html>
