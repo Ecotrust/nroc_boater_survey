@@ -1,2 +1,2 @@
 #!/bin/bash
-dropdb or-non-con
+dropdb rbsw
