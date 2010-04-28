@@ -8,13 +8,13 @@ body {
     font-size: 76%;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     color: #333;
-    background: #fff;
+    background: #07033C;
 }
 
 /* LINKS */
 
 a:link, a:visited {
-    color: #39F;
+    color: #FFFF00;
     text-decoration: none;
 }
 
@@ -46,7 +46,7 @@ p {
 h1,h2,h3,h4,h5,h6 {
     font-weight: normal; 
     margin:0; 
-    color:#666;
+    color:#FFF;
 }
 
 h1 {
@@ -555,8 +555,7 @@ a.deletelink:hover {
 
 #header {
     width: 100%;
-    padding-bottom: 6px;
-    padding-top: 6px;
+    margin-top: 20px;
 }
 
 #content-main {
@@ -583,7 +582,7 @@ a.deletelink:hover {
 /* HEADER */
 
 #header {
-    background: #FFFFFF;
+    background: #07033C;
     color: #333333;
     overflow: hidden;
 }
@@ -630,9 +629,10 @@ a.deletelink:hover {
 
 #wrap {
 	position: relative;
-	width: 800px; /*Width of main container*/
+	width: 770px; /*Width of main container*/
 	margin: 0 auto; /*Center container on page*/
-	background:#f9f9f9; 
+    background-color: #70889f;
+    color: #eee;
     padding-bottom: 6px;
-    Margin-bottom: 10px;
-	}
+    margin-bottom: 10px;
+}
