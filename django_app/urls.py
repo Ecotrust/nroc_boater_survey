@@ -11,7 +11,7 @@ from views import *
 
 urlpatterns = patterns('',
     (r'^$', intro),
-    (r'draw^', include('draw_app.urls')),
+    (r'^draw/', include('draw_app.urls')),
     (r'^videos/', include('videos.urls')),
     (r'^admin/', include(admin.site.urls))    
 )
