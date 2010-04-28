@@ -24,18 +24,18 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     startInit: function() {
         this.loadViewport();
         this.createError();        
-        this.startSplashStep();
+        this.startNavStep();
     },
                     
     /********************** Survey steps ************************/
 
     /*load unfinished resource tool if there is one */
-    startSplashStep: function() {
-        this.loadSplash();
+    startNavStep: function() {
+        this.loadNavPanel();
     },
     
     /* Finish splash and start resource selection */
-    finSplashStep: function() {
+    finNavStep: function() {
     	this.startPointActivity();
     },
     
@@ -89,11 +89,12 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     /******************** UI widget handlers ********************/   
     
     /* Load the initial splash screen for the user */
-    loadSplash: function() {      	
-        this.splashPanel = new gwst.widgets.SplashPanel();
+    loadNavPanel: function() {      	
+        this.navPanel = new gwst.widgets.NavigatePanel();
         //When panel fires event saying it's all done, we want to process it and move on 
-        this.splashPanel.on('splash-cont', this.finPointInstruction, this);
-        this.viewport.setWestPanel(this.splashPanel);
+        this.navPanel.on('nav-cont', function(){alert('You clicked continue')}, this);
+        this.navPanel.on('nav-skip', function(){alert('You clicked skip')}, this);        
+        this.viewport.setWestPanel(this.navPanel);
     },    
 
     loadPointInstruction: function(config) {      	

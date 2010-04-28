@@ -10,52 +10,10 @@ from utils.geojson_encode import *
 from models import *
 
 def draw(request):
-    return_url = request.GET.get('returnURL')
-    user_id = request.GET.get('mno')
-    return_url = return_url+'&mno='+user_id
-    activity_ids = request.GET.get('activities')
-    activity_ids = activity_ids.split(',')
-    
-    activity_list = []
-    point_activities = []
-    poly_activities = []
-    for activity_id in activity_ids:
-        activity = Activity.objects.get(kn_id=activity_id)
-        if activity.draw_type == 'point':
-            activity.shape_name = 'marker'            
-            activity.finished = False
-            point_activities.append(activity)
-        elif activity.draw_type == 'polygon':
-            activity.shape_name = 'area'
-            activity.finished = False
-            poly_activities.append(activity)
-        activity.num_saved = 0;
-    point_activities = geojson_encode(point_activities)
-    poly_activities = geojson_encode(poly_activities)
-    return render_to_response('draw.html', RequestContext(request,{'GMAPS_API_KEY':settings.GMAPS_API_KEY, 'point_activities':point_activities, 'poly_activities':poly_activities, 'return_url':return_url, 'user_id':user_id}) )
-
-def or_coast_cities(request):    
-    """Coast cities web service"""    
-    qs = OrCoastCities.objects.filter().order_by('city')
-    return render_to_geojson(
-        qs,
-        geom_attribute='the_geom',
-        mimetype = 'text/plain',
-        proj_transform=900913,
-        pretty_print=True
-    )
-
-def or_coast_placemarks(request):    
-    """Coast placemarks web service"""    
-    qs = OrCoastPlacemarks.objects.filter().order_by('name').exclude(type='Cemetery').exclude(type='Airport').exclude(type='Building').exclude(type='Canal').exclude(type='Census').exclude(type='Church').exclude(type='Channel').exclude(type='Civil').exclude(type='Gut').exclude(type='Mine').exclude(type='Populated Place').exclude(type='Post Office').exclude(type='School').exclude(type='Tower').exclude(type='Civil').exclude(type='Dam').exclude(type='Hospital').exclude(type='Military').exclude(type='Military (Historical)').exclude(type='Spring').exclude(type='Swamp').exclude(type='Valley').distinct()
-    return render_to_geojson(
-        qs,
-        geom_attribute='the_geom',
-        excluded_fields=['gid','type'],
-        mimetype = 'text/plain',
-        proj_transform=900913,
-        pretty_print=True
-    )
+    #return_url = request.GET.get('returnURL')
+    #user_id = request.GET.get('mno')
+    #return_url = return_url+'&mno='+user_id
+    return render_to_response('draw.html', RequestContext(request,{'GMAPS_API_KEY':settings.GMAPS_API_KEY}) )
 
 def draw_settings (request):
     pass
