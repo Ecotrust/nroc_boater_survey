@@ -23,8 +23,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 
     startInit: function() {
         this.loadViewport();
-        this.loadOrCoastPlacemarks();
-        this.createError();
+        this.createError();        
+        this.startSplashStep();
     },
                     
     /********************** Survey steps ************************/
@@ -243,55 +243,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     		this.saveNewFeature();
         }    	
     },
-    
-    /******************** Data store loaders *******************/    
-    
-    loadOrCoastPlacemarks: function() {
-    	this.loadWait('Loading Oregon Placemarks...');
-        gwst.settings.placemarkStore = new GeoExt.data.FeatureStore({
-            proxy:  new GeoExt.data.ProtocolProxy({
-                protocol: new OpenLayers.Protocol.HTTP({
-                    url: '/or_coast_placemarks/json/',
-                    format: new OpenLayers.Format.GeoJSON()
-                })
-            }),
-            fields: [{
-                name:'name',
-                type:'string',
-                defaultValue: null
-            }],	        
-            autoLoad: true  
-        });
-        gwst.settings.placemarkStore.on('load', this.afterPlacemarksLoaded, this);
-    },    
-
-    afterPlacemarksLoaded: function() {
-    	this.loadOrCoastCities();
-    },        	
-    
-    loadOrCoastCities: function() {
-    	this.loadWait('Loading Oregon Cities...');
-        gwst.settings.cityStore = new GeoExt.data.FeatureStore({
-            proxy:  new GeoExt.data.ProtocolProxy({
-                protocol: new OpenLayers.Protocol.HTTP({
-                    url: '/or_coast_cities/json/',
-                    format: new OpenLayers.Format.GeoJSON()
-                })
-            }),
-            fields: [{
-                name:'city',
-                type:'string',
-                defaultValue: null
-            }],	        
-            autoLoad: true  
-        });    
-        gwst.settings.cityStore.on('load', this.afterCitiesLoaded, this);        
-    },    
-    
-    afterCitiesLoaded: function() {
-    	this.hideWait();
-    	this.startSplashStep();   	
-    },    
 
     /******************** Feature handling *****************/
     
