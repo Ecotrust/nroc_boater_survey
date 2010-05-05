@@ -135,12 +135,8 @@ p.x-panel-static{
     padding: 10px;
 }
 
-.marker-icon {
-    background-image: url(/media/img/small_red_marker.png) ! important;
-}
-
-.poly-icon {
-    background-image: url(/media/img/shape_square_red.png) !important;
+.draw-icon {
+    background-image: url(/media/img/pencil_add.png) ! important;
 }
 
 .cancel-icon {

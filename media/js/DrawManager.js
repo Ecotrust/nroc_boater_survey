@@ -9,7 +9,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 	cur_poly_activity_index: 0, //Current poly activity
 	cur_activity_num: 1, //Current activity overall
 	cur_feature: null, //Last drawn feature
-	addMarkerWinOffset: [405, 8],
+	addRouteWinOffset: [405, 8],
 	addPolyWinOffset: [405, 8],
 	cancelWinOffset: [535, 8],
 	activityNum: 0,
@@ -24,46 +24,42 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     startInit: function() {
         this.loadViewport();
         this.createError();        
-        this.startLyrInstrStep();
+        this.startLyrInstructStep();
     },
                     
     /********************** Survey steps ************************/
 
-    startLyrInstrStep: function() {
-        this.loadLyrInstrPanel();
+    startLyrInstructStep: function() {
+        this.loadLyrInstructPanel();
     },
     
-    finLyrInstrStep: function() {
+    finLyrInstructStep: function() {
         this.startNavStep();
     },
 
-    /*load unfinished resource tool if there is one */
     startNavStep: function() {
         this.loadNavPanel();
     },
     
-    /* Finish splash and start resource selection */
     finNavStep: function() {
-    	this.startPointActivity();
+    	this.startRouteInstructStep();
+    },
+        
+    startRouteInstructStep: function() {
+        this.loadRouteInstructPanel();
     },
     
+    finRouteInstructStep: function() {
+    	this.startDrawInstructStep();
+    },    
     
-    /*load unfinished resource tool if there is one */
-    startPointInstruction: function() {
-        this.loadPointInstruction({'activity':this.getCurPointActivity().name});
+    startDrawInstructStep: function() {
+        this.loadDrawInstructPanel();
+        this.loadAddRouteWin();
     },
     
-    /* Finish splash and start resource selection */
-    finPointInstruction: function() {
-    	this.startPointActivity();
-    },
-    
-    startPolyInstruction: function() {
-    	this.loadPolyInstruction({'activity':this.getCurPolyActivity().name});
-    },
-    
-    finPolyInstruction: function() {
-    	this.startPolyActivity();
+    finDrawInstructStep: function() {
+        alert('Not Implemented');
     },
 
     /* 
@@ -96,91 +92,58 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     /******************** UI widget handlers ********************/   
     
-    loadLyrInstrPanel: function() {
-        this.lyrInstrPanel = new gwst.widgets.LayerInstructPanel();
+    loadLyrInstructPanel: function() {
+        this.lyrInstructPanel = new gwst.widgets.LayerInstructPanel();
         //When panel fires event saying it's all done, we want to process it and move on 
-        this.lyrInstrPanel.on('lyr-cont', this.finLyrInstrStep, this);
-        this.viewport.setWestPanel(this.lyrInstrPanel);    
+        this.lyrInstructPanel.on('lyr-cont', this.finLyrInstructStep, this);
+        this.viewport.setWestPanel(this.lyrInstructPanel);    
     },
     
-    /* Load the initial splash screen for the user */
     loadNavPanel: function() {      	
         this.navPanel = new gwst.widgets.NavigatePanel();
         //When panel fires event saying it's all done, we want to process it and move on 
-        this.navPanel.on('nav-cont', function(){alert('You clicked continue')}, this);  
+        this.navPanel.on('nav-cont', this.finNavStep, this);  
         this.viewport.setWestPanel(this.navPanel);
     },    
 
-    loadPointInstruction: function(config) {      	
-    	if (!this.pointInstrPanel) {
-	    	this.pointInstrPanel = new gwst.widgets.PointInstructionPanel(config);
+    loadRouteInstructPanel: function() {      	
+    	if (!this.routeInstructPanel) {
+	    	this.routeInstructPanel = new gwst.widgets.RouteInstructPanel();
 	        //When panel fires event saying it's all done, we want to process it and move on 
-	        this.pointInstrPanel.on('point-cont', this.finPointInstruction, this);
-    		this.pointInstrPanel.on('skip-activity', this.skipPointActivity, this);	        
-    	} else {
-    		this.pointInstrPanel.update(config);
+	        this.routeInstructPanel.on('route-cont', this.finRouteInstructStep, this);
     	}
-        this.viewport.setWestPanel(this.pointInstrPanel);  
-    },        
+        this.viewport.setWestPanel(this.routeInstructPanel);  
+    },      
     
-    loadPolyInstruction: function(config) {      	
-        if (!this.polyInstrPanel) {
-        	this.polyInstrPanel = new gwst.widgets.PolyInstructionPanel(config);
-        	//When panel fires event saying it's all done, we want to process it and move on 
-        	this.polyInstrPanel.on('poly-cont', this.finPolyInstruction, this);
-    		this.polyInstrPanel.on('skip-activity', this.skipPolyActivity, this);        	
-        } else {
-        	this.polyInstrPanel.update(config);
-        }
-        this.viewport.setWestPanel(this.polyInstrPanel);  
-    },        
+    loadDrawInstructPanel: function() {      	
+    	if (!this.drawInstructPanel) {
+	    	this.drawInstructPanel = new gwst.widgets.DrawInstructPanel();
+	        //When panel fires event saying it's all done, we want to process it and move on 
+	        this.drawInstructPanel.on('draw-cont', this.finDrawInstructStep, this);
+    	}
+        this.viewport.setWestPanel(this.drawInstructPanel);  
+    },      
     
     /* Render viewport with main widgets to document body (right now) */
     loadViewport: function() {
         this.viewport = new gwst.widgets.MainViewport({
 			mapPanelListeners: this.mapPanelListeners
 		});
-    },    
+    },            
     
-    loadPointPanel: function(config) {  
-    	if (!this.pointPanel) {
-    		this.pointPanel = new gwst.widgets.PointPanel(config);
-    		this.pointPanel.on('city-selected', this.zoomToCity, this);
-    		this.pointPanel.on('place-selected', this.zoomToPlacemark, this);
-    		this.pointPanel.on('skip-activity', this.skipPointActivity, this);
-    		this.pointPanel.on('next-activity', this.checkPointActivity, this);
-    	} else {
-    		this.pointPanel.update(config);
-    	}
-        this.viewport.setWestPanel(this.pointPanel);        
-    },    
-
-    loadPolyPanel: function(config) {  
-    	if (!this.polyPanel) {
-    		this.polyPanel = new gwst.widgets.PolyPanel(config);
-    		this.polyPanel.on('city-selected', this.zoomToCity, this);
-    		this.polyPanel.on('place-selected', this.zoomToPlacemark, this);
-    		this.polyPanel.on('skip-activity', this.skipPolyActivity, this);
-    		this.polyPanel.on('next-activity', this.checkPolyActivity, this);
-    	} else {
-    		this.polyPanel.update(config);
-    	}
-        this.viewport.setWestPanel(this.polyPanel); 
-    },        
-    
-    loadAddMarkerWin: function() {
-    	if (!this.addMarkerWin) {
-			this.addMarkerWin = new gwst.widgets.AddMarkerWindow();
-			this.addMarkerWin.on('add-marker-clicked', this.mapPanel.enablePointDraw, this.mapPanel);
-			this.addMarkerWin.on('add-marker-clicked', this.loadAddMarkerTip, this);		
+    loadAddRouteWin: function() {
+    	if (!this.addRouteWin) {
+			this.addRouteWin = new gwst.widgets.AddRouteWindow();
+			this.addRouteWin.on('draw-route-clicked', this.mapPanel.enableLineDraw, this.mapPanel);
+			this.addRouteWin.on('draw-route-clicked', this.loadAddRouteTip, this);		
 		}
-		this.addMarkerWin.show();		
-		this.addMarkerWin.alignTo(document.body, "tl-tl", this.addMarkerWinOffset);    	
+		this.addRouteWin.show();		
+		this.addRouteWin.alignTo(document.body, "tl-tl", this.addRouteWinOffset);    	
     },
     
-    hideAddMarkerWin: function() {
-    	if (this.addMarkerWin) {
-    		this.addMarkerWin.hide();
+    hideAddRouteWin: function() {
+    	if (this.addRouteWin) {
+    		this.addRouteWin.hide();
     	}
     },
 
@@ -234,28 +197,22 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },    
     
     /* Load the satisfied with shape west panel */
-    loadSatisfiedShapePanel: function() {
-    	if (!this.satisfiedShapePanel) {
-    		this.satisfiedShapePanel = new gwst.widgets.SatisfiedShapePanel({shape_name: this.getCurActivity().shape_name});
+    loadSatisfiedRouteStep: function() {
+    	if (!this.satisfiedRoutePanel) {
+    		this.satisfiedRoutePanel = new gwst.widgets.SatisfiedRoutePanel();
             //When panel fires event saying it's all done, we want to process it and move on 
-            this.satisfiedShapePanel.on('satisfied', this.finSatisfiedShapeStep, this);            
-        } else {
-        	this.satisfiedShapePanel.updateText({shape_name: this.getCurActivity().shape_name});
+            this.satisfiedRoutePanel.on('satisfied', this.finSatisfiedRouteStep, this);            
         }
-        this.viewport.setWestPanel(this.satisfiedShapePanel);    	
+        this.viewport.setWestPanel(this.satisfiedRoutePanel);    	
     },    
     
-    finSatisfiedShapeStep: function(result) {
+    finSatisfiedRouteStep: function(result) {
     	if (!result.satisfied) {
     		this.mapPanel.removeLastFeature();
-    		//Restart the current activity
-    		if (this.getCurActivity().draw_type == 'polygon') {
-        		this.startPolyActivity();
-        	} else {
-        		this.startPointActivity();
-        	}
+    		this.startDrawInstructStep();
     	} else {
-    		this.saveNewFeature();
+    		alert('Route saving not implemented');
+            this.startDrawInstructStep();
         }    	
     },
 
@@ -289,7 +246,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         var res_obj = Ext.decode(response.responseText);
         var status_code = parseFloat(res_obj.status_code);
         if (status_code == 0) {
-        	this.loadSatisfiedShapePanel();
+        	this.loadSatisfiedRouteStep();
         } else if (status_code > 0){
         	this.startInvalidShapeStep(status_code);	
         } else {
@@ -366,7 +323,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     		'activity':cur_activity.name,
     		'activity_num':this.cur_activity_num
     	});
-    	this.loadAddMarkerWin();    	
+    	this.loadAddRouteWin();    	
     },
 
     getCurActivity: function() {
@@ -383,8 +340,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     skipPointActivity: function() {
     	this.hideMapTooltip();
-    	this.mapPanel.disablePointDraw();
-    	this.hideAddMarkerWin();
+    	this.mapPanel.disableLineDraw();
+    	this.hideAddRouteWin();
     	//Save skip in database
     	//Reset instruction flag so they get shown again for the next activity
     	this.point_instruct_loaded = false;
@@ -393,9 +350,9 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     checkPointActivity: function() {
     	this.hideMapTooltip();
-    	this.mapPanel.disablePointDraw();
+    	this.mapPanel.disableLineDraw();
     	if (this.getCurActivity().num_saved > 0) {
-        	this.hideAddMarkerWin();    		
+        	this.hideAddRouteWin();    		
     		//Reset instruction flag so they get shown again for the next activity
     		this.point_instruct_loaded = false;
     		this.goToNextPointActivity();
@@ -467,9 +424,9 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     newFeatureHandler: function(feature) {
     	this.cur_feature = feature;
     	//If user drew a point, skip straight to satisfied
-    	if (feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point') {
-    		this.hideAddMarkerWin();
-    		this.loadSatisfiedShapePanel();
+    	if (feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.LineString') {
+    		this.hideAddRouteWin();
+    		this.loadSatisfiedRouteStep();
     		return;
     	} else {
     		this.hideAddPolyWin();
@@ -499,8 +456,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     /******************** UI Utility Functions ********************/    
     
-    loadAddMarkerTip: function() {
-    	this.loadMapTooltip('Now click on the map where the activity took place');
+    loadAddRouteTip: function() {
+    	this.loadMapTooltip('Now click on the map where you started your route. Continue clicking and tracing it out. Double-click the last point to finish');
     },    
     
     loadDrawAreaTooltip: function() {

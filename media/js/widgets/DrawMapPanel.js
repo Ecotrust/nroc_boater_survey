@@ -110,18 +110,25 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 		map.addControl(new OpenLayers.Control.MousePosition());
 
 		//Point control
-        this.drawPointControl = new OpenLayers.Control.DrawFeature(
-        	this.vectorLayer,
-            OpenLayers.Handler.Point
+        //this.drawPointControl = new OpenLayers.Control.DrawFeature(
+        //	this.vectorLayer,
+        //    OpenLayers.Handler.Point
+        //);        		
+		//map.addControl(this.drawPointControl);		
+        
+        //Line
+        this.drawLineControl = new OpenLayers.Control.DrawFeature(
+            	this.vectorLayer,
+                OpenLayers.Handler.Path
         );        		
-		map.addControl(this.drawPointControl);		
+		map.addControl(this.drawLineControl);                
         
         //Polygon 
-        this.drawPolyControl = new OpenLayers.Control.DrawFeature(
-            	this.vectorLayer,
-                OpenLayers.Handler.Polygon
-        );        		
-		map.addControl(this.drawPolyControl);                
+        //this.drawPolyControl = new OpenLayers.Control.DrawFeature(
+        //    	this.vectorLayer,
+        //        OpenLayers.Handler.Polygon
+        //);        		
+		//map.addControl(this.drawPolyControl);                
 
 		//Select control
 //        this.selectControl = new OpenLayers.Control.SelectFeature(
@@ -194,6 +201,14 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     
     disablePointDraw: function() {
     	this.drawPointControl.deactivate();
+    },
+    
+    enableLineDraw: function() {
+        this.drawLineControl.activate();
+    },
+    
+    disableLineDraw: function() {
+        this.drawLineControl.deactivate();
     },
     
     enablePolyDraw: function() {

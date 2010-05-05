@@ -1,47 +1,39 @@
 Ext.namespace('gwst', 'gwst.widgets');
 
-gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
-    id: 'lyr-panel',
-	resource: 'unknown',
-    shape_name: 'unknown',
-    user_group: 'unknown',
-    help_url: gwst.settings.urls.lyr_help,
+gwst.widgets.DrawInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
+    id: 'draw-panel',
+    help_url: gwst.settings.urls.draw_help,
 	
     // Constructor Defaults, can be overridden by user's config object
     initComponent: function(){
         // Constructor, config object already applied to 'this' so properties can 
         // be created and added/overridden here: Ext.apply(this, {});
 		
-		this.addEvents('lyr-cont');
-        this.addEvents('lyr-back');
+		this.addEvents('draw-cont');
+        this.addEvents('draw-back');
 		
         // Call parent (required)
-        gwst.widgets.LayerInstructPanel.superclass.initComponent.apply(
+        gwst.widgets.DrawInstructPanel.superclass.initComponent.apply(
           this, arguments);                     
     },
-    
-    updateText: function(text_config) {
-        Ext.apply(this, text_config);
-        this.inner_panel.getEl().update(this.getHtmlText());
-    },
-    
+
     getHtmlText: function() {
-        var html_text = '<h2>Instructions</h2><p>A number of map layers such as nautical charts are available to assist you in finding where you went on your last trip. The map layers can be found to the top right of the map. Turn them on and off as needed by clicking the checkboxes.</p>';
+        var html_text = '<h2>Instructions</h2><p>Draw the route of your last trip on the map from start to finish.</p>';
         return html_text;
     },
 	
     onRender: function(){
     
         this.header_panel = new Ext.Container({  
-			autoEl: {tag:'div', cls:'action-panel-header', id:'header_lyr', html:'Map Layers'},
+			autoEl: {tag:'div', cls:'action-panel-header', id:'header_draw', html:'Draw Your Route'},
 			style: 'padding:5px',
-            id: 'lyr_header_panel_point',
+            id: 'draw_header_panel_point',
 			border: false   
         }); 
 
 		this.inner_panel = new Ext.Panel({
 			html: this.getHtmlText(),
-            id: 'lyr_inner_panel',
+            id: 'draw_inner_panel',
 			style: 'margin: 10px',
 			border: false
 		});
@@ -56,21 +48,35 @@ gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
             layoutConfig: {
                 columns: 2
             },
-            id: 'lyr_table_panel',
+            id: 'draw_table_panel',
             items: [{
-                html: '<p>Nautical Chart</p>'
+                html: '<p>a. Click the \'Draw Route\' button.</p>'
+            },{
+                html: 'image here"'
+            },{
+                html: '<p>b. Click once on the map where you started your trip</p>'
             },{
                 html: 'image here'
             },{
-                html: '<p>Access Points</p>'
-            },{
-                html: 'image here'
-            },{
-                html: '<p>Bathymetry</p>'
+                html: '<p>c. Move mouse and click to create a second point</p>'
             }, {
                 html: 'image here'
             },{
-                html: '<p class="video-link"><a href="'+ this.help_url +'" onclick="alert(\'Not implemented\'); return false" target="_blank">View Video Demonstration</a>'
+                html: '<p>d. Continue clicking along your boat route</p>'
+            },{
+                html: 'image here'
+            },{
+                html: '<p>e. Use the arrow buttons to move the map as you go</p>'
+            },{
+                html: 'image here'
+            },{
+                html: '<p>f. Double-click the last point to complete the route</p>'
+            },{
+                html: 'image here'
+            },{
+                html: '<p>g. If you made a mistake, click the \'Cancel\' button</p>'
+            },{
+                html: 'image here'
             }]
         });       
 
@@ -88,17 +94,13 @@ gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.button_panel);
         
         // Call parent (required)
-        gwst.widgets.LayerInstructPanel.superclass.onRender.apply(this, arguments); 
+        gwst.widgets.DrawInstructPanel.superclass.onRender.apply(this, arguments); 
 	},
-    
-    skipClicked: function() {
-        this.fireEvent('lyr-skip',this);
-    },
-    
+
 	contBtnClicked: function() {
-		this.fireEvent('lyr-cont',this,this.resource);
+		this.fireEvent('draw-cont',this,this.resource);
     }
 });
  
 // register xtype to allow for lazy initialization
-Ext.reg('gwst-layer-instruct-panel', gwst.widgets.LayerInstructPanel);
+Ext.reg('gwst-draw-instruct-panel', gwst.widgets.DrawInstructPanel);
