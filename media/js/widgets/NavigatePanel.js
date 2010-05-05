@@ -26,7 +26,7 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     getHtmlText: function() {
-        var html_text = '<h2>Instructions</h2><p>Navigate the map and zoom in to the location you started your last trip.</p>';
+        var html_text = '<h2>Instructions</h2><p>Navigate the map and zoom in to the location you started your last trip for the following vessel: <i><b>'+gwst.settings.vessel+'</i></b>.</p>';
         return html_text;
     },
 	
