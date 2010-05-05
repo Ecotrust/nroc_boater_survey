@@ -24,10 +24,18 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     startInit: function() {
         this.loadViewport();
         this.createError();        
-        this.startNavStep();
+        this.startLyrInstrStep();
     },
                     
     /********************** Survey steps ************************/
+
+    startLyrInstrStep: function() {
+        this.loadLyrInstrPanel();
+    },
+    
+    finLyrInstrStep: function() {
+        this.startNavStep();
+    },
 
     /*load unfinished resource tool if there is one */
     startNavStep: function() {
@@ -88,12 +96,18 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     /******************** UI widget handlers ********************/   
     
+    loadLyrInstrPanel: function() {
+        this.lyrInstrPanel = new gwst.widgets.LayerInstructPanel();
+        //When panel fires event saying it's all done, we want to process it and move on 
+        this.lyrInstrPanel.on('lyr-cont', this.finLyrInstrStep, this);
+        this.viewport.setWestPanel(this.lyrInstrPanel);    
+    },
+    
     /* Load the initial splash screen for the user */
     loadNavPanel: function() {      	
         this.navPanel = new gwst.widgets.NavigatePanel();
         //When panel fires event saying it's all done, we want to process it and move on 
-        this.navPanel.on('nav-cont', function(){alert('You clicked continue')}, this);
-        this.navPanel.on('nav-skip', function(){alert('You clicked skip')}, this);        
+        this.navPanel.on('nav-cont', function(){alert('You clicked continue')}, this);  
         this.viewport.setWestPanel(this.navPanel);
     },    
 

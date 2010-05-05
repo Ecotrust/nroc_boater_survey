@@ -1,22 +1,22 @@
 Ext.namespace('gwst', 'gwst.widgets');
 
-gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
-    id: 'navigate-panel',
+gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
+    id: 'lyr-panel',
 	resource: 'unknown',
     shape_name: 'unknown',
     user_group: 'unknown',
-    help_url: gwst.settings.urls.nav_help,
+    help_url: gwst.settings.urls.lyr_help,
 	
     // Constructor Defaults, can be overridden by user's config object
     initComponent: function(){
         // Constructor, config object already applied to 'this' so properties can 
         // be created and added/overridden here: Ext.apply(this, {});
 		
-		this.addEvents('nav-cont');
-        this.addEvents('nav-back');
+		this.addEvents('lyr-cont');
+        this.addEvents('lyr-back');
 		
         // Call parent (required)
-        gwst.widgets.NavigatePanel.superclass.initComponent.apply(
+        gwst.widgets.LayerInstructPanel.superclass.initComponent.apply(
           this, arguments);                     
     },
     
@@ -26,14 +26,14 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     getHtmlText: function() {
-        var html_text = '<h2>Instructions</h2><p>Navigate the map and zoom in to the location you started your last trip for the following vessel: <i><b>'+gwst.settings.vessel+'</i></b>.</p>';
+        var html_text = '<h2>Instructions</h2><p>A number of map layers are available to the top right of the map to assist you in finding where you went on your last trip. Click the checkboxes to turn them on and off.</p>';
         return html_text;
     },
 	
     onRender: function(){
     
         this.header_panel = new Ext.Container({  
-			autoEl: {tag:'div', cls:'action-panel-header', id:'header_html_point', html:'Navigate the Map'},
+			autoEl: {tag:'div', cls:'action-panel-header', id:'header_html_point', html:'Map Layers'},
 			style: 'padding:5px',
             id: 'intro_header_panel_point',
 			border: false   
@@ -41,7 +41,7 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
 
 		this.inner_panel = new Ext.Panel({
 			html: this.getHtmlText(),
-            id: 'nav_inner_panel',
+            id: 'lyr_inner_panel',
 			style: 'margin: 10px',
 			border: false
 		});
@@ -56,19 +56,19 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
             layoutConfig: {
                 columns: 2
             },
-            id: 'nav_table_panel',
+            id: 'lyr_table_panel',
             items: [{
-                html: '<p>a. Use the arrow buttons to pan the map North, South, East or West centering the map over your starting location.'
+                html: '<p>Nautical Chart</p>'
             },{
-                html: '<img src="/media/img/nav_2.png">'
+                html: 'image here'
             },{
-                html: '<p>b. Zoom the map in and out by clicking the \'+\' and \'-\' buttons on the map.</p>'
+                html: '<p>Access Points</p>'
             },{
-                html: '<img src="/media/img/nav_2.png">'
+                html: 'image here'
             },{
-                html: '<p>c. Get as close as you can then press the Continue button</p>'
+                html: '<p>Bathymetry</p>'
             }, {
-                html: ''
+                html: 'image here'
             },{
                 html: '<p class="video-link"><a href="'+ this.help_url +'" onclick="alert(\'Not implemented\'); return false" target="_blank">View Video Demonstration</a>'
             }]
@@ -88,17 +88,17 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.button_panel);
         
         // Call parent (required)
-        gwst.widgets.NavigatePanel.superclass.onRender.apply(this, arguments); 
+        gwst.widgets.LayerInstructPanel.superclass.onRender.apply(this, arguments); 
 	},
     
     skipClicked: function() {
-        this.fireEvent('nav-skip',this);
+        this.fireEvent('lyr-skip',this);
     },
     
 	contBtnClicked: function() {
-		this.fireEvent('nav-cont',this,this.resource);
+		this.fireEvent('lyr-cont',this,this.resource);
     }
 });
  
 // register xtype to allow for lazy initialization
-Ext.reg('gwst-navigate-panel', gwst.widgets.NavigatePanel);
+Ext.reg('gwst-layer-instruct-panel', gwst.widgets.LayerInstructPanel);
