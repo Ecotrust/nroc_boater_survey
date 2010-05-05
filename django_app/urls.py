@@ -13,7 +13,8 @@ urlpatterns = patterns('',
     (r'^$', intro),
     (r'^draw/', include('draw_app.urls')),
     (r'^videos/', include('videos.urls')),
-    (r'^admin/', include(admin.site.urls))    
+    (r'^admin/', include(admin.site.urls)),
+    (r'^test/', test),
 )
 
 #Serve media through development server instead of web server (Apache)

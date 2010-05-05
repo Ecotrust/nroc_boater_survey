@@ -9,11 +9,12 @@ from utils.geojson_encode import *
 
 from models import *
 
-def draw(request):
-    #return_url = request.GET.get('returnURL')
-    #user_id = request.GET.get('mno')
-    #return_url = return_url+'&mno='+user_id
-    return render_to_response('draw.html', RequestContext(request,{'GMAPS_API_KEY':settings.GMAPS_API_KEY}) )
+def draw(request):    
+    params = {
+        'interview_id': request.session['interview_id'], 
+        'vessel': request.session['vessel']
+    }
+    return render_to_response('draw.html', RequestContext(request, params))
 
 def draw_settings (request):
     pass
