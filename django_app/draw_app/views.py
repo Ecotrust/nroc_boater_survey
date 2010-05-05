@@ -10,6 +10,8 @@ from utils.geojson_encode import *
 from models import *
 
 def draw(request):    
+    if not request.session.has_key('interview_id'):    
+        return HttpResponse('We\'re sorry, this section is not accessible without providing the proper information' , status=500)
     params = {
         'interview_id': request.session['interview_id'], 
         'vessel': request.session['vessel']
