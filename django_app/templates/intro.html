@@ -29,7 +29,7 @@
                 <li>Just be as accurate as you can.</li>
             </ul></td>
         </tr><tr>
-            <td colspan="2"><b>Finally, you will be asked to draw areas along that route where you particpated in different activities.</b></td>
+            <td colspan="2"><b>Finally, you will be asked to draw areas along that route where you participated in different activities.</b></td>
         </tr><tr>
             <td><span style='border: 1px solid white'>Image goes here</span></td>
             <td><ul>
@@ -43,7 +43,8 @@
 asked questions</a> page.  You can also email <a href="mailto:help@maboatersurvey.com">help@maboatersurvey.com</a>.</p>
 
    <form style='width: 600px' class="gwst-form" method="post" action="/draw/">
-   <p><input id="submit" type="submit" value="Continue" />
+   <p><input id="submit" type="button" value="Skip This Section" onclick='confirm("Are you sure you want to skip the drawing portion? Step-by-step instructions are provided to help you through the process and the information you provide will be kept confidential.")'/>
+   &nbsp;&nbsp;<input id="submit" type="submit" value="Continue" />
    </form>
 
 {% endblock %}
