@@ -1,1 +1,1 @@
-dropdb -U postgres or-non-con
+dropdb -U postgres rbsw
