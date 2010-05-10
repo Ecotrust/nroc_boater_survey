@@ -124,11 +124,11 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 		map.addControl(this.drawLineControl);                
         
         //Polygon 
-        //this.drawPolyControl = new OpenLayers.Control.DrawFeature(
-        //    	this.vectorLayer,
-        //        OpenLayers.Handler.Polygon
-        //);        		
-		//map.addControl(this.drawPolyControl);                
+        this.drawPolyControl = new OpenLayers.Control.DrawFeature(
+           	this.vectorLayer,
+               OpenLayers.Handler.Polygon
+        );        		
+		map.addControl(this.drawPolyControl);                
 
 		//Select control
 //        this.selectControl = new OpenLayers.Control.SelectFeature(
@@ -165,7 +165,8 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     vecComplete: function(evt) {
     	this.fireEvent('vector-completed', evt.feature);
     	this.curFeature = evt.feature;
-    	this.disablePointDraw();
+    	// this.disablePointDraw();
+        this.disableLineDraw();
     	this.disablePolyDraw();
     },
     
@@ -194,14 +195,14 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 //        feature.popup = null;
 //    },
     
-    enablePointDraw: function() {
-//    	this.selectControl.unselectAll();
-        this.drawPointControl.activate();        
-    },
+    // enablePointDraw: function() {
+   	// this.selectControl.unselectAll();
+        // this.drawPointControl.activate();        
+    // },
     
-    disablePointDraw: function() {
-    	this.drawPointControl.deactivate();
-    },
+    // disablePointDraw: function() {
+    	// this.drawPointControl.deactivate();
+    // },
     
     enableLineDraw: function() {
         this.drawLineControl.activate();
@@ -220,10 +221,10 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     	this.drawPolyControl.deactivate();
     },    
     
-    zoomToPoint: function(pnt) {
-    	var lonlat = new OpenLayers.LonLat(pnt.geometry.x, pnt.geometry.y);
-    	this.map.setCenter(lonlat, 8);
-    },
+    // zoomToPoint: function(pnt) {
+    	// var lonlat = new OpenLayers.LonLat(pnt.geometry.x, pnt.geometry.y);
+    	// this.map.setCenter(lonlat, 8);
+    // },
     
     cancelPoly: function() {
     	this.disablePolyDraw();        
