@@ -8,7 +8,10 @@ gwst.widgets.SatisfiedRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
         // Constructor, config object already applied to 'this' so properties can 
         // be created and added/overridden here: Ext.apply(this, {});
 		
-		this.addEvents('satisfied');
+		this.addEvents('cont-route');
+        this.addEvents('edit-route');
+        this.addEvents('redraw-route');
+        this.addEvents('save-route');
 		
         // Call parent (required)
         gwst.widgets.SatisfiedRoutePanel.superclass.initComponent.apply(
@@ -21,7 +24,8 @@ gwst.widgets.SatisfiedRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     getHtmlText: function() {
-        var html_text = '<h3>Are you satisfied with the route you just drew? Click \'No\' to draw it again.</h3>';
+        var html_text = '<h3>Are you satisfied with your boat route?</h3>\
+        <p>Your route should capture your entire trip even if you made multiple stops, finished where you started, or came back the same way.</p>';
         return html_text;
     },
 	
@@ -33,9 +37,44 @@ gwst.widgets.SatisfiedRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
 			border: false
 		});
         
-        this.button_panel = new gwst.widgets.YesNoButtons ({
-            yes_handler: this.yesClicked.createDelegate(this),
-            no_handler: this.noClicked.createDelegate(this)
+        this.button_panel = new gwst.widgets.CustomButtons ({
+            element_list: [{
+                elem: this.contClicked.createDelegate(this),
+                type: 'handler'
+            },{
+                elem: 'Continue drawing route',
+                type: 'text'
+            },{
+            	elem: '',
+            	type: 'text'            	
+            },{
+                elem: this.editClicked.createDelegate(this),
+                type: 'handler'
+            },{
+                elem: 'Edit route',
+                type: 'text'
+            },{
+                elem: 'Make some edits to this route',
+                type: 'text'
+            },{
+                elem: this.redrawClicked.createDelegate(this),
+                type: 'handler'
+            },{
+                elem: 'Redraw route',
+                type: 'text'
+            },{
+                elem: 'Discard this route and draw it again',
+                type: 'text'
+            },{
+                elem: this.saveClicked.createDelegate(this),
+                type: 'handler'
+            },{
+                elem: 'Save route',
+                type: 'text'
+            },{
+                elem: 'Save this route and move on',
+                type: 'text'
+            }]
         });
         
 		this.add(this.inner_panel);
@@ -45,12 +84,20 @@ gwst.widgets.SatisfiedRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
         gwst.widgets.SatisfiedRoutePanel.superclass.onRender.apply(this, arguments); 
 	},
     
-    yesClicked: function() {
-        this.fireEvent('satisfied',{satisfied:true});
+    contClicked: function() {
+		this.fireEvent('cont-route',this);
     },
     
-	noClicked: function() {
-		this.fireEvent('satisfied',{satisfied:false});
+    editClicked: function() {
+        this.fireEvent('edit-route',this);
+    },
+    
+	redrawClicked: function() {
+		this.fireEvent('redraw-route',this);
+    },
+    
+    saveClicked: function() {
+        this.fireEvent('save-route',this);
     }
 });
  

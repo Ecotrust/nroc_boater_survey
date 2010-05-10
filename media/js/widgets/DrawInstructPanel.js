@@ -50,9 +50,13 @@ gwst.widgets.DrawInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
             },
             id: 'draw_table_panel',
             items: [{
+                html: '<p><b>How?</b></p>'
+            },{
+                html: ''
+            },{
                 html: '<p>a. Click the \'Draw Route\' button.</p>'
             },{
-                html: 'image here"'
+                html: 'image here'
             },{
                 html: '<p>b. Click once on the map where you started your trip</p>'
             },{

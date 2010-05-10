@@ -196,24 +196,47 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.viewport.setWestPanel(this.invalidShapePanel);    	
     },    
     
-    /* Load the satisfied with shape west panel */
+    /* Load the satisfied with route west panel */
     loadSatisfiedRouteStep: function() {
     	if (!this.satisfiedRoutePanel) {
     		this.satisfiedRoutePanel = new gwst.widgets.SatisfiedRoutePanel();
             //When panel fires event saying it's all done, we want to process it and move on 
-            this.satisfiedRoutePanel.on('satisfied', this.finSatisfiedRouteStep, this);            
+            this.satisfiedRoutePanel.on('cont-route', this.contDrawInstructStep, this);
+            this.satisfiedRoutePanel.on('edit-route', this.editRouteStep, this);
+            this.satisfiedRoutePanel.on('redraw-route', this.redrawRouteStep, this);
+            this.satisfiedRoutePanel.on('save-route', this.finSatisfiedRouteStep, this);
         }
         this.viewport.setWestPanel(this.satisfiedRoutePanel);    	
     },    
     
+    contDrawInstructStep: function() {
+        alert('Route continuation not implemented');
+    },
+     
+    editRouteStep: function() {
+        alert('Route editing not implemented');
+        this.loadEditRouteStep();
+    },
+    
+    redrawRouteStep: function() {
+        this.mapPanel.removeLastFeature();
+    	this.startDrawInstructStep();
+    },
+    
     finSatisfiedRouteStep: function(result) {
-    	if (!result.satisfied) {
-    		this.mapPanel.removeLastFeature();
-    		this.startDrawInstructStep();
-    	} else {
-    		alert('Route saving not implemented');
-            this.startDrawInstructStep();
-        }    	
+    	alert('Route saving not implemented');
+        this.startDrawInstructStep();
+    },
+    
+    /* Load the edit route west panel */
+    loadEditRouteStep: function() {
+        if (!this.editRoutePanel) {
+            this.editRoutePanel = new gwst.widgets.EditRoutePanel();
+            //When panel fires event saying it's all done, we want to process it and move on 
+            this.editRoutePanel.on('redraw-edit-route', this.redrawRouteStep, this);
+            this.editRoutePanel.on('save-edit-route', this.finSatisfiedRouteStep, this);
+        }
+        this.viewport.setWestPanel(this.editRoutePanel);
     },
 
     /******************** Feature handling *****************/
