@@ -64,6 +64,12 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     startEditRouteStep: function() {
         this.loadEditRoutePanel();
+        this.enableRouteEdit();
+    },  
+    
+    finEditRouteStep: function() {
+        this.disableRouteEdit();
+        this.startActivityInstructStep();
     },
     
     startActivityInstructStep: function() {
@@ -236,7 +242,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.editRoutePanel = new gwst.widgets.EditRoutePanel();
             //When panel fires event saying it's all done, we want to process it and move on 
             this.editRoutePanel.on('redraw-edit-route', this.redrawRoute, this);
-            this.editRoutePanel.on('save-edit-route', this.finDrawInstructStep, this);
+            this.editRoutePanel.on('save-edit-route', this.finEditRouteStep, this);
         }
         this.viewport.setWestPanel(this.editRoutePanel);
     },
@@ -252,6 +258,14 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },      
     
     /******************** Feature handling *****************/
+    
+    enableRouteEdit: function() {
+        this.mapPanel.modifyFeature(this.cur_feature);
+    },
+    
+    disableRouteEdit: function() {
+        this.mapPanel.finModifyFeature();
+    },
     
     validateShape: function(feature) {    	
     	var config = {
