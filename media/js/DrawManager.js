@@ -64,11 +64,11 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     startEditRouteStep: function() {
         this.loadEditRoutePanel();
-        this.enableRouteEdit();
+        this.enableFeatureEdit();
     },  
     
     finEditRouteStep: function() {
-        this.disableRouteEdit();
+        this.disableFeatureEdit();
         this.startActivityInstructStep();
     },
     
@@ -91,11 +91,11 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     startEditActivityStep: function() {
         this.loadEditActivityPanel();
-        //this.enableActivityEdit();
+        this.enableFeatureEdit();
     },  
     
     finEditActivityStep: function() {
-        //this.disableActivityEdit();
+        this.disableFeatureEdit();
         this.startAreaInfoStep();
     },
     
@@ -302,17 +302,23 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },    
     
     loadEditActivityPanel: function() {
-        alert("edit activity not implemented yet");
+        if (!this.editActPanel) {
+            this.editActPanel = new gwst.widgets.EditActivityPanel();
+            //When panel fires event saying it's all done, we want to process it and move on 
+            this.editActPanel.on('redraw-edit-act', this.redrawActivity, this);
+            this.editActPanel.on('save-edit-act', this.finEditActivityStep, this);
+        }
+        this.viewport.setWestPanel(this.editActPanel);
     },
     
     
     /******************** Feature handling *****************/
     
-    enableRouteEdit: function() {
+    enableFeatureEdit: function() {
         this.mapPanel.modifyFeature(this.cur_feature);
     },
     
-    disableRouteEdit: function() {
+    disableFeatureEdit: function() {
         this.mapPanel.finModifyFeature();
     },
     
