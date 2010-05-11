@@ -121,7 +121,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 
         this.vectorLayer = new OpenLayers.Layer.Vector(
     		"Vector Layer", 
-    		{styleMap: pointStyleMap, displayInLayerSwitcher: false}
+    		{displayInLayerSwitcher: false}
         );        
         this.vectorLayer.events.on({
             "sketchstarted": this.vecStarted,
@@ -161,6 +161,9 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
                 OpenLayers.Handler.Path
         );        		
 		map.addControl(this.drawLineControl);                
+        
+        this.modifyControl = new OpenLayers.Control.ModifyFeature(this.vectorLayer);
+        map.addControl(this.modifyControl);
         
         //Polygon 
         this.drawPolyControl = new OpenLayers.Control.DrawFeature(
@@ -207,6 +210,15 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     	// this.disablePointDraw();
         this.disableLineDraw();
     	this.disablePolyDraw();
+    },
+    
+    modifyFeature: function(feature) {
+        this.modifyControl.activate();
+        this.modifyControl.selectFeature(feature);
+    },
+    
+    finModifyFeature: function() {
+        this.modifyControl.deactivate();
     },
     
     removeLastFeature: function() {
