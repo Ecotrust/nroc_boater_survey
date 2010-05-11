@@ -51,7 +51,7 @@ gwst.widgets.ActivityInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
 	},
 
     skipActClicked: function() {
-        alert("Skip activities not implemented yet!");
+        this.fireEvent('activity-skip',this);
     },
     
     contBtnClicked: function() {

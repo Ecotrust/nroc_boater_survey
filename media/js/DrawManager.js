@@ -80,6 +80,10 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.startDrawActivityInstructStep();
     },
     
+    skipActivitiesStep: function() {
+        alert("Skip activities not implemented yet!");
+    },
+    
     startDrawActivityInstructStep: function() {
         this.loadDrawActivityInstructPanel();
         this.loadAddPolyWin();
@@ -272,6 +276,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 	    	this.actInstructPanel = new gwst.widgets.ActivityInstructPanel();
 	        //When panel fires event saying it's all done, we want to process it and move on 
 	        this.actInstructPanel.on('activity-cont', this.finActivityInstructStep, this);
+            this.actInstructPanel.on('activity-skip', this.skipActivitiesStep, this);
     	}
         this.viewport.setWestPanel(this.actInstructPanel);  
     },   
