@@ -224,7 +224,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     contDrawInstruct: function() {
         alert('Route continuation not implemented');
     },
-    },
     
     redrawRoute: function() {
         this.mapPanel.removeLastFeature();
