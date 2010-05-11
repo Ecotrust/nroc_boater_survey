@@ -215,7 +215,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
      
     editRouteStep: function() {
         alert('Route editing not implemented');
-        this.loadEditRouteStep();
+        this.load();
     },
     
     redrawRouteStep: function() {

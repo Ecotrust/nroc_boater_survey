@@ -20,7 +20,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         var map_options = {
 			controls: [],
             projection: new OpenLayers.Projection("EPSG:900913"),
-            //displayProjection: new OpenLayers.Projection("EPSG:4326"),
+            displayProjection: new OpenLayers.Projection("EPSG:4326"),
             units: "m",
             numZoomLevels: 18,
             maxResolution: 156543.0339,
@@ -78,14 +78,29 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             {
             	type: G_HYBRID_MAP, 
             	sphericalMercator: true,
-            	minZoomLevel: 6, 
-            	maxZoomLevel: 17
             }
         );             
+        
+        // create WMS layer
+        var nautLayer = new OpenLayers.Layer.WMS(
+            "Nautical Charts", "http://map-dev.maboatersurvey.com:8080/geoserver/wms", 
+            {
+                layers: 'rbsw:13006_1',
+                styles: '',
+                srs: 'EPSG:900913',
+                format: 'image/jpeg',
+                transparent: 'True'
+            },{
+                'isBaseLayer': false,
+                'opacity': 0.8,
+                'visibility': false
+            }
+        ); 
+        
 
         this.vectorLayer = new OpenLayers.Layer.Vector(
-    		"Point Activities", 
-    		{styleMap: pointStyleMap}
+    		"Vector Layer", 
+    		{styleMap: pointStyleMap, displayInLayerSwitcher: false}
         );        
         this.vectorLayer.events.on({
             "sketchstarted": this.vecStarted,
@@ -108,6 +123,9 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 		map.addControl(new OpenLayers.Control.Navigation());		
 		map.addControl(new OpenLayers.Control.PanZoomBar());
 		map.addControl(new OpenLayers.Control.MousePosition());
+		var layerSwitcher = new OpenLayers.Control.LayerSwitcher();
+		map.addControl(layerSwitcher);
+		layerSwitcher.maximizeControl();		
 
 		//Point control
         //this.drawPointControl = new OpenLayers.Control.DrawFeature(
@@ -143,10 +161,10 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         //Update internal MapPanel properties
 		Ext.apply(this, {
 		    map: map,
-		    layers: [baseLayer, this.vectorLayer],
+		    layers: [baseLayer, nautLayer, this.vectorLayer],
 		    extent: map_extent,
 	        center: region_extent.getCenterLonLat(),
-	        zoom: 2,
+	        zoom: 8,
 	        cls: 'tip-target'
 		});    		
 		
