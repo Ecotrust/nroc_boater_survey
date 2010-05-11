@@ -77,7 +77,12 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     finActivityInstructStep: function() {
-        alert('Not Implemented');
+        this.startDrawActivityInstructStep();
+    },
+    
+    startDrawActivityInstructStep: function() {
+        this.loadDrawActivityInstructPanel();
+        this.loadAddPolyWin();
     },
 
     /* 
@@ -96,12 +101,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
      */
     finInvalidShapeStep: function() {
 		this.mapPanel.removeLastFeature();
-		//Restart the current activity
-		if (this.getCurActivity().draw_type == 'polygon') {
-    		this.startPolyActivity();
-    	} else {
-    		this.startPointActivity();
-    	}
+                                            //TODO: implement new stuff here?
+        alert("Is this called? Should it go somewhere? (DrawManager.js - finInvalidShapeStep)");        //TODO: Kill this
     },    
     
     allFinished: function() {
@@ -255,7 +256,32 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 	        this.actInstructPanel.on('activity-cont', this.finActivityInstructStep, this);
     	}
         this.viewport.setWestPanel(this.actInstructPanel);  
-    },      
+    },   
+
+    loadDrawActivityInstructPanel: function() {      	
+    	if (!this.drawActInstructPanel) {
+	    	this.drawActInstructPanel = new gwst.widgets.DrawActivityInstructPanel();
+	        //When panel fires event saying it's all done, we want to process it and move on 
+	        //this.drawActInstructPanel.on('draw-cont', this.finDrawActivityInstructStep, this);
+    	}
+        this.viewport.setWestPanel(this.drawActInstructPanel);  
+    },    
+    
+    /* Load the satisfied with activity west panel */
+    loadSatisfiedActivityPanel: function() {
+    	// if (!this.satisfiedActPanel) {
+    		// this.satisfiedActPanel = new gwst.widgets.SatisfiedActivityPanel();
+            // this.satisfiedActPanel.on('cont-act', this.contDrawActivityInstruct, this);
+            // this.satisfiedActPanel.on('edit-act', this.startEditActivityStep, this);
+            // this.satisfiedActPanel.on('redraw-act', this.redrawActivity, this);
+            // this.satisfiedActPanel.on('save-act', this.finDrawActivityInstructStep, this);
+        // }
+        // this.viewport.setWestPanel(this.satisfiedActPanel);    
+
+        alert("satisfied not implemented yet");
+        
+    },    
+    
     
     /******************** Feature handling *****************/
     
@@ -268,208 +294,83 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     validateShape: function(feature) {    	
-    	var config = {
-            geometry: feature.geometry.toString(),
-            activity_id: this.getCurActivity().id,
-            user_id: user_id
-         }    	
+    	// var config = {
+            // geometry: feature.geometry.toString()
+            //activity_id: this.getCurActivity().id,
+            //user_id: user_id
+         // }    	
+        alert("Validation not implemented yet (DrawManager.js - validateShape)");
         this.loadWait('Validating your shape');
-    	Ext.Ajax.request({
-	        url: gwst.settings.urls.shape_validate,
-	        method: 'POST',
-	        disableCachingParam: true,
-	        params: config,
-	        success: this.finValidateShape,
-           	failure: function(response, opts) {
+    	// Ext.Ajax.request({
+	        // url: gwst.settings.urls.shape_validate,        //TODO: activate this on validation
+	        // method: 'POST',
+	        // disableCachingParam: true,
+	        // params: config,
+	        // success: this.finValidateShape,
+           	// failure: function(response, opts) {
         		//Change to error window
-              	this.hideWait();
-              	gwst.error.load('An error has occurred.  Please try again and notify us if it happens again.');
-           	},
-            scope: this
-	    });
+              	// this.hideWait();
+              	// gwst.error.load('An error has occurred.  Please try again and notify us if it happens again.');
+           	// },
+            // scope: this
+	    // });
+        this.finValidateShape();            //TODO: Kill this when validation is implemented
+        
     },
 
     /* Processes the result of validateShape */
     finValidateShape: function(response, opts) {
         this.hideWait();
-        var res_obj = Ext.decode(response.responseText);
-        var status_code = parseFloat(res_obj.status_code);
-        if (status_code == 0) {
-        	this.loadSatisfiedRoutePanel();
-        } else if (status_code > 0){
-        	this.startInvalidShapeStep(status_code);	
-        } else {
-        	gwst.error.load('An error has occurred while trying to validate your area.  Please try again and notify us if this keeps happening.');
-        }        
+        // var res_obj = Ext.decode(response.responseText);         //TODO: activate this on validation
+        // var status_code = parseFloat(res_obj.status_code);
+        // if (status_code == 0) {
+        	this.loadSatisfiedActivityPanel();
+        // } else if (status_code > 0){
+        	// this.startInvalidShapeStep(status_code);	
+        // } else {
+        	// gwst.error.load('An error has occurred while trying to validate your area.  Please try again and notify us if this keeps happening.');
+        // }        
     },               
 
-    saveNewFeature: function() {        
-    	this.loadWait('Saving');
+    // saveNewFeature: function() {        
+        // alert("Saving not implemented yet");
+    	// this.loadWait('Saving');
 
-        var data = {
-            geometry: this.cur_feature.geometry.toString(),
-            activity_id: this.getCurActivity().id,
-            user_id: user_id
-        };
+        // var data = {
+            // geometry: this.cur_feature.geometry.toString()
+            // activity_id: this.getCurActivity().id,
+            // user_id: user_id
+        // };
         
-    	Ext.Ajax.request({
-	        url: gwst.settings.urls.shapes,
-	        method: 'POST',
-	        disableCachingParam: true,
-	        params: {feature: Ext.util.JSON.encode(data)},
-	        success: this.finSaveNewFeature,
-           	failure: function(response, opts) {
-        		//Change to error window
-              	this.hideWait.defer(500, this);
-              	gwst.error.load('An error has occurred while trying to save.');
-           	},
-            scope: this
-	    });                	
-    },     
+    	// Ext.Ajax.request({
+	        // url: gwst.settings.urls.shapes,
+	        // method: 'POST',
+	        // disableCachingParam: true,
+	        // params: {feature: Ext.util.JSON.encode(data)},
+	        // success: this.finSaveNewFeature,
+           	// failure: function(response, opts) {
+        		// Change to error window
+              	// this.hideWait.defer(500, this);
+              	// gwst.error.load('An error has occurred while trying to save.');
+           	// },
+            // scope: this
+	    // });  
+    // },     
     
-    finSaveNewFeature: function(response) {
-    	var new_feat = Ext.decode(response.responseText);
-    	this.hideWait.defer(500, this);
+    // finSaveNewFeature: function(response) {
+    	// var new_feat = Ext.decode(response.responseText);    //TODO: activate on save
+    	// this.hideWait.defer(500, this);
     	    	
-    	this.getCurActivity().num_saved += 1;
-    	if (this.getCurActivity().draw_type == 'polygon') {
-    		this.startPolyActivity();
-    	} else {
-    		this.startPointActivity()
-    	}    	    	
-    },    
+    	// this.getCurActivity().num_saved += 1;
+    	// if (this.getCurActivity().draw_type == 'polygon') {
+    		// this.startPolyActivity();
+    	// } else {
+    		// this.startPointActivity()
+    	// }    	    	
+    // },    
     
-    /******************** Event handlers *******************/    
+    /******************** Event handlers *******************/   
 
-    startPointActivity: function() {
-    	if (point_activities.length > 0) {
-    		if (!this.point_instruct_loaded) { 
-    			this.startPointInstruction();
-    			//Flag instruction so they don't get shown again next time through
-    			this.point_instruct_loaded = true;
-    		} else {
-    			this.loadPointActivity();
-    		}   
-    	} else {
-    		this.startPolyActivity();
-    	}
-    },
-
-    goToNextPointActivity: function() {
-    	this.cur_point_activity_index += 1;
-    	this.cur_activity_num += 1;
-    	if (this.cur_point_activity_index >= point_activities.length) {
-    		this.startPolyActivity();
-    	} else {
-    		this.startPointActivity();
-    	}
-    },    
-    
-    /* Load the point activity panel */
-    loadPointActivity: function() {    	
-    	var cur_activity = this.getCurPointActivity();
-    	this.loadPointPanel({
-    		'activity':cur_activity.name,
-    		'activity_num':this.cur_activity_num
-    	});
-    	this.loadAddRouteWin();    	
-    },
-
-    getCurActivity: function() {
-    	if (this.cur_activity_num > point_activities.length) {
-    		return poly_activities[this.cur_poly_activity_index];
-    	} else {
-    		return point_activities[this.cur_point_activity_index];
-    	}
-    },
-    
-    getCurPointActivity: function() {
-    	return point_activities[this.cur_point_activity_index];
-    },    
-    
-    skipPointActivity: function() {
-    	this.hideMapTooltip();
-    	this.mapPanel.disableLineDraw();
-    	this.hideAddRouteWin();
-    	//Save skip in database
-    	//Reset instruction flag so they get shown again for the next activity
-    	this.point_instruct_loaded = false;
-    	this.goToNextPointActivity();
-    },
-    
-    checkPointActivity: function() {
-    	this.hideMapTooltip();
-    	this.mapPanel.disableLineDraw();
-    	if (this.getCurActivity().num_saved > 0) {
-        	this.hideAddRouteWin();    		
-    		//Reset instruction flag so they get shown again for the next activity
-    		this.point_instruct_loaded = false;
-    		this.goToNextPointActivity();
-    	} else {
-    		gwst.error.load('You must add at least one marker first.');
-    	}
-    },    
-
-    startPolyActivity: function() {
-		if (poly_activities.length > 0) {
-			if (!this.poly_instruct_loaded) { 
-				this.startPolyInstruction();
-				//Flag instruction so they don't get shown again next time through
-				this.poly_instruct_loaded = true;
-			} else {
-				this.loadPolyActivity();
-			}    		
-		} else {
-			window.location = return_url;	
-		}
-	},
-	
-    goToNextPolyActivity: function() {
-    	this.cur_poly_activity_index += 1;
-    	this.cur_activity_num += 1;    	
-    	if (this.cur_poly_activity_index >= poly_activities.length) {
-    		this.allFinished();    		
-    	} else {
-    		this.startPolyActivity();
-    	}
-    }, 	
-    
-    loadPolyActivity: function() {
-    	var cur_activity = this.getCurPolyActivity();
-    	this.loadPolyPanel({
-    		'activity':cur_activity.name,
-    		'activity_num':this.cur_activity_num
-    	});
-    	this.loadAddPolyWin();
-    },        
-
-    getCurPolyActivity: function() {
-    	return poly_activities[this.cur_poly_activity_index];
-    },    
-    
-    skipPolyActivity: function() {
-    	this.hideMapTooltip();
-    	this.mapPanel.disablePolyDraw();
-    	this.hideAddPolyWin();
-    	//Save skip in database
-    	//Reset instruction flag so they get shown again for the next activity
-    	this.poly_instruct_loaded = false;
-    	this.goToNextPolyActivity();    	
-    },        
-
-    checkPolyActivity: function() {
-    	this.hideMapTooltip();
-    	this.mapPanel.disablePolyDraw();
-    	if (this.getCurActivity().num_saved > 0) {
-        	this.hideAddPolyWin();    		
-    		//Reset instruction flag so they get shown again for the next activity
-    		this.poly_instruct_loaded = false;
-    		this.goToNextPolyActivity();
-    	} else {
-    		gwst.error.load('You must draw at least one area first.');
-    	}
-    },    
-    
     newFeatureHandler: function(feature) {
     	this.cur_feature = feature;
     	//If user drew a point, skip straight to satisfied
