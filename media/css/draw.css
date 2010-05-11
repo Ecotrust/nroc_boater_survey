@@ -176,3 +176,7 @@ p.x-panel-static{
 .invalid-image {
    margin: 5px 10px 10px 10px;
 }
+
+.ext-el-mask {
+    opacity: 0.25;
+}

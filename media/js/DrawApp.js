@@ -12,5 +12,4 @@ gwst.DrawApp = Ext.extend(Ext.util.Observable, {
 		this.draw_manager = new gwst.DrawManager();
 		this.draw_manager.startInit();		        	        
     }	
-});
-	
+});	

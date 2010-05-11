@@ -64,6 +64,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     startEditRouteStep: function() {
         this.loadEditRoutePanel();
+        //Finish off the sketch creating the route feature
+        this.mapPanel.lineFinish();
         this.enableFeatureEdit();
     },  
     
@@ -159,8 +161,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     loadDrawInstructPanel: function() {      	
     	if (!this.drawInstructPanel) {
 	    	this.drawInstructPanel = new gwst.widgets.DrawInstructPanel();
-	        //When panel fires event saying it's all done, we want to process it and move on 
-	        this.drawInstructPanel.on('draw-cont', this.finDrawInstructStep, this);
     	}
         this.viewport.setWestPanel(this.drawInstructPanel);  
     },      
@@ -242,16 +242,19 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     	if (!this.satisfiedRoutePanel) {
     		this.satisfiedRoutePanel = new gwst.widgets.SatisfiedRoutePanel();
             //When panel fires event saying it's all done, we want to process it and move on 
-            this.satisfiedRoutePanel.on('cont-route', this.contDrawInstruct, this);
+            this.satisfiedRoutePanel.on('cont-route', this.resumeRoute, this);
             this.satisfiedRoutePanel.on('edit-route', this.startEditRouteStep, this);
             this.satisfiedRoutePanel.on('redraw-route', this.redrawRoute, this);
-            this.satisfiedRoutePanel.on('save-route', this.finDrawInstructStep, this);
+            this.satisfiedRoutePanel.on('save-route', this.saveRoute, this);
         }
         this.viewport.setWestPanel(this.satisfiedRoutePanel);    	
     },    
     
-    contDrawInstruct: function() {
-        alert('Route continuation not implemented');
+    saveRoute: function() {
+        //Finish off the sketch creating the route feature
+        this.mapPanel.lineFinish();
+        alert('Route save would happen now, press OK to move on');
+        this.finDrawInstructStep();
     },
     
     redrawRoute: function() {
@@ -406,16 +409,26 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     /******************** Event handlers *******************/   
 
     newFeatureHandler: function(feature) {
+        //track current feature for referencing later
     	this.cur_feature = feature;
-    	//If user drew a point, skip straight to satisfied
     	if (feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.LineString') {
-    		this.hideAddRouteWin();
-    		this.loadSatisfiedRoutePanel();
     		return;
     	} else {
     		this.hideAddPolyWin();
     		this.validateShape(feature);
     	}
+    },
+    
+    pauseRoute: function() {
+    	this.hideMapTooltip();
+    	this.hideCancelWin();    	
+        this.hideAddRouteWin(); 
+        this.loadSatisfiedRoutePanel();    	    
+    },
+    
+    resumeRoute: function() {    
+        this.mapPanel.lineResume();
+        this.startDrawInstructStep();
     },
     
     /* 
@@ -424,10 +437,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
      */
     mapPanelCreated: function() {
     	this.mapPanel = Ext.getCmp('mappanel');    	
-    	this.mapPanel.on('vector-completed', this.hideMapTooltip, this);
-    	this.mapPanel.on('vector-completed', this.newFeatureHandler, this);
-    	this.mapPanel.on('vector-completed', this.hideCancelWin, this);
-    	
+    	this.mapPanel.on('line-paused', this.pauseRoute, this);    	
+    	this.mapPanel.on('vector-completed', this.newFeatureHandler, this);    	
     },    
     
     zoomToCity: function(city_rec) {
