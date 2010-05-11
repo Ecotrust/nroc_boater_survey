@@ -84,6 +84,24 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.loadDrawActivityInstructPanel();
         this.loadAddPolyWin();
     },
+    
+    finDrawActivityInstructStep: function() {
+        this.startAreaInfoStep();
+    },
+    
+    startEditActivityStep: function() {
+        this.loadEditActivityPanel();
+        //this.enableActivityEdit();
+    },  
+    
+    finEditActivityStep: function() {
+        //this.disableActivityEdit();
+        this.startAreaInfoStep();
+    },
+    
+    startAreaInfoStep: function() {
+        alert("Area Info Panel not implemented yet");
+    },
 
     /* 
      * Setup UI for invalid shape error display step 
@@ -269,18 +287,23 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     /* Load the satisfied with activity west panel */
     loadSatisfiedActivityPanel: function() {
-    	// if (!this.satisfiedActPanel) {
-    		// this.satisfiedActPanel = new gwst.widgets.SatisfiedActivityPanel();
-            // this.satisfiedActPanel.on('cont-act', this.contDrawActivityInstruct, this);
-            // this.satisfiedActPanel.on('edit-act', this.startEditActivityStep, this);
-            // this.satisfiedActPanel.on('redraw-act', this.redrawActivity, this);
-            // this.satisfiedActPanel.on('save-act', this.finDrawActivityInstructStep, this);
-        // }
-        // this.viewport.setWestPanel(this.satisfiedActPanel);    
+    	if (!this.satisfiedActPanel) {
+    		this.satisfiedActPanel = new gwst.widgets.SatisfiedActivityPanel();
+            this.satisfiedActPanel.on('edit-act', this.startEditActivityStep, this);
+            this.satisfiedActPanel.on('redraw-act', this.redrawActivity, this);
+            this.satisfiedActPanel.on('save-act', this.finDrawActivityInstructStep, this);
+        }
+        this.viewport.setWestPanel(this.satisfiedActPanel);    
+    },   
 
-        alert("satisfied not implemented yet");
-        
+    redrawActivity: function() {
+        this.mapPanel.removeLastFeature();
+    	this.startDrawActivityInstructStep();
     },    
+    
+    loadEditActivityPanel: function() {
+        alert("edit activity not implemented yet");
+    },
     
     
     /******************** Feature handling *****************/
