@@ -158,8 +158,10 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         //Line
         this.drawLineControl = new OpenLayers.Control.DrawFeature(
             	this.vectorLayer,
-                OpenLayers.Handler.Path
+                OpenLayers.Handler.ResumablePath
         );        		
+        this.drawLineControl.handler.pause = this.linePaused.createDelegate(this);
+
 		map.addControl(this.drawLineControl);                
         
         this.modifyControl = new OpenLayers.Control.ModifyFeature(this.vectorLayer);
@@ -194,6 +196,20 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 		
         // Call parent (required)
 		gwst.widgets.ResDrawMapPanel.superclass.initComponent.call(this);
+    },
+
+    linePaused: function() {
+        this.getEl().mask();
+        this.fireEvent('line-paused');
+    },
+    
+    lineResume: function() {
+        this.getEl().unmask();
+    },
+    
+    lineFinish: function() {
+        this.getEl().unmask();
+        this.drawLineControl.handler.finishPath();
     },
 
     vecStarted: function(evt) {
