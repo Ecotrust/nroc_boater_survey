@@ -73,15 +73,22 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         });
 	    
 	    //Map base layers
-        var baseLayer = new OpenLayers.Layer.Google(
-            "Satellite Imagery",
+        var hybridLayer = new OpenLayers.Layer.Google(
+            "Satellite",
             {
             	type: G_HYBRID_MAP, 
             	sphericalMercator: true,
             }
         );             
+
+        var physicalLayer = new OpenLayers.Layer.Google(
+            "Terrain",
+            {
+            	type: G_PHYSICAL_MAP, 
+            	sphericalMercator: true,
+            }
+        );     
         
-        // create WMS layer
         var nautLayer = new OpenLayers.Layer.WMS(
             "Nautical Charts", "http://map-dev.maboatersurvey.com:8080/geoserver/wms", 
             {
@@ -94,6 +101,20 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
                 'isBaseLayer': false,
                 'opacity': 0.8,
                 'visibility': false
+            }
+        ); 
+        
+        var rampLayer = new OpenLayers.Layer.WMS(
+            "Boat Ramps", "http://map-dev.maboatersurvey.com:8080/geoserver/wms", 
+            {
+                layers: 'rbsw:massgis_ofba_Coastal',
+                styles: '',
+                srs: 'EPSG:900913',
+                format: 'image/jpeg',
+                transparent: 'True'
+            },{
+                'isBaseLayer': false,
+                'visibility': true
             }
         ); 
         
@@ -161,7 +182,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         //Update internal MapPanel properties
 		Ext.apply(this, {
 		    map: map,
-		    layers: [baseLayer, nautLayer, this.vectorLayer],
+		    layers: [hybridLayer, physicalLayer, nautLayer, rampLayer, this.vectorLayer],
 		    extent: map_extent,
 	        center: region_extent.getCenterLonLat(),
 	        zoom: 8,
