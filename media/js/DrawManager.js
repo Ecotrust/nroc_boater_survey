@@ -59,6 +59,18 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     finDrawInstructStep: function() {
+        this.startActivityInstructStep();
+    },
+    
+    startEditRouteStep: function() {
+        this.loadEditRoutePanel();
+    },
+    
+    startActivityInstructStep: function() {
+        this.loadActivityInstructPanel();
+    },
+    
+    finActivityInstructStep: function() {
         alert('Not Implemented');
     },
 
@@ -197,48 +209,49 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },    
     
     /* Load the satisfied with route west panel */
-    loadSatisfiedRouteStep: function() {
+    loadSatisfiedRoutePanel: function() {
     	if (!this.satisfiedRoutePanel) {
     		this.satisfiedRoutePanel = new gwst.widgets.SatisfiedRoutePanel();
             //When panel fires event saying it's all done, we want to process it and move on 
-            this.satisfiedRoutePanel.on('cont-route', this.contDrawInstructStep, this);
-            this.satisfiedRoutePanel.on('edit-route', this.editRouteStep, this);
-            this.satisfiedRoutePanel.on('redraw-route', this.redrawRouteStep, this);
-            this.satisfiedRoutePanel.on('save-route', this.finSatisfiedRouteStep, this);
+            this.satisfiedRoutePanel.on('cont-route', this.contDrawInstruct, this);
+            this.satisfiedRoutePanel.on('edit-route', this.startEditRouteStep, this);
+            this.satisfiedRoutePanel.on('redraw-route', this.redrawRoute, this);
+            this.satisfiedRoutePanel.on('save-route', this.finDrawInstructStep, this);
         }
         this.viewport.setWestPanel(this.satisfiedRoutePanel);    	
     },    
     
-    contDrawInstructStep: function() {
+    contDrawInstruct: function() {
         alert('Route continuation not implemented');
     },
-     
-    editRouteStep: function() {
-        alert('Route editing not implemented');
-        this.load();
     },
     
-    redrawRouteStep: function() {
+    redrawRoute: function() {
         this.mapPanel.removeLastFeature();
     	this.startDrawInstructStep();
     },
     
-    finSatisfiedRouteStep: function(result) {
-    	alert('Route saving not implemented');
-        this.startDrawInstructStep();
-    },
-    
     /* Load the edit route west panel */
-    loadEditRouteStep: function() {
+    loadEditRoutePanel: function() {
         if (!this.editRoutePanel) {
             this.editRoutePanel = new gwst.widgets.EditRoutePanel();
             //When panel fires event saying it's all done, we want to process it and move on 
-            this.editRoutePanel.on('redraw-edit-route', this.redrawRouteStep, this);
-            this.editRoutePanel.on('save-edit-route', this.finSatisfiedRouteStep, this);
+            this.editRoutePanel.on('redraw-edit-route', this.redrawRoute, this);
+            this.editRoutePanel.on('save-edit-route', this.finDrawInstructStep, this);
         }
         this.viewport.setWestPanel(this.editRoutePanel);
     },
-
+    
+    /* Load the draw area instructions west panel*/
+    loadActivityInstructPanel: function() {      	
+    	if (!this.drawActivityInstructPanel) {
+	    	this.actInstructPanel = new gwst.widgets.ActivityInstructPanel();
+	        //When panel fires event saying it's all done, we want to process it and move on 
+	        this.actInstructPanel.on('activity-cont', this.finActivityInstructStep, this);
+    	}
+        this.viewport.setWestPanel(this.actInstructPanel);  
+    },      
+    
     /******************** Feature handling *****************/
     
     validateShape: function(feature) {    	
@@ -269,7 +282,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         var res_obj = Ext.decode(response.responseText);
         var status_code = parseFloat(res_obj.status_code);
         if (status_code == 0) {
-        	this.loadSatisfiedRouteStep();
+        	this.loadSatisfiedRoutePanel();
         } else if (status_code > 0){
         	this.startInvalidShapeStep(status_code);	
         } else {
@@ -449,7 +462,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     	//If user drew a point, skip straight to satisfied
     	if (feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.LineString') {
     		this.hideAddRouteWin();
-    		this.loadSatisfiedRouteStep();
+    		this.loadSatisfiedRoutePanel();
     		return;
     	} else {
     		this.hideAddPolyWin();

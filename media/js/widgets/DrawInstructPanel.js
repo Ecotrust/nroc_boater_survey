@@ -18,7 +18,7 @@ gwst.widgets.DrawInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
 
     getHtmlText: function() {
-        var html_text = '<h2>Instructions</h2><p>Draw the route of your last trip on the map from start to finish.</p>';
+        var html_text = '<h2>Instructions:</h2><p>Draw the route of your last trip on the map from start to finish.</p>';
         return html_text;
     },
 	
@@ -81,21 +81,16 @@ gwst.widgets.DrawInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
                 html: '<p>g. If you made a mistake, click the \'Cancel\' button</p>'
             },{
                 html: 'image here'
+            },{
+                html: '<a>Watch Demonstration</a>'  //TODO: link this to video
+            },{
+                html: ''
             }]
         });       
 
-        this.button_panel = new gwst.widgets.TwoButtonPanel ({
-                btn1_width: 140,
-                btn2_text: 'Continue >>',               
-            btn2_handler: this.contBtnClicked.createDelegate(this),
-            btn2_width: 100,
-            left_margin: 40
-        });
-        
         this.add(this.header_panel);
 		this.add(this.inner_panel);
         this.add(this.table_panel);
-        this.add(this.button_panel);
         
         // Call parent (required)
         gwst.widgets.DrawInstructPanel.superclass.onRender.apply(this, arguments); 
