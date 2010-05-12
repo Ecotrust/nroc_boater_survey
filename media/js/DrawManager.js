@@ -92,7 +92,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     finDrawActivityInstructStep: function() {
-        this.startAreaInfoStep();
+        this.startActivityInfoStep();
     },
     
     startEditActivityStep: function() {
@@ -102,12 +102,34 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     finEditActivityStep: function() {
         this.disableFeatureEdit();
-        this.startAreaInfoStep();
+        this.startActivityInfoStep();
     },
     
-    startAreaInfoStep: function() {
-        alert("Area Info Panel not implemented yet");
+    startActivityInfoStep: function() {
+        this.loadActivityInfo1Panel();
     },
+    
+    finActivityInfoStep: function() {
+        this.startActivityInfo2Step();
+    },
+    
+    startActivityInfo2Step: function() {
+        this.loadActivityInfo2Panel();
+    },
+    
+    finActivityInfo2Step: function() {
+        this.startDrawNewAreaStep();
+    },
+    
+    startDrawNewAreaStep: function() {
+        alert("Draw New Area not implemented yet!");
+    },
+    
+    finDrawNewAreaStep: function() {
+    
+    },
+    
+    
 
     /* 
      * Setup UI for invalid shape error display step 
@@ -319,6 +341,23 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.viewport.setWestPanel(this.editActPanel);
     },
     
+    loadActivityInfo1Panel: function() {
+        if (!this.activityInfo1Panel) {
+            this.activityInfo1Panel = new gwst.widgets.ActivityInfo1Panel();
+            //When panel fires even saying it's all done, we want to process it and move on
+            this.activityInfo1Panel.on('activity-info1-cont', this.finActivityInfoStep, this);
+        }
+        this.viewport.setWestPanel(this.activityInfo1Panel);    
+    },
+    
+    loadActivityInfo2Panel: function() {
+        if (!this.activityInfo2Panel) {
+            this.activityInfo2Panel = new gwst.widgets.ActivityInfo2Panel();
+            //When panel fires even saying it's all done, we want to process it and move on
+            this.activityInfo2Panel.on('activity-info2-cont', this.finActivityInfo2Step, this);
+        }
+        this.viewport.setWestPanel(this.activityInfo2Panel);    
+    },
     
     /******************** Feature handling *****************/
     
