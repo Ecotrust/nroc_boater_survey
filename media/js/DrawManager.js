@@ -296,6 +296,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     redrawRoute: function() {
+        //Finish off the sketch creating the route feature
+        this.mapPanel.lineFinish();
         this.mapPanel.removeLastFeature();
     	this.startDrawInstructStep();
     },
