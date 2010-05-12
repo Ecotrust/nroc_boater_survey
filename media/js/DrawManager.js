@@ -375,7 +375,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             //activity_id: this.getCurActivity().id,
             //user_id: user_id
          // }    	
-        alert("Validation not implemented yet (DrawManager.js - validateShape)");
+        //alert("Validation not implemented yet (DrawManager.js - validateShape)");
         this.loadWait('Validating your shape');
     	// Ext.Ajax.request({
 	        // url: gwst.settings.urls.shape_validate,        //TODO: activate this on validation
@@ -454,6 +454,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     		return;
     	} else {
     		this.hideAddPolyWin();
+    		this.hideCancelWin();
+    		this.hideMapTooltip();
     		this.validateShape(feature);
     	}
     },
