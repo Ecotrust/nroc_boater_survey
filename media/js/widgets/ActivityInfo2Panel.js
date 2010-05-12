@@ -29,53 +29,14 @@ gwst.widgets.ActivityInfo2Panel = Ext.extend(gwst.widgets.WestPanel, {
             border: 'solid',
             width: '200px'
         });
-    	
-		this.question_two = new Ext.Panel({		
-			html: '<p>If you could not have engaged in this activity at this location, what would you have done instead?</p>',
-			style: 'margin: 0px 0px 10px 10px',
-			border: false
-        });
         
-        this.answer_two = new Ext.Panel({
-            html: 'Q2 dropdown here',
-            style: 'margin: 0px 0px 10px 10px',
-            border: 'solid',
-            width: '150px'
-        });
-        
-        this.other_text_two = new Ext.Panel({
-            html: 'If \'other\':',
+        this.other_text_one = new Ext.Panel({
+            html: 'If \'other\' please specify:',
             style: 'margin: 0px 0px 10px 10px',
             border: false
         });
         
-        this.other_two = new Ext.Panel({
-            html: '|',
-            style: 'margin: 0px 0px 10px 10px',
-            border: 'solid',
-            width: '150px'
-        });
-        
-        this.question_three = new Ext.Panel({		
-			html: '<p>Please choose the MAIN activity in which you would have most likely engaged.</p>',
-			style: 'margin: 0px 0px 10px 10px',
-			border: false
-        });
-        
-        this.answer_three = new Ext.Panel({
-            html: 'Q3 dropdown here',
-            style: 'margin: 0px 0px 10px 10px',
-            border: 'solid',
-            width: '150px'
-        });
-        
-        this.other_text_three = new Ext.Panel({
-            html: 'If \'other\':',
-            style: 'margin: 0px 0px 10px 10px',
-            border: false
-        });
-        
-        this.other_three = new Ext.Panel({
+        this.other_one = new Ext.Panel({
             html: '|',
             style: 'margin: 0px 0px 10px 10px',
             border: 'solid',
@@ -91,17 +52,12 @@ gwst.widgets.ActivityInfo2Panel = Ext.extend(gwst.widgets.WestPanel, {
             bottom_margin: 5
         });
         
+        
         this.add(this.header_panel);        
         this.add(this.question_one);
         this.add(this.answer_one);
-        this.add(this.question_two);
-        this.add(this.answer_two);
-        this.add(this.other_text_two);
-        this.add(this.other_two);
-        this.add(this.question_three);
-        this.add(this.answer_three);
-        this.add(this.other_text_three);
-        this.add(this.other_three);
+        this.add(this.other_text_one);
+        this.add(this.other_one);
         this.add(this.button_panel);
     
         // Call parent (required)

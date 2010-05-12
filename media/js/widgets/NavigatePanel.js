@@ -35,7 +35,7 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
         this.header_panel = new Ext.Container({  
 			autoEl: {tag:'div', cls:'action-panel-header', id:'header_html_point', html:'Navigate the Map'},
 			style: 'padding:5px',
-            id: 'intro_header_panel_point',
+            id: 'intro_header_panel',
 			border: false   
         }); 
 

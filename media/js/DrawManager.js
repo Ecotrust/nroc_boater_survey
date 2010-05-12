@@ -118,15 +118,31 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     finActivityInfo2Step: function() {
+        this.startActivityInfo3Step();
+    },
+    
+    startActivityInfo3Step: function() {
+        this.loadActivityInfo3Panel();
+    },
+    
+    finActivityInfo3Step: function() {
         this.startDrawNewAreaStep();
     },
     
     startDrawNewAreaStep: function() {
-        alert("Draw New Area not implemented yet!");
+        this.loadDrawNewAreaPanel();
     },
     
-    finDrawNewAreaStep: function() {
+    finDrawNewAreaStep: function(result) {
+        if (!result.draw_new) {
+    		this.startFinishedStep();
+    	} else {
+    		this.startDrawActivityInstructStep();
+        }    	
+    },
     
+    startFinishedStep: function() {
+        alert('Finished panel not implemented yet');
     },
     
     
@@ -357,6 +373,24 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.activityInfo2Panel.on('activity-info2-cont', this.finActivityInfo2Step, this);
         }
         this.viewport.setWestPanel(this.activityInfo2Panel);    
+    },
+    
+    loadActivityInfo3Panel: function() {
+        if (!this.activityInfo3Panel) {
+            this.activityInfo3Panel = new gwst.widgets.ActivityInfo3Panel();
+            //When panel fires even saying it's all done, we want to process it and move on
+            this.activityInfo3Panel.on('activity-info3-cont', this.finActivityInfo3Step, this);
+        }
+        this.viewport.setWestPanel(this.activityInfo3Panel);    
+    },
+    
+    loadDrawNewAreaPanel: function() {
+        if (!this.drawNewAreaPanel) {
+            this.drawNewAreaPanel = new gwst.widgets.DrawNewAreaPanel();
+            //When panel fires even saying it's all done, we want to process it and move on
+            this.drawNewAreaPanel.on('draw-new', this.finDrawNewAreaStep, this);
+        }
+        this.viewport.setWestPanel(this.drawNewAreaPanel);    
     },
     
     /******************** Feature handling *****************/

@@ -24,7 +24,7 @@ gwst.widgets.DrawActivityInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.header_panel = new Ext.Container({  
 			autoEl: {tag:'div', cls:'action-panel-header', id:'header_draw', html:'Draw an Activity Area'},
 			style: 'padding:5px',
-            id: 'draw_header_panel_point',
+            id: 'draw_header_panel',
 			border: false   
         }); 
 

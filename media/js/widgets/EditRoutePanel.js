@@ -31,7 +31,7 @@ gwst.widgets.EditRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
         this.header_panel = new Ext.Container({  
 			autoEl: {tag:'div', cls:'action-panel-header', id:'header_edit_route', html:'Edit Your Route'},
 			style: 'padding:5px',
-            id: 'edit_route_header_panel_point',
+            id: 'edit_route_header_panel',
 			border: false   
         }); 
     
