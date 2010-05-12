@@ -68,7 +68,8 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
                 graphicHeight: 25,
                 graphicWidth: 15,
                 graphicYOffset: -27
-            }, OpenLayers.Feature.Vector.style["default"]))
+            }, 
+            OpenLayers.Feature.Vector.style["default"]))
         });
 	    
 	    //Map base layers
@@ -76,7 +77,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             "Satellite",
             {
             	type: G_HYBRID_MAP, 
-            	sphericalMercator: true,
+            	sphericalMercator: true
             }
         );             
 
@@ -84,7 +85,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             "Terrain",
             {
             	type: G_PHYSICAL_MAP, 
-            	sphericalMercator: true,
+            	sphericalMercator: true
             }
         );     
         
