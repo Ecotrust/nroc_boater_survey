@@ -13,7 +13,7 @@ gwst.widgets.RouteInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.header_panel = new Ext.Container({  
 			autoEl: {tag:'div', cls:'action-panel-header', id:'header_route', html:'Drawing Your Route'},
 			style: 'padding:5px',
-            id: 'route_header_panel_point',
+            id: 'route_header_panel',
 			border: false   
         }); 
         
