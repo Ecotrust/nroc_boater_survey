@@ -12,4 +12,8 @@ gwst.DrawApp = Ext.extend(Ext.util.Observable, {
 		this.draw_manager = new gwst.DrawManager();
 		this.draw_manager.startInit();		        	        
     }	
-});	
+});
+
+window.onbeforeunload = function confirmBrowseAway() {
+    return "If you leave now your survey will be left unfinished.";
+}

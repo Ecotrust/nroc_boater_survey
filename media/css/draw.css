@@ -139,6 +139,10 @@ p.x-panel-static{
     background-image: url(/media/img/pencil_add.png) ! important;
 }
 
+.poly-icon {
+    background-image: url(/media/img/pencil_add.png) !important;
+}
+
 .cancel-icon {
     background-image: url(/media/img/cancel.png) !important;
 }

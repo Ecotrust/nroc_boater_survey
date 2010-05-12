@@ -14,8 +14,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         };
 		var map_extent = new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34);
 	    var region_extent = new OpenLayers.Bounds(region.w_bound,region.s_bound,region.e_bound,region.n_bound)
-	    
-	    
+	    	    
 	    //Map base options
         var map_options = {
 			controls: [],
@@ -118,7 +117,6 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             }
         ); 
         
-
         this.vectorLayer = new OpenLayers.Layer.Vector(
     		"Vector Layer", 
     		{displayInLayerSwitcher: false}
@@ -146,14 +144,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 		map.addControl(new OpenLayers.Control.MousePosition());
 		var layerSwitcher = new OpenLayers.Control.LayerSwitcher();
 		map.addControl(layerSwitcher);
-		layerSwitcher.maximizeControl();		
-
-		//Point control
-        //this.drawPointControl = new OpenLayers.Control.DrawFeature(
-        //	this.vectorLayer,
-        //    OpenLayers.Handler.Point
-        //);        		
-		//map.addControl(this.drawPointControl);		
+		layerSwitcher.maximizeControl();				
         
         //Line
         this.drawLineControl = new OpenLayers.Control.DrawFeature(
@@ -172,17 +163,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
            	this.vectorLayer,
                OpenLayers.Handler.Polygon
         );        		
-		map.addControl(this.drawPolyControl);                
-
-		//Select control
-//        this.selectControl = new OpenLayers.Control.SelectFeature(
-//        		this.vectorLayer,{
-//        			onSelect: this.onFeatureSelect, 
-//        			onUnselect: this.onFeatureUnselect
-//        		}
-//        );		
-//        map.addControl(this.selectControl);
-//        this.selectControl.activate();		
+		map.addControl(this.drawPolyControl);                		
 		
         //Update internal MapPanel properties
 		Ext.apply(this, {
@@ -230,7 +211,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     
     modifyFeature: function(feature) {
         this.modifyControl.activate();
-        this.modifyControl.selectFeature(feature);
+        this.modifyControl.selectControl.select(feature);
     },
     
     finModifyFeature: function() {
