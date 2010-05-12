@@ -4,12 +4,16 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
     // Constructor Defaults, can be overridden by user's config object
     initComponent: function(){
 		
+        
         // Call parent (required)
         gwst.widgets.ActivityInfo3Panel.superclass.initComponent.apply(
           this, arguments);                     
     },
 
     onRender: function(){
+        
+        var other_selected = false;
+        
         this.header_panel = new Ext.Container({  
 			autoEl: {tag:'div', cls:'action-panel-header', id:'header_activity_info3', html:'Activity Questions 3'},
 			style: 'padding:5px',
@@ -23,12 +27,21 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
 			border: false
         });
         
-        this.answer_one = new Ext.Panel({
-            html: 'Q1 dropdown here',
+        this.answer_one = new Ext.form.ComboBox({
+            store: [
+                'Engage in another recreational boating activity',
+                'Engage in an activity not associated with recreational boating (i.e. go to the movies, go to the beach, etc...)',
+                'Stay at home',
+                'Other'
+            ],
+            emptyText:'Select an alternate...',
+            triggerAction: 'all',
             style: 'margin: 0px 0px 10px 10px',
-            border: 'solid',
+			border: false,
             width: '150px'
         });
+        
+        this.answer_one.on('select', this.alternateSelected, this);
         
         this.other_text_one = new Ext.Panel({
             html: 'If \'other\' please specify:',
@@ -49,12 +62,30 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
 			border: false
         });
         
-        this.answer_two = new Ext.Panel({
-            html: 'Q2 dropdown here',
+        this.answer_two = new Ext.form.ComboBox({
+            store: [
+                'Cruising',
+                'Entertaining family/friends',
+                'Fishing or shellfishing',
+                'Hunting',
+                'Whale watching',
+                'Bird watching',
+                'Racing',
+                'Sailing',
+                'Scubadiving/Snorkeling',
+                'Sightseeing',
+                'Swimming',
+                'Waterskiing/Wakeboarding',
+                'Other'
+            ],
+            emptyText:'Select an activity...',
+            triggerAction: 'all',
             style: 'margin: 0px 0px 10px 10px',
-            border: 'solid',
+			border: false,
             width: '150px'
         });
+        
+        this.answer_two.on('select', this.activitySelected, this);
         
         this.other_text_two = new Ext.Panel({
             html: 'If \'other\' please specify:',
@@ -88,10 +119,58 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.other_text_two);
         this.add(this.other_two);
         this.add(this.button_panel);
+        this.other_text_one.hide();
+        this.other_one.hide();
+        this.question_two.hide();
+        this.answer_two.hide();
+        this.other_text_two.hide();
+        this.other_two.hide();
     
         // Call parent (required)
         gwst.widgets.ActivityInfo3Panel.superclass.onRender.apply(this, arguments);     
 	},
+    
+    alternateSelected: function(combo, rec, index) {
+        if(rec.data.text == "Other") {
+            this.other_text_one.show();
+            this.other_one.show();
+            this.question_two.hide();
+            this.answer_two.hide();
+            this.other_text_two.hide();
+            this.other_two.hide();
+        } else if (rec.data.text == "Engage in another recreational boating activity") {
+            this.other_text_one.hide();
+            this.other_one.hide();
+            this.question_two.show();
+            this.answer_two.show();
+            if (this.other_selected) {
+                this.other_text_two.show();
+                this.other_two.show();
+            } else {
+                this.other_text_two.hide();
+                this.other_two.hide();
+            }
+        } else {
+            this.other_text_one.hide();
+            this.other_one.hide();
+            this.question_two.hide();
+            this.answer_two.hide();
+            this.other_text_two.hide();
+            this.other_two.hide();
+        }
+    },
+    
+    activitySelected: function(combo, rec, index) {
+        if(rec.data.text == "Other") {
+            this.other_text_two.show();
+            this.other_two.show();
+            this.other_selected = true;
+        } else {
+            this.other_text_two.hide();
+            this.other_two.hide();
+            this.other_selected = false;
+        }
+    },
     
     contBtnClicked: function() {
         this.fireEvent('activity-info3-cont',this);

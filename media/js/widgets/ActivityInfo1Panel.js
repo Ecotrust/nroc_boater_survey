@@ -23,8 +23,39 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
 			border: false
         });
         
-        this.answer_one = new Ext.Panel({
-            html: 'Q1 dropdown here',
+        this.answer_one = new Ext.form.ComboBox({
+            store: [
+                'Cruising',
+                'Entertaining family/friends',
+                'Fishing or shellfishing',
+                'Hunting',
+                'Whale watching',
+                'Bird watching',
+                'Racing',
+                'Sailing',
+                'Scubadiving/Snorkeling',
+                'Sightseeing',
+                'Swimming',
+                'Waterskiing/Wakeboarding',
+                'Other'
+            ],
+            emptyText:'Select an activity...',
+            triggerAction: 'all',
+            style: 'margin: 0px 0px 10px 10px',
+			border: false,
+            width: '150px'
+        });
+        
+        this.answer_one.on('select', this.activitySelected, this);
+        
+        this.other_text_one = new Ext.Panel({
+            html: 'If \'other\' please specify:',
+            style: 'margin: 0px 0px 10px 10px',
+            border: false
+        });
+        
+        this.other_one = new Ext.Panel({
+            html: '|',
             style: 'margin: 0px 0px 10px 10px',
             border: 'solid',
             width: '150px'
@@ -36,10 +67,19 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
 			border: false
         });
         
-        this.answer_two = new Ext.Panel({
-            html: 'Q2 dropdown here',
+        this.answer_two = new Ext.form.ComboBox({
+            store: [
+                'Less than 1 hour',
+                '1-2 hours',
+                '3-4 hours',
+                '5-6 hours',
+                '7-8 hours',
+                '9-12 hours',
+                'Over 12 hours'
+            ],
+            emptyText:'Select a time frame...',
             style: 'margin: 0px 0px 10px 10px',
-            border: 'solid',
+			border: false,
             width: '150px'
         });
         
@@ -49,10 +89,18 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
 			border: false
         });
         
-        this.answer_three = new Ext.Panel({
-            html: 'Q3 dropdown here',
+        this.answer_three = new Ext.form.ComboBox({
+            store: [
+                '1',
+                '2',
+                '3',
+                '4',
+                '5',
+                'Don\'t know'
+            ],
+            emptyText:'Select a ranking...',
             style: 'margin: 0px 0px 10px 10px',
-            border: 'solid',
+			border: false,
             width: '150px'
         });
         
@@ -67,6 +115,10 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.header_panel);        
         this.add(this.question_one);
         this.add(this.answer_one);
+        this.add(this.other_text_one);
+        this.other_text_one.hide();
+        this.add(this.other_one);
+        this.other_one.hide();
         this.add(this.question_two);
         this.add(this.answer_two);
         this.add(this.question_three);
@@ -76,6 +128,16 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
         // Call parent (required)
         gwst.widgets.ActivityInfo1Panel.superclass.onRender.apply(this, arguments);     
 	},
+    
+    activitySelected: function(combo, rec, index) {
+        if(rec.data.text == "Other") {
+            this.other_text_one.show();
+            this.other_one.show();
+        } else {
+            this.other_text_one.hide();
+            this.other_one.hide();
+        }
+    },
     
     contBtnClicked: function() {
         this.fireEvent('activity-info1-cont',this);
