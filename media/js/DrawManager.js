@@ -83,7 +83,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     skipActivitiesStep: function() {
-        alert("Skip activities not implemented yet!");
+        this.startFinishedStep();
     },
     
     startDrawActivityInstructStep: function() {
@@ -142,9 +142,12 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     startFinishedStep: function() {
-        alert('Finished panel not implemented yet');
+        this.loadFinishPanel();
     },
     
+    finFinishedStep: function() {
+        alert("End of survey demo.");
+    },
     
 
     /* 
@@ -393,6 +396,15 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.drawNewAreaPanel.on('draw-new', this.finDrawNewAreaStep, this);
         }
         this.viewport.setWestPanel(this.drawNewAreaPanel);    
+    },
+    
+    loadFinishPanel: function() {
+        if (!this.finishPanel) {
+            this.finishPanel = new gwst.widgets.FinishPanel();
+            //When panel fires even saying it's all done, we want to process it and move on
+            this.finishPanel.on('finish-cont', this.finFinishedStep, this);
+        }
+    this.viewport.setWestPanel(this.finishPanel);
     },
     
     /******************** Feature handling *****************/
