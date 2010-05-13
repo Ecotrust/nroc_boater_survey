@@ -40,6 +40,7 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
                 'Other'
             ],
             emptyText:'Select an activity...',
+            editable: false,
             triggerAction: 'all',
             style: 'margin: 0px 0px 10px 10px',
 			border: false,
@@ -54,11 +55,10 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
             border: false
         });
         
-        this.other_one = new Ext.Panel({
-            html: '|',
+        this.other_one = new Ext.form.TextField({
+            id: 'other-activity',
             style: 'margin: 0px 0px 10px 10px',
-            border: 'solid',
-            width: '150px'
+            width: '200px'
         });
     	
 		this.question_two = new Ext.Panel({		
@@ -78,6 +78,7 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
                 'Over 12 hours'
             ],
             emptyText:'Select a time frame...',
+            editable: false,
             style: 'margin: 0px 0px 10px 10px',
 			border: false,
             width: '150px'
@@ -99,6 +100,7 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
                 'Don\'t know'
             ],
             emptyText:'Select a ranking...',
+            editable: false,
             style: 'margin: 0px 0px 10px 10px',
 			border: false,
             width: '150px'

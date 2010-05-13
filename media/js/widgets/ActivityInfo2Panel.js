@@ -23,11 +23,39 @@ gwst.widgets.ActivityInfo2Panel = Ext.extend(gwst.widgets.WestPanel, {
 			border: false
         });
         
-        this.answer_one = new Ext.Panel({
-            html: '<p>Q1 checklist here:</p><p>item1</p><p>item2</p><p>item3</p><p>item4</p><p>item5</p><p>item6</p><p>item7</p><p>item8</p><p>item9</p><p>item10</p><p>item11</p><p>item12</p><p>item13</p><p>item14</p><p>item15</p><p>item16</p><p>item17</p>',            
-            style: 'margin: 0px 0px 10px 10px',
-            border: 'solid',
-            width: '200px'
+        this.other_box = new Ext.form.Checkbox ({
+            boxLabel: 'Other',
+            name: 'other'
+        });
+        
+        this.other_box.on('check', this.boxChecked, this);
+        
+        this.answer_one = new Ext.form.CheckboxGroup ({
+            id: 'answerOne',
+            xtype: 'checkboxgroup',
+            fieldLabel: 'Reasons List',
+            itemCls: 'x-check-group-alt',
+            style: 'margin-left: 5px',
+            columns: 1,
+            items: [
+                {boxLabel: 'Area reached quickly and/or easily', name: 'easy-access'},
+                {boxLabel: 'Area is familiar / I have a good knowledge of the area', name: 'familiar'},
+                {boxLabel: 'Calm waters', name: 'calm'},
+                {boxLabel: 'Protected waters', name: 'protected'},
+                {boxLabel: 'Clean and/or clear waters', name: 'clean'},
+                {boxLabel: 'Wildlife viewing opportunities', name: 'wild-viewing'},
+                {boxLabel: 'Scenic beauty', name: 'beauty'},
+                {boxLabel: 'Tranquility', name: 'tranquil'},
+                {boxLabel: 'Absence of other boaters', name: 'solitude'},
+                {boxLabel: 'Presence of other boaters', name: 'popular'},
+                {boxLabel: 'Fishing opportunities', name: 'fishing'},
+                {boxLabel: 'Swimming opportunities', name: 'swimming'},
+                {boxLabel: 'Natural or undeveloped shoreline', name: 'natural'},
+                {boxLabel: 'Access to shoreside entertainment and restaurants', name: 'entertainment'},
+                {boxLabel: 'Access to supplies, marina, convenient mooring or fuel', name: 'amenities'},
+                {boxLabel: 'No specific reason', name: 'no-reason'},
+                this.other_box
+            ]
         });
         
         this.other_text_one = new Ext.Panel({
@@ -36,11 +64,10 @@ gwst.widgets.ActivityInfo2Panel = Ext.extend(gwst.widgets.WestPanel, {
             border: false
         });
         
-        this.other_one = new Ext.Panel({
-            html: '|',
+        this.other_one = new Ext.form.TextField({
+            id: 'other-reason',
             style: 'margin: 0px 0px 10px 10px',
-            border: 'solid',
-            width: '150px'
+            width: '200px'
         });
         
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
@@ -52,17 +79,28 @@ gwst.widgets.ActivityInfo2Panel = Ext.extend(gwst.widgets.WestPanel, {
             bottom_margin: 5
         });
         
-        
         this.add(this.header_panel);        
         this.add(this.question_one);
         this.add(this.answer_one);
         this.add(this.other_text_one);
+        this.other_text_one.hide();
         this.add(this.other_one);
+        this.other_one.hide();
         this.add(this.button_panel);
     
         // Call parent (required)
         gwst.widgets.ActivityInfo2Panel.superclass.onRender.apply(this, arguments);     
 	},
+    
+    boxChecked: function() {
+        if (this.answer_one.items.item(16).checked) {
+            this.other_text_one.show();
+            this.other_one.show();
+        } else {
+            this.other_text_one.hide();
+            this.other_one.hide();
+        }
+    },
     
     contBtnClicked: function() {
         this.fireEvent('activity-info2-cont',this);

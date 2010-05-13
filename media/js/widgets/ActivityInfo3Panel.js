@@ -35,6 +35,7 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
                 'Other'
             ],
             emptyText:'Select an alternate...',
+            editable: false,
             triggerAction: 'all',
             style: 'margin: 0px 0px 10px 10px',
 			border: false,
@@ -49,11 +50,10 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
             border: false
         });
         
-        this.other_one = new Ext.Panel({
-            html: '|',
+        this.other_one = new Ext.form.TextField({
+            id: 'other-alt-activity',
             style: 'margin: 0px 0px 10px 10px',
-            border: 'solid',
-            width: '150px'
+            width: '200px'
         });
         
         this.question_two = new Ext.Panel({		
@@ -79,6 +79,7 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
                 'Other'
             ],
             emptyText:'Select an activity...',
+            editable: false,
             triggerAction: 'all',
             style: 'margin: 0px 0px 10px 10px',
 			border: false,
@@ -93,11 +94,10 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
             border: false
         });
         
-        this.other_two = new Ext.Panel({
-            html: '|',
+        this.other_two = new Ext.form.TextField({
+            id: 'other-alt-boat-activity',
             style: 'margin: 0px 0px 10px 10px',
-            border: 'solid',
-            width: '150px'
+            width: '200px'
         });
         
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
