@@ -56,31 +56,31 @@ gwst.widgets.DrawInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
             },{
                 html: '<p>a. Click the \'Draw Route\' button.</p>'
             },{
-                html: 'image here'
+                html: '<img src="/media/img/route_1.png">'
             },{
                 html: '<p>b. Click once on the map where you started your trip</p>'
             },{
-                html: 'image here'
+                html: '<img src="/media/img/route_2.png">'
             },{
                 html: '<p>c. Move mouse and click to create a second point</p>'
             }, {
-                html: 'image here'
+                html: '<img src="/media/img/route_3.png">'
             },{
                 html: '<p>d. Continue clicking along your boat route</p>'
             },{
-                html: 'image here'
+                html: '<img src="/media/img/route_4.png">'
             },{
                 html: '<p>e. Use the arrow buttons to move the map as you go</p>'
             },{
-                html: 'image here'
+                html: '<img src="/media/img/route_5.png">'
             },{
                 html: '<p>f. Double-click the last point to complete the route</p>'
             },{
-                html: 'image here'
+                html: '<img src="/media/img/route_6.png">'
             },{
                 html: '<p>g. If you made a mistake, click the \'Cancel\' button</p>'
             },{
-                html: 'image here'
+                html: '<img src="/media/img/route_7.png">'
             },{
                 html: '<a>Watch Demonstration</a>'  //TODO: link this to video
             },{

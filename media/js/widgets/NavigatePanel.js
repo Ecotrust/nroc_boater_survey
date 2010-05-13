@@ -60,11 +60,11 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
             items: [{
                 html: '<p>a. Use the arrow buttons to pan the map North, South, East or West centering the map over your starting location.'
             },{
-                html: '<img src="/media/img/nav_2.png">'
+                html: '<img src="/media/img/nav_arrows.png">'
             },{
                 html: '<p>b. Zoom the map in and out by clicking the \'+\' and \'-\' buttons on the map.</p>'
             },{
-                html: '<img src="/media/img/nav_2.png">'
+                html: '<img src="/media/img/nav_zoombar.png">'
             },{
                 html: '<p>c. Get as close as you can then press the Continue button</p>'
             }, {
