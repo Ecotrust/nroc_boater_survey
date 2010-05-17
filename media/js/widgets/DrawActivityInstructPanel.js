@@ -53,31 +53,31 @@ gwst.widgets.DrawActivityInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
             },{
                 html: '<p>a. First, click the \'Draw Area\' button</p>'
             },{
-                html: 'image here'
+                html: '<img src="/media/img/area_1.png" />'
             },{
                 html: '<p>b. Click once on the map to start drawing your area</p>'
             },{
-                html: 'image here'
+                html: '<img src="/media/img/area_2.png" />'
             },{
                 html: '<p>c. Move mouse and click to create a second point</p>'
             }, {
-                html: 'image here'
+                html: '<img src="/media/img/area_3.png" />'
             },{
                 html: '<p>d. Continue clicking, tracing out the boundary of your area</p>'
             },{
-                html: 'image here'
+                html: '<img src="/media/img/area_4.png" />'
             },{
                 html: '<p>e. Use the arrow buttons to move the map as you go</p>'
             },{
-                html: 'image here'
+                html: '<img src="/media/img/area_5.png" />'
             },{
                 html: '<p>f. Double-click the last point to complete the area</p>'
             },{
-                html: 'image here'
+                html: '<img src="/media/img/area_6.png" />'
             },{
                 html: '<p>g. If you made a mistake, click the \'Cancel\' button to start over</p>'
             },{
-                html: 'image here'
+                html: '<img src="/media/img/area_7.png" />'
             },{
                 html: '<a>Watch Demonstration</a>'  //TODO: link this to video
             },{

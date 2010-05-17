@@ -79,8 +79,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
                 format: 'image/jpeg',
                 transparent: 'True'
             },{
-                'isBaseLayer': false,
-                'opacity': 0.8,
+                'isBaseLayer': true,
                 'visibility': false
             }
         ); 
@@ -261,6 +260,10 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     
     cancelPoly: function() {
     	this.disablePolyDraw();        
+    },
+    
+    cancelLine: function() {
+        this.disableLineDraw();
     }
 });
  
