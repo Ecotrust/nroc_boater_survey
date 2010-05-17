@@ -60,23 +60,23 @@ gwst.widgets.EditRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
             },{
                 html: '<p>The <i>dark</i> circles you see on your route are the points you added.</p>'
             },{
-                html: 'image here'
+                html: '<img src="/media/img/edit_route_1.png" />'
             },{
                 html: '<p>The <i>light</i> circles between your points are \'ghost\' points and are used to create new points.</p>'
             },{
-                html: 'image here'
+                html: '<img src="/media/img/edit_route_2.png" />'
             },{
                 html: '<p><b>Moving.</b> To move to a point, click the mouse and drag it where you want, then release.</p>'
             }, {
-                html: 'image here'
+                html: '<img src="/media/img/edit_route_3.png" />'
             },{
                 html: '<p><b>Adding.</b> To add a point click a \'ghost\' point and drag it where you want, then release.</p>'
             },{
-                html: 'image here'
+                html: '<img src="/media/img/edit_route_4.png" />'
             },{
                 html: '<p><b>Removing.</b> To remove a point hold your mouse over it and press the \'Delete\' key on your keyboard.</p>'
             },{
-                html: 'image here'
+                html: '<img src="/media/img/edit_route_5.png" />'
             },{
                 html: '<a>Watch Demonstration</a>' //TODO: add link to video
             },{
