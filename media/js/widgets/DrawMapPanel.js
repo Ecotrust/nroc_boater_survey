@@ -26,51 +26,29 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             maxExtent: map_extent
         };        
 
-        //Map vector style
-        var styleMap = new OpenLayers.StyleMap({
-            'default': new OpenLayers.Style({
-                fillColor: '#ff8c00',
-                fillOpacity: 0.4,
-                strokeColor: '#ff8c00',
-                strokeOpacity: 1,
-                strokeWidth: 1,
-                cursor: 'pointer',
-                pointerEvents: "visiblePainted",
-                fontColor: "black",
-                fontSize: "12px",
-                labelAlign: "cm"
-            }),
-            'select': new OpenLayers.Style({
-                strokeWidth: 3,
-                fillColor: '#ff8c00',
-                strokeColor: 'yellow',
-                strokeOpacity: 1,
-                fillOpacity: 0.4,
-                cursor: 'default',
-                pointerEvents: "visiblePainted",
-                fontColor: "black",
-                fontSize: "12px",
-                labelAlign: "cm"
-            }),
-            'temporary': new OpenLayers.Style({
-                fillColor: '#ff8c00',
-                fillOpacity: 0.4,
-                strokeWidth: 2,
-                strokeColor: '#ff8c00',
-                strokeOpacity: 1
-            })
-        });	    
+        var defaultStyle = new OpenLayers.Style(OpenLayers.Util.applyDefaults({
+            fillColor: "#c800c6",
+            strokeColor: "#c800c6",
+            strokeWidth: 2
+        }, OpenLayers.Feature.Vector.style["default"]));
         
-        var pointStyleMap = new OpenLayers.StyleMap({
-            "default": new OpenLayers.Style(OpenLayers.Util.applyDefaults({
-                externalGraphic: "/media/img/small_red_marker.png",
-                graphicOpacity: 1,
-                graphicHeight: 25,
-                graphicWidth: 15,
-                graphicYOffset: -27
-            }, 
-            OpenLayers.Feature.Vector.style["default"]))
-        });
+        var selectStyle = new OpenLayers.Style(OpenLayers.Util.applyDefaults({
+            fillColor: "#c800c6",
+            strokeColor: "#c800c6",
+            strokeWidth: 2
+        }, OpenLayers.Feature.Vector.style["select"]));
+
+        var tempStyle = new OpenLayers.Style(OpenLayers.Util.applyDefaults({
+            fillColor: "#c800c6",
+            strokeColor: "#c800c6",
+            strokeWidth: 2
+        }, OpenLayers.Feature.Vector.style["temporary"]));
+
+        var myStyle = new OpenLayers.StyleMap({
+            'default': defaultStyle,
+            'select': selectStyle,
+            'temporary': tempStyle
+        }); 
 	    
 	    //Map base layers
         var hybridLayer = new OpenLayers.Layer.Google(
@@ -120,7 +98,10 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         
         this.vectorLayer = new OpenLayers.Layer.Vector(
     		"Vector Layer", 
-    		{displayInLayerSwitcher: false}
+    		{
+    		    displayInLayerSwitcher: false,
+    		    styleMap: myStyle
+    		}
         );        
         this.vectorLayer.events.on({
             "sketchstarted": this.vecStarted,
