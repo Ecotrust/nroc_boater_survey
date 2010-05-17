@@ -14,3 +14,7 @@ def intro(request):
     
 def test(request):    
     return render_to_response('test.html')
+
+def style_demo(request):
+    return render_to_response('style_demo.html')
+    
