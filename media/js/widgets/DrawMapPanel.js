@@ -27,20 +27,23 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         };        
 
         var defaultStyle = new OpenLayers.Style(OpenLayers.Util.applyDefaults({
-            fillColor: "#c800c6",
-            strokeColor: "#c800c6",
+            fillColor: "#ff3333",
+            fillOpacity: 0.3,
+            strokeColor: "#ff6600",
             strokeWidth: 2
         }, OpenLayers.Feature.Vector.style["default"]));
         
         var selectStyle = new OpenLayers.Style(OpenLayers.Util.applyDefaults({
-            fillColor: "#c800c6",
-            strokeColor: "#c800c6",
+            fillColor: "#ff3333",
+            fillOpacity: 0.3,            
+            strokeColor: "#ff6600",
             strokeWidth: 2
         }, OpenLayers.Feature.Vector.style["select"]));
 
         var tempStyle = new OpenLayers.Style(OpenLayers.Util.applyDefaults({
-            fillColor: "#c800c6",
-            strokeColor: "#c800c6",
+            fillColor: "#ff3333",
+            fillOpacity: 0.3,            
+            strokeColor: "#ff6600",
             strokeWidth: 2
         }, OpenLayers.Feature.Vector.style["temporary"]));
 
@@ -49,7 +52,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             'select': selectStyle,
             'temporary': tempStyle
         }); 
-	    
+        
 	    //Map base layers
         var hybridLayer = new OpenLayers.Layer.Google(
             "Satellite",
