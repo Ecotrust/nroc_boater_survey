@@ -71,9 +71,9 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         );     
         
         var nautLayer = new OpenLayers.Layer.WMS(
-            "Nautical Charts", "http://map-dev.maboatersurvey.com:8080/geoserver/wms", 
+            "Nautical Charts", "http://map-dev.maboatersurvey.com:8080/geoserver/gwc/service/wms", 
             {
-                layers: 'rbsw:13006_1',
+                layers: 'RBSW: NOAA Layer Group',
                 styles: '',
                 srs: 'EPSG:900913',
                 format: 'image/jpeg',
@@ -87,7 +87,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         var rampLayer = new OpenLayers.Layer.WMS(
             "Boat Ramps", "http://map-dev.maboatersurvey.com:8080/geoserver/wms", 
             {
-                layers: 'rbsw:massgis_ofba_Coastal',
+                layers: 'RBSW:massgis_ofba_Coastal',
                 styles: '',
                 srs: 'EPSG:900913',
                 format: 'image/jpeg',
