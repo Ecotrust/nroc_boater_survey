@@ -70,7 +70,8 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.gis',
     'draw_app',
-    'videos'
+    'videos',
+    'faq'
 )
 
 SELF_REGISTRATION=False
