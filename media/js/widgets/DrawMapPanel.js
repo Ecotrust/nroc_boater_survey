@@ -58,7 +58,8 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             "Satellite",
             {
             	type: G_HYBRID_MAP, 
-            	sphericalMercator: true
+            	sphericalMercator: true,
+                'maxZoomLevel': 13            	
             }
         );             
 
@@ -66,7 +67,8 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             "Terrain",
             {
             	type: G_PHYSICAL_MAP, 
-            	sphericalMercator: true
+            	sphericalMercator: true,
+                'maxZoomLevel': 13            	
             }
         );     
         
@@ -77,15 +79,16 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
                 styles: '',
                 srs: 'EPSG:900913',
                 format: 'image/jpeg',
-                transparent: 'True'
+                transparent: 'True',
+                'maxZoomLevel': 13                
             },{
                 'isBaseLayer': true,
-                'visibility': false
+                'visibility': false                
             }
         ); 
         
         var rampLayer = new OpenLayers.Layer.WMS(
-            "Boat Ramps", "http://map-dev.maboatersurvey.com:8080/geoserver/wms", 
+            "Access Points", "http://map-dev.maboatersurvey.com:8080/geoserver/wms", 
             {
                 layers: 'RBSW:massgis_ofba_Coastal',
                 styles: '',
