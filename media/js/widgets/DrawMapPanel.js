@@ -26,26 +26,26 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             maxExtent: map_extent
         };        
 
-            var defaultStyle = new OpenLayers.Style(OpenLayers.Util.applyDefaults({
-                fillColor: "#ee9900",
-                fillOpacity: 0.4,                
-                strokeColor: "#ff6600",
-                strokeWidth: 2                
-            }, OpenLayers.Feature.Vector.style["default"]));
-            
-            var selectStyle = new OpenLayers.Style(OpenLayers.Util.applyDefaults({
-                fillColor: 'blue',
-                fillOpacity: 0.4, 
-                strokeColor: 'blue',
-                strokeWidth: 2                                
-            }, OpenLayers.Feature.Vector.style["select"]));
+        var defaultStyle = new OpenLayers.Style(OpenLayers.Util.applyDefaults({
+            fillColor: "#ee9900",
+            fillOpacity: 0.4,                
+            strokeColor: "#ff6600",
+            strokeWidth: 2                
+        }, OpenLayers.Feature.Vector.style["default"]));
+        
+        var selectStyle = new OpenLayers.Style(OpenLayers.Util.applyDefaults({
+            fillColor: 'blue',
+            fillOpacity: 0.4, 
+            strokeColor: 'blue',
+            strokeWidth: 2                                
+        }, OpenLayers.Feature.Vector.style["select"]));
 
-            var tempStyle = new OpenLayers.Style(OpenLayers.Util.applyDefaults({
-                fillColor: "#ee9900",
-                fillOpacity: 0.4,                                
-                strokeColor: "#ff6600",
-                strokeWidth: 2                                
-            }, OpenLayers.Feature.Vector.style["temporary"]));
+        var tempStyle = new OpenLayers.Style(OpenLayers.Util.applyDefaults({
+            fillColor: "#ee9900",
+            fillOpacity: 0.4,                                
+            strokeColor: "#ff6600",
+            strokeWidth: 2                                
+        }, OpenLayers.Feature.Vector.style["temporary"]));
 
         var myStyle = new OpenLayers.StyleMap({
             'default': defaultStyle,
