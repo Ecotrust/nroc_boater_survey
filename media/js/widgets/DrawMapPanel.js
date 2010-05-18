@@ -94,7 +94,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
                 transparent: 'True'
             },{
                 'isBaseLayer': false,
-                'visibility': true
+                'visibility': false
             }
         ); 
         

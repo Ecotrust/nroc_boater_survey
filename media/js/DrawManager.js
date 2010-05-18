@@ -560,7 +560,9 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             width:150,
             trackMouse: true,
             autoHide: false,
-            html: text
+            html: text,
+            mouseOffset: [25,28],
+            style: 'opacity: 0.5; -moz-opacity: 0.5'
     	});
     },
     
