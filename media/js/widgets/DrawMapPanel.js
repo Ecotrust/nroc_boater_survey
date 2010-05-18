@@ -58,8 +58,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             "Satellite",
             {
             	type: G_HYBRID_MAP, 
-            	sphericalMercator: true,
-                'maxZoomLevel': 13            	
+            	sphericalMercator: true,         	
             }
         );             
 
@@ -67,8 +66,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             "Terrain",
             {
             	type: G_PHYSICAL_MAP, 
-            	sphericalMercator: true,
-                'maxZoomLevel': 13            	
+            	sphericalMercator: true,      	
             }
         );     
         

@@ -23,7 +23,7 @@ gwst.widgets.DrawNewAreaPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     getHtmlText: function() {
-        var html_text = '<h3>The activity area you drew is now complete. Do you want to draw another area where an activity took place on your last trip?</h3>';
+        var html_text = '<h3>This activity area is now complete. Do you want to draw another area where an activity took place on your last trip?</h3>';
         return html_text;
     },
 	
