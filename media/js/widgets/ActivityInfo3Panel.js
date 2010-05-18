@@ -37,9 +37,9 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
             emptyText:'Select an alternate...',
             editable: false,
             triggerAction: 'all',
-            style: 'margin: 0px 0px 10px 10px',
+            style: 'margin: 0px 0px 10px 10px; width: 270px',
 			border: false,
-            width: '150px'
+            width: '250px'
         });
         
         this.answer_one.on('select', this.alternateSelected, this);
@@ -83,7 +83,7 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
             triggerAction: 'all',
             style: 'margin: 0px 0px 10px 10px',
 			border: false,
-            width: '150px'
+            width: '250px'
         });
         
         this.answer_two.on('select', this.activitySelected, this);
@@ -109,6 +109,15 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
             bottom_margin: 5
         });
         
+        this.alt_button_panel = new gwst.widgets.TwoButtonPanel ({
+            btn1_width: 120,
+        	btn2_text: 'Continue >>',        	
+            btn2_handler: this.altContBtnClicked.createDelegate(this),
+            btn2_width: 100,
+            left_margin: 20,
+            bottom_margin: 5
+        });
+        
         this.add(this.header_panel);        
         this.add(this.question_one);
         this.add(this.answer_one);
@@ -119,12 +128,14 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.other_text_two);
         this.add(this.other_two);
         this.add(this.button_panel);
+        this.add(this.alt_button_panel);
         this.other_text_one.hide();
         this.other_one.hide();
         this.question_two.hide();
         this.answer_two.hide();
         this.other_text_two.hide();
         this.other_two.hide();
+        this.alt_button_panel.hide();
     
         // Call parent (required)
         gwst.widgets.ActivityInfo3Panel.superclass.onRender.apply(this, arguments);     
@@ -138,11 +149,15 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
             this.answer_two.hide();
             this.other_text_two.hide();
             this.other_two.hide();
+            this.button_panel.show();
+            this.alt_button_panel.hide();
         } else if (rec.data.text == "Engage in another recreational boating activity") {
             this.other_text_one.hide();
             this.other_one.hide();
             this.question_two.show();
             this.answer_two.show();
+            this.button_panel.hide();
+            this.alt_button_panel.show();
             if (this.other_selected) {
                 this.other_text_two.show();
                 this.other_two.show();
@@ -157,6 +172,8 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
             this.answer_two.hide();
             this.other_text_two.hide();
             this.other_two.hide();
+            this.button_panel.show();
+            this.alt_button_panel.hide();
         }
     },
     
@@ -170,6 +187,10 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
             this.other_two.hide();
             this.other_selected = false;
         }
+    },
+    
+    altContBtnClicked: function() {
+        this.fireEvent('activity-info3-alt-cont',this);
     },
     
     contBtnClicked: function() {

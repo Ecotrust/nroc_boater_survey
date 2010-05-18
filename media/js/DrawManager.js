@@ -13,6 +13,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 	addPolyWinOffset: [405, 8],
 	cancelWinOffset: [535, 8],
 	activityNum: 0,
+    alternateActivity: false,
 
     constructor: function(){
         gwst.DrawManager.superclass.constructor.call(this);
@@ -129,6 +130,17 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.startDrawNewAreaStep();
     },
     
+    startActivityInfo4Step: function() {
+        this.loadActivityInfo4Panel();
+        this.loadAltPolyWin();
+        this.alternateActivity = true;
+    },
+    
+    finActivityInfo4Step: function() {
+        this.startDrawNewAreaStep();
+        this.alternateActivity = false;
+    },
+    
     startDrawNewAreaStep: function() {
         this.loadDrawNewAreaPanel();
     },
@@ -218,6 +230,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 			this.addRouteWin = new gwst.widgets.AddRouteWindow();
 			this.addRouteWin.on('draw-route-clicked', this.mapPanel.enableLineDraw, this.mapPanel);
 			this.addRouteWin.on('draw-route-clicked', this.loadAddRouteTip, this);		
+            this.addRouteWin.on('draw-route-clicked', this.loadRouteCancelWin, this);
 		}
 		this.addRouteWin.show();		
 		this.addRouteWin.alignTo(document.body, "tl-tl", this.addRouteWinOffset);    	
@@ -240,10 +253,31 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 		this.addPolyWin.alignTo(document.body, "tl-tl", this.addPolyWinOffset);    	
     },   
     
+    loadAltPolyWin: function() {
+    	if (!this.altPolyWin) {
+			this.altPolyWin = new gwst.widgets.AddPolyWindow();
+			this.altPolyWin.on('draw-poly-clicked', this.mapPanel.enablePolyDraw, this.mapPanel);
+			this.altPolyWin.on('draw-poly-clicked', this.loadDrawAreaTooltip, this);
+			this.altPolyWin.on('draw-poly-clicked', this.loadCancelWin, this);			
+		}
+		this.altPolyWin.show();		
+		this.altPolyWin.alignTo(document.body, "tl-tl", this.addPolyWinOffset);    	
+    },   
+    
     hideAddPolyWin: function() {
     	if (this.addPolyWin) {
     		this.addPolyWin.hide();
     	}
+    },
+    
+    loadRouteCancelWin: function() {
+        if (!this.routeCancelWin) {
+			this.routeCancelWin = new gwst.widgets.CancelWindow();
+			this.routeCancelWin.on('cancel-clicked', this.mapPanel.cancelLine, this.mapPanel);
+			this.routeCancelWin.on('cancel-clicked', this.hideMapTooltip, this);
+		}
+		this.routeCancelWin.show();		
+		this.routeCancelWin.alignTo(document.body, "tl-tl", this.cancelWinOffset);    	
     },
     
     loadCancelWin: function() {
@@ -288,7 +322,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.satisfiedRoutePanel.on('redraw-route', this.redrawRoute, this);
             this.satisfiedRoutePanel.on('save-route', this.saveRoute, this);
         }
-        this.viewport.setWestPanel(this.satisfiedRoutePanel);    	
+        this.viewport.setWestPanel(this.satisfiedRoutePanel);  
+        this.routeCancelWin.hide();
     },    
     
     saveRoute: function() {
@@ -385,8 +420,18 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.activityInfo3Panel = new gwst.widgets.ActivityInfo3Panel();
             //When panel fires even saying it's all done, we want to process it and move on
             this.activityInfo3Panel.on('activity-info3-cont', this.finActivityInfo3Step, this);
+            this.activityInfo3Panel.on('activity-info3-alt-cont', this.startActivityInfo4Step, this);
         }
         this.viewport.setWestPanel(this.activityInfo3Panel);    
+    },
+    
+    loadActivityInfo4Panel: function() {
+        if (!this.activityInfo4Panel) {
+            this.activityInfo4Panel = new gwst.widgets.ActivityInfo4Panel();
+            //When panel fires even saying it's all done, we want to process it and move on
+            this.activityInfo4Panel.on('activity-info4-cont', this.finActivityInfo4Step, this);
+        }
+        this.viewport.setWestPanel(this.activityInfo4Panel);    
     },
     
     loadDrawNewAreaPanel: function() {
@@ -448,7 +493,11 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         // var res_obj = Ext.decode(response.responseText);         //TODO: activate this on validation
         // var status_code = parseFloat(res_obj.status_code);
         // if (status_code == 0) {
+        if (this.alternateActivity) {
+            this.finActivityInfo4Step();
+        } else {
         	this.loadSatisfiedActivityPanel();
+        }
         // } else if (status_code > 0){
         	// this.startInvalidShapeStep(status_code);	
         // } else {
@@ -518,6 +567,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     resumeRoute: function() {    
         this.mapPanel.lineResume();
         this.startDrawInstructStep();
+        this.loadRouteCancelWin();
     },
     
     /* 
