@@ -158,7 +158,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     finFinishedStep: function() {
-        alert("End of survey demo.");
+        alert("This is the end of the survey.");
     },
     
 
@@ -335,7 +335,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     saveRoute: function() {
         //Finish off the sketch creating the route feature
         this.mapPanel.lineFinish();
-        alert('Route save would happen now, press OK to move on');
         this.finDrawInstructStep();
     },
     
