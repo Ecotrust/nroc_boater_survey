@@ -268,6 +268,9 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     	if (this.addPolyWin) {
     		this.addPolyWin.hide();
     	}
+        if (this.altPolyWin) {
+            this.altPolyWin.hide();
+        }
     },
     
     loadRouteCancelWin: function() {
@@ -294,6 +297,9 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     	if (this.cancelWin) {
     		this.cancelWin.hide();
     	}
+        if (this.routeCancelWin) {
+            this.routeCancelWin.hide();
+        }
     },
 
     /* Load the Invalid Shape west panel */
@@ -340,12 +346,19 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     	this.startDrawInstructStep();
     },
     
+    redrawEditRoute: function() {
+        //Finish off the sketch creating the route feature
+        this.disableFeatureEdit();
+        this.mapPanel.removeLastFeature();
+    	this.startDrawInstructStep();    
+    },
+    
     /* Load the edit route west panel */
     loadEditRoutePanel: function() {
         if (!this.editRoutePanel) {
             this.editRoutePanel = new gwst.widgets.EditRoutePanel();
             //When panel fires event saying it's all done, we want to process it and move on 
-            this.editRoutePanel.on('redraw-edit-route', this.redrawRoute, this);
+            this.editRoutePanel.on('redraw-edit-route', this.redrawEditRoute, this);
             this.editRoutePanel.on('save-edit-route', this.finEditRouteStep, this);
         }
         this.viewport.setWestPanel(this.editRoutePanel);
@@ -387,11 +400,16 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     	this.startDrawActivityInstructStep();
     },    
     
+    redrawEditActivity: function() {
+        this.disableFeatureEdit();
+        this.redrawActivity();
+    },
+    
     loadEditActivityPanel: function() {
         if (!this.editActPanel) {
             this.editActPanel = new gwst.widgets.EditActivityPanel();
             //When panel fires event saying it's all done, we want to process it and move on 
-            this.editActPanel.on('redraw-edit-act', this.redrawActivity, this);
+            this.editActPanel.on('redraw-edit-act', this.redrawEditActivity, this);
             this.editActPanel.on('save-edit-act', this.finEditActivityStep, this);
         }
         this.viewport.setWestPanel(this.editActPanel);
