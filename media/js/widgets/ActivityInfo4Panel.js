@@ -11,14 +11,14 @@ gwst.widgets.ActivityInfo4Panel = Ext.extend(gwst.widgets.WestPanel, {
 
     onRender: function(){
         this.header_panel = new Ext.Container({  
-			autoEl: {tag:'div', cls:'action-panel-header', id:'header_activity_info4', html:'Activity Questions 4'},
+			autoEl: {tag:'div', cls:'action-panel-header', id:'header_activity_info4', html:'Secondary Location'},
 			style: 'padding:5px',
             id: 'activity_info4_panel',
 			border: false   
         }); 
         
 		this.question_one = new Ext.Panel({		
-			html: '<p>Please plot the area where you would most likely have engaged in this activity.</p>',
+			html: '<p>Since you said you would engage in this activity at another location if you had to, please draw the location you most likely would have gone on the map.</p><p>You will draw this alternate area just like you did your original activity area, starting with clicking the \'Draw New Area\' button.  Move and zoom and map as needed to get to this location first.</p>',
 			style: 'margin: 10px',
 			border: false
         });
