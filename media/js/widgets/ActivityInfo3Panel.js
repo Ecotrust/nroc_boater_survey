@@ -39,7 +39,7 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
             triggerAction: 'all',
             style: 'margin: 0px 0px 10px 10px; width: 270px',
 			border: false,
-            listWidth: '620px'
+            listWidth: 620
         });
         
         this.answer_one.on('select', this.alternateSelected, this);
