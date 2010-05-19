@@ -70,8 +70,12 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             }
         );     
         
-        var nautLayer = new OpenLayers.Layer.WMS(
-            "Nautical Charts", "http://map-dev.maboatersurvey.com:8080/geoserver/gwc/service/wms", 
+        var nautLayer = new OpenLayers.Layer.GeoWebCache({
+            url: "http://db-dev.maboatersurvey.com/RBSW__NOAA_Layer_Group",
+            name: 'Nautical Charts',
+            isBaseLayer: false
+        });
+        /*
             {
                 layers: 'RBSW: NOAA Layer Group',
                 styles: '',
@@ -83,7 +87,8 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
                 'isBaseLayer': true,
                 'visibility': false                
             }
-        ); 
+        );
+        */
         
         var rampLayer = new OpenLayers.Layer.WMS(
             "Access Points", "http://map-dev.maboatersurvey.com:8080/geoserver/wms", 
