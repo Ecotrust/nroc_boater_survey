@@ -191,11 +191,27 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
     
     altContBtnClicked: function() {
         this.fireEvent('activity-info3-alt-cont',this);
+        this.resetPanel();
     },
     
     contBtnClicked: function() {
         this.fireEvent('activity-info3-cont',this);
-    }    
+        this.resetPanel();
+    },
+
+    resetPanel: function() {
+        this.answer_one.reset();
+        this.other_one.reset();
+        this.answer_two.reset();
+        this.other_two.reset();
+        this.other_text_one.hide();
+        this.other_one.hide();
+        this.question_two.hide();
+        this.answer_two.hide();
+        this.other_text_two.hide();
+        this.other_two.hide();
+        this.other_selected = false;
+    }
 });
  
 // register xtype to allow for lazy initialization
