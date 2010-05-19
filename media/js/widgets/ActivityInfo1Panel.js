@@ -79,6 +79,7 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
             ],
             emptyText:'Select a time frame...',
             editable: false,
+            triggerAction: 'all',
             style: 'margin: 0px 0px 10px 10px',
 			border: false,
             width: '150px'
@@ -101,6 +102,7 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
             ],
             emptyText:'Select a ranking...',
             editable: false,
+            triggerAction: 'all',
             style: 'margin: 0px 0px 10px 10px',
 			border: false,
             width: '150px'
@@ -143,7 +145,17 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
     
     contBtnClicked: function() {
         this.fireEvent('activity-info1-cont',this);
-    }    
+        this.resetPanel();
+    },
+
+    resetPanel: function() {
+        this.answer_one.reset();
+        this.other_one.reset();
+        this.answer_two.reset();
+        this.answer_three.reset();
+        this.other_text_one.hide();
+        this.other_one.hide();
+    }
 });
  
 // register xtype to allow for lazy initialization

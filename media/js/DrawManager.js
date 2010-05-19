@@ -60,7 +60,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     finDrawInstructStep: function() {
-        this.startActivityInstructStep();
+        this.startRouteInfoStep();
     },
     
     startEditRouteStep: function() {
@@ -72,6 +72,14 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     finEditRouteStep: function() {
         this.disableFeatureEdit();
+        this.startRouteInfoStep();
+    },
+    
+    startRouteInfoStep: function() {
+        this.loadRouteInfo1Panel();
+    },
+    
+    finRouteInfoStep: function() {
         this.startActivityInstructStep();
     },
     
@@ -361,6 +369,15 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.editRoutePanel.on('save-edit-route', this.finEditRouteStep, this);
         }
         this.viewport.setWestPanel(this.editRoutePanel);
+    },
+    
+    loadRouteInfo1Panel: function() {
+        if (!this.routeInfo1Panel) {
+            this.routeInfo1Panel = new gwst.widgets.RouteInfo1Panel();
+            //When panel fires even saying it's all done, we want to process it and move on
+            this.routeInfo1Panel.on('route-info1-cont', this.finRouteInfoStep, this);
+        }
+        this.viewport.setWestPanel(this.routeInfo1Panel);    
     },
     
     /* Load the draw area instructions west panel*/

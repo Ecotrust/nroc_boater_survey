@@ -1,24 +1,24 @@
 Ext.namespace('gwst', 'gwst.widgets');
 
-gwst.widgets.ActivityInfo2Panel = Ext.extend(gwst.widgets.WestPanel, {
+gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
     // Constructor Defaults, can be overridden by user's config object
     initComponent: function(){
 		
         // Call parent (required)
-        gwst.widgets.ActivityInfo2Panel.superclass.initComponent.apply(
+        gwst.widgets.RouteInfo1Panel.superclass.initComponent.apply(
           this, arguments);                     
     },
 
     onRender: function(){
         this.header_panel = new Ext.Container({  
-			autoEl: {tag:'div', cls:'action-panel-header', id:'header_activity_info2', html:'Activity Questions 2'},
+			autoEl: {tag:'div', cls:'action-panel-header', id:'header_route_info1', html:'Route Questions'},
 			style: 'padding:5px',
-            id: 'activity_info2_panel',
+            id: 'route_info1_panel',
 			border: false   
         }); 
         
 		this.question_one = new Ext.Panel({		
-			html: '<p>Why did you choose this area to engage in this activity? (select all that apply)</p>',
+			html: '<p>What factors were important to you in <u>selecting your travel route</u>? <i>Check all that apply</i>.</p>',
 			style: 'margin: 10px',
 			border: false
         });
@@ -31,29 +31,27 @@ gwst.widgets.ActivityInfo2Panel = Ext.extend(gwst.widgets.WestPanel, {
         this.other_box.on('check', this.boxChecked, this);
         
         this.answer_one = new Ext.form.CheckboxGroup ({
-            id: 'answerOne',
+            id: 'route1-answerOne',
             xtype: 'checkboxgroup',
             fieldLabel: 'Reasons List',
             itemCls: 'x-check-group-alt',
             style: 'margin-left: 5px',
             columns: 1,
             items: [
-                {boxLabel: 'Area reached quickly and/or easily', name: 'easy-access'},
-                {boxLabel: 'Area is familiar / I have a good knowledge of the area', name: 'familiar'},
-                {boxLabel: 'Calm waters', name: 'calm'},
-                {boxLabel: 'Protected waters', name: 'protected'},
-                {boxLabel: 'Clean and/or clear waters', name: 'clean'},
-                {boxLabel: 'Wildlife viewing opportunities', name: 'wild-viewing'},
+                {boxLabel: 'Proximity to my favorite boating area(s)', name: 'proximity'},
+                {boxLabel: 'Reduce my travel time to get to my favorite boating area(s)', name: 'travel-time'},
+                {boxLabel: 'Route is familiar / I have good knowledge of the route', name: 'familiar'},
+                {boxLabel: 'Avoid shallow water', name: 'avoid-shallow'},
+                {boxLabel: 'Challenging navigation', name: 'challenge'},
+                {boxLabel: 'Calm waters', name: 'calm-waters'},
                 {boxLabel: 'Scenic beauty', name: 'beauty'},
                 {boxLabel: 'Tranquility', name: 'tranquil'},
                 {boxLabel: 'Absence of other boaters', name: 'solitude'},
                 {boxLabel: 'Presence of other boaters', name: 'popular'},
-                {boxLabel: 'Fishing opportunities', name: 'fishing'},
-                {boxLabel: 'Swimming opportunities', name: 'swimming'},
-                {boxLabel: 'Natural or undeveloped shoreline', name: 'natural'},
+                {boxLabel: 'Avoid speed zones', name: 'speed-zones'},
                 {boxLabel: 'Access to shoreside entertainment and restaurants', name: 'entertainment'},
                 {boxLabel: 'Access to supplies, marina, convenient mooring or fuel', name: 'amenities'},
-                {boxLabel: 'No specific reason', name: 'no-reason'},
+                {boxLabel: 'None are particularly important. I just cruise around', name: 'no-reason'},
                 this.other_box
             ]
         });
@@ -65,7 +63,7 @@ gwst.widgets.ActivityInfo2Panel = Ext.extend(gwst.widgets.WestPanel, {
         });
         
         this.other_one = new Ext.form.TextField({
-            id: 'other-reason',
+            id: 'route1-other-reason',
             style: 'margin: 0px 0px 10px 10px',
             width: '200px'
         });
@@ -89,11 +87,11 @@ gwst.widgets.ActivityInfo2Panel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.button_panel);
     
         // Call parent (required)
-        gwst.widgets.ActivityInfo2Panel.superclass.onRender.apply(this, arguments);     
+        gwst.widgets.RouteInfo1Panel.superclass.onRender.apply(this, arguments);     
 	},
     
     boxChecked: function() {
-        if (this.answer_one.items.item(16).checked) {
+        if (this.answer_one.items.item(14).checked) {
             this.other_text_one.show();
             this.other_one.show();
         } else {
@@ -103,7 +101,7 @@ gwst.widgets.ActivityInfo2Panel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     contBtnClicked: function() {
-        this.fireEvent('activity-info2-cont',this);
+        this.fireEvent('route-info1-cont',this);
         this.resetPanel();
     },
 
@@ -116,4 +114,4 @@ gwst.widgets.ActivityInfo2Panel = Ext.extend(gwst.widgets.WestPanel, {
 });
  
 // register xtype to allow for lazy initialization
-Ext.reg('gwst-activity-info2-panel', gwst.widgets.ActivityInfo2Panel);
+Ext.reg('gwst-route-info1-panel', gwst.widgets.RouteInfo1Panel);
