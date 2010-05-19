@@ -18,7 +18,7 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
         }); 
         
 		this.question_one = new Ext.Panel({		
-			html: '<p>What was the primary activity you were engaged in?</p>',
+			html: '<p>In this area, what was the primary activity you were engaged in?</p>',
 			style: 'margin: 10px',
 			border: false
         });
@@ -85,7 +85,7 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
         });
         
         this.question_three = new Ext.Panel({		
-			html: '<p>On a scale of 1 to 5 (with 1 being much worse and 5 being much better) how do you rank this area for this activity compared to other areas in Massachusetts where you have done this?</p>',
+			html: '<p>On a scale of 1 to 5 (with 1 being much worse and 5 being much better) how do you rank this area for this activity compared to other areas in Massachusetts where you could have done this?</p>',
 			style: 'margin: 0px 0px 10px 10px',
 			border: false
         });
