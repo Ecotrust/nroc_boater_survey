@@ -18,7 +18,9 @@ gwst.widgets.DrawInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
 
     getHtmlText: function() {
-        var html_text = '<h2>Instructions:</h2><p>Draw the route of your last trip on the map from start to finish.</p>';
+        var html_text = '<h2>Instructions:</h2>\
+        <p>Draw the route of your last trip on the map from start to finish.</p>\
+        <h2 style="margin: 15px 0px 0px 0px">How?</h2>';
         return html_text;
     },
 	
@@ -34,26 +36,22 @@ gwst.widgets.DrawInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
 		this.inner_panel = new Ext.Panel({
 			html: this.getHtmlText(),
             id: 'draw_inner_panel',
-			style: 'margin: 10px',
+			style: 'margin: 10px 10px 0px 10px',
 			border: false
 		});
         
         this.table_panel = new Ext.Panel({
             layout: 'table',
             border: false,
-            style: 'margin: 5px; padding: 5px',
+            style: 'margin: 0px 5px 5px 5px; padding: 0px 5px 5px 5px',
             defaults: {
-                bodyStyle: 'border: none; padding: 5px'
+                bodyStyle: 'border: none; padding: 0px 5px 5px 5px'
             },
             layoutConfig: {
                 columns: 2
             },
             id: 'draw_table_panel',
             items: [{
-                html: '<p><b>How?</b></p>'
-            },{
-                html: ''
-            },{
                 html: '<p>a. Click the \'Draw Route\' button.</p>'
             },{
                 html: '<img src="/media/img/route_1.png" />'

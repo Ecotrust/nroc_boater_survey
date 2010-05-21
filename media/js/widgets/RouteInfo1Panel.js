@@ -39,7 +39,7 @@ gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
             columns: 1,
             items: [
                 {boxLabel: 'Proximity to my favorite boating area(s)', name: 'proximity'},
-                {boxLabel: 'Reduce my travel time to get to my favorite boating area(s)', name: 'travel-time'},
+                {boxLabel: 'Reduced travel time to get to favorite boating area(s)', name: 'travel-time'},
                 {boxLabel: 'Route is familiar / I have good knowledge of the route', name: 'familiar'},
                 {boxLabel: 'Avoid shallow water', name: 'avoid-shallow'},
                 {boxLabel: 'Challenging navigation', name: 'challenge'},
