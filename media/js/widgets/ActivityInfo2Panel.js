@@ -19,7 +19,7 @@ gwst.widgets.ActivityInfo2Panel = Ext.extend(gwst.widgets.WestPanel, {
         
 		this.question_one = new Ext.Panel({		
 			html: '<p>Why did you choose this area to engage in this activity? (select all that apply)</p>',
-			style: 'margin: 10px',
+			style: 'margin: 10px 10px 5px 10px',
 			border: false
         });
         

@@ -53,24 +53,50 @@ gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.table_panel = new Ext.Panel({
             layout: 'table',
             border: false,
-            style: 'margin: 5px; padding: 5px',
+            style: 'margin: 0px 5px 5px 5px; padding: 0px 5px 5px 5px',
             defaults: {
-                bodyStyle: 'border: none; padding: 5px'
+                bodyStyle: 'border: none; margin: 0px; padding: 0px 5px 0px 5px'
             },
             layoutConfig: {
                 columns: 2
             },
             id: 'lyr_table_panel',
             items: [{
-                html: '<p>Nautical Chart</p>'
+                html: '<p style="margin: 0px">Satellite</p>'
+            },{
+                html: '<p style="margin: 0px">Terrain</p>'
+            },{
+                html: '<img src="/media/img/satellite.png" />'
+            },{
+                html: '<img src="/media/img/terrain.png" />'
+            },{
+                html: '<p style="margin: 5px 0px 0px 0px">Nautical Chart</p>'
+            },{
+                html: '<p style="margin: 5px 0px 0px 0px">Bathymetry Map</p>'
             },{
                 html: '<img src="/media/img/nautical.png" />'
             },{
-                html: '<p>Access Points</p>'
+                html: '<img src="/media/img/tmp.png" style="width: 125px; height: 45px"/>'
+            },{
+                html: '<p style="margin: 5px 0px 0px 0px">Access Points</p>'
+            },{
+                html: '<p style="margin: 5px 0px 0px 0px">Marinas</p>'
             },{
                 html: '<img src="/media/img/boat_ramps.png" />'
             },{
+                html: '<img src="/media/img/tmp.png" style="width: 125px; height: 45px"/>'
+            },{
+                html: '<p style="margin: 5px 0px 0px 0px">Lat/Lon Grid</p>'
+            },{
+                html: ''
+            },{
+                html: '<img src="/media/img/tmp.png" style="width: 125px; height: 45px"/>'
+            },{ 
+                html: ''
+            },{
+
                 // html: '<p>Bathymetry</p>'
+
             // }, {
                 // html: 'image here'
             // },{
