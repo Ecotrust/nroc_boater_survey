@@ -38,7 +38,7 @@ p, ol, ul, dl {
 }
 
 p {
-    font-size: 1em; 
+    font-size: 1.2em; 
     line-height: 1.4em; 
     margin: 0 0 1.2em 0;
 }
@@ -100,7 +100,7 @@ li ul {
 }
 
 li, dt, dd {
-    font-size: 11px;
+    font-size: 13px;
     line-height: 14px;
 }
 
@@ -206,8 +206,8 @@ table {
 }
 
 td, th {
-    font-size: 11px;
-    line-height: 13px;
+    font-size: 16px;
+    line-height: 18px;
     vertical-align: top;
     padding: 5px;
     font-family: "Lucida Grande", Verdana, Arial, sans-serif;
@@ -375,6 +375,7 @@ input, text, textfield, textarea, password {
    color:#333;
    background-color: #e5e5e5;
    border: 1px solid #ccc;
+   font-size: 1.3em;
    }
  
 input:focus, text:focus, textarea:focus, textfield:focus, password:focus, checkbox:focus {

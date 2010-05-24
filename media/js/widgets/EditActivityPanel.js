@@ -77,10 +77,6 @@ gwst.widgets.EditActivityPanel = Ext.extend(gwst.widgets.WestPanel, {
                 html: '<p><b>Removing.</b> To remove a point hold your mouse over it and press the \'Delete\' key on your keyboard.</p>'
             },{
                 html: '<img src="/media/img/edit_area_5.png" />'
-            },{
-                html: '<a>Watch Demonstration</a>' //TODO: add link to video
-            },{
-                html: ''
             }]
         });       
         

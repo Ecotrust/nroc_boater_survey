@@ -67,10 +67,6 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
                 html: '<img src="/media/img/nav_zoombar.png">'
             },{
                 html: '<p>c. Get as close as you can then press the Continue button</p>'
-            }, {
-                html: ''
-            },{
-                html: '<p class="video-link"><a href="'+ this.help_url +'" onclick="alert(\'Not implemented\'); return false" target="_blank">View Video Demonstration</a>'
             }]
         });       
 

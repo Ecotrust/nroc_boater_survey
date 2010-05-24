@@ -76,10 +76,6 @@ gwst.widgets.DrawActivityInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
                 html: '<p>g. If you made a mistake, click the \'Cancel\' button to start over</p>'
             },{
                 html: '<img src="/media/img/area_7.png" />'
-            },{
-                html: '<a>Watch Demonstration</a>'  //TODO: link this to video
-            },{
-                html: ''
             }]
         });       
 

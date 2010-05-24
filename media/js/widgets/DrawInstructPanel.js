@@ -79,10 +79,6 @@ gwst.widgets.DrawInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
                 html: '<p>g. If you made a mistake, click the \'Cancel\' button</p>'
             },{
                 html: '<img src="/media/img/route_7.png" />'
-            },{
-                html: '<a>Watch Demonstration</a>'  //TODO: link this to video
-            },{
-                html: ''
             }]
         });       
 
