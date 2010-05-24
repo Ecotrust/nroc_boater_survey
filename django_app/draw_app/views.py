@@ -14,7 +14,8 @@ def draw(request):
         return HttpResponse('We\'re sorry, this section is not accessible without providing the proper information' , status=500)
     params = {
         'interview_id': request.session['interview_id'], 
-        'vessel': request.session['vessel']
+        'vessel': request.session['vessel'],
+        'month': request.session['month']
     }
     return render_to_response('draw.html', RequestContext(request, params))
 

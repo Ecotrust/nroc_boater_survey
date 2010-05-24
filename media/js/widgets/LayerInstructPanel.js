@@ -29,7 +29,7 @@ gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         var html_text = '<h2>Instructions</h2>\
         <p>A number of map layers such as nautical charts are available to assist you in finding where you went on your last trip.\
         The map layers can be found to the top right of the map. Turn them on and off as needed by clicking the checkboxes:</p>\
-        <img src="/media/img/layers.png" style="margin-bottom: 15px" />\
+        <img src="/media/img/layers.png" style="margin-bottom: 8px" />\
         <h2 style="margin-bottom: 0px">Available Layers</h2>';
         return html_text;
     },
@@ -46,7 +46,7 @@ gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
 		this.inner_panel = new Ext.Panel({
 			html: this.getHtmlText(),
             id: 'lyr_inner_panel',
-			style: 'margin: 10px; margin-bottom: 0px',
+			style: 'margin: 3px 3px 0px 10px',
 			border: false
 		});
         
@@ -72,7 +72,7 @@ gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
             },{
                 html: '<p style="margin: 5px 0px 0px 0px">Nautical Chart</p>'
             },{
-                html: '<p style="margin: 5px 0px 0px 0px">Bathymetry Map</p>'
+                html: '<p style="margin: 5px 0px 0px 0px">Bathymetry</p>'
             },{
                 html: '<img src="/media/img/nautical.png" />'
             },{
@@ -93,14 +93,6 @@ gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
                 html: '<img src="/media/img/tmp.png" style="width: 125px; height: 45px"/>'
             },{ 
                 html: ''
-            },{
-
-                // html: '<p>Bathymetry</p>'
-
-            // }, {
-                // html: 'image here'
-            // },{
-                html: '<p class="video-link"><a href="'+ this.help_url +'" onclick="alert(\'Not implemented\'); return false" target="_blank">View Video Demonstration</a>'
             }]
         });       
 
