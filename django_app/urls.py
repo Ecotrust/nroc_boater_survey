@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     (r'^videos/', include('videos.urls')),
     (r'^admin/', include(admin.site.urls)),
     (r'^test/', test),
+    (r'^zoom/', zoom),
 )
 
 #Serve media through development server instead of web server (Apache)
