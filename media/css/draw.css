@@ -121,6 +121,13 @@ p.x-panel-static{
     border: 1px solid #0066FF; 
 }
 
+.the-footer {
+    background-color: #ff9999;
+    font-weight: bold;
+    color: #333333;
+    height: 24;
+}
+
 .activity-text {
     font-style: italic;
     color: #0066FF;
