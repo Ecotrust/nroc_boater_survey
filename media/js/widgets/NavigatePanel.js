@@ -74,7 +74,7 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
                 btn1_width: 140,
                 btn2_text: 'Continue >>',               
             btn2_handler: this.contBtnClicked.createDelegate(this),
-            btn2_width: 100,
+            btn2_width: 120,
             left_margin: 40
         });
         

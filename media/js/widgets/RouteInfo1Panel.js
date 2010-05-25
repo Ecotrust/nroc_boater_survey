@@ -69,10 +69,10 @@ gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
         });
         
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
-        	btn1_width: 120,
+        	btn1_width: 140,
         	btn2_text: 'Continue >>',        	
             btn2_handler: this.contBtnClicked.createDelegate(this),
-            btn2_width: 100,
+            btn2_width: 120,
             left_margin: 20,
             bottom_margin: 5
         });

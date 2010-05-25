@@ -2,6 +2,7 @@ Ext.namespace('gwst', 'gwst.widgets');
 
 gwst.widgets.CustomButtons = Ext.extend(Ext.Panel, {
     element_list: [],
+    col_width: 150,
     
     initComponent: function(){
 		
@@ -45,7 +46,7 @@ gwst.widgets.CustomButtons = Ext.extend(Ext.Panel, {
                     items: [
                         new Ext.Button(btn_action)
                     ],
-                    width: 150
+                    width: this.col_width
                 });
                 i++;
             } else if (this.element_list[i].type == 'text') {

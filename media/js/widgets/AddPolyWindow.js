@@ -8,7 +8,7 @@ gwst.widgets.AddPolyWindow = Ext.extend(Ext.Window, {
 		
 		Ext.apply(this, {          
             height: 25,
-            width: 122,
+            width: 149,
             layout:'fit',
             html:'blort',
             resizable: false,

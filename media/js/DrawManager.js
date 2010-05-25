@@ -11,7 +11,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 	cur_feature: null, //Last drawn feature
 	addRouteWinOffset: [405, 8],
 	addPolyWinOffset: [405, 8],
-	cancelWinOffset: [535, 8],
+	cancelWinOffset: [562, 8],
+    routeCancelWinOffset: [542, 8],
 	activityNum: 0,
     alternateActivity: false,
 
@@ -288,7 +289,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 			this.routeCancelWin.on('cancel-clicked', this.hideMapTooltip, this);
 		}
 		this.routeCancelWin.show();		
-		this.routeCancelWin.alignTo(document.body, "tl-tl", this.cancelWinOffset);    	
+		this.routeCancelWin.alignTo(document.body, "tl-tl", this.routeCancelWinOffset);    	
     },
     
     loadCancelWin: function() {
