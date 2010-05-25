@@ -9,6 +9,16 @@ gwst.DrawApp = Ext.extend(Ext.util.Observable, {
     },
 
     init: function(){
+        OpenLayers.Util.onImageLoadError = function() {
+            /**
+             * For images that don't exist in the cache, you can display
+             * a default image - one that looks like water for example.
+             * To show nothing at all, leave the following lines commented out.
+             */
+            this.src = "/media/img/geowebcache-404_NOAA.png";
+            this.style.display = "";
+        };    
+    
 		this.draw_manager = new gwst.DrawManager();
 		this.draw_manager.startInit();		        	        
     }	
