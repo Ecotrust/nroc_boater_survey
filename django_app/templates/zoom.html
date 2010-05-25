@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <table border="0" padding="5px">
+        <tr style="height: 35px">
+            <td>
+                <b style="font-size: 18px">Can you read the text and buttons below?</b>
+            </td>
+        </tr><tr>
+            <td style="background-color: white"><p style="font-size: 12px; color: black">
+                Is this text size appropriate? 1234567890 !@#$%^\&*()
+            </p></td> 
+        </tr><tr>
+            <td style="background-color: white">
+                <input id="test" type="button" style="font-size: 0.9em" value="Is this button size appropriate?" onclick='confirm("Is this text size appropriate?")'/>
+            </td>
+        </tr><tr>
+            <td><p></p></td>
+        </tr><tr style="height: 35px">
+            <td>
+                <b style="font-size: 18px">
+                    If so, please adjust your browser's viewing settings before moving on:
+                </b>
+            </td>
+        </tr><tr>
+            <td>
+                <p style="font-size: 18px">For <u>Internet Explorer</u>:
+                    <ul>
+                        <li style="font-size: 18px; line-height: 18px">1 - Open your "view" menu at the top of the screen</li>
+                        <li style="font-size: 18px; line-height: 18px">2 - select "zoom" from the drop down</li>
+                        <li style="font-size: 18px; line-height: 18px">3 - Click "Zoom In".  Repeat until you can read the above content clearly.</li>
+                    </ul>
+                </p>    
+            </td>
+        </tr><tr>
+            <td>
+                <p style="font-size: 18px">For <u>Firefox</u>:
+                    <ul>
+                        <li style="font-size: 18px; line-height: 18px">1 - Open your "view" menu at the top of the screen</li>
+                        <li style="font-size: 18px; line-height: 18px">2 - select "zoom" from the drop down</li>
+                        <li style="font-size: 18px; line-height: 18px">3 - Click "Zoom In".  Repeat until you can read the above content clearly.</li>
+                    </ul>
+                </p>
+            </td>
+        </tr><tr>
+            <td>                
+                <p style="font-size: 18px">For <u>Chrome</u>:
+                    <ul>
+                        <li style="font-size: 18px; line-height: 18px">1 - Click on the page icon at the top right of the screen</li>
+                        <li style="font-size: 18px; line-height: 18px">2 - select "zoom" from the drop down</li>
+                        <li style="font-size: 18px; line-height: 18px">3 - Click "Larger".  Repeat until you can read the above content clearly.</li>
+                    </ul>
+                </p>
+            </td>
+        </tr><tr>
+            <td>                
+                <p style="font-size: 18px">For <u>Safari</u>:
+                    <ul>
+                        <li style="font-size: 18px; line-height: 18px">1 - Click on the page icon at the top right of the screen</li>
+                        <li style="font-size: 18px; line-height: 18px">2 - select "zoom" from the drop down</li>
+                        <li style="font-size: 18px; line-height: 18px">3 - Click "Zoom In".  Repeat until you can read the above content clearly.</li>
+                    </ul>
+                </p>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <p>If you need additional help, you can call 617-287-5576, email <a href="mailto:help@maboatersurvey.com">help@maboatersurvey.com</a>, or refer to our <a target="_blank" href="http://maboatersurvey.com/faq">frequently asked questions page</a>.</p>
+
+    <form class="gwst-form" method="get" action="/">
+        <input type="hidden" name="id" id="{{interview_id}}"/>
+        <input type="hidden" name="vessel" value='{{vessel}}'/>
+        <input type="hidden" name="month" value='{{month}}'/>
+        <input type='hidden' name='test' value='true'/>
+        <input id="submit" type="submit" value="Continue" style='margin-right: 450px' />
+    </form>
+
+{% endblock %}

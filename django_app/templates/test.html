@@ -1,26 +1,26 @@
 <html>
-<body>
-<form action='/' method='get'>
-<h3>Test Survey Form</h3>
-<table>
-<tr>
-<td>User ID (random by default):</td>
-<td><input type="text" name="id" id="user_id"/></td>
-</tr><tr>
-<td>Vessel name/type:</td>
-<td><input type="text" name="vessel" value='17 foot Boston Whaler'/></td>
-</tr><tr>
-<td>Month:</td>
-<td><input type="text" name="month" value='may'/></td>
-</tr><tr>
-<td></td><td align='right'><input type="submit" value="Start Survey"></td>
-</tr>
-</table>
-<input type='hidden' name='test' value='true'/>
-</form>
-<script type='text/javascript'>
-random_id = Math.floor(Math.random()*100000000000)
-document.getElementById('user_id').value = random_id;
-</script>
-</body>
+    <body>
+        <form action='/zoom/' method='get'>
+            <h3>Test Survey Form</h3>
+            <table>
+                <tr>
+                    <td>User ID (random by default):</td>
+                    <td><input type="text" name="id" id="user_id"/></td>
+                </tr><tr>
+                    <td>Vessel name/type:</td>
+                    <td><input type="text" name="vessel" value='17 foot Boston Whaler'/></td>
+                </tr><tr>
+                    <td>Month:</td>
+                    <td><input type="text" name="month" value='may'/></td>
+                </tr><tr>
+                    <td></td><td align='right'><input type="submit" value="Start Survey"></td>
+                </tr>
+            </table>
+            <input type='hidden' name='test' value='true'/>
+        </form>
+        <script type='text/javascript'>
+            random_id = Math.floor(Math.random()*100000000000)
+            document.getElementById('user_id').value = random_id;
+        </script>
+    </body>
 </html>
