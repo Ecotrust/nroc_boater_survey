@@ -24,8 +24,8 @@ gwst.widgets.SatisfiedRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     getHtmlText: function() {
-        var html_text = '<h3>Are you satisfied with your boat route?</h3>\
-        <p>Your route should capture your entire trip even if you made multiple stops, finished where you started, or came back the same way.</p>';
+        var html_text = '<h3>Are you satisfied with this route?</h3>\
+        <h3>Did you draw your entire ROUNDTRIP route even if you came back the same way?</p>';
         return html_text;
     },
 	
@@ -46,7 +46,7 @@ gwst.widgets.SatisfiedRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
                 elem: 'Continue drawing route',
                 type: 'text'
             },{
-            	elem: '',
+            	elem: 'Continue where you left off',
             	type: 'text'            	
             },{
                 elem: this.editClicked.createDelegate(this),
@@ -73,7 +73,7 @@ gwst.widgets.SatisfiedRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
                 elem: 'Save route',
                 type: 'text'
             },{
-                elem: 'Save this route and move on',
+                elem: 'I\'m done, save this route and move on',
                 type: 'text'
             }]
         });

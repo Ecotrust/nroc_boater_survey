@@ -8,7 +8,7 @@ gwst.widgets.CancelWindow = Ext.extend(Ext.Window, {
 		
 		Ext.apply(this, {          
             height: 25,
-            width: 147,
+            width: 152,
             layout:'fit',
             html:'blort',
             resizable: false,
@@ -16,7 +16,7 @@ gwst.widgets.CancelWindow = Ext.extend(Ext.Window, {
             collapsible: false,
             draggable: false,
             tbar: [{
-				text: 'Cancel Drawing',
+				text: 'Redraw Route',
 				iconCls: 'cancel-icon',
 				handler: this.cancelShape,
 				scope: this
