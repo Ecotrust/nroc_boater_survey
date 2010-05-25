@@ -8,7 +8,7 @@ gwst.widgets.AddRouteWindow = Ext.extend(Ext.Window, {
 		
 		Ext.apply(this, {          
             height: 25,
-            width: 122,
+            width: 125,
             layout:'fit',
             html:'blort',
             resizable: false,

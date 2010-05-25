@@ -37,6 +37,7 @@ gwst.widgets.SatisfiedActivityPanel = Ext.extend(gwst.widgets.WestPanel, {
 		});
         
         this.button_panel = new gwst.widgets.CustomButtons ({
+            col_width: 150,
             element_list: [{
                 elem: this.saveClicked.createDelegate(this),
                 type: 'handler'

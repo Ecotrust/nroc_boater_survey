@@ -11,11 +11,11 @@ gwst.widgets.TwoButtonPanel = Ext.extend(Ext.Panel, {
     
     initComponent: function() {
         Ext.apply(this, {
-            style: 'margin: 0px 10px; padding: 5px 0px 5px 5px',
+            style: 'margin: 0px 20px; padding: 5px 0px 5px 5px',
             cls: 'gwst-button-panel',
             layout:'table',
             border: false,
-            width: 260,
+            width: 280,
             defaults: {
                 bodyStyle:'border: none'
             },

@@ -198,6 +198,11 @@ p.x-panel-static{
 
 /*     buttons     */
 
+.x-btn button{
+    font-size: 13px;
+    font-weight: bold;
+}
+
 .x-btn-left{
 	width:3px;
 	height:21px;

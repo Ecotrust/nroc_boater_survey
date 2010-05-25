@@ -8,7 +8,7 @@ gwst.widgets.CancelWindow = Ext.extend(Ext.Window, {
 		
 		Ext.apply(this, {          
             height: 25,
-            width: 120,
+            width: 147,
             layout:'fit',
             html:'blort',
             resizable: false,
