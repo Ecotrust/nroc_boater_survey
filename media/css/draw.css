@@ -195,3 +195,34 @@ p.x-panel-static{
 .x-form-radio-group .x-form-radio-wrap {
     white-space: nowrap;
 }
+
+/*     buttons     */
+
+.x-btn-left{
+	width:3px;
+	height:21px;
+	background:url(../img/btn-sprite.gif) no-repeat 0 0;
+}
+.x-btn-right{
+	width:3px;
+	height:21px;
+	background:url(../img/btn-sprite.gif) no-repeat 0 -21px;
+}
+.x-btn-center{
+	background:url(../img/btn-sprite.gif) repeat-x 0 -42px;
+	vertical-align: middle;
+	text-align:center;
+	padding:0 5px;
+	cursor:pointer;
+	white-space:nowrap;
+}
+/* Toggle button styles */
+.x-btn-pressed .x-btn-left{
+	background: url(../img/btn-sprite.gif) no-repeat 0 -63px;
+}
+.x-btn-pressed .x-btn-right{
+	background: url(../img/btn-sprite.gif) no-repeat 0 -84px;
+}
+.x-btn-pressed .x-btn-center{
+	background: url(../img/btn-sprite.gif) repeat-x 0 -126px;
+}
