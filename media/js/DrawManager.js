@@ -24,6 +24,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },          
 
     startInit: function() {
+        this.enableUnloadWarning();
         this.loadViewport();
         this.createError();        
         this.startLyrInstructStep();
@@ -163,11 +164,12 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     startFinishedStep: function() {
+        this.disableUnloadWarning();
         this.loadFinishPanel();
     },
     
     finFinishedStep: function() {
-        alert("This is the end of the survey.");
+        window.location = return_url;
     },
     
 
@@ -190,10 +192,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
                                             //TODO: implement new stuff here?
         alert("Is this called? Should it go somewhere? (DrawManager.js - finInvalidShapeStep)");        //TODO: Kill this
     },    
-    
-    allFinished: function() {
-    	window.location = return_url;
-    },
     
     /******************** UI widget handlers ********************/   
     
@@ -624,6 +622,16 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     /******************** UI Utility Functions ********************/    
+    
+    enableUnloadWarning: function() {
+        window.onbeforeunload = function confirmBrowseAway() {
+            return "If you leave now your survey will be left unfinished.";
+        }    
+    },
+    
+    disableUnloadWarning: function() {
+        window.onbeforeunload = null;
+    },
     
     loadAddRouteTip: function() {
     	this.loadMapTooltip('Now click on the map where you started your route. Continue clicking and tracing it out. Double-click the last point to finish');
