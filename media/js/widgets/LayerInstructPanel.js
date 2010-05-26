@@ -78,7 +78,7 @@ gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
             },{
                 html: '<img src="/media/img/tmp.png" style="width: 125px; height: 45px"/>'
             },{
-                html: '<p style="margin: 5px 0px 0px 0px">Access Points</p>'
+                html: '<p style="margin: 5px 0px 0px 0px">Boat Ramps</p>'
             },{
                 html: '<p style="margin: 5px 0px 0px 0px">Marinas</p>'
             },{

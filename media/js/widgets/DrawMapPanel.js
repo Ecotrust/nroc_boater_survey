@@ -91,7 +91,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         */
         
         var rampLayer = new OpenLayers.Layer.WMS(
-            "Access Points", "http://map-dev.maboatersurvey.com:8080/geoserver/wms", 
+            "Boat Ramps", "http://map-dev.maboatersurvey.com:8080/geoserver/wms", 
             {
                 layers: 'RBSW:massgis_ofba_Coastal',
                 styles: '',
@@ -103,6 +103,20 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
                 'visibility': false
             }
         ); 
+        
+        var marinaLayer = new OpenLayers.Layer.WMS(
+            "Marinas", "http://map-dev.maboatersurvey.com:8080/geoserver/wms", 
+            {
+                layers: 'RBSW:moris_marina_pt',
+                styles: '',
+                srs: 'EPSG:900913',
+                format: 'image/jpeg',
+                transparent: 'True'
+            },{
+                'isBaseLayer': false,
+                'visibility': false
+            }
+        );                 	
         
         this.vectorLayer = new OpenLayers.Layer.Vector(
     		"Vector Layer", 
@@ -158,7 +172,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         //Update internal MapPanel properties
 		Ext.apply(this, {
 		    map: map,
-		    layers: [hybridLayer, physicalLayer, nautLayer, rampLayer, this.vectorLayer],
+		    layers: [nautLayer, hybridLayer, physicalLayer, rampLayer, marinaLayer, this.vectorLayer],
 		    extent: map_extent,
 	        center: region_extent.getCenterLonLat(),
 	        zoom: 8,
