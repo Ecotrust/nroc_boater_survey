@@ -22,7 +22,7 @@ gwst.widgets.EditActivityPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     getHtmlText: function() {
-        var html_text = '<h2>Instructions:</h2> <p>Edit your boat activity area by adding, moving, or removing points along its path.</p>';
+        var html_text = '<h2>Instructions:</h2> <p>Edit your area by adding, moving, or removing points along its path.</p>';
         return html_text;
     },
 	
@@ -58,23 +58,23 @@ gwst.widgets.EditActivityPanel = Ext.extend(gwst.widgets.WestPanel, {
             },{
                 html: ''
             },{
-                html: '<p>The <i>dark</i> circles you see on your area are the points you added.</p>'
+                html: '<p>The <i>dark orange</i> circles you see on your area are the points you added.</p>'
             },{
                 html: '<img src="/media/img/edit_area_1.png" />'
             },{
-                html: '<p>The <i>light</i> circles between your points are \'ghost\' points and are used to create new points.</p>'
+                html: '<p>The <i>light orange</i> circles between your points are \'ghost\' points and are used to create new points.</p>'
             },{
                 html: '<img src="/media/img/edit_area_2.png" />'
             },{
-                html: '<p><b>Moving.</b> To move to a point, click the mouse and drag it where you want, then release.</p>'
+                html: '<p><b>Moving.</b> To move a point, click the mouse and drag it where you want, then release.</p>'
             }, {
                 html: '<img src="/media/img/edit_area_3.png" />'
             },{
-                html: '<p><b>Adding.</b> To add a point click a \'ghost\' point and drag it where you want, then release.</p>'
+                html: '<p><b>Adding.</b> To add a point, click a \'ghost\' point and drag it where you want, then release.</p>'
             },{
                 html: '<img src="/media/img/edit_area_4.png" />'
             },{
-                html: '<p><b>Removing.</b> To remove a point hold your mouse over it and press the \'Delete\' key on your keyboard.</p>'
+                html: '<p><b>Removing.</b> To remove a point, hover your mouse over it and press the \'Delete\' key on your keyboard.</p>'
             },{
                 html: '<img src="/media/img/edit_area_5.png" />'
             }]

@@ -26,7 +26,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     startInit: function() {
         this.enableUnloadWarning();
         this.loadViewport();
-        this.createError();        
+        this.createError();          
         this.startLyrInstructStep();
     },
                     
@@ -113,7 +113,11 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     finEditActivityStep: function() {
         this.disableFeatureEdit();
-        this.startActivityInfoStep();
+        if (this.alternateActivity) {
+            this.finActivityInfo4Step();
+        } else {
+            this.startActivityInfoStep();
+        }        
     },
     
     startActivityInfoStep: function() {
@@ -145,11 +149,19 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.loadAltPolyWin();
         this.alternateActivity = true;
     },
-    
+
     finActivityInfo4Step: function() {
         this.startDrawNewAreaStep();
-        this.alternateActivity = false;
     },
+
+    startEditAltActivityStep: function() {
+        this.loadEditActivityPanel();
+        this.enableFeatureEdit();    
+    },
+    
+    finEditAltActivityStep: function() {
+        this.saveAltActivity();
+    },    
     
     startDrawNewAreaStep: function() {
         this.loadDrawNewAreaPanel();
@@ -417,7 +429,11 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     redrawEditActivity: function() {
         this.disableFeatureEdit();
-        this.redrawActivity();
+        if (this.alternateActivity) {
+            this.redrawAltActivity();
+        } else {
+            this.redrawActivity();
+        }
     },
     
     loadEditActivityPanel: function() {
@@ -462,9 +478,31 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         if (!this.activityInfo4Panel) {
             this.activityInfo4Panel = new gwst.widgets.ActivityInfo4Panel();
             //When panel fires even saying it's all done, we want to process it and move on
-            this.activityInfo4Panel.on('activity-info4-cont', this.finActivityInfo4Step, this);
+            this.activityInfo4Panel.on('activity-info4-cont', this.loadSatisfiedAltActivityPanel, this);
         }
         this.viewport.setWestPanel(this.activityInfo4Panel);    
+    },
+
+    /* Load the satisfied with activity west panel */
+    loadSatisfiedAltActivityPanel: function() {
+    	if (!this.satisfiedAltActPanel) {
+    		this.satisfiedAltActPanel = new gwst.widgets.SatisfiedAltActivityPanel();
+            this.satisfiedAltActPanel.on('edit-act', this.startEditAltActivityStep, this);
+            this.satisfiedAltActPanel.on('redraw-act', this.redrawAltActivity, this);
+            this.satisfiedAltActPanel.on('save-act', this.saveAltActivity, this);
+        }
+        this.viewport.setWestPanel(this.satisfiedAltActPanel);    
+    },    
+    
+    redrawAltActivity: function() {
+        this.mapPanel.removeLastFeature();
+    	this.loadActivityInfo4Panel();    
+        this.loadAltPolyWin();    	
+    },
+    
+    saveAltActivity: function() {
+        this.finActivityInfo4Step();
+        this.alternateActivity = false;
     },
     
     loadDrawNewAreaPanel: function() {
@@ -527,7 +565,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         // var status_code = parseFloat(res_obj.status_code);
         // if (status_code == 0) {
         if (this.alternateActivity) {
-            this.finActivityInfo4Step();
+            this.loadSatisfiedAltActivityPanel();
         } else {
         	this.loadSatisfiedActivityPanel();
         }

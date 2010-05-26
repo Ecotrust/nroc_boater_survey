@@ -1,20 +1,20 @@
 Ext.namespace('gwst', 'gwst.widgets');
 
-gwst.widgets.SatisfiedRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
-    id: 'satisfied-route-panel',
+gwst.widgets.SatisfiedAltActivityPanel = Ext.extend(gwst.widgets.WestPanel, {
+    id: 'satisfied-alt-activity-panel',
 	
     // Constructor Defaults, can be overridden by user's config object
     initComponent: function(){
         // Constructor, config object already applied to 'this' so properties can 
         // be created and added/overridden here: Ext.apply(this, {});
 		
-		this.addEvents('cont-route');
-        this.addEvents('edit-route');
-        this.addEvents('redraw-route');
-        this.addEvents('save-route');
+		this.addEvents('cont-activity');
+        this.addEvents('edit-activity');
+        this.addEvents('redraw-activity');
+        this.addEvents('save-activity');
 		
         // Call parent (required)
-        gwst.widgets.SatisfiedRoutePanel.superclass.initComponent.apply(
+        gwst.widgets.SatisfiedAltActivityPanel.superclass.initComponent.apply(
           this, arguments);                     
     },
     
@@ -24,56 +24,46 @@ gwst.widgets.SatisfiedRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     getHtmlText: function() {
-        var html_text = '<h3>Are you satisfied with this route?</h3>\
-        <h3>Did you draw your entire ROUNDTRIP route even if you came back the same way?</p>';
+        var html_text = '<h3>Are you satisfied with the alternate recreation area you drew?</h3>';
         return html_text;
     },
 	
     onRender: function(){
 		this.inner_panel = new Ext.Panel({
 			html: this.getHtmlText(),
-            id: 'satisfied_shape_inner_panel',
+            id: 'satisfied_alt_shape_inner_panel',
 			style: 'margin: 10px',
 			border: false
 		});
         
         this.button_panel = new gwst.widgets.CustomButtons ({
-            col_width: 180,
+            col_width: 150,
             element_list: [{
-                elem: this.contClicked.createDelegate(this),
+                elem: this.saveClicked.createDelegate(this),
                 type: 'handler'
             },{
-                elem: 'Continue route',
+                elem: 'Yes',
                 type: 'text'
             },{
-            	elem: 'Continue where you left off',
-            	type: 'text'            	
+                elem: 'Save this area',
+                type: 'text'
             },{
                 elem: this.editClicked.createDelegate(this),
                 type: 'handler'
             },{
-                elem: 'Edit route',
+                elem: 'No, edit',
                 type: 'text'
             },{
-                elem: 'Make some edits to this route',
+                elem: 'Make some edits to this area',
                 type: 'text'
             },{
                 elem: this.redrawClicked.createDelegate(this),
                 type: 'handler'
             },{
-                elem: 'Redraw route',
+                elem: 'No, redraw',
                 type: 'text'
             },{
-                elem: 'Discard this route and draw it again',
-                type: 'text'
-            },{
-                elem: this.saveClicked.createDelegate(this),
-                type: 'handler'
-            },{
-                elem: 'Save route',
-                type: 'text'
-            },{
-                elem: 'I\'m done, save this route and move on',
+                elem: 'Discard this area and draw it again',
                 type: 'text'
             }]
         });
@@ -82,25 +72,21 @@ gwst.widgets.SatisfiedRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.button_panel);
         
         // Call parent (required)
-        gwst.widgets.SatisfiedRoutePanel.superclass.onRender.apply(this, arguments); 
+        gwst.widgets.SatisfiedAltActivityPanel.superclass.onRender.apply(this, arguments); 
 	},
     
-    contClicked: function() {
-		this.fireEvent('cont-route',this);
-    },
-    
     editClicked: function() {
-        this.fireEvent('edit-route',this);
+        this.fireEvent('edit-act',this);
     },
     
 	redrawClicked: function() {
-		this.fireEvent('redraw-route',this);
+		this.fireEvent('redraw-act',this);
     },
     
     saveClicked: function() {
-        this.fireEvent('save-route',this);
+        this.fireEvent('save-act',this);
     }
 });
  
 // register xtype to allow for lazy initialization
-Ext.reg('gwst-satisfied-route-panel', gwst.widgets.SatisfiedRoutePanel);
+Ext.reg('gwst-satisfied-alt-activity-panel', gwst.widgets.SatisfiedAltActivityPanel);

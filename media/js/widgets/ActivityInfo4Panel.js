@@ -18,11 +18,57 @@ gwst.widgets.ActivityInfo4Panel = Ext.extend(gwst.widgets.WestPanel, {
         }); 
         
 		this.question_one = new Ext.Panel({		
-			html: '<p>Since you said you would engage in this activity at another location if you had to, please draw the location you most likely would have gone on the map.</p><p>You will draw this alternate area just like you did your original activity area, starting with clicking the \'Draw New Area\' button.  Move and zoom and map as needed to get to this location first.</p>',
+			html: '<p>In a previous question, you said you would engage in this activity at another location if you had to.  At this time, please draw the area you most likely would have gone on the map.</p>',
 			style: 'margin: 10px',
 			border: false
         });
         
+        //collapsible instruction panel - content from first draw panel
+        this.instruction_again_panel = new Ext.Panel({
+            title: 'How do I draw, again?',
+            collapsible: true,
+            collapsed: true,        
+            layout: 'table',
+            border: false,
+            style: 'margin: 0px 5px 5px 5px; padding: 0px 5px 5px 5px',
+            defaults: {
+                bodyStyle: 'border: none; padding: 0px 5px 5px 5px'
+            },
+            layoutConfig: {
+                columns: 2
+            },
+            id: 'draw_table_panel',
+            items: [{
+                html: '<p>a. First, click the \'Draw Area\' button</p>'
+            },{
+                html: '<img src="/media/img/area_1.png" />'
+            },{
+                html: '<p>b. Click once on the map to start drawing your area</p>'
+            },{
+                html: '<img src="/media/img/area_2.png" />'
+            },{
+                html: '<p>c. Move mouse and click to create a second point</p>'
+            }, {
+                html: '<img src="/media/img/area_3.png" />'
+            },{
+                html: '<p>d. Continue clicking, tracing out the boundary of your area</p>'
+            },{
+                html: '<img src="/media/img/area_4.png" />'
+            },{
+                html: '<p>e. Use the arrow buttons to move the map as you go</p>'
+            },{
+                html: '<img src="/media/img/area_5.png" />'
+            },{
+                html: '<p>f. Double-click the last point to complete the area</p>'
+            },{
+                html: '<img src="/media/img/area_6.png" />'
+            },{
+                html: '<p>g. If you made a mistake, click the \'Cancel\' button to start over</p>'
+            },{
+                html: '<img src="/media/img/area_7.png" />'
+            }]
+        });       
+
         // this.button_panel = new gwst.widgets.TwoButtonPanel ({
         	// btn1_width: 120,
         	// btn2_text: 'Continue >>',        	
@@ -33,6 +79,7 @@ gwst.widgets.ActivityInfo4Panel = Ext.extend(gwst.widgets.WestPanel, {
         
         this.add(this.header_panel);        
         this.add(this.question_one);
+        this.add(this.instruction_again_panel);
         // this.add(this.button_panel);
     
         // Call parent (required)
