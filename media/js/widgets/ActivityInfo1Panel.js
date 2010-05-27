@@ -145,7 +145,6 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
     
     contBtnClicked: function() {
         this.fireEvent('activity-info1-cont',this);
-        this.resetPanel();
     },
 
     resetPanel: function() {

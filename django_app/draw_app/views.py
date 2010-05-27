@@ -29,7 +29,9 @@ GET: filter by interview group: 'group_id'
 POST - expects {'feature':{geometry, group_id, resource_id, boundary_n, boundary_s, boundary_e, boundary_w}}
 DELETE - expects a shape id /shapes/id or resource_id param
 '''
-def shapes(request, id=None):    
+def shapes(request, id=None):  
+
+  
     if request.method == 'POST':        
         #Make sure we were passed a feature
         if not request.POST.has_key('feature'):
@@ -40,24 +42,54 @@ def shapes(request, id=None):
         #It must be a new shape, create it                                 
         result = '{"status_code":"-1",  "success":"false",  "message":"Error saving"}'
         try:
+             
             geom = GEOSGeometry(feat.get('geometry'), srid=settings.CLIENT_SRID)
             geom.transform(settings.SERVER_SRID)                        
-             
-            activity = Activity.objects.get(pk=feat.get('activity_id'))
-            if activity.draw_type == 'point':
-                new_shape = ActivityPoint(
-                    kn_user_id = feat.get('user_id'),
-                    act = activity,                
+            # activity = Activity.objects.get(pk=feat.get('activity_id'))
+            if feat.get('type') == 'route':
+                new_shape = Route(
+                    survey_id = feat.get('survey_id'),
+                    user_type = feat.get('survey_id')[0],
+                    user_id = feat.get('survey_id')[1:7],
+                    month = feat.get('survey_id')[-2:],
                     geometry = geom,
+                    factors = feat.get('factors'),
+                    other_factor = feat.get('other_factor'),
                 )
-            elif activity.draw_type == 'polygon':
-                new_shape = ActivityPoly(
-                    kn_user_id = feat.get('user_id'),
-                    act = activity,                
+            elif feat.get('type') == 'act_area':
+                new_shape = ActivityArea(
+                    survey_id = feat.get('survey_id'),
+                    user_type = feat.get('survey_id')[0],
+                    user_id = feat.get('survey_id')[1:7],
+                    month = feat.get('survey_id')[-2:],
                     geometry = geom,
-                )                                        
-            new_shape.save() 
+                    primary_activity = feat.get('primary_act'),
+                    duration = feat.get('duration'),
+                    rank = feat.get('rank'),
+                    factors = feat.get('factors'),
+                    other_factor = feat.get('other_factor'),
+                    alternate_activity_type = feat.get('alt_act'),
+                )    
 
+            elif feat.get('type') == 'alt_act_area':
+                new_shape = AltActArea(
+                    survey_id = feat.get('survey_id'),
+                    user_type = feat.get('survey_id')[0],
+                    user_id = feat.get('survey_id')[1:7],
+                    month = feat.get('survey_id')[-2:],
+                    geometry = geom,
+                    primary_activity = feat.get('primary_act'),
+                    preferred_area = request.session['preferred_shape'],
+                )     
+            new_shape.save() 
+            
+            if feat.get('type') == 'act_area':
+                request.session['preferred_shape'] = new_shape
+                
+
+            # import pdb
+            # pdb.set_trace()
+            
         except Exception, e:
             return HttpResponse(result + e.message, status=500)
 

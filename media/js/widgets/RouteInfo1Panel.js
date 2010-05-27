@@ -101,8 +101,7 @@ gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     contBtnClicked: function() {
-        this.fireEvent('route-info1-cont',this);
-        this.resetPanel();
+        this.fireEvent('route-info1-cont',this);  //TODO: pass answer_one.getValue()?
     },
 
     resetPanel: function() {

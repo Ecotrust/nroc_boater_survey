@@ -15,6 +15,19 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     routeCancelWinOffset: [542, 8],
 	activityNum: 0,
     alternateActivity: false,
+    route_factors: 'test_route_factors',
+    route_factors_other: '',
+    activity_1_primary: 'test_act_primary',
+    activity_1_other: '',
+    activity_1_duration: 'test_act_duration',
+    activity_1_rank: 'test_act_rank',
+    activity_factors: 'test_act_factors',
+    activity_factors_other: '',
+    activity_3_alt: 'test_act_alternative',
+    activity_3_other: '',
+    activity_3_alt_act: 'test_activity_alt_act',
+    activity_3_alt_other: '',
+    alt_act_primary_area: 'test_primary_id',
 
     constructor: function(){
         gwst.DrawManager.superclass.constructor.call(this);
@@ -82,7 +95,15 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     finRouteInfoStep: function() {
-        this.startActivityInstructStep();
+        if (this.routeInfo1Panel.answer_one.getValue()) {
+            this.route_factors = this.routeInfo1Panel.answer_one.getValue();
+            if (this.routeInfo1Panel.other_one.getValue()) {
+                this.route_factors_other = this.routeInfo1Panel.other_one.getValue();
+            }
+        }
+        this.routeInfo1Panel.resetPanel();
+        this.saveNewRoute();
+        // this.startActivityInstructStep();
     },
     
     startActivityInstructStep: function() {
@@ -125,6 +146,22 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     finActivityInfoStep: function() {
+        if ( this.activityInfo1Panel.answer_one.getValue()) {
+            this.activity_1_primary = this.activityInfo1Panel.answer_one.getValue();
+            if (this.activityInfo1Panel.other_one.getValue()) {
+                this.activity_1_other = this.activityInfo1Panel.other_one.getValue();
+                if (this.activity_1_primary == 'Other' && this.activity_1_other != "") {
+                    this.activity_1_primary = this.activity_1_other;
+                }
+            }
+        }
+        if (this.activityInfo1Panel.answer_two.getValue()) { 
+            this.activity_1_duration = this.activityInfo1Panel.answer_two.getValue();
+        }
+        if (this.activityInfo1Panel.answer_three.getValue()) {
+            this.activity_1_rank = this.activityInfo1Panel.answer_three.getValue();
+        }
+        this.activityInfo1Panel.resetPanel();        
         this.startActivityInfo2Step();
     },
     
@@ -133,6 +170,13 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     finActivityInfo2Step: function() {
+        if (this.activityInfo2Panel.answer_one.getValue()) {
+            this.activity_factors = this.activityInfo2Panel.answer_one.getValue();
+            if (this.activityInfo2Panel.other_one.getValue()) {
+                this.activity_factors_other = this.activityInfo2Panel.other_one.getValue();
+            }
+        }
+        this.activityInfo2Panel.resetPanel();
         this.startActivityInfo3Step();
     },
     
@@ -141,7 +185,27 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     finActivityInfo3Step: function() {
-        this.startDrawNewAreaStep();
+        if (this.activityInfo3Panel.answer_one.getValue()) {
+            this.activity_3_alt = this.activityInfo3Panel.answer_one.getValue();
+            if (this.activityInfo3Panel.other_one.getValue()) {
+                this.activity_3_other = this.activityInfo3Panel.other_one.getValue();
+                if (this.activity_3_alt == 'Other' && this.activity_3_other != "") {
+                    this.activity_3_alt = this.activity_3_other;
+                }
+            }
+        }
+        
+        if (this.activityInfo3Panel.answer_two.getValue()) {
+            this.activity_3_alt_act = this.activityInfo3Panel.answer_two.getValue();
+            if (this.activityInfo3Panel.other_two.getValue()) {
+                this.activity_3_alt_other = this.activityInfo3Panel.other_two.getValue();
+                if (this.activity_3_alt_act == 'Other' && this.activity_3_alt_other != "") {
+                    this.activity_3_alt_act = this.activity_3_alt_other;
+                }
+            }
+        }
+    
+        this.saveNewArea(true);
     },
     
     startActivityInfo4Step: function() {
@@ -151,7 +215,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
 
     finActivityInfo4Step: function() {
-        this.startDrawNewAreaStep();
+        this.saveNewArea(false);
+        // this.startDrawNewAreaStep();
     },
 
     startEditAltActivityStep: function() {
@@ -171,6 +236,20 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         if (!result.draw_new) {
     		this.startFinishedStep();
     	} else {
+        
+            this.route_factors= 'test_route_factors';
+            this.route_factors_other= '';
+            this.activity_1_primary= 'test_act_primary';
+            this.activity_1_other= '';
+            this.activity_1_duration= 'test_act_duration';
+            this.activity_1_rank= 'test_act_rank';
+            this.activity_factors= 'test_act_factors';
+            this.activity_factors_other= '';
+            this.activity_3_alt= 'test_act_alternative';
+            this.activity_3_other= '';
+            this.activity_3_alt_act= 'test_activity_alt_act';
+            this.activity_3_alt_other= '';
+            
     		this.startDrawActivityInstructStep();
         }    	
     },
@@ -354,6 +433,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     saveRoute: function() {
         //Finish off the sketch creating the route feature
         this.mapPanel.lineFinish();
+        // this.saveNewRoute();
         this.finDrawInstructStep();
     },
     
@@ -469,7 +549,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.activityInfo3Panel = new gwst.widgets.ActivityInfo3Panel();
             //When panel fires even saying it's all done, we want to process it and move on
             this.activityInfo3Panel.on('activity-info3-cont', this.finActivityInfo3Step, this);
-            this.activityInfo3Panel.on('activity-info3-alt-cont', this.startActivityInfo4Step, this);
+            // this.activityInfo3Panel.on('activity-info3-alt-cont', this.startActivityInfo4Step, this); //TODO: kill alt, branch based on answer
+            this.activityInfo3Panel.on('activity-info3-alt-cont', this.finActivityInfo3Step, this);
         }
         this.viewport.setWestPanel(this.activityInfo3Panel);    
     },
@@ -534,12 +615,11 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     validateShape: function(feature) {    	
-    	// var config = {
-            // geometry: feature.geometry.toString()
-            //activity_id: this.getCurActivity().id,
-            //user_id: user_id
-         // }    	
-        //alert("Validation not implemented yet (DrawManager.js - validateShape)");
+    	var config = {
+            geometry: feature.geometry.toString(),
+            survey_id: gwst.settings.interview_id
+         }    	
+        // alert("Validation not implemented yet (DrawManager.js - validateShape)");
         this.loadWait('Validating your shape');
     	// Ext.Ajax.request({
 	        // url: gwst.settings.urls.shape_validate,        //TODO: activate this on validation
@@ -576,42 +656,103 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         // }        
     },               
 
-    // saveNewFeature: function() {        
-        // alert("Saving not implemented yet");
-    	// this.loadWait('Saving');
+    saveNewRoute: function() {        
+    	this.loadWait('Saving');
 
-        // var data = {
-            // geometry: this.cur_feature.geometry.toString()
-            // activity_id: this.getCurActivity().id,
-            // user_id: user_id
-        // };
-        
-    	// Ext.Ajax.request({
-	        // url: gwst.settings.urls.shapes,
-	        // method: 'POST',
-	        // disableCachingParam: true,
-	        // params: {feature: Ext.util.JSON.encode(data)},
-	        // success: this.finSaveNewFeature,
-           	// failure: function(response, opts) {
+        var data = {
+            geometry: this.cur_feature.geometry.toString(),
+            survey_id: gwst.settings.interview_id,
+            type: 'route',
+            factors: this.route_factors, //TODO: get factors list from form
+            other_factor: this.route_factors_other
+        };
+        Ext.Ajax.request({
+	        url: gwst.settings.urls.shapes,
+	        method: 'POST',
+	        disableCachingParam: true,
+	        params: {feature: Ext.util.JSON.encode(data)},
+	        success: this.finSaveNewRoute,
+           	failure: function(response, opts) {
         		// Change to error window
-              	// this.hideWait.defer(500, this);
-              	// gwst.error.load('An error has occurred while trying to save.');
-           	// },
-            // scope: this
-	    // });  
-    // },     
+              	this.hideWait.defer(500, this);
+              	gwst.error.load('An error has occurred while trying to save.');
+           	},
+            scope: this
+	    });  
+    },     
     
-    // finSaveNewFeature: function(response) {
-    	// var new_feat = Ext.decode(response.responseText);    //TODO: activate on save
-    	// this.hideWait.defer(500, this);
-    	    	
-    	// this.getCurActivity().num_saved += 1;
-    	// if (this.getCurActivity().draw_type == 'polygon') {
-    		// this.startPolyActivity();
-    	// } else {
-    		// this.startPointActivity()
-    	// }    	    	
-    // },    
+    saveNewArea: function(bool_primary) {        
+    	this.loadWait('Saving');
+
+        if (bool_primary) {
+            var data = {
+                geometry: this.cur_feature.geometry.toString(),
+                survey_id: gwst.settings.interview_id,
+                type: 'act_area',
+                primary_act: this.activity_1_primary, 
+                duration: this.activity_1_duration, 
+                rank: this.activity_1_rank, 
+                factors: this.activity_factors, //TODO: get factors from form
+                other_factor: this.activity_factors_other,
+                alt_act: this.activity_3_alt
+            };
+            Ext.Ajax.request({
+                url: gwst.settings.urls.shapes,
+                method: 'POST',
+                disableCachingParam: true,
+                params: {feature: Ext.util.JSON.encode(data)},
+                success: this.finSaveNewArea,
+                failure: function(response, opts) {
+                    // Change to error window
+                    this.hideWait.defer(500, this);
+                    gwst.error.load('An error has occurred while trying to save.');
+                },
+                scope: this
+            });  
+        } else {
+            var data = {
+                geometry: this.cur_feature.geometry.toString(),
+                survey_id: gwst.settings.interview_id,
+                type: 'alt_act_area',
+                primary_act: this.activity_3_alt_act 
+            };
+            Ext.Ajax.request({
+                url: gwst.settings.urls.shapes,
+                method: 'POST',
+                disableCachingParam: true,
+                params: {feature: Ext.util.JSON.encode(data)},
+                success: this.finSaveNewAltArea,
+                failure: function(response, opts) {
+                    // Change to error window
+                    this.hideWait.defer(500, this);
+                    gwst.error.load('An error has occurred while trying to save.');
+                },
+                scope: this
+            });  
+        }
+    },     
+    
+    finSaveNewRoute: function(response) {
+    	var new_feat = Ext.decode(response.responseText);    
+    	this.hideWait.defer(500, this);
+        this.startActivityInstructStep();
+    },
+    
+    finSaveNewArea: function(response) {
+    	var new_feat = Ext.decode(response.responseText);    
+    	this.hideWait.defer(500, this);
+        if (this.activity_3_alt == 'Engage in another recreational boating activity') {
+            this.startActivityInfo4Step();
+        } else {
+            this.startDrawNewAreaStep();
+        }
+    },
+    
+    finSaveNewAltArea: function(response) {
+    	var new_feat = Ext.decode(response.responseText);    
+    	this.hideWait.defer(500, this);
+        this.startDrawNewAreaStep();
+    },
     
     /******************** Event handlers *******************/   
 
@@ -619,7 +760,11 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         //track current feature for referencing later
     	this.cur_feature = feature;
     	if (feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.LineString') {
-    		return;
+            this.hideAddRouteWin();
+            this.hideCancelWin();
+            this.hideMapTooltip();
+            // this.validateShape(feature);
+    		// return;
     	} else {
     		this.hideAddPolyWin();
     		this.hideCancelWin();

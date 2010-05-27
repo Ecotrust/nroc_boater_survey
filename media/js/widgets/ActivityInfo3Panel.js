@@ -191,12 +191,10 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
     
     altContBtnClicked: function() {
         this.fireEvent('activity-info3-alt-cont',this);
-        this.resetPanel();
     },
     
     contBtnClicked: function() {
         this.fireEvent('activity-info3-cont',this);
-        this.resetPanel();
     },
 
     resetPanel: function() {
