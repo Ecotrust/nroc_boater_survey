@@ -40,26 +40,26 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.enableUnloadWarning();
         this.loadViewport();
         this.createError();          
-        this.startLyrInstructStep();
+        this.startNavStep();
     },
                     
     /********************** Survey steps ************************/
-
-    startLyrInstructStep: function() {
-        this.loadLyrInstructPanel();
-    },
-    
-    finLyrInstructStep: function() {
-        this.startNavStep();
-    },
 
     startNavStep: function() {
         this.loadNavPanel();
     },
     
-    finNavStep: function() {
-    	this.startRouteInstructStep();
+    finNavStep: function() {    	
+    	this.startLyrInstructStep();
     },
+    
+    startLyrInstructStep: function() {
+        this.loadLyrInstructPanel();
+    },
+    
+    finLyrInstructStep: function() {
+        this.startRouteInstructStep();
+    },    
         
     startRouteInstructStep: function() {
         this.loadRouteInstructPanel();
