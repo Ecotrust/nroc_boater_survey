@@ -59,8 +59,8 @@ class Route(Model):
     user_id = TextField()
     month = TextField()
     geometry = LineStringField(srid=settings.SERVER_SRID)
-    factors = TextField()
-    other_factor = TextField()
+    factors = TextField( blank=True, null=True )
+    other_factor = TextField( blank=True, null=True )
     objects = GeoManager()
     creation_date = DateTimeField(default=datetime.datetime.now)
     class Meta:
@@ -72,12 +72,12 @@ class ActivityArea(Model):
     user_id = TextField()
     month = TextField()
     geometry = PolygonField(srid=settings.SERVER_SRID)
-    primary_activity = TextField()
-    duration = TextField()
-    rank = TextField()
-    factors = TextField()
-    other_factor = TextField()
-    alternate_activity_type = TextField()
+    primary_activity = TextField( blank=True, null=True )
+    duration = TextField( blank=True, null=True )
+    rank = TextField( blank=True, null=True )
+    factors = TextField( blank=True, null=True )
+    other_factor = TextField( blank=True, null=True )
+    alternate_activity_type = TextField( blank=True, null=True )
     objects = GeoManager()
     creation_date = DateTimeField(default=datetime.datetime.now)
     class Meta:
@@ -90,7 +90,7 @@ class AltActArea(Model):
     month = TextField()
     geometry = PolygonField(srid=settings.SERVER_SRID)
     preferred_area = ForeignKey(ActivityArea)
-    primary_activity = TextField()
+    primary_activity = TextField( blank=True, null=True )
     objects = GeoManager()
     creation_date = DateTimeField(default=datetime.datetime.now)
     class Meta:
@@ -102,10 +102,10 @@ class SurveyStatus(Model):
     user_id = TextField()
     month = TextField()
     start_time = DateTimeField(default=datetime.datetime.now)
-    map_status = TextField() #skipped?  May need to be handled before accessing draw_app
-    act_status = TextField()
+    map_status = TextField( blank=True, null=True ) #skipped?  May need to be handled before accessing draw_app
+    act_status = TextField( blank=True, null=True )
     complete = BooleanField( default=False )
-    complete_time = DateTimeField()
+    complete_time = DateTimeField( blank=True, null=True )
     class Meta:
         db_table = u'survey_status'
     
