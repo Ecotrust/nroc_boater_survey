@@ -13,11 +13,9 @@ urlpatterns = patterns('',
     (r'^$', intro),
     (r'^draw/', include('draw_app.urls')),
     url(r'^faq/', include('faq.urls'), name='faq'),
-    (r'^style_demo/$', style_demo),    
     (r'^videos/', include('videos.urls')),
     (r'^admin/', include(admin.site.urls)),
     (r'^test/', test),
-    (r'^zoom/', zoom),
 )
 
 #Serve media through development server instead of web server (Apache)
