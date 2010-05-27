@@ -67,7 +67,9 @@ gwst.widgets.ActivityInfo2Panel = Ext.extend(gwst.widgets.WestPanel, {
         this.other_one = new Ext.form.TextField({
             id: 'other-reason',
             style: 'margin: 0px 0px 10px 10px',
-            width: '200px'
+            width: '250px',
+            maxLength: 150,
+            maxLengthText: 'Your entry is too long'
         });
         
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
@@ -103,7 +105,11 @@ gwst.widgets.ActivityInfo2Panel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     contBtnClicked: function() {
-        this.fireEvent('activity-info2-cont',this);
+        if (this.other_one.isValid()) {
+            this.fireEvent('activity-info2-cont',this);
+        } else {
+            alert('Your entry for \'other\' is too long.  Please shorten it.');
+        }
     },
 
     resetPanel: function() {

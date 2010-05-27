@@ -65,7 +65,9 @@ gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
         this.other_one = new Ext.form.TextField({
             id: 'route1-other-reason',
             style: 'margin: 0px 0px 10px 10px',
-            width: '200px'
+            width: '250px',
+            maxLength: 150,
+            maxLengthText: 'Your entry is too long'
         });
         
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
@@ -101,7 +103,11 @@ gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     contBtnClicked: function() {
-        this.fireEvent('route-info1-cont',this);  //TODO: pass answer_one.getValue()?
+        if (this.other_one.isValid()) {
+            this.fireEvent('route-info1-cont',this); 
+        } else {
+            alert('Your entry for \'other\' is too long.  Please shorten it.');
+        }
     },
 
     resetPanel: function() {
