@@ -123,7 +123,19 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     skipActivitiesStep: function() {
-        this.startFinishedStep();
+        Ext.Msg.show({
+           title:'Save Changes?',
+           msg: 'Are you sure you want to skip the drawing of your activity areas?',
+           buttons: Ext.Msg.YESNO,
+           fn: this.skipActivitiesCheck.createDelegate(this),
+           icon: Ext.MessageBox.QUESTION
+        });        
+    },
+
+    skipActivitiesCheck: function(id, text, opt) {
+        if (id == 'yes') {
+            this.startFinishedStep();
+        }
     },
     
     startDrawActivityInstructStep: function() {
