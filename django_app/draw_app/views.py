@@ -44,7 +44,7 @@ def shapes(request, id=None):
         try:
              
             geom = GEOSGeometry(feat.get('geometry'), srid=settings.CLIENT_SRID)
-            geom.transform(settings.SERVER_SRID)                        
+            geom.transform(settings.SERVER_SRID)     
             # activity = Activity.objects.get(pk=feat.get('activity_id'))
             if feat.get('type') == 'route':
                 new_shape = Route(
@@ -53,8 +53,6 @@ def shapes(request, id=None):
                     user_id = feat.get('survey_id')[1:7],
                     month = feat.get('survey_id')[-2:],
                     geometry = geom,
-                    factors = feat.get('factors'),
-                    other_factor = feat.get('other_factor'),
                 )
             elif feat.get('type') == 'act_area':
                 new_shape = ActivityArea(
@@ -66,8 +64,6 @@ def shapes(request, id=None):
                     primary_activity = feat.get('primary_act'),
                     duration = feat.get('duration'),
                     rank = feat.get('rank'),
-                    factors = feat.get('factors'),
-                    other_factor = feat.get('other_factor'),
                     alternate_activity_type = feat.get('alt_act'),
                 )    
 
@@ -83,13 +79,39 @@ def shapes(request, id=None):
                 )     
             new_shape.save() 
             
+            if feat.get('type') == 'route':
+                factors = feat.get('factors')
+                for factor in factors:
+                    if factor == 'other':
+                        new_factor = RouteFactor(
+                            route = new_shape,
+                            factor = feat.get('other_factor'),
+                        )
+                    else :
+                        new_factor = RouteFactor(
+                            route = new_shape,
+                            factor = factor,
+                        )
+                    new_factor.save()
+                    
+            elif feat.get('type') == 'act_area':   
+                factors = feat.get('factors')
+                for factor in factors:
+                    if factor == 'other':
+                        new_factor = ActivityFactor(
+                            activity = new_shape,
+                            factor = feat.get('other_factor'),
+                        )      
+                    else :
+                        new_factor = ActivityFactor(
+                            activity = new_shape,
+                            factor = factor,
+                        )            
+                    new_factor.save()
+                    
             if feat.get('type') == 'act_area':
                 request.session['preferred_shape'] = new_shape
                 
-
-            # import pdb
-            # pdb.set_trace()
-            
         except Exception, e:
             return HttpResponse(result + e.message, status=500)
 

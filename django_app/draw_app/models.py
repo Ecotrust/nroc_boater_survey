@@ -59,8 +59,6 @@ class Route(Model):
     user_id = TextField()
     month = TextField()
     geometry = LineStringField(srid=settings.SERVER_SRID)
-    factors = TextField( blank=True, null=True )
-    other_factor = TextField( blank=True, null=True )
     objects = GeoManager()
     creation_date = DateTimeField(default=datetime.datetime.now)
     class Meta:
@@ -75,8 +73,6 @@ class ActivityArea(Model):
     primary_activity = TextField( blank=True, null=True )
     duration = TextField( blank=True, null=True )
     rank = TextField( blank=True, null=True )
-    factors = TextField( blank=True, null=True )
-    other_factor = TextField( blank=True, null=True )
     alternate_activity_type = TextField( blank=True, null=True )
     objects = GeoManager()
     creation_date = DateTimeField(default=datetime.datetime.now)
@@ -109,7 +105,17 @@ class SurveyStatus(Model):
     class Meta:
         db_table = u'survey_status'
     
-    
+class RouteFactor(Model):
+    route = ForeignKey(Route)
+    factor = TextField()
+    class Meta:
+        db_table = u'route_factors'
+        
+class ActivityFactor(Model):
+    activity = ForeignKey(ActivityArea)
+    factor = TextField()
+    class Meta:
+        db_table = u'activity_factors'
     
 
 # class ActivityAdmin(admin.ModelAdmin):
