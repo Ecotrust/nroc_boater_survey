@@ -31,7 +31,6 @@ DELETE - expects a shape id /shapes/id or resource_id param
 '''
 def shapes(request, id=None):  
 
-  
     if request.method == 'POST':        
         #Make sure we were passed a feature
         if not request.POST.has_key('feature'):
@@ -42,10 +41,8 @@ def shapes(request, id=None):
         #It must be a new shape, create it                                 
         result = '{"status_code":"-1",  "success":"false",  "message":"Error saving"}'
         try:
-             
             geom = GEOSGeometry(feat.get('geometry'), srid=settings.CLIENT_SRID)
             geom.transform(settings.SERVER_SRID)     
-            # activity = Activity.objects.get(pk=feat.get('activity_id'))
             if feat.get('type') == 'route':
                 new_shape = Route(
                     survey_id = feat.get('survey_id'),
@@ -85,11 +82,15 @@ def shapes(request, id=None):
                     if factor == 'other':
                         new_factor = RouteFactor(
                             route = new_shape,
+                            survey_id = feat.get('survey_id'),
+                            route_pk = new_shape.id,
                             factor = feat.get('other_factor'),
                         )
                     else :
                         new_factor = RouteFactor(
                             route = new_shape,
+                            survey_id = feat.get('survey_id'),
+                            route_pk = new_shape.id,
                             factor = factor,
                         )
                     new_factor.save()
@@ -100,11 +101,15 @@ def shapes(request, id=None):
                     if factor == 'other':
                         new_factor = ActivityFactor(
                             activity = new_shape,
+                            survey_id = feat.get('survey_id'),
+                            activity_pk = new_shape.id,                            
                             factor = feat.get('other_factor'),
                         )      
                     else :
                         new_factor = ActivityFactor(
                             activity = new_shape,
+                            survey_id = feat.get('survey_id'),
+                            activity_pk = new_shape.id,
                             factor = factor,
                         )            
                     new_factor.save()
