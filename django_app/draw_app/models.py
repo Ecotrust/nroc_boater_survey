@@ -63,7 +63,23 @@ class Route(Model):
     creation_date = DateTimeField(default=datetime.datetime.now)
     class Meta:
         db_table = u'route'
+        
+class RouteAdmin(OSMGeoAdmin):
+    list_display = ('survey_id', 'user_type', 'user_id', 'month', 'creation_date')
+    odering = ('survey_id',)
     
+class RouteFactor(Model):
+    route = ForeignKey(Route)
+    survey_id = TextField()
+    route_pk = IntegerField()
+    factor = TextField()
+    class Meta:
+        db_table = u'route_factors'
+        
+class RouteFactorAdmin(admin.ModelAdmin):
+    list_display = ('survey_id', 'route_pk', 'factor')
+    odering = ('survey_id',)        
+        
 class ActivityArea(Model):
     survey_id = TextField()
     user_type = CharField( max_length=1 )
@@ -79,6 +95,22 @@ class ActivityArea(Model):
     class Meta:
         db_table = u'act_area'
         
+class ActivityAdmin(OSMGeoAdmin):
+    list_display = ('survey_id', 'user_type', 'user_id', 'month', 'creation_date')
+    odering = ('survey_id',)
+        
+class ActivityFactor(Model):
+    activity = ForeignKey(ActivityArea)
+    survey_id = TextField()
+    activity_pk = IntegerField()
+    factor = TextField()
+    class Meta:
+        db_table = u'activity_factors'
+        
+class ActivityFactorAdmin(admin.ModelAdmin):
+    list_display = ('survey_id', 'activity_pk', 'factor')
+    odering = ('survey_id',)                
+    
 class AltActArea(Model):
     survey_id = TextField()
     user_type = CharField( max_length=1 )
@@ -91,6 +123,10 @@ class AltActArea(Model):
     creation_date = DateTimeField(default=datetime.datetime.now)
     class Meta:
         db_table = u'alt_act_area'
+        
+class AltActAdmin(OSMGeoAdmin):
+    list_display = ('survey_id', 'user_type', 'user_id', 'month', 'creation_date')
+    odering = ('survey_id',)        
         
 class SurveyStatus(Model):
     survey_id = TextField()
@@ -105,18 +141,6 @@ class SurveyStatus(Model):
     class Meta:
         db_table = u'survey_status'
     
-class RouteFactor(Model):
-    route = ForeignKey(Route)
-    factor = TextField()
-    class Meta:
-        db_table = u'route_factors'
-        
-class ActivityFactor(Model):
-    activity = ForeignKey(ActivityArea)
-    factor = TextField()
-    class Meta:
-        db_table = u'activity_factors'
-    
 
 # class ActivityAdmin(admin.ModelAdmin):
     # list_display = ('kn_id', 'draw_type', 'name')
@@ -130,7 +154,9 @@ class ActivityFactor(Model):
     # default_zoom = 6
     # mouse_position = True
     # display_srid = True    
-
-# admin.site.register(Activity,ActivityAdmin)
-# admin.site.register(ActivityPoint,ActivityRecordAdmin)
-# admin.site.register(ActivityPoly,ActivityRecordAdmin)
+    
+admin.site.register(Route,RouteAdmin)
+admin.site.register(ActivityArea,ActivityAdmin)
+admin.site.register(AltActArea,AltActAdmin)
+admin.site.register(RouteFactor,RouteFactorAdmin)
+admin.site.register(ActivityFactor,ActivityFactorAdmin)
