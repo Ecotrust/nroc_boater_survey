@@ -46,17 +46,14 @@ def shapes(request, id=None):
             if feat.get('type') == 'route':
                 new_shape = Route(
                     survey_id = feat.get('survey_id'),
-                    user_type = feat.get('survey_id')[0],
-                    user_id = feat.get('survey_id')[1:7],
-                    month = feat.get('survey_id')[-2:],
+                    # user_type = feat.get('survey_id')[0],
+                    # user_id = feat.get('survey_id')[1:7],
+                    # month = feat.get('survey_id')[-2:],
                     geometry = geom,
                 )
             elif feat.get('type') == 'act_area':
                 new_shape = ActivityArea(
                     survey_id = feat.get('survey_id'),
-                    user_type = feat.get('survey_id')[0],
-                    user_id = feat.get('survey_id')[1:7],
-                    month = feat.get('survey_id')[-2:],
                     geometry = geom,
                     primary_activity = feat.get('primary_act'),
                     duration = feat.get('duration'),
@@ -67,9 +64,6 @@ def shapes(request, id=None):
             elif feat.get('type') == 'alt_act_area':
                 new_shape = AltActArea(
                     survey_id = feat.get('survey_id'),
-                    user_type = feat.get('survey_id')[0],
-                    user_id = feat.get('survey_id')[1:7],
-                    month = feat.get('survey_id')[-2:],
                     geometry = geom,
                     primary_activity = feat.get('primary_act'),
                     preferred_area = request.session['preferred_shape'],
