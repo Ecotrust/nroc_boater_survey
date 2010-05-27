@@ -15,19 +15,19 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     routeCancelWinOffset: [542, 8],
 	activityNum: 0,
     alternateActivity: false,
-    route_factors: 'test_route_factors',
-    route_factors_other: '',
-    activity_1_primary: 'test_act_primary',
-    activity_1_other: '',
-    activity_1_duration: 'test_act_duration',
-    activity_1_rank: 'test_act_rank',
-    activity_factors: 'test_act_factors',
-    activity_factors_other: '',
-    activity_3_alt: 'test_act_alternative',
-    activity_3_other: '',
-    activity_3_alt_act: 'test_activity_alt_act',
-    activity_3_alt_other: '',
-    alt_act_primary_area: 'test_primary_id',
+    // route_factors: 'test_route_factors',
+    route_factors_other: null,
+    activity_1_primary: null,
+    activity_1_other: null,
+    activity_1_duration: null,
+    activity_1_rank: null,
+    // activity_factors: null,
+    activity_factors_other: null,
+    activity_3_alt: null,
+    activity_3_other: null,
+    activity_3_alt_act: null,
+    activity_3_alt_other: null,
+    alt_act_primary_area: null,
 
     constructor: function(){
         gwst.DrawManager.superclass.constructor.call(this);
@@ -95,11 +95,19 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     finRouteInfoStep: function() {
-        if (this.routeInfo1Panel.answer_one.getValue()) {
-            this.route_factors = this.routeInfo1Panel.answer_one.getValue();
-            if (this.routeInfo1Panel.other_one.getValue()) {
-                this.route_factors_other = this.routeInfo1Panel.other_one.getValue();
+        this.factor_count = this.routeInfo1Panel.answer_one.items.getCount();
+        if (!this.route_factors) {
+            this.route_factors = new Array();
+        } else {
+            this.route_factors = [];
+        }
+        for (var i = 0; i < this.factor_count; i++) {
+            if (this.routeInfo1Panel.answer_one.items.get(i).checked) {
+                this.route_factors.push(this.routeInfo1Panel.answer_one.items.get(i).name);
             }
+        }
+        if (this.routeInfo1Panel.answer_one.items.get(this.factor_count-1).checked) {
+            this.route_factors_other = this.routeInfo1Panel.other_one.getValue();
         }
         this.routeInfo1Panel.resetPanel();
         this.saveNewRoute();
@@ -170,12 +178,21 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     finActivityInfo2Step: function() {
-        if (this.activityInfo2Panel.answer_one.getValue()) {
-            this.activity_factors = this.activityInfo2Panel.answer_one.getValue();
-            if (this.activityInfo2Panel.other_one.getValue()) {
-                this.activity_factors_other = this.activityInfo2Panel.other_one.getValue();
+        this.factor_count = this.activityInfo2Panel.answer_one.items.getCount();
+        if (!this.activity_factors) {
+            this.activity_factors = new Array();
+        } else {
+            this.activity_factors = [];
+        }
+        for (var i = 0; i < this.factor_count; i++) {
+            if (this.activityInfo2Panel.answer_one.items.get(i).checked) {
+                this.activity_factors.push(this.activityInfo2Panel.answer_one.items.get(i).name);
             }
         }
+        if (this.activityInfo2Panel.answer_one.items.get(this.factor_count-1).checked) {
+            this.activity_factors_other = this.activityInfo2Panel.other_one.getValue();
+        }
+        
         this.activityInfo2Panel.resetPanel();
         this.startActivityInfo3Step();
     },
@@ -204,7 +221,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
                 }
             }
         }
-    
+        this.activityInfo3Panel.resetPanel();
         this.saveNewArea(true);
     },
     
@@ -237,18 +254,18 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     		this.startFinishedStep();
     	} else {
         
-            this.route_factors= 'test_route_factors';
-            this.route_factors_other= '';
-            this.activity_1_primary= 'test_act_primary';
-            this.activity_1_other= '';
-            this.activity_1_duration= 'test_act_duration';
-            this.activity_1_rank= 'test_act_rank';
-            this.activity_factors= 'test_act_factors';
-            this.activity_factors_other= '';
-            this.activity_3_alt= 'test_act_alternative';
-            this.activity_3_other= '';
-            this.activity_3_alt_act= 'test_activity_alt_act';
-            this.activity_3_alt_other= '';
+            // this.route_factors= null;
+            this.route_factors_other= null;
+            this.activity_1_primary= null;
+            this.activity_1_other= null;
+            this.activity_1_duration= null;
+            this.activity_1_rank= null;
+            // this.activity_factors= null;
+            this.activity_factors_other= null;
+            this.activity_3_alt= null;
+            this.activity_3_other= null;
+            this.activity_3_alt_act= null;
+            this.activity_3_alt_other= null;
             
     		this.startDrawActivityInstructStep();
         }    	
