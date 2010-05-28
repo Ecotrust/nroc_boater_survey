@@ -23,16 +23,16 @@ def status(request):
         try: 
             if status.get('field') == 'map_status':
                 up_status = SurveyStatus.objects.get(survey_id=request.session['interview_id'])
-                up_status.map_status=status.get('value')
+                up_status.map_status=status.get('val')
                 up_status.save()
             elif status.get('field') == 'act_status':
                 up_status = SurveyStatus.objects.get(survey_id=request.session['interview_id'])
-                up_status.act_status=status.get('value')
+                up_status.act_status=status.get('val')
                 up_status.save()
             elif status.get('field') == 'complete':
                 up_status = SurveyStatus.objects.get(survey_id=request.session['interview_id'])
-                up_status.complete=status.get('value')
-                up_status.complete_time = datetime.datetime.now
+                up_status.complete=status.get('val')
+                up_status.complete_time = datetime.datetime.now()
                 up_status.save()
                 
         except Exception, e:
