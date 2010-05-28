@@ -6,8 +6,45 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render_to_response
 from shortcuts import render_to_geojson
 from utils.geojson_encode import *
+import datetime
 
 from models import *
+
+def status(request):
+    if request.method == 'POST':        
+        #Make sure we were passed a feature
+        if not request.POST.has_key('status'):
+            return HttpResponse('{"status_code":"-1",  "success":"false",  "message":"Expected \'feature\'"}', status=403)
+        import simplejson
+        status = simplejson.loads(request.POST.get('status')) 
+         
+         #It must be a new status, create it                                 
+        result = '{"status_code":"-1",  "success":"false",  "message":"Error saving"}'
+        try: 
+            if status.get('field') == 'map_status':
+                up_status = SurveyStatus.objects.get(survey_id=request.session['interview_id'])
+                up_status.map_status=status.get('value')
+                up_status.save()
+            elif status.get('field') == 'act_status':
+                up_status = SurveyStatus.objects.get(survey_id=request.session['interview_id'])
+                up_status.act_status=status.get('value')
+                up_status.save()
+            elif status.get('field') == 'complete':
+                up_status = SurveyStatus.objects.get(survey_id=request.session['interview_id'])
+                up_status.complete=status.get('value')
+                up_status.complete_time = datetime.datetime.now
+                up_status.save()
+                
+        except Exception, e:
+            return HttpResponse(result + e.message, status=500)
+
+        result = {
+            "status_code":1,  
+            "success":True, 
+            "message":"Saved successfully",
+            "status": up_status
+        }              
+        return HttpResponse(geojson_encode(result))                
 
 def draw(request):    
     if not request.session.has_key('interview_id'):    
@@ -46,11 +83,11 @@ def shapes(request, id=None):
             if feat.get('type') == 'route':
                 new_shape = Route(
                     survey_id = feat.get('survey_id'),
-                    # user_type = feat.get('survey_id')[0],
-                    # user_id = feat.get('survey_id')[1:7],
-                    # month = feat.get('survey_id')[-2:],
                     geometry = geom,
                 )
+                status = SurveyStatus.objects.get(survey_id=feat.get('survey_id'))
+                status.map_status = 'Route drawn'
+                status.save()
             elif feat.get('type') == 'act_area':
                 new_shape = ActivityArea(
                     survey_id = feat.get('survey_id'),
@@ -60,14 +97,16 @@ def shapes(request, id=None):
                     rank = feat.get('rank'),
                     alternate_activity_type = feat.get('alt_act'),
                 )    
-
+                status = SurveyStatus.objects.get(survey_id=feat.get('survey_id'))
+                status.act_status = 'Area drawn'
+                status.save()
             elif feat.get('type') == 'alt_act_area':
                 new_shape = AltActArea(
                     survey_id = feat.get('survey_id'),
                     geometry = geom,
                     primary_activity = feat.get('primary_act'),
                     preferred_area = request.session['preferred_shape'],
-                )     
+                )  
             new_shape.save() 
             
             if feat.get('type') == 'route':
