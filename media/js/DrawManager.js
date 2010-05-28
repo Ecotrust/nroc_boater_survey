@@ -770,7 +770,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     finSaveNewArea: function(response) {
     	var new_feat = Ext.decode(response.responseText);    
     	this.hideWait.defer(500, this);
-        if (this.activity_3_alt == 'Engage in another recreational boating activity') {
+        if (this.activity_3_alt == 'Engage in a recreational boating activity at a different location') {
             this.startActivityInfo4Step();
         } else {
             this.startDrawNewAreaStep();

@@ -29,7 +29,8 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
         
         this.answer_one = new Ext.form.ComboBox({
             store: [
-                'Engage in another recreational boating activity',
+                'Engage in another recreational boating activity at this location',
+                'Engage in a recreational boating activity at a different location',                
                 'Engage in an activity not associated with recreational boating (i.e. go to the movies, go to the beach, etc...)',
                 'Stay at home',
                 'Other'
@@ -135,8 +136,6 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.alt_button_panel);
         this.other_text_one.hide();
         this.other_one.hide();
-        this.question_two.hide();
-        this.answer_two.hide();
         this.other_text_two.hide();
         this.other_two.hide();
         this.alt_button_panel.hide();
@@ -149,31 +148,13 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
         if(rec.data.text == "Other") {
             this.other_text_one.show();
             this.other_one.show();
-            this.question_two.hide();
-            this.answer_two.hide();
             this.other_text_two.hide();
             this.other_two.hide();
             this.button_panel.show();
             this.alt_button_panel.hide();
-        } else if (rec.data.text == "Engage in another recreational boating activity") {
-            this.other_text_one.hide();
-            this.other_one.hide();
-            this.question_two.show();
-            this.answer_two.show();
-            this.button_panel.hide();
-            this.alt_button_panel.show();
-            if (this.other_selected) {
-                this.other_text_two.show();
-                this.other_two.show();
-            } else {
-                this.other_text_two.hide();
-                this.other_two.hide();
-            }
         } else {
             this.other_text_one.hide();
             this.other_one.hide();
-            this.question_two.hide();
-            this.answer_two.hide();
             this.other_text_two.hide();
             this.other_two.hide();
             this.button_panel.show();
