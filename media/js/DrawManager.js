@@ -683,7 +683,30 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         // } else {
         	// gwst.error.load('An error has occurred while trying to validate your area.  Please try again and notify us if this keeps happening.');
         // }        
-    },               
+    },          
+
+    updateStatus: function(field,value) {
+        this.loadWait('Updating');
+        
+        var data = {
+            survey_id: gwst.settings.interview_id,
+            field: field,
+            value: value
+        };
+        Ext.Ajax.request({
+            url: gwst.settings.urls.status,
+            method: 'POST',
+            disableCachingParam: true,
+            params: {status: Ext.util.JSON.encode(data)},
+            success: this.finUpdateStatus,
+            failure: function(response, opts) {
+                //change to error window
+                this.hideWait.defer(500, this);
+                gwst.error.load('An error has occurred while trying to update.');
+            },
+            scope: this
+        });
+    },
 
     saveNewRoute: function() {        
     	this.loadWait('Saving');
@@ -692,7 +715,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             geometry: this.cur_feature.geometry.toString(),
             survey_id: gwst.settings.interview_id,
             type: 'route',
-            factors: this.route_factors, //TODO: get factors list from form
+            factors: this.route_factors, 
             other_factor: this.route_factors_other
         };
         Ext.Ajax.request({
@@ -721,7 +744,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
                 primary_act: this.activity_1_primary, 
                 duration: this.activity_1_duration, 
                 rank: this.activity_1_rank, 
-                factors: this.activity_factors, //TODO: get factors from form
+                factors: this.activity_factors, 
                 other_factor: this.activity_factors_other,
                 alt_act: this.activity_3_alt
             };
@@ -761,6 +784,11 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         }
     },     
     
+    finUpdateStatus: function(response) {
+        var new_status = Ext.decode(response.responseText);
+        this.hideWait.defer(500, this);
+    },
+    
     finSaveNewRoute: function(response) {
     	var new_feat = Ext.decode(response.responseText);    
     	this.hideWait.defer(500, this);
@@ -770,7 +798,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     finSaveNewArea: function(response) {
     	var new_feat = Ext.decode(response.responseText);    
     	this.hideWait.defer(500, this);
-        if (this.activity_3_alt == 'Engage in a recreational boating activity at a different location') {
+        if (this.activity_3_alt == 'Engage in another recreational boating activity at this location' ||
+            this.activity_3_alt == 'Engage in a recreational boating activity at a different location') {
             this.startActivityInfo4Step();
         } else {
             this.startDrawNewAreaStep();

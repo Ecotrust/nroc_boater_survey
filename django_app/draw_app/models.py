@@ -68,7 +68,7 @@ class SurveyStatus(Model):
 
 class SurveyStatusAdmin(admin.ModelAdmin):
     list_display = ('survey_id', 'map_status', 'act_status', 'complete', 'start_time', 'complete_time')
-    ordering = ('survey_id',)
+    ordering = ('start_time',)
         
 class RouteAdmin(OSMGeoAdmin):
     list_display = ('survey_id', 'creation_date')
