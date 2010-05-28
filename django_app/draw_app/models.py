@@ -65,6 +65,10 @@ class SurveyStatus(Model):
         db_table = u'survey_status'
         
 ### ADMINS ###        
+
+class SurveyStatusAdmin(admin.ModelAdmin):
+    list_display = ('survey_id', 'map_status', 'act_status', 'complete', 'start_time', 'complete_time')
+    ordering = ('survey_id',)
         
 class RouteAdmin(OSMGeoAdmin):
     list_display = ('survey_id', 'creation_date')
@@ -101,6 +105,7 @@ class AltActAdmin(OSMGeoAdmin):
     mouse_position = True
     display_srid = True
     
+admin.site.register(SurveyStatus,SurveyStatusAdmin)
 admin.site.register(Route,RouteAdmin)
 admin.site.register(ActivityArea,ActivityAdmin)
 admin.site.register(AltActArea,AltActAdmin)
