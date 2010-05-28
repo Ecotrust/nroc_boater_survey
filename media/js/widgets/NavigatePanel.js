@@ -68,7 +68,7 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
             },{
                 html: 'c. Get as close as you can to your starting point, then press the Continue button'
             }]
-        });       
+        });         
 
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
                 btn1_width: 90,
