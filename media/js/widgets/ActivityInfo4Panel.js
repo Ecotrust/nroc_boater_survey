@@ -18,7 +18,7 @@ gwst.widgets.ActivityInfo4Panel = Ext.extend(gwst.widgets.WestPanel, {
         }); 
         
 		this.question_one = new Ext.Panel({		
-			html: '<p>In a previous question, you said you would engage in this activity at another location if you had to.  At this time, please draw the area you most likely would have gone on the map.</p>',
+			html: '<p>For the last question, you said you would engage in an activity at a different location if you had to.  At this time, please draw on the map the area you most likely would have gone.</p>',
 			style: 'margin: 10px',
 			border: false
         });
