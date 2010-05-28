@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
+import datetime
 
 from draw_app.models import SurveyStatus
 
@@ -26,6 +27,8 @@ def intro(request):
         skipped_survey[0].month=request.session['interview_id'][-2:]
         skipped_survey[0].map_status = 'Skipped'
         skipped_survey[0].act_status = 'Skipped'
+        skipped_survey[0].complete = True
+        skipped_survey[0].complete_time = datetime.datetime.now()
         skipped_survey[0].save()
         return HttpResponseRedirect('http://www.maboatersurvey.com/thanks.htm')
 

@@ -134,7 +134,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 
     skipActivitiesCheck: function(id, text, opt) {
         if (id == 'yes') {
-            this.startFinishedStep();
+            this.updateStatus('act_status','Skipped',this.finUpdateActStatus);
         }
     },
     
@@ -289,7 +289,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     finFinishedStep: function() {
-        window.location = return_url;
+        this.updateStatus('complete',true,this.finUpdateCompleteStatus);
     },
     
 
@@ -685,20 +685,20 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         // }        
     },          
 
-    updateStatus: function(field,value) {
+    updateStatus: function(field,val,handler) {
         this.loadWait('Updating');
         
         var data = {
             survey_id: gwst.settings.interview_id,
             field: field,
-            value: value
+            val: val
         };
         Ext.Ajax.request({
             url: gwst.settings.urls.status,
             method: 'POST',
             disableCachingParam: true,
             params: {status: Ext.util.JSON.encode(data)},
-            success: this.finUpdateStatus,
+            success: handler,
             failure: function(response, opts) {
                 //change to error window
                 this.hideWait.defer(500, this);
@@ -784,9 +784,16 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         }
     },     
     
-    finUpdateStatus: function(response) {
+    finUpdateActStatus: function(response) {
         var new_status = Ext.decode(response.responseText);
         this.hideWait.defer(500, this);
+        this.startFinishedStep();
+    },
+    
+    finUpdateCompleteStatus: function(response) {
+        var new_status = Ext.decode(response.responseText);
+        this.hideWait.defer(500, this);
+        window.location = return_url;
     },
     
     finSaveNewRoute: function(response) {
