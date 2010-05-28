@@ -91,19 +91,12 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         );
         */
         
-        var rampLayer = new OpenLayers.Layer.WMS(
-            "Boat Ramps", "http://map-dev.maboatersurvey.com:8080/geoserver/wms", 
-            {
-                layers: 'RBSW:massgis_ofba_Coastal',
-                styles: '',
-                srs: 'EPSG:900913',
-                format: 'image/jpeg',
-                transparent: 'True'
-            },{
-                'isBaseLayer': false,
-                'visibility': false
-            }
-        ); 
+        var rampLayer = new OpenLayers.Layer.GeoWebCache({
+            url: "http://db-dev.maboatersurvey.com/RBSW-DEV_massgis_ofba_Coastal",
+            name: 'Boat Ramps',
+            isBaseLayer: false,
+            visibility: false
+        });  
         
         var marinaLayer = new OpenLayers.Layer.GeoWebCache({
             url: "http://db-dev.maboatersurvey.com/RBSW-DEV_moris_marina_pt",

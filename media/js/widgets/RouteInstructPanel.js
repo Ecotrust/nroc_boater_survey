@@ -18,22 +18,22 @@ gwst.widgets.RouteInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         }); 
         
 		this.panel_one = new Ext.Panel({		
-			html: '<h2>Instructions</h2><p><i>On the NEXT page</i>, you\'re going to draw your boat route for your last trip on the map.</p><p>Please remember to plot a ROUNDTRIP route.</p>',
+			html: '<h2>How to Draw Your Route</h2><p><i>On the NEXT page</i>, you\'re going to draw your last trip boat route on the map. Please remember to plot a ROUNDTRIP route.</p>',
 			style: 'margin: 10px',
 			border: false
         });
     	
 		this.panel_two = new Ext.Panel({		
-			html: '<img src="/media/img/route_intro.png"><p>Click the \'Continue\' button</p>',
+			html: '<img style="margin: 0px 0px 10px 10px" src="/media/img/route_intro.png"><p>Click the \'Continue\' button</p>',
 			style: 'margin: 0px 0px 10px 10px',
 			border: false
         });    	
         
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
-        	btn1_width: 140,
-        	btn2_text: 'Continue >>',        	
+        	btn1_width: 80,
+        	btn2_text: 'OK, let\'s begin drawing!',        	
             btn2_handler: this.contBtnClicked.createDelegate(this),
-            btn2_width: 120,
+            btn2_width: 210,
             left_margin: 40
         });
         
