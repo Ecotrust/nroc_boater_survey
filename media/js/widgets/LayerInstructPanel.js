@@ -62,36 +62,28 @@ gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
             },
             id: 'lyr_table_panel',
             items: [{
+                html: '<p style="margin: 0px">Nautical Charts</p>'
+            },{
                 html: '<p style="margin: 0px">Satellite</p>'
-            },{
-                html: '<p style="margin: 0px">Terrain</p>'
-            },{
-                html: '<img src="/media/img/satellite.png" />'
-            },{
-                html: '<img src="/media/img/terrain.png" />'
-            },{
-                html: '<p style="margin: 5px 0px 0px 0px">Nautical Chart</p>'
-            },{
-                html: '<p style="margin: 5px 0px 0px 0px">Bathymetry</p>'
             },{
                 html: '<img src="/media/img/nautical.png" />'
             },{
-                html: '<img src="/media/img/tmp.png" style="width: 125px; height: 45px"/>'
+                html: '<img src="/media/img/satellite.png" />'
+            },{
+                html: '<p style="margin: 5px 0px 0px 0px">Terrain</p>'
             },{
                 html: '<p style="margin: 5px 0px 0px 0px">Boat Ramps</p>'
             },{
-                html: '<p style="margin: 5px 0px 0px 0px">Marinas</p>'
+                html: '<img src="/media/img/terrain.png" />'
             },{
                 html: '<img src="/media/img/boat_ramps.png" />'
             },{
-                html: '<img src="/media/img/tmp.png" style="width: 125px; height: 45px"/>'
-            },{
-                html: '<p style="margin: 5px 0px 0px 0px">Lat/Lon Grid</p>'
+                html: '<p style="margin: 5px 0px 0px 0px">Marinas</p>'
             },{
                 html: ''
             },{
                 html: '<img src="/media/img/tmp.png" style="width: 125px; height: 45px"/>'
-            },{ 
+            },{
                 html: ''
             }]
         });       
