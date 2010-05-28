@@ -99,7 +99,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         });  
         
         var marinaLayer = new OpenLayers.Layer.GeoWebCache({
-            url: "http://db-dev.maboatersurvey.com/RBSW-DEV_moris_marina_pt",
+            url: "http://c1753222.cdn.cloudfiles.rackspacecloud.com/RBSW-DEV_moris_marina_pt/",
             name: 'Marinas',
             isBaseLayer: false,
             visibility: false
