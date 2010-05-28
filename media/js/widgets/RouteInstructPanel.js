@@ -11,14 +11,14 @@ gwst.widgets.RouteInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
 
     onRender: function(){
         this.header_panel = new Ext.Container({  
-			autoEl: {tag:'div', cls:'action-panel-header', id:'header_route', html:'Drawing Your Route'},
+			autoEl: {tag:'div', cls:'action-panel-header', id:'header_route', html:'Instructions Page 3/3'},
 			style: 'padding:5px',
             id: 'route_header_panel',
 			border: false   
         }); 
         
 		this.panel_one = new Ext.Panel({		
-			html: '<h2>Instructions</h2><p>In the next step, you\'re going to draw one or more lines on the map representing the route you took on your last trip with the following vessel: <i><b>'+gwst.settings.vessel+'</b></i></p><p>You will draw your entire route even if your trip was multiple days or you came back the same way you went.</p>',
+			html: '<h2>Instructions</h2><p><i>On the NEXT page</i>, you\'re going to draw your boat route for your last trip on the map.</p><p>Please remember to plot a ROUNDTRIP route.</p>',
 			style: 'margin: 10px',
 			border: false
         });

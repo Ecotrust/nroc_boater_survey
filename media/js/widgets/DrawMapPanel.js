@@ -75,6 +75,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             name: 'Nautical Charts',
             isBaseLayer: true
         });
+        
         /*
             {
                 layers: 'RBSW: NOAA Layer Group',
@@ -104,19 +105,12 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             }
         ); 
         
-        var marinaLayer = new OpenLayers.Layer.WMS(
-            "Marinas", "http://map-dev.maboatersurvey.com:8080/geoserver/wms", 
-            {
-                layers: 'RBSW:moris_marina_pt',
-                styles: '',
-                srs: 'EPSG:900913',
-                format: 'image/jpeg',
-                transparent: 'True'
-            },{
-                'isBaseLayer': false,
-                'visibility': false
-            }
-        );                 	
+        var marinaLayer = new OpenLayers.Layer.GeoWebCache({
+            url: "http://db-dev.maboatersurvey.com/RBSW-DEV_moris_marina_pt",
+            name: 'Marinas',
+            isBaseLayer: false,
+            visibility: false
+        });                        	
         
         this.vectorLayer = new OpenLayers.Layer.Vector(
     		"Vector Layer", 
