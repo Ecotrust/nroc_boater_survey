@@ -26,10 +26,9 @@ gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     getHtmlText: function() {
-        var html_text = '<h2>Instructions</h2>\
-        <p>A number of map layers such as nautical charts are available to assist you in finding where you went on your last trip.\
-        The map layers can be found to the top right of the map. Turn them on and off as needed by clicking the checkboxes:</p>\
-        <img src="/media/img/layers.png" style="margin-bottom: 8px" />\
+        var html_text = '<h2>How to Change Your Base Map</h2>\
+        <p>You can change your base map by clicking different base layers in the blue box on the top right of your screen.</p>\
+        <img src="/media/img/layers.png" style="margin-left: 10px; margin-bottom: 8px" />\
         <h2 style="margin-bottom: 0px">Available Layers</h2>';
         return html_text;
     },
@@ -37,7 +36,7 @@ gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
     onRender: function(){
     
         this.header_panel = new Ext.Container({  
-			autoEl: {tag:'div', cls:'action-panel-header', id:'header_lyr', html:'Map Layers'},
+			autoEl: {tag:'div', cls:'action-panel-header', id:'header_lyr', html:'Instructions Page 2/3'},
 			style: 'padding:5px',
             id: 'lyr_header_panel',
 			border: false   
@@ -53,7 +52,7 @@ gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.table_panel = new Ext.Panel({
             layout: 'table',
             border: false,
-            style: 'margin: 0px 5px 5px 5px; padding: 0px 5px 5px 5px',
+            style: 'margin: 5px 5px 5px 10px; padding: 0px 5px 5px 5px',
             defaults: {
                 bodyStyle: 'border: none; margin: 0px; padding: 0px 5px 0px 5px'
             },
@@ -89,10 +88,10 @@ gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         });       
 
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
-                btn1_width: 140,
-                btn2_text: 'Continue >>',               
+                btn1_width: 90,
+                btn2_text: 'Continue to page 3 >>',               
             btn2_handler: this.contBtnClicked.createDelegate(this),
-            btn2_width: 120,
+            btn2_width: 200,
             left_margin: 40
         });
         
