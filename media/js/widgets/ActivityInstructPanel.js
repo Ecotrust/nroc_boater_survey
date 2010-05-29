@@ -18,16 +18,13 @@ gwst.widgets.ActivityInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         }); 
         
 		this.panel_one = new Ext.Panel({		
-			html: '<p>On the next page you\'re going to draw areas \
-                    along your route where you participated in different activities.</p>',
+			html: '<p>On the next page you\'re going to draw areas along your route where you participated in different activities. Possible activities include: <i>fishing, sightseeing, hunting, etc...</i></p>',
 			style: 'margin: 10px',
 			border: false
         });
     	
 		this.panel_two = new Ext.Panel({		
-			html: '<img style="padding-left:10px" src="/media/img/area_intro.png" />\
-                    <p>Possible activities include: <i>fishing, sightseeing, hunting, etc...</i></p>\
-                    <p>Press the \'Continue\' button to begin.  If you don\'t feel it\'s appropriate \
+			html: '<img style="padding-left:10px; padding-bottom: 10px" src="/media/img/area_intro.png" /><p>Press the \'Continue\' button to begin.  If you don\'t feel it\'s appropriate \
                     for you to complete this section press the \'Skip Activities\' button.</p>',
 			style: 'margin: 0px 0px 10px 10px',
 			border: false
@@ -37,7 +34,7 @@ gwst.widgets.ActivityInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
             btn1_text: 'Skip Activities',        	
             btn1_handler: this.skipActClicked.createDelegate(this),
         	btn1_width: 130,
-        	btn2_text: 'Continue >>',        	
+        	btn2_text: 'Start Drawing',        	
             btn2_handler: this.contBtnClicked.createDelegate(this),
             btn2_width: 120,
             left_margin: 15
