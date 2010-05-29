@@ -38,10 +38,9 @@ gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
             style: 'margin-left: 5px',
             columns: 1,
             items: [
-                {boxLabel: 'Proximity to my favorite boating area(s)', name: 'proximity'},
-                {boxLabel: 'Reduced travel time to get to favorite boating area(s)', name: 'travel-time'},
-                {boxLabel: 'Route is familiar / I have good knowledge of the route', name: 'familiar'},
-                {boxLabel: 'Avoid shallow water', name: 'avoid-shallow'},
+                {boxLabel: 'Quickest route to my destination', name: 'travel-time'},
+                {boxLabel: 'I am very familiar with this route', name: 'familiar'},
+                {boxLabel: 'Safest route to my destination', name: 'avoid-shallow'},
                 {boxLabel: 'Challenging navigation', name: 'challenge'},
                 {boxLabel: 'Calm waters', name: 'calm-waters'},
                 {boxLabel: 'Scenic beauty', name: 'beauty'},
@@ -49,9 +48,9 @@ gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
                 {boxLabel: 'Absence of other boaters', name: 'solitude'},
                 {boxLabel: 'Presence of other boaters', name: 'popular'},
                 {boxLabel: 'Avoid speed zones', name: 'speed-zones'},
-                {boxLabel: 'Access to shoreside entertainment and restaurants', name: 'entertainment'},
-                {boxLabel: 'Access to supplies, marina, convenient mooring or fuel', name: 'amenities'},
-                {boxLabel: 'None are particularly important. I just cruise around', name: 'no-reason'},
+                {boxLabel: 'Access to shoreside facilities/entertainment', name: 'entertainment'},
+                {boxLabel: 'Access to fuel, marina, mooring, etc.', name: 'amenities'},
+                {boxLabel: 'None of the above. I was just cruising', name: 'no-reason'},
                 this.other_box
             ]
         });

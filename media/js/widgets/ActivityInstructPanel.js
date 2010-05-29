@@ -18,14 +18,14 @@ gwst.widgets.ActivityInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         }); 
         
 		this.panel_one = new Ext.Panel({		
-			html: '<h2>Instructions:</h2><p>In the next step you\'re going to draw areas \
+			html: '<p>On the next page you\'re going to draw areas \
                     along your route where you participated in different activities.</p>',
 			style: 'margin: 10px',
 			border: false
         });
     	
 		this.panel_two = new Ext.Panel({		
-			html: '<img src="/media/img/area_intro.png" />\
+			html: '<img style="padding-left:10px" src="/media/img/area_intro.png" />\
                     <p>Possible activities include: <i>fishing, sightseeing, hunting, etc...</i></p>\
                     <p>Press the \'Continue\' button to begin.  If you don\'t feel it\'s appropriate \
                     for you to complete this section press the \'Skip Activities\' button.</p>',

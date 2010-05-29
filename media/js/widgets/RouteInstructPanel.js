@@ -24,7 +24,7 @@ gwst.widgets.RouteInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         });
     	
 		this.panel_two = new Ext.Panel({		
-			html: '<img style="margin: 0px 0px 10px 10px" src="/media/img/route_intro.png"><p>Click the \'Continue\' button</p>',
+			html: '<img style="margin: 0px 0px 10px 10px" src="/media/img/route_intro.png">',
 			style: 'margin: 0px 0px 10px 10px',
 			border: false
         });    	
