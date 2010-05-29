@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     (r'^shapes/(\d*)$', shapes),
     (r'^report/$', report),
     (r'^status/$', status),
+    (r'^check/$', complete_check),
 )

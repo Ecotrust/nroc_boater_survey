@@ -15,13 +15,11 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     routeCancelWinOffset: [542, 8],
 	activityNum: 0,
     alternateActivity: false,
-    // route_factors: 'test_route_factors',
     route_factors_other: null,
     activity_1_primary: null,
     activity_1_other: null,
     activity_1_duration: null,
     activity_1_rank: null,
-    // activity_factors: null,
     activity_factors_other: null,
     activity_3_alt: null,
     activity_3_other: null,
@@ -37,10 +35,32 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },          
 
     startInit: function() {
-        this.enableUnloadWarning();
-        this.loadViewport();
-        this.createError();          
-        this.startNavStep();
+    
+        this.createError();  
+        
+        Ext.Ajax.request({
+            url: gwst.settings.urls.check,
+            method: 'GET',
+            disableCachingParam: true,
+            success: this.finInit,
+            failure: function(response, opts) {
+                // change to error window
+                gwst.error.load('An error has occurred while trying to check for previous survey instance.');
+            },
+            scope: this
+        });
+    
+    },
+    
+    finInit: function(response) {
+        var complete = Ext.decode(response.responseText); 
+        if (complete.is_complete) {
+            window.location = return_url;
+        } else {
+            this.enableUnloadWarning();
+            this.loadViewport();
+            this.startNavStep();
+        }
     },
                     
     /********************** Survey steps ************************/
@@ -111,7 +131,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         }
         this.routeInfo1Panel.resetPanel();
         this.saveNewRoute();
-        // this.startActivityInstructStep();
     },
     
     startActivityInstructStep: function() {
@@ -245,7 +264,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 
     finActivityInfo4Step: function() {
         this.saveNewArea(false);
-        // this.startDrawNewAreaStep();
     },
 
     startEditAltActivityStep: function() {
@@ -266,13 +284,11 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     		this.startFinishedStep();
     	} else {
         
-            // this.route_factors= null;
             this.route_factors_other= null;
             this.activity_1_primary= null;
             this.activity_1_other= null;
             this.activity_1_duration= null;
             this.activity_1_rank= null;
-            // this.activity_factors= null;
             this.activity_factors_other= null;
             this.activity_3_alt= null;
             this.activity_3_other= null;
@@ -462,7 +478,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     saveRoute: function() {
         //Finish off the sketch creating the route feature
         this.mapPanel.lineFinish();
-        // this.saveNewRoute();
         this.finDrawInstructStep();
     },
     
@@ -515,7 +530,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     	if (!this.drawActInstructPanel) {
 	    	this.drawActInstructPanel = new gwst.widgets.DrawActivityInstructPanel();
 	        //When panel fires event saying it's all done, we want to process it and move on 
-	        //this.drawActInstructPanel.on('draw-cont', this.finDrawActivityInstructStep, this);
     	}
         this.viewport.setWestPanel(this.drawActInstructPanel);  
     },    
