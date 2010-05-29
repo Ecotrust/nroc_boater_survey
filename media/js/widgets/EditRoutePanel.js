@@ -22,7 +22,7 @@ gwst.widgets.EditRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     getHtmlText: function() {
-        var html_text = '<h2>Instructions:</h2> <p>Edit your boat route by adding, moving, or removing points along its path.</p>';
+        var html_text = '<h2>Instructions</h2> <p>Edit your boat route by adding, moving, or removing points along its path.</p><h2>How?</h2>';
         return html_text;
     },
 	
@@ -38,43 +38,39 @@ gwst.widgets.EditRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
 		this.inner_panel = new Ext.Panel({
 			html: this.getHtmlText(),
             id: 'edit_shape_inner_panel',
-			style: 'margin: 10px',
+			style: 'margin: 10px 10px 0px 10px',
 			border: false
 		});
         
         this.table_panel = new Ext.Panel({
             layout: 'table',
             border: false,
-            style: 'margin: 5px; padding: 5px',
+            style: 'margin: 0px 5px 5px 5px; padding: 0px 5px 5px 5px',
             defaults: {
-                bodyStyle: 'border: none; padding: 5px'
+                bodyStyle: 'border: none; padding: 0px 5px 5px 5px'
             },
             layoutConfig: {
                 columns: 2
             },
             id: 'edit_route_table_panel',
             items: [{
-                html: '<p><b>How?</b></p>'
-            },{
-                html: ''
-            },{
-                html: '<p>The <i>dark</i> circles you see on your route are the points you added.</p>'
+                html: '<p>The <i>dark orange</i> circles you see on your route are the points you added.</p>'
             },{
                 html: '<img src="/media/img/edit_route_1.png" />'
             },{
-                html: '<p>The <i>light</i> circles between your points are \'ghost\' points and are used to create new points.</p>'
+                html: '<p>The <i>light orange</i> circles between your points are \'ghost\' points and are used to create new points.</p>'
             },{
                 html: '<img src="/media/img/edit_route_2.png" />'
             },{
-                html: '<p><b>Moving.</b> To move to a point, click the mouse and drag it where you want, then release.</p>'
+                html: '<p><b><u>Moving</u></b>. To move to a point, click the mouse and drag it where you want, then release.</p>'
             }, {
                 html: '<img src="/media/img/edit_route_3.png" />'
             },{
-                html: '<p><b>Adding.</b> To add a point click a \'ghost\' point and drag it where you want, then release.</p>'
+                html: '<p><b><u>Adding</u></b>. To add a point click a \'ghost\' point and drag it where you want, then release.</p>'
             },{
                 html: '<img src="/media/img/edit_route_4.png" />'
             },{
-                html: '<p><b>Removing.</b> To remove a point hold your mouse over it and press the \'Delete\' key on your keyboard.</p>'
+                html: '<p><b><u>Removing</u></b>. To remove a point hold your mouse over it and press the \'Delete\' key on your keyboard.</p>'
             },{
                 html: '<img src="/media/img/edit_route_5.png" />'
             }]

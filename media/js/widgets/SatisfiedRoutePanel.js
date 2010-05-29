@@ -38,7 +38,7 @@ gwst.widgets.SatisfiedRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
 		});
         
         this.button_panel = new gwst.widgets.CustomButtons ({
-            col_width: 180,
+            col_width: 150,
             element_list: [{
                 elem: this.contClicked.createDelegate(this),
                 type: 'handler'

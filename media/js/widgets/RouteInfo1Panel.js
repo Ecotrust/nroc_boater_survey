@@ -19,7 +19,7 @@ gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
         
 		this.question_one = new Ext.Panel({		
 			html: '<p>What factors were important to you in <u>selecting your travel route</u>? <i>Check all that apply</i>.</p>',
-			style: 'margin: 10px',
+			style: 'margin: 10px 10px 10px 0px',
 			border: false
         });
         
@@ -35,7 +35,7 @@ gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
             xtype: 'checkboxgroup',
             fieldLabel: 'Reasons List',
             itemCls: 'x-check-group-alt',
-            style: 'margin-left: 5px',
+            style: 'margin: 0px 0px 10px 5px',
             columns: 1,
             items: [
                 {boxLabel: 'Quickest route to my destination', name: 'travel-time'},

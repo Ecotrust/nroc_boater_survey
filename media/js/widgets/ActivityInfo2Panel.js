@@ -18,8 +18,8 @@ gwst.widgets.ActivityInfo2Panel = Ext.extend(gwst.widgets.WestPanel, {
         }); 
         
 		this.question_one = new Ext.Panel({		
-			html: '<p>Why did you choose this area to engage in this activity? (select all that apply)</p>',
-			style: 'margin: 10px 10px 5px 10px',
+			html: '<p>Why did you choose this area for this activity? (select all that apply)</p>',
+			style: 'margin: 10px 10px 5px 0px',
 			border: false
         });
         
@@ -35,11 +35,11 @@ gwst.widgets.ActivityInfo2Panel = Ext.extend(gwst.widgets.WestPanel, {
             xtype: 'checkboxgroup',
             fieldLabel: 'Reasons List',
             itemCls: 'x-check-group-alt',
-            style: 'margin-left: 5px',
+            style: 'margin: 0px 0px 10px 5px',
             columns: 1,
             items: [
                 {boxLabel: 'Area reached quickly and/or easily', name: 'easy-access'},
-                {boxLabel: 'Area is familiar / I have a good knowledge of the area', name: 'familiar'},
+                {boxLabel: 'I am very familiar with the area', name: 'familiar'},
                 {boxLabel: 'Calm waters', name: 'calm'},
                 {boxLabel: 'Protected waters', name: 'protected'},
                 {boxLabel: 'Clean and/or clear waters', name: 'clean'},
@@ -51,8 +51,8 @@ gwst.widgets.ActivityInfo2Panel = Ext.extend(gwst.widgets.WestPanel, {
                 {boxLabel: 'Fishing opportunities', name: 'fishing'},
                 {boxLabel: 'Swimming opportunities', name: 'swimming'},
                 {boxLabel: 'Natural or undeveloped shoreline', name: 'natural'},
-                {boxLabel: 'Access to shoreside entertainment and restaurants', name: 'entertainment'},
-                {boxLabel: 'Access to supplies, marina, convenient mooring or fuel', name: 'amenities'},
+                {boxLabel: 'Access to shoreside facilities/entertainment', name: 'entertainment'},
+                {boxLabel: 'Access fuel, marina, mooring, etc.', name: 'amenities'},
                 {boxLabel: 'No specific reason', name: 'no-reason'},
                 this.other_box
             ]

@@ -19,7 +19,7 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
         
 		this.question_one = new Ext.Panel({		
 			html: '<p>In this area, what was the primary activity you were engaged in?</p>',
-			style: 'margin: 10px',
+			style: 'margin: 10px 10px 10px 0px',
 			border: false
         });
         
@@ -37,6 +37,7 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
                 'Sightseeing',
                 'Swimming',
                 'Waterskiing/Wakeboarding',
+                'Land-based Activity',
                 'Other'
             ],
             emptyText:'Select an activity...',
@@ -65,7 +66,7 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
     	
 		this.question_two = new Ext.Panel({		
 			html: '<p>How long did you engage in this activity in this area?</p>',
-			style: 'margin: 0px 0px 10px 10px',
+			style: 'margin: 0px 0px 10px 0px',
 			border: false
         });
         
@@ -88,18 +89,18 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
         });
         
         this.question_three = new Ext.Panel({		
-			html: '<p>On a scale of 1 to 5 (with 1 being much worse and 5 being much better) how do you rank this area for this activity compared to other areas in Massachusetts where you could have done this?</p>',
-			style: 'margin: 0px 0px 10px 10px',
+			html: '<p>How do you rank this area for this activity compared to other areas in Massachusetts where you could have done this?</p>',
+			style: 'margin: 0px 0px 10px 0px',
 			border: false
         });
         
         this.answer_three = new Ext.form.ComboBox({
             store: [
-                '1',
-                '2',
-                '3',
-                '4',
-                '5',
+                'Much Worse',
+                'Worse',
+                'Same',
+                'Better',
+                'Much Better',
                 'Don\'t know'
             ],
             emptyText:'Select a ranking...',

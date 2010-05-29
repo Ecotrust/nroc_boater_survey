@@ -170,10 +170,10 @@ p.x-panel-static{
     color: #222222;
     font-size: 12px ! important;
     right: 0px ! important;
-    filter:alpha(opacity=65);
-    -moz-opacity:0.65;
-    -khtml-opacity: 0.65;
-    opacity: 0.65;
+    filter:alpha(opacity=75);
+    -moz-opacity:0.75;
+    -khtml-opacity: 0.75;
+    opacity: 0.75;
     padding-left: 5px;
     padding-right: 5px;
 }
