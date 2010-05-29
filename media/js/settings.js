@@ -36,6 +36,7 @@ gwst.settings = {
 gwst.settings.urls = {
 	shapes: '/draw/shapes/',
     status: '/draw/status/',
+    check: '/draw/check/',
 	shape_validate: '/shape/validate/'		
 };
 

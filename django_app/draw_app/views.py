@@ -55,6 +55,27 @@ def draw(request):
         'GMAPS_API_KEY': settings.GMAPS_API_KEY,
         'month': request.session['month']
     }
+    
+    already_complete = SurveyStatus.objects.filter(survey_id = request.session['interview_id'], complete = True)
+        
+    if already_complete:
+        return HttpResponseRedirect('http://www.maboatersurvey.com/thanks.htm')
+    
+    started_survey = SurveyStatus.objects.get_or_create(survey_id=request.session['interview_id'])
+    #Save status here
+    started_survey[0].user_type=request.session['interview_id'][0]
+    started_survey[0].user_id=request.session['interview_id'][1:7]
+    started_survey[0].month=request.session['interview_id'][-2:]
+    started_survey[0].map_status = 'Started'
+    started_survey[0].act_status = 'Not yet started'
+    started_survey[0].save()
+    
+    Route.objects.filter(survey_id=request.session['interview_id']).delete()
+    ActivityArea.objects.filter(survey_id=started_survey).delete()
+    AltActArea.objects.filter(survey_id=started_survey).delete()
+    RouteFactor.objects.filter(survey_id=started_survey).delete()
+    ActivityFactor.objects.filter(survey_id=started_survey).delete()
+    
     return render_to_response('draw.html', RequestContext(request, params))
 
 def draw_settings (request):
@@ -82,7 +103,7 @@ def shapes(request, id=None):
             geom.transform(settings.SERVER_SRID)     
             if feat.get('type') == 'route':
                 new_shape = Route(
-                    survey_id = feat.get('survey_id'),
+                    survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
                     geometry = geom,
                 )
                 status = SurveyStatus.objects.get(survey_id=feat.get('survey_id'))
@@ -90,7 +111,7 @@ def shapes(request, id=None):
                 status.save()
             elif feat.get('type') == 'act_area':
                 new_shape = ActivityArea(
-                    survey_id = feat.get('survey_id'),
+                    survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
                     geometry = geom,
                     primary_activity = feat.get('primary_act'),
                     duration = feat.get('duration'),
@@ -102,7 +123,7 @@ def shapes(request, id=None):
                 status.save()
             elif feat.get('type') == 'alt_act_area':
                 new_shape = AltActArea(
-                    survey_id = feat.get('survey_id'),
+                    survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
                     geometry = geom,
                     primary_activity = feat.get('primary_act'),
                     preferred_area = request.session['preferred_shape'],
@@ -115,14 +136,14 @@ def shapes(request, id=None):
                     if factor == 'other':
                         new_factor = RouteFactor(
                             route = new_shape,
-                            survey_id = feat.get('survey_id'),
+                            survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
                             route_pk = new_shape.id,
                             factor = feat.get('other_factor'),
                         )
                     else :
                         new_factor = RouteFactor(
                             route = new_shape,
-                            survey_id = feat.get('survey_id'),
+                            survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
                             route_pk = new_shape.id,
                             factor = factor,
                         )
@@ -134,14 +155,14 @@ def shapes(request, id=None):
                     if factor == 'other':
                         new_factor = ActivityFactor(
                             activity = new_shape,
-                            survey_id = feat.get('survey_id'),
+                            survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
                             activity_pk = new_shape.id,                            
                             factor = feat.get('other_factor'),
                         )      
                     else :
                         new_factor = ActivityFactor(
                             activity = new_shape,
-                            survey_id = feat.get('survey_id'),
+                            survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
                             activity_pk = new_shape.id,
                             factor = factor,
                         )            
@@ -281,3 +302,14 @@ def report(request):
     for id in a_recs.keys():
         writer.writerow(a_recs[id].values())
     return response
+
+def complete_check(request):
+    already_complete = SurveyStatus.objects.filter(survey_id = request.session['interview_id'], complete = True)
+        
+    if already_complete:
+        result = {'is_complete': True}
+    else:
+        result = {'is_complete': False}
+    
+    return HttpResponse(json.dumps(result))
+    
