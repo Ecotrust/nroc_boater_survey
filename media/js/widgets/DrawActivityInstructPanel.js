@@ -15,9 +15,7 @@ gwst.widgets.DrawActivityInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
 
     getHtmlText: function() {
-        var html_text = '<h2>Instructions:</h2>\
-        <p>Draw one area where an activity took place on your last trip.  Be as specific as you can, you\'ll be able to draw additional areas.</p>\
-        <h2 style="margin: 15px 0px 0px 0px">How?</h2>';
+        var html_text = '<h2>How to Draw an Activity Area</h2><p>1. Click the "Draw Area" button on the right.</p><p>2.Click once on the map for each \"corner\" of your area and <u>double-click</u> to finish it.</p>';
         return html_text;
     },
 	
@@ -38,9 +36,12 @@ gwst.widgets.DrawActivityInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
 		});
         
         this.table_panel = new Ext.Panel({
+            title: 'View detailed drawing instructions',
+            collapsible: true,
+            collapsed: true, 
             layout: 'table',
             border: false,
-            style: 'margin: 0px 5px 5px 5px; padding: 0px 5px 5px 5px',
+            style: 'margin: 5px 5px 5px 5px; padding: 0px 5px 5px 5px',
             defaults: {
                 bodyStyle: 'border: none; padding: 0px 5px 5px 5px'
             },
@@ -79,9 +80,16 @@ gwst.widgets.DrawActivityInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
             }]
         });       
 
+        this.panel_three = new Ext.Panel({
+            html: "Feel free to play around and try it out and don't worry if you make a mistake.  You can restart your area at any time by clicking the 'Redraw' button.  You can also edit or restart your area after you finish it.",
+            border: false,
+            style: 'padding:5px 5px 5px 10px'
+        });
+
         this.add(this.header_panel);
 		this.add(this.inner_panel);
         this.add(this.table_panel);
+        this.add(this.panel_three);
         
         // Call parent (required)
         gwst.widgets.DrawActivityInstructPanel.superclass.onRender.apply(this, arguments); 
