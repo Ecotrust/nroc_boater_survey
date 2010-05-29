@@ -38,7 +38,7 @@ gwst.widgets.DrawInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
 		});
         
         this.table_panel = new Ext.Panel({
-            title: 'View detailed drawing instructions',
+            title: 'View more detailed drawing instructions',
             collapsible: true,
             collapsed: true,          
             layout: 'table',
@@ -50,7 +50,7 @@ gwst.widgets.DrawInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
             layoutConfig: {
                 columns: 2
             },
-            id: 'draw_table_panel',
+            id: 'draw_table_panel_2',
             items: [{
                 html: '<p>a. Click the \'Draw Route\' button.</p>'
             },{
@@ -83,15 +83,15 @@ gwst.widgets.DrawInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         });       
 
         this.panel_three = new Ext.Panel({
-            html: "Feel free to play around and try it out and don't worry if you make a mistake.  You can restart your route at any time by clicking the 'Redraw' button.  You can also edit or restart your route after you finish it.",
+            html: "Feel free to play around and try it out. Don't worry if you make a mistake.  A 'Redraw' button will appear once you start drawing that will let you redraw your route.  You will also be able to edit or restart your route after you finish it.",
             border: false,
             style: 'padding:5px 5px 5px 10px'
         });
 
         this.add(this.header_panel);
 		this.add(this.inner_panel);
-        this.add(this.table_panel);
-		this.add(this.panel_three);        
+		this.add(this.panel_three);
+        this.add(this.table_panel);		
         
         // Call parent (required)
         gwst.widgets.DrawInstructPanel.superclass.onRender.apply(this, arguments); 

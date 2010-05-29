@@ -22,7 +22,7 @@ gwst.widgets.EditActivityPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     getHtmlText: function() {
-        var html_text = '<h2>Instructions:</h2> <p>Edit your area by adding, moving, or removing points along its path.</p>';
+        var html_text = '<h2>Instructions:</h2> <p>Edit your area by adding, moving, or removing points along its path.</p><h2>How?</h2>';
         return html_text;
     },
 	
@@ -38,26 +38,22 @@ gwst.widgets.EditActivityPanel = Ext.extend(gwst.widgets.WestPanel, {
 		this.inner_panel = new Ext.Panel({
 			html: this.getHtmlText(),
             id: 'edit_shape_inner_panel',
-			style: 'margin: 10px',
+			style: 'margin: 10px 10px 0px 10px',
 			border: false
 		});
         
         this.table_panel = new Ext.Panel({
             layout: 'table',
             border: false,
-            style: 'margin: 5px; padding: 5px',
+            style: 'margin: 0px 10px 10px 10px',
             defaults: {
-                bodyStyle: 'border: none; padding: 5px'
+                bodyStyle: 'border: none; padding: 0px 5px 5px 5px'
             },
             layoutConfig: {
                 columns: 2
             },
             id: 'edit_activity_table_panel',
             items: [{
-                html: '<p><b>How?</b></p>'
-            },{
-                html: ''
-            },{
                 html: '<p>The <i>dark orange</i> circles you see on your area are the points you added.</p>'
             },{
                 html: '<img src="/media/img/edit_area_1.png" />'

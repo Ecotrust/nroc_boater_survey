@@ -22,8 +22,8 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
         }); 
         
 		this.question_one = new Ext.Panel({		
-			html: '<p>If you could not have engaged in this activity at this location, what would you have done instead?</p>',
-			style: 'margin: 0px 0px 10px 10px',
+			html: '<p>If you could not have used this location for this activity, what would you have done instead?</p>',
+			style: 'margin: 10px 0px 10px 0px',
 			border: false
         });
         
@@ -61,7 +61,7 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
         
         this.question_two = new Ext.Panel({		
 			html: '<p>Please choose the MAIN activity in which you would have most likely engaged.</p>',
-			style: 'margin: 0px 0px 10px 10px',
+			style: 'margin: 0px 0px 10px 0px',
 			border: false
         });
         
