@@ -71,10 +71,10 @@ def draw(request):
     started_survey[0].save()
     
     Route.objects.filter(survey_id=request.session['interview_id']).delete()
-    ActivityArea.objects.filter(survey_id=started_survey).delete()
-    AltActArea.objects.filter(survey_id=started_survey).delete()
-    RouteFactor.objects.filter(survey_id=started_survey).delete()
-    ActivityFactor.objects.filter(survey_id=started_survey).delete()
+    ActivityArea.objects.filter(survey_id=request.session['interview_id']).delete()
+    AltActArea.objects.filter(survey_id=request.session['interview_id']).delete()
+    RouteFactor.objects.filter(survey_id=request.session['interview_id']).delete()
+    ActivityFactor.objects.filter(survey_id=request.session['interview_id']).delete()
     
     return render_to_response('draw.html', RequestContext(request, params))
 
