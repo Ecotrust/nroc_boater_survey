@@ -1,7 +1,7 @@
 Ext.namespace('gwst', 'gwst.widgets');
 
-gwst.widgets.InvalidShapePanel = Ext.extend(gwst.widgets.WestPanel, {
-    id: 'invalid-shape-panel',
+gwst.widgets.InvalidRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
+    id: 'invalid-route-panel',
     status_code: null,
 	
     // Constructor Defaults, can be overridden by user's config object
@@ -12,7 +12,7 @@ gwst.widgets.InvalidShapePanel = Ext.extend(gwst.widgets.WestPanel, {
 		this.addEvents('okay-btn');
 		
         // Call parent (required)
-        gwst.widgets.InvalidShapePanel.superclass.initComponent.apply(
+        gwst.widgets.InvalidRoutePanel.superclass.initComponent.apply(
           this, arguments);                     
     },
     
@@ -24,7 +24,7 @@ gwst.widgets.InvalidShapePanel = Ext.extend(gwst.widgets.WestPanel, {
     getHtmlText: function() {
         var html_text = gwst.settings.shape_error_text;
         if (this.status_code == 2) {
-            html_text += gwst.settings.invalid_poly_text;
+            html_text += gwst.settings.route_invalid_text;
         }
         html_text += '<p>Click the \'Continue\' button to try again.</p>';
         return html_text;
@@ -33,7 +33,7 @@ gwst.widgets.InvalidShapePanel = Ext.extend(gwst.widgets.WestPanel, {
     onRender: function(){
 		this.inner_panel = new Ext.Panel({
 			html: this.getHtmlText(),
-            id: 'invalid_inner_panel',
+            id: 'invalid_route_inner_panel',
 			style: 'margin: 10px',
 			border: false
 		});
@@ -49,7 +49,7 @@ gwst.widgets.InvalidShapePanel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.button_panel);
         
         // Call parent (required)
-        gwst.widgets.InvalidShapePanel.superclass.onRender.apply(this, arguments); 
+        gwst.widgets.InvalidRoutePanel.superclass.onRender.apply(this, arguments); 
 	},
     
     contBtnClicked: function() {
@@ -58,4 +58,4 @@ gwst.widgets.InvalidShapePanel = Ext.extend(gwst.widgets.WestPanel, {
 });
  
 // register xtype to allow for lazy initialization
-Ext.reg('gwst-invalid-shape-panel', gwst.widgets.InvalidShapePanel);
+Ext.reg('gwst-invalid-route-panel', gwst.widgets.InvalidRoutePanel);

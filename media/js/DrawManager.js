@@ -107,7 +107,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     finEditRouteStep: function() {
         this.disableFeatureEdit();
-        this.startRouteInfoStep();
+        //Now that we're done editing, time to validate
+        this.validateShape(this.cur_feature, 'route');
     },
     
     startRouteInfoStep: function() {
@@ -174,10 +175,10 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     finEditActivityStep: function() {
         this.disableFeatureEdit();
         if (this.alternateActivity) {
-            this.finActivityInfo4Step();
+            this.validateShape(this.cur_feature, 'alt_act_area');
         } else {
-            this.startActivityInfoStep();
-        }        
+            this.validateShape(this.cur_feature, 'act_area');
+        }                
     },
     
     startActivityInfoStep: function() {
@@ -263,6 +264,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
 
     finActivityInfo4Step: function() {
+        this.alternateActivity = false;
         this.saveNewArea(false);
     },
 
@@ -306,8 +308,15 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     finFinishedStep: function() {
         this.updateStatus('complete',true,this.finUpdateCompleteStatus);
+    },    
+
+    /* 
+     * Setup UI for invalid shape error display step 
+     */
+    startInvalidRouteStep: function(status_code) {
+        this.loadInvalidRoutePanel(status_code);        
+        this.mapPanel.removeLastFeature();
     },
-    
 
     /* 
      * Setup UI for invalid shape error display step 
@@ -323,11 +332,22 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     /*
      * Process and finish Invalid Shape step
      */
+    finInvalidRouteStep: function() {
+		this.mapPanel.removeLastFeature();
+  	    this.startDrawInstructStep();        
+    },        
+       
+    /*
+     * Process and finish Invalid Shape step
+     */
     finInvalidShapeStep: function() {
 		this.mapPanel.removeLastFeature();
-                                            //TODO: implement new stuff here?
-        alert("Is this called? Should it go somewhere? (DrawManager.js - finInvalidShapeStep)");        //TODO: Kill this
-    },    
+        if (this.alternateActivity) {
+            this.startActivityInfo4Step();
+        } else {
+    		this.startDrawActivityInstructStep();
+        }		
+    },       
     
     /******************** UI widget handlers ********************/   
     
@@ -461,6 +481,22 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.viewport.setWestPanel(this.invalidShapePanel);    	
     },    
     
+    /* Load the Invalid Shape west panel */
+    loadInvalidRoutePanel: function(status_code) {
+    	if (!this.invalidRoutePanel) {
+            this.invalidRoutePanel = new gwst.widgets.InvalidRoutePanel({
+                status_code: status_code
+            });
+            //When panel fires event saying it's all done, we want to process it and move on 
+            this.invalidRoutePanel.on('okay-btn', this.finInvalidRouteStep, this);
+        } else {
+            this.invalidRoutePanel.updateText({
+                status_code: status_code
+            });
+        }
+        this.viewport.setWestPanel(this.invalidRoutePanel);    	
+    },     
+    
     /* Load the satisfied with route west panel */
     loadSatisfiedRoutePanel: function() {
     	if (!this.satisfiedRoutePanel) {
@@ -469,16 +505,16 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.satisfiedRoutePanel.on('cont-route', this.resumeRoute, this);
             this.satisfiedRoutePanel.on('edit-route', this.startEditRouteStep, this);
             this.satisfiedRoutePanel.on('redraw-route', this.redrawRoute, this);
-            this.satisfiedRoutePanel.on('save-route', this.saveRoute, this);
+            this.satisfiedRoutePanel.on('save-route', this.completeRoute, this);
         }
         this.viewport.setWestPanel(this.satisfiedRoutePanel);  
         this.routeCancelWin.hide();
     },    
     
-    saveRoute: function() {
+    completeRoute: function() {
         //Finish off the sketch creating the route feature
         this.mapPanel.lineFinish();
-        this.finDrawInstructStep();
+        this.validateShape(this.cur_feature, 'route');
     },
     
     redrawRoute: function() {
@@ -540,10 +576,14 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     		this.satisfiedActPanel = new gwst.widgets.SatisfiedActivityPanel();
             this.satisfiedActPanel.on('edit-act', this.startEditActivityStep, this);
             this.satisfiedActPanel.on('redraw-act', this.redrawActivity, this);
-            this.satisfiedActPanel.on('save-act', this.finDrawActivityInstructStep, this);
+            this.satisfiedActPanel.on('save-act', this.completeActivity, this);
         }
         this.viewport.setWestPanel(this.satisfiedActPanel);    
     },   
+
+    completeActivity: function() {
+        this.validateShape(this.cur_feature,'act_area');
+    },
 
     redrawActivity: function() {
         this.mapPanel.removeLastFeature();
@@ -625,8 +665,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     saveAltActivity: function() {
-        this.finActivityInfo4Step();
-        this.alternateActivity = false;
+        this.validateShape(this.cur_feature,'alt_act_area');
     },
     
     loadDrawNewAreaPanel: function() {
@@ -657,46 +696,55 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.mapPanel.finModifyFeature();
     },
     
-    validateShape: function(feature) {    	
+    validateShape: function(feature, type) {    	
     	var config = {
             geometry: feature.geometry.toString(),
-            survey_id: gwst.settings.interview_id
+            survey_id: gwst.settings.interview_id,
+            type: type
          }    	
-        // alert("Validation not implemented yet (DrawManager.js - validateShape)");
         this.loadWait('Validating your shape');
-    	// Ext.Ajax.request({
-	        // url: gwst.settings.urls.shape_validate,        //TODO: activate this on validation
-	        // method: 'POST',
-	        // disableCachingParam: true,
-	        // params: config,
-	        // success: this.finValidateShape,
-           	// failure: function(response, opts) {
-        		//Change to error window
-              	// this.hideWait();
-              	// gwst.error.load('An error has occurred.  Please try again and notify us if it happens again.');
-           	// },
-            // scope: this
-	    // });
-        this.finValidateShape();            //TODO: Kill this when validation is implemented
-        
+    	Ext.Ajax.request({
+	        url: gwst.settings.urls.shape_validate,        //TODO: activate this on validation
+	        method: 'POST',
+	        disableCachingParam: true,
+	        params: config,
+	        success: this.finValidateShape,
+          	failure: function(response, opts) {
+                //Change to error window
+                this.hideWait();
+                gwst.error.load('An error has occurred.  Please try again and notify us if it happens again.');
+           	},
+            scope: this
+	    });        
     },
 
     /* Processes the result of validateShape */
     finValidateShape: function(response, opts) {
         this.hideWait();
-        // var res_obj = Ext.decode(response.responseText);         //TODO: activate this on validation
-        // var status_code = parseFloat(res_obj.status_code);
-        // if (status_code == 0) {
-        if (this.alternateActivity) {
-            this.loadSatisfiedAltActivityPanel();
+        var res_obj = Ext.decode(response.responseText);
+        var status_code = parseFloat(res_obj.status_code);
+        
+        //Feature is valid
+        if (status_code == 0) {
+            if (res_obj.type == 'route') {
+                this.finDrawInstructStep();
+            } else {
+                if (this.alternateActivity) {                
+                    this.finActivityInfo4Step();
+                } else {
+                    this.startActivityInfoStep();
+                }                    
+            }
+        //Feature is invalid
+        } else if (status_code > 0){
+            if (res_obj.type == 'route') {
+                this.startInvalidRouteStep(status_code);	
+            } else {
+                this.startInvalidShapeStep(status_code);	
+            }
         } else {
-        	this.loadSatisfiedActivityPanel();
-        }
-        // } else if (status_code > 0){
-        	// this.startInvalidShapeStep(status_code);	
-        // } else {
-        	// gwst.error.load('An error has occurred while trying to validate your area.  Please try again and notify us if this keeps happening.');
-        // }        
+            gwst.error.load('An error has occurred while trying to validate your area.  Please try again and notify us if this keeps happening.');
+        }        
     },          
 
     updateStatus: function(field,val,handler) {
@@ -842,13 +890,16 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.hideAddRouteWin();
             this.hideCancelWin();
             this.hideMapTooltip();
-            // this.validateShape(feature);
-    		// return;
+            //the route pause handler will handle loading the satisfied panel
     	} else {
     		this.hideAddPolyWin();
     		this.hideCancelWin();
     		this.hideMapTooltip();
-    		this.validateShape(feature);
+            if (this.alternateActivity) {
+                this.loadSatisfiedAltActivityPanel();
+            } else {
+                this.loadSatisfiedActivityPanel();
+            }    		
     	}
     },
     
