@@ -33,7 +33,7 @@ gwst.widgets.MainViewport = Ext.extend(Ext.Viewport, {
                 id: 'southpanel',              
                 bodyStyle: 'background-color: #E6F1FF; font-weight: bold; color: #222222; padding: 3px; border-top: 1px solid #0066ff; border-bottom: 1px solid #0066ff',
                 border: false,
-                html: 'If you need help, call 617-287-5576, email <a href="mailto:help@maboatersurvey.com">help@maboatersurvey.com</a>, or refer to our <a target="_blank" href="http://maboatersurvey.com/faq.htm#map">frequently asked questions</a>'
+                html: gwst.settings.help_text
             }]        
 		});
 
