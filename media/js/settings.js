@@ -32,7 +32,7 @@ gwst.settings = {
     shape_other_overlap_text: '<p>Your new area overlaps one of your other areas. They are not allowed to do this.</p>  <p>If you have two that border each other, just draw the second one along the edge of the first as best as you can.</p><img class="invalid-image" src="/media/img/invalid_overlap.png">',
     invalid_poly_text: '<p>Your area is not valid because it had less than 3 \'corners\'.</p> <p>You may have accidentally double-clicked and completed it before you were done.</p>',    
     route_invalid_text: '<p>Your route is not valid because it only had one point.  You may have accidentally double-clicked and completed it before you were done.  Please try again and create at least two waypoints for your route.</p>',
-    help_text: 'If you need help, call 617-287-5576, email <a href="mailto:help@maboatersurvey.com">help@maboatersurvey.com</a>, or refer to our <a target="_blank" href="http://www.maboatersurvey.com/map_faq.htm">frequently asked questions</a>'
+    help_text: 'If you need help, call 617-287-5576, email <a href="mailto:help@maboatersurvey.com">help@maboatersurvey.com</a>, or refer to our <a target="_blank" href="http://www.maboatersurvey.com/map_faq.htm">detailed drawing instructions</a> page'
 };
 
 gwst.settings.urls = {
