@@ -76,21 +76,6 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             isBaseLayer: true
         });
         
-        /*
-            {
-                layers: 'RBSW: NOAA Layer Group',
-                styles: '',
-                srs: 'EPSG:900913',
-                format: 'image/jpeg',
-                transparent: 'True',
-                'maxZoomLevel': 13                
-            },{
-                'isBaseLayer': true,
-                'visibility': false                
-            }
-        );
-        */
-        
         var rampLayer = new OpenLayers.Layer.GeoWebCache({
             url: "http://db-dev.maboatersurvey.com/RBSW-DEV_massgis_ofba_Coastal",
             name: 'Boat Ramps',
@@ -195,7 +180,6 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     vecComplete: function(evt) {
     	this.fireEvent('vector-completed', evt.feature);
     	this.curFeature = evt.feature;
-    	// this.disablePointDraw();
         this.disableLineDraw();
     	this.disablePolyDraw();
     },
@@ -213,36 +197,6 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     	this.vectorLayer.removeFeatures([this.curFeature]);
     },    
     
-//    onPopupClose: function(evt) {
-//        selectControl.unselect(selectedFeature);
-//    },
-    
-//    onFeatureSelect: function(feature) {
-//        selectedFeature = feature;
-//        popup = new OpenLayers.Popup.FramedCloud("chicken", 
-//                                 feature.geometry.getBounds().getCenterLonLat(),
-//                                 null,
-//                                 "<div style='font-size:.8em'><a href='#'>Delete</a></div>",
-//                                 null, true, this.onPopupClose);
-//        feature.popup = popup;
-//        map.addPopup(popup);
-//    },
-    
-//    onFeatureUnselect: function(feature) {
-//        map.removePopup(feature.popup);
-//        feature.popup.destroy();
-//        feature.popup = null;
-//    },
-    
-    // enablePointDraw: function() {
-   	// this.selectControl.unselectAll();
-        // this.drawPointControl.activate();        
-    // },
-    
-    // disablePointDraw: function() {
-    	// this.drawPointControl.deactivate();
-    // },
-    
     enableLineDraw: function() {
         this.drawLineControl.activate();
     },
@@ -252,18 +206,12 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     },
     
     enablePolyDraw: function() {
-//    	this.selectControl.unselectAll();
         this.drawPolyControl.activate();        
     },
     
     disablePolyDraw: function() {
     	this.drawPolyControl.deactivate();
-    },    
-    
-    // zoomToPoint: function(pnt) {
-    	// var lonlat = new OpenLayers.LonLat(pnt.geometry.x, pnt.geometry.y);
-    	// this.map.setCenter(lonlat, 8);
-    // },
+    },        
     
     cancelPoly: function() {
     	this.disablePolyDraw();        

@@ -62,11 +62,11 @@ gwst.widgets.EditRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
             },{
                 html: '<img src="/media/img/edit_route_2.png" />'
             },{
-                html: '<p><b><u>Moving</u></b>. To move to a point, click the mouse and drag it where you want, then release.</p>'
+                html: '<p><b><u>Moving</u></b>. To move an existing point, click and drag a dark orange cirle where you want, then release.</p>'
             }, {
                 html: '<img src="/media/img/edit_route_3.png" />'
             },{
-                html: '<p><b><u>Adding</u></b>. To add a point click a \'ghost\' point and drag it where you want, then release.</p>'
+                html: '<p><b><u>Adding</u></b>. To add a point, click a \'ghost\' point and drag it where you want, then release.</p>'
             },{
                 html: '<img src="/media/img/edit_route_4.png" />'
             },{

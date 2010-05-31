@@ -198,52 +198,40 @@ Result status codes
 def validate_shape(request):
     cur_activity = None    
     try:
-        user_id = request.REQUEST['user_id']
-        activity_id = request.REQUEST['activity_id']
-        shape_json = request.REQUEST['geometry']
-        
-        cur_activity =  Activity.objects.get(pk=activity_id)        
+        survey_id = request.REQUEST['survey_id']
+        type = request.REQUEST['type']
+        shape_json = request.REQUEST['geometry']        
     except Exception, e:
-        return gen_validate_response(1, 'Invalid, missing arguments. user_id, activity_id and geometry are required', None)
+        return gen_validate_response(1, 'Invalid, missing arguments. survey_id, type and geometry are required', None)
 
     try:    
         new_shape = GEOSGeometry( shape_json, srid=settings.CLIENT_SRID )
-        if new_shape.area == 0:
-            return gen_validate_response(4, 'Shape is not valid', None)                
-        if not new_shape.valid:
-            return gen_validate_response(2, 'Shape is not valid', new_shape)        
+        #Verify route is valid
+        if type == 'route':
+            if (not new_shape.geom_type == 'LineString') or (not new_shape.valid):
+                return gen_validate_response(2, 'Route is not valid', new_shape, type)        
+        #Verify activity is valid
+        elif type == 'act_area':
+            if new_shape.area == 0:
+                return gen_validate_response(2, 'Shape is not valid', None, type)                
+            if (not new_shape.geom_type == 'Polygon') or (not new_shape.valid):
+                return gen_validate_response(2, 'Shape is not valid', new_shape, type)                        
     except Exception, e:
-        return gen_validate_response(2, 'Shape is not valid', None)
-    
-    try:        
-        new_shape.transform( settings.SERVER_SRID )
-
-        other_shapes = None
-        if cur_activity.draw_type == 'point':
-            other_shapes = ActivityPoint.objects.filter(kn_user_id=user_id, act=cur_activity)
-        else:
-            other_shapes = ActivityPoly.objects.filter(kn_user_id=user_id, act=cur_activity)                                                        
-
-        #Error if new shape intersects
-        for i, shape in enumerate( other_shapes.all() ):
-            if new_shape.intersects( shape.geometry ):
-                return gen_validate_response(3, 'New geometry overlaps existing shapes', None)
-        
-        return gen_validate_response(0, 'Valid shape', new_shape)                   
-    except Exception, e:
-        raise
-        #return HttpResponse(result + e.message, status=500)
+        return gen_validate_response(2, 'Shape is not valid', None, type)
+            
+    return gen_validate_response(0, 'Valid shape', new_shape, type)                               
 
 '''
 Utility function for generating manipulator response 
 '''
-def gen_validate_response(code, message, geom):
+def gen_validate_response(code, message, geom, type):
     if geom:
         geom.transform( settings.CLIENT_SRID )
     result = {
         'status_code':code,
         'message':message,
-        'geom':geom
+        'geom':geom,
+        'type':type
     }
     return HttpResponse(geojson_encode(result))
 
