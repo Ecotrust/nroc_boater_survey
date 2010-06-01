@@ -8,6 +8,9 @@ Ext.namespace('gwst');
 */
 
 gwst.settings = {	
+    minimum_draw_zoom: 10,
+    zoom_error_text: 'For accuracy reasons, you must zoom in further before drawing on the map.  Please zoom in and try again',    
+    
     adminEmail: 'fish@ecotrust.org',
     step1text: '<b>1. Select one place you participated in the above activity during your last trip.  If this place is not in the lists below, skip to step two.</b>',
     zoomText: '',

@@ -391,13 +391,21 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     loadAddRouteWin: function() {
     	if (!this.addRouteWin) {
 			this.addRouteWin = new gwst.widgets.AddRouteWindow();
-			this.addRouteWin.on('draw-route-clicked', this.mapPanel.enableLineDraw, this.mapPanel);
-			this.addRouteWin.on('draw-route-clicked', this.loadAddRouteTip, this);		
-            this.addRouteWin.on('draw-route-clicked', this.loadRouteCancelWin, this);
+			this.addRouteWin.on('draw-route-clicked', this.activateRouteDraw, this);
 		}
 		this.addRouteWin.show();		
 		this.addRouteWin.alignTo(document.body, "tl-tl", this.addRouteWinOffset);    	
     },
+    
+    activateRouteDraw: function() {
+        if (this.mapPanel.map.getZoom() < gwst.settings.minimum_draw_zoom) {
+            alert(gwst.settings.zoom_error_text);
+        } else {    
+            this.mapPanel.enableLineDraw();
+            this.loadAddRouteTooltip();
+            this.loadRouteCancelWin();
+        }
+    },    
     
     hideAddRouteWin: function() {
     	if (this.addRouteWin) {
@@ -408,24 +416,40 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     loadAddPolyWin: function() {
     	if (!this.addPolyWin) {
 			this.addPolyWin = new gwst.widgets.AddPolyWindow();
-			this.addPolyWin.on('draw-poly-clicked', this.mapPanel.enablePolyDraw, this.mapPanel);
-			this.addPolyWin.on('draw-poly-clicked', this.loadDrawAreaTooltip, this);
-			this.addPolyWin.on('draw-poly-clicked', this.loadCancelWin, this);			
+			this.addPolyWin.on('draw-poly-clicked', this.activatePolyDraw, this);		
 		}
 		this.addPolyWin.show();		
 		this.addPolyWin.alignTo(document.body, "tl-tl", this.addPolyWinOffset);    	
     },   
+
+    activatePolyDraw: function() {
+        if (this.mapPanel.map.getZoom() < gwst.settings.minimum_draw_zoom) {
+            alert(gwst.settings.zoom_error_text);
+        } else {    
+            this.mapPanel.enablePolyDraw();
+            this.loadDrawAreaTooltip();
+            this.loadCancelWin();
+        }
+    },
     
     loadAltPolyWin: function() {
     	if (!this.altPolyWin) {
 			this.altPolyWin = new gwst.widgets.AddPolyWindow();
-			this.altPolyWin.on('draw-poly-clicked', this.mapPanel.enablePolyDraw, this.mapPanel);
-			this.altPolyWin.on('draw-poly-clicked', this.loadDrawAreaTooltip, this);
-			this.altPolyWin.on('draw-poly-clicked', this.loadCancelWin, this);			
+			this.altPolyWin.on('draw-poly-clicked', this.activateAltPolyDraw, this);		
 		}
 		this.altPolyWin.show();		
 		this.altPolyWin.alignTo(document.body, "tl-tl", this.addPolyWinOffset);    	
     },   
+
+    activateAltPolyDraw: function() {
+        if (this.mapPanel.map.getZoom() < gwst.settings.minimum_draw_zoom) {
+            alert(gwst.settings.zoom_error_text);
+        } else {    
+            this.mapPanel.enablePolyDraw();
+            this.loadDrawAreaTooltip();
+            this.loadCancelWin();
+        }
+    },
     
     hideAddPolyWin: function() {
     	if (this.addPolyWin) {
@@ -867,8 +891,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     finSaveNewArea: function(response) {
     	var new_feat = Ext.decode(response.responseText);    
     	this.hideWait.defer(500, this);
-        if (this.activity_3_alt == 'Engage in another recreational boating activity at this location' ||
-            this.activity_3_alt == 'Engage in a recreational boating activity at a different location') {
+        if (this.activity_3_alt == 'Engage in a recreational boating activity at a different location') {
             this.startActivityInfo4Step();
         } else {
             this.startDrawNewAreaStep();
@@ -946,7 +969,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         window.onbeforeunload = null;
     },
     
-    loadAddRouteTip: function() {
+    loadAddRouteTooltip: function() {
     	this.loadMapTooltip('Now click on the map where you started your route. Continue clicking and tracing it out. Double-click the last point to finish');
     },    
     
@@ -968,7 +991,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             autoHide: false,
             html: text,
             mouseOffset: [25,28],
-            style: 'opacity: 0.5; -moz-opacity: 0.5'
+            style: 'opacity: 0.6; -moz-opacity: 0.6'
     	});
     },
     
