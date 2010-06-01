@@ -166,16 +166,37 @@ p.x-panel-static{
 }
 
 .olControlMousePosition {
-    background-color: #DDD;
-    color: #222222;
-    font-size: 12px ! important;
-    right: 0px ! important;
-    filter:alpha(opacity=75);
-    -moz-opacity:0.75;
-    -khtml-opacity: 0.75;
-    opacity: 0.75;
+    background-color: #DDDDDD;
+    color: black;
+    font-size: 13px ! important;
+    right: 0 !important;    
+    filter:alpha(opacity=65);
+    -moz-opacity:0.65;
+    -khtml-opacity: 0.65;
+    opacity: 0.65;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.olControlScaleLine {
+    background-color: #DDDDDD;
+    left: auto !important;
+    right: 0 !important;
+    bottom: 30px;
+    padding: 5px 10px;
+    color: black;
+    filter:alpha(opacity=65);
+    -moz-opacity:0.65;
+    -khtml-opacity: 0.65;
+    opacity: 0.65;
+}
+
+.olControlScaleLineTop {
+    font-size: 11px;
+}
+
+.olControlScaleLineBottom {
+    font-size: 11px;
 }
 
 .custom-left-button {

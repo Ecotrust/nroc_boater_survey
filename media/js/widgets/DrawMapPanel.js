@@ -19,7 +19,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         var map_options = {
 			controls: [],
             projection: new OpenLayers.Projection("EPSG:900913"),
-            displayProjection: new OpenLayers.Projection("EPSG:900913"),
+            displayProjection: new OpenLayers.Projection("EPSG:4326"),
             units: "m",
             numZoomLevels: 18,
             maxResolution: 156543.0339,
@@ -77,7 +77,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         });
         
         var rampLayer = new OpenLayers.Layer.GeoWebCache({
-            url: "http://db-dev.maboatersurvey.com/RBSW-DEV_massgis_ofba_Coastal",
+            url: "http://c1753222.cdn.cloudfiles.rackspacecloud.com/RBSW-DEV_massgis_ofba_Coastal/",
             name: 'Boat Ramps',
             isBaseLayer: false,
             visibility: false
@@ -120,6 +120,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 		map.addControl(new OpenLayers.Control.MousePosition());
 		var layerSwitcher = new OpenLayers.Control.LayerSwitcher();
 		map.addControl(layerSwitcher);
+		map.addControl(new OpenLayers.Control.ScaleLine());
 		layerSwitcher.maximizeControl();				
         
         //Line
