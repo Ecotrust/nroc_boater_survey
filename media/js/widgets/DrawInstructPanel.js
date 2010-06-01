@@ -18,7 +18,7 @@ gwst.widgets.DrawInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
 
     getHtmlText: function() {
-        var html_text = '<p>1. Zoom to where you started your trip using the blue navigation controls on the right.</p><p>2. Click the "Draw Route" button to start drawing your ROUNDTRIP trip.</p><p>3. Click once for each waypoint and <u>double-click</u> to finish your route.</p>';
+        var html_text = '<p style="padding-bottom:3px">Step 1. Zoom to where you started your trip using the blue navigation controls on the right.</p><p style="padding-bottom:3px">Step 2. Click the "Draw Route" button to start drawing your ROUNDTRIP trip.</p><p style="padding-bottom:3px">Step 3. Click once for each waypoint and <u>double-click</u> to finish your route.</p>';
         return html_text;
     },
 	

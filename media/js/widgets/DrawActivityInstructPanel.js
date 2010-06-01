@@ -15,7 +15,7 @@ gwst.widgets.DrawActivityInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
 
     getHtmlText: function() {
-        var html_text = '<h2>How to Draw an Activity Area</h2><p>1. Click the "Draw Area" button on the right.</p><p>2.Click once on the map for each \"corner\" of your area and <u>double-click</u> to finish it.</p>';
+        var html_text = '<h2>How to Draw an Activity Area</h2><p style="padding-bottom: 5px;">Step 1. Click the "Draw Area" button on the right.</p><p>Step 2. Click once on the map for each \"corner\" of your area and <u>double-click</u> to finish it.</p>';
         return html_text;
     },
 	
