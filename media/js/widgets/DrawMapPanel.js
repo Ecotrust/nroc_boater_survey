@@ -6,10 +6,10 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     initComponent: function(){		
 		//Map region
 		var region = {
-            e_bound: -7670000,
-            n_bound: 5380000,
-            s_bound: 4980000,
-            w_bound: -8110000,
+            e_bound: -7675000,
+            n_bound: 5301000,
+            s_bound: 5116000,
+            w_bound: -7955000,
             name: 'Oregon Coast'
         };
 		var map_extent = new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34);
@@ -19,7 +19,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         var map_options = {
 			controls: [],
             projection: new OpenLayers.Projection("EPSG:900913"),
-            displayProjection: new OpenLayers.Projection("EPSG:4326"),
+            displayProjection: new OpenLayers.Projection("EPSG:900913"),
             units: "m",
             numZoomLevels: 18,
             maxResolution: 156543.0339,
@@ -147,7 +147,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 		    layers: [nautLayer, hybridLayer, physicalLayer, rampLayer, marinaLayer, this.vectorLayer],
 		    extent: map_extent,
 	        center: region_extent.getCenterLonLat(),
-	        zoom: 8,
+	        zoom: 9,
 	        cls: 'tip-target'
 		});    		
 		
