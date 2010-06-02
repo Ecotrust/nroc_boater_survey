@@ -653,8 +653,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.activityInfo3Panel = new gwst.widgets.ActivityInfo3Panel();
             //When panel fires even saying it's all done, we want to process it and move on
             this.activityInfo3Panel.on('activity-info3-cont', this.finActivityInfo3Step, this);
-            // this.activityInfo3Panel.on('activity-info3-alt-cont', this.startActivityInfo4Step, this); //TODO: kill alt, branch based on answer
-            this.activityInfo3Panel.on('activity-info3-alt-cont', this.finActivityInfo3Step, this);
         }
         this.viewport.setWestPanel(this.activityInfo3Panel);    
     },

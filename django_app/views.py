@@ -3,7 +3,7 @@ from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
 import datetime
 
-from draw_app.models import SurveyStatus
+from draw_app.models import *
 
 def intro(request):
     
@@ -17,6 +17,14 @@ def intro(request):
             return HttpResponseRedirect('/draw/')
             
     elif request.GET.has_key('skip'):
+        
+        #clear out previous answers
+        Route.objects.filter(survey_id=request.session['interview_id']).delete()
+        ActivityArea.objects.filter(survey_id=request.session['interview_id']).delete()
+        AltActArea.objects.filter(survey_id=request.session['interview_id']).delete()
+        RouteFactor.objects.filter(survey_id=request.session['interview_id']).delete()
+        ActivityFactor.objects.filter(survey_id=request.session['interview_id']).delete()    
+    
         skipped_survey = SurveyStatus.objects.get_or_create(survey_id=request.session['interview_id'])
         #Save skip status here
         skipped_survey[0].user_type=request.session['interview_id'][0]
