@@ -725,7 +725,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
          }    	
         this.loadWait('Validating your shape');
     	Ext.Ajax.request({
-	        url: gwst.settings.urls.shape_validate,        //TODO: activate this on validation
+	        url: gwst.settings.urls.shape_validate,        
 	        method: 'POST',
 	        disableCachingParam: true,
 	        params: config,
@@ -829,7 +829,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
                 rank: this.activity_1_rank, 
                 factors: this.activity_factors, 
                 other_factor: this.activity_factors_other,
-                alt_act: this.activity_3_alt
+                alt_act_type: this.activity_3_alt,
+                alt_act: this.activity_3_alt_act 
             };
             Ext.Ajax.request({
                 url: gwst.settings.urls.shapes,
@@ -848,8 +849,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             var data = {
                 geometry: this.cur_feature.geometry.toString(),
                 survey_id: gwst.settings.interview_id,
-                type: 'alt_act_area',
-                primary_act: this.activity_3_alt_act 
+                type: 'alt_act_area'
             };
             Ext.Ajax.request({
                 url: gwst.settings.urls.shapes,

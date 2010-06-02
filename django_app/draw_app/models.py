@@ -43,6 +43,7 @@ class ActivityArea(Model):
     duration = CharField( blank=True, null=True, max_length= 100 )
     rank = CharField( blank=True, null=True, max_length=100 )
     alternate_activity_type = CharField( blank=True, null=True, max_length=150 )
+    alternate_activity = CharField( blank=True, null=True, max_length=150 )
     objects = GeoManager()
     creation_date = DateTimeField(default=datetime.datetime.now)
     class Meta:
@@ -60,7 +61,6 @@ class AltActArea(Model):
     survey_id = ForeignKey(SurveyStatus)
     geometry = PolygonField(srid=settings.SERVER_SRID)
     preferred_area = ForeignKey(ActivityArea)
-    primary_activity = CharField( blank=True, null=True, max_length=150 )
     objects = GeoManager()
     creation_date = DateTimeField(default=datetime.datetime.now)
     class Meta:
