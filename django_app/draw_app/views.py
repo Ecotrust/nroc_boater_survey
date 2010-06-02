@@ -110,14 +110,25 @@ def shapes(request, id=None):
                 status.map_status = 'Route drawn'
                 status.save()
             elif feat.get('type') == 'act_area':
-                new_shape = ActivityArea(
-                    survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
-                    geometry = geom,
-                    primary_activity = feat.get('primary_act'),
-                    duration = feat.get('duration'),
-                    rank = feat.get('rank'),
-                    alternate_activity_type = feat.get('alt_act'),
-                )    
+                if feat.get('alt_act_type') == 'Engage in a recreational boating activity at a different location' or feat.get('alt_act_type') == 'Engage in another recreational boating activity at this location':
+                    new_shape = ActivityArea(
+                        survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
+                        geometry = geom,
+                        primary_activity = feat.get('primary_act'),
+                        duration = feat.get('duration'),
+                        rank = feat.get('rank'),
+                        alternate_activity_type = feat.get('alt_act_type'),
+                        alternate_activity = feat.get('alt_act'),
+                    )    
+                else:
+                    new_shape = ActivityArea(
+                        survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
+                        geometry = geom,
+                        primary_activity = feat.get('primary_act'),
+                        duration = feat.get('duration'),
+                        rank = feat.get('rank'),
+                        alternate_activity_type = feat.get('alt_act_type'),
+                    )    
                 status = SurveyStatus.objects.get(survey_id=feat.get('survey_id'))
                 status.act_status = 'Area drawn'
                 status.save()
@@ -125,7 +136,6 @@ def shapes(request, id=None):
                 new_shape = AltActArea(
                     survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
                     geometry = geom,
-                    primary_activity = feat.get('primary_act'),
                     preferred_area = request.session['preferred_shape'],
                 )  
             new_shape.save() 
