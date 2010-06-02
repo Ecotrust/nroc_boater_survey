@@ -71,7 +71,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         );     
         
         var nautLayer = new OpenLayers.Layer.GeoWebCache({
-            url: "http://db-dev.maboatersurvey.com/RBSW__NOAA_Layer_Group",
+            url: "http://c1753222.cdn.cloudfiles.rackspacecloud.com/RBSW-DEV_NOAA_Layer_Group/",
             name: 'Nautical Charts',
             isBaseLayer: true
         });
