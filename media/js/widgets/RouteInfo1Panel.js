@@ -92,7 +92,7 @@ gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
 	},
     
     boxChecked: function() {
-        if (this.answer_one.items.item(14).checked) {
+        if (this.answer_one.items.item(13).checked) {
             this.other_text_one.show();
             this.other_one.show();
         } else {
