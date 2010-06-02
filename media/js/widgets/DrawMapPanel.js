@@ -148,7 +148,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 		    layers: [nautLayer, hybridLayer, physicalLayer, rampLayer, marinaLayer, this.vectorLayer],
 		    extent: map_extent,
 	        center: region_extent.getCenterLonLat(),
-	        zoom: 9,
+	        zoom: 8,
 	        cls: 'tip-target'
 		});    		
 		
