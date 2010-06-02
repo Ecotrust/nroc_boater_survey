@@ -5,9 +5,6 @@ gwst.DrawManager- manages resource drawing process including user information, u
 shapes and pennies.  Extends Ext.Observable providing event handling
 */
 gwst.DrawManager = Ext.extend(Ext.util.Observable, {
-	cur_point_activity_index: 0, //Current point activity
-	cur_poly_activity_index: 0, //Current poly activity
-	cur_activity_num: 1, //Current activity overall
 	cur_feature: null, //Last drawn feature
 	addRouteWinOffset: [405, 8],
 	addPolyWinOffset: [405, 8],
