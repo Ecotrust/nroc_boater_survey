@@ -18,24 +18,29 @@ def intro(request):
             
     elif request.GET.has_key('skip'):
         
-        #clear out previous answers
-        Route.objects.filter(survey_id=request.session['interview_id']).delete()
-        ActivityArea.objects.filter(survey_id=request.session['interview_id']).delete()
-        AltActArea.objects.filter(survey_id=request.session['interview_id']).delete()
-        RouteFactor.objects.filter(survey_id=request.session['interview_id']).delete()
-        ActivityFactor.objects.filter(survey_id=request.session['interview_id']).delete()    
-    
-        skipped_survey = SurveyStatus.objects.get_or_create(survey_id=request.session['interview_id'])
-        #Save skip status here
-        skipped_survey[0].user_type=request.session['interview_id'][0]
-        skipped_survey[0].user_id=request.session['interview_id'][1:7]
-        skipped_survey[0].month=request.session['interview_id'][-2:]
-        skipped_survey[0].map_status = 'Skipped'
-        skipped_survey[0].act_status = 'Skipped'
-        skipped_survey[0].complete = True
-        skipped_survey[0].complete_time = datetime.datetime.now()
-        skipped_survey[0].save()
-        return HttpResponseRedirect('http://www.maboatersurvey.com/thanks.htm')
+        already_complete = SurveyStatus.objects.filter(survey_id = request.session['interview_id'], complete = True)
+        
+        if already_complete:
+            return HttpResponseRedirect('http://www.maboatersurvey.com/thanks.htm')
+        else:    
+            #clear out previous answers
+            Route.objects.filter(survey_id=request.session['interview_id']).delete()
+            ActivityArea.objects.filter(survey_id=request.session['interview_id']).delete()
+            AltActArea.objects.filter(survey_id=request.session['interview_id']).delete()
+            RouteFactor.objects.filter(survey_id=request.session['interview_id']).delete()
+            ActivityFactor.objects.filter(survey_id=request.session['interview_id']).delete()    
+        
+            skipped_survey = SurveyStatus.objects.get_or_create(survey_id=request.session['interview_id'])
+            #Save skip status here
+            skipped_survey[0].user_type=request.session['interview_id'][0]
+            skipped_survey[0].user_id=request.session['interview_id'][1:7]
+            skipped_survey[0].month=request.session['interview_id'][-2:]
+            skipped_survey[0].map_status = 'Skipped'
+            skipped_survey[0].act_status = 'Skipped'
+            skipped_survey[0].complete = True
+            skipped_survey[0].complete_time = datetime.datetime.now()
+            skipped_survey[0].save()
+            return HttpResponseRedirect('http://www.maboatersurvey.com/thanks.htm')
 
     if not request.GET.has_key('id'):    
         return HttpResponse('We\'re sorry, this section is not accessible without providing the proper information' , status=500)
