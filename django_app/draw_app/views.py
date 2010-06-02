@@ -211,7 +211,7 @@ def validate_shape(request):
             if (not new_shape.geom_type == 'LineString') or (not new_shape.valid):
                 return gen_validate_response(2, 'Route is not valid', new_shape, type)        
         #Verify activity is valid
-        elif type == 'act_area':
+        elif type == 'act_area' or type == 'alt_act_area':
             if new_shape.area == 0:
                 return gen_validate_response(2, 'Shape is not valid', None, type)                
             if (not new_shape.geom_type == 'Polygon') or (not new_shape.valid):
