@@ -27,6 +27,8 @@ class Route(Model):
     creation_date = DateTimeField(default=datetime.datetime.now)
     class Meta:
         db_table = u'route'
+    def __unicode__(self):
+        return unicode('%s' % (self.pk))
         
 class RouteFactor(Model):
     route = ForeignKey(Route)
@@ -48,6 +50,8 @@ class ActivityArea(Model):
     creation_date = DateTimeField(default=datetime.datetime.now)
     class Meta:
         db_table = u'act_area'
+    def __unicode__(self):
+        return unicode('%s' % (self.pk))
         
 class ActivityFactor(Model):
     activity = ForeignKey(ActivityArea)
@@ -99,7 +103,7 @@ class ActivityFactorAdmin(admin.ModelAdmin):
     odering = ('survey_id',)                
     
 class AltActAdmin(OSMGeoAdmin):
-    list_display = ('pk', 'survey_id', 'creation_date')
+    list_display = ('pk', 'preferred_area', 'survey_id', 'creation_date')
     odering = ('survey_id',)
     default_lon = -7870000
     default_lat = 5165000

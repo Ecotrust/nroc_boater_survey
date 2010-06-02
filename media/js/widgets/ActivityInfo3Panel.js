@@ -197,7 +197,7 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
     
     altContBtnClicked: function() {
         if (this.other_two.isValid()) {
-            this.fireEvent('activity-info3-alt-cont',this);
+            this.fireEvent('activity-info3-cont',this);
         } else {
             alert('Your entry for \'other\' is too long.  Please shorten it.');
         }
