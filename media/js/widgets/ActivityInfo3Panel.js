@@ -38,7 +38,7 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
             emptyText:'Select an alternate...',
             editable: false,
             triggerAction: 'all',
-            style: 'margin: 0px 0px 10px 10px; width: 270px',
+            style: 'margin: 0px 0px 10px 10px',
 			border: false,
             listWidth: 620
         });
