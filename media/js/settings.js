@@ -42,7 +42,8 @@ gwst.settings.urls = {
 	shapes: '/draw/shapes/',
     status: '/draw/status/',
     check: '/draw/check/',
-	shape_validate: '/draw/shape/validate/'		
+	shape_validate: '/draw/shape/validate/',
+    complete: '/complete/'
 };
 
 Ext.Ajax.timeout = 120000;

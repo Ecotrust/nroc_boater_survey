@@ -12,7 +12,7 @@ def intro(request):
         already_complete = SurveyStatus.objects.filter(survey_id = request.session['interview_id'], complete = True)
         
         if already_complete:
-            return HttpResponseRedirect('http://www.maboatersurvey.com/thanks.htm')
+            return HttpResponseRedirect('/complete/')
         else:    
             return HttpResponseRedirect('/draw/')
             
@@ -21,7 +21,7 @@ def intro(request):
         already_complete = SurveyStatus.objects.filter(survey_id = request.session['interview_id'], complete = True)
         
         if already_complete:
-            return HttpResponseRedirect('http://www.maboatersurvey.com/thanks.htm')
+            return HttpResponseRedirect('/complete/')
         else:    
             #clear out previous answers
             Route.objects.filter(survey_id=request.session['interview_id']).delete()
@@ -56,9 +56,16 @@ def intro(request):
     already_complete = SurveyStatus.objects.filter(survey_id = request.session['interview_id'], complete = True)
         
     if already_complete:
-        return HttpResponseRedirect('http://www.maboatersurvey.com/thanks.htm')
+        return HttpResponseRedirect('/complete/')
     else: 
         return render_to_response('intro.html', {'interview_id':interview_id,'vessel':vessel,'month':month})
 
 def test(request):    
     return render_to_response('test.html')    
+    
+def complete(request):
+
+    interview_id  = request.GET.get('id')
+    vessel  = request.GET.get('vessel')
+    month = request.GET.get('month')
+    return render_to_response('complete.html', {'interview_id':request.session['interview_id'], 'vessel':request.session['vessel'],'month':request.session['month']})
