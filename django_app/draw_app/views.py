@@ -59,7 +59,7 @@ def draw(request):
     already_complete = SurveyStatus.objects.filter(survey_id = request.session['interview_id'], complete = True)
         
     if already_complete:
-        return HttpResponseRedirect('http://www.maboatersurvey.com/thanks.htm')
+        return HttpResponseRedirect('/complete/')
     
     started_survey = SurveyStatus.objects.get_or_create(survey_id=request.session['interview_id'])
     #Save status here
