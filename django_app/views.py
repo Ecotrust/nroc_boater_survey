@@ -33,7 +33,7 @@ def intro(request):
             skipped_survey = SurveyStatus.objects.get_or_create(survey_id=request.session['interview_id'])
             #Save skip status here
             skipped_survey[0].user_type=request.session['interview_id'][0]
-            skipped_survey[0].user_id=request.session['interview_id'][1:7]
+            skipped_survey[0].user_id=request.session['interview_id'][1:-2]
             skipped_survey[0].month=request.session['interview_id'][-2:]
             skipped_survey[0].map_status = 'Skipped'
             skipped_survey[0].act_status = 'Skipped'
