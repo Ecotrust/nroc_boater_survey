@@ -48,7 +48,7 @@ def status(request):
 
 def draw(request):   
     if not request.session.has_key('interview_id'):    
-        return HttpResponse('We\'re sorry, We\'re sorry, the mapping portion of this survey cannot be opened.  If you believe this is an error, you can call 617-287-5576, or email <a href="mailto:help@maboatersurvey.com">help@maboatersurvey.com</a>.' , status=500)
+        return HttpResponse('We\'re sorry, the mapping portion of this survey cannot be opened.  If you believe this is an error, you can call 617-287-5576, or email <a href="mailto:help@maboatersurvey.com">help@maboatersurvey.com</a>.' , status=500)
     params = {
         'interview_id': request.session['interview_id'], 
         'vessel': request.session['vessel'],
