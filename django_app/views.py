@@ -43,7 +43,7 @@ def intro(request):
             return HttpResponseRedirect('http://www.maboatersurvey.com/thanks.htm')
 
     if not request.GET.has_key('id'):    
-        return HttpResponse('We\'re sorry, this section is not accessible without providing the proper information' , status=500)
+        return HttpResponse('We\'re sorry, the mapping portion of this survey cannot be opened.  If you believe this is an error, you can call 617-287-5576, or email <a href="mailto:help@maboatersurvey.com">help@maboatersurvey.com</a>.' , status=500)
 
     interview_id  = request.GET.get('id')
     vessel  = request.GET.get('vessel')
@@ -65,7 +65,4 @@ def test(request):
     
 def complete(request):
 
-    interview_id  = request.GET.get('id')
-    vessel  = request.GET.get('vessel')
-    month = request.GET.get('month')
     return render_to_response('complete.html', {'interview_id':request.session['interview_id'], 'vessel':request.session['vessel'],'month':request.session['month']})
