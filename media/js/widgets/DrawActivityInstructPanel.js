@@ -85,16 +85,29 @@ gwst.widgets.DrawActivityInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
             },{
                 html: '<img src="/media/img/area_7.png" />'
             }]
-        });       
+        });      
+
+        this.button_panel = new gwst.widgets.TwoButtonPanel ({
+        	btn1_width: 140,
+        	btn2_text: 'Skip this step',        	
+            btn2_handler: this.skipStepClicked.createDelegate(this),
+            btn2_width: 140,
+            left_margin: 15
+        });        
 
         this.add(this.header_panel);
 		this.add(this.inner_panel);
         this.add(this.panel_three);
+        this.add(this.button_panel);
         this.add(this.table_panel);        
         
         // Call parent (required)
         gwst.widgets.DrawActivityInstructPanel.superclass.onRender.apply(this, arguments); 
-	}
+	},
+    
+    skipStepClicked: function() {
+        this.fireEvent('draw-skip',this);
+    }
 
 });
  
