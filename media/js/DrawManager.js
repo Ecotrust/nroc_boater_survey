@@ -280,7 +280,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     finDrawNewAreaStep: function(result) {
         if (!result.draw_new) {
-    		this.startFinishedStep();
+            this.updateStatus('complete',true,this.finUpdateCompleteStatus);
     	} else {
         
             this.route_factors_other= null;
@@ -304,7 +304,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     finFinishedStep: function() {
-        this.updateStatus('complete',true,this.finUpdateCompleteStatus);
+        window.location = return_url;
     },    
 
     /* 
@@ -868,13 +868,13 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     finUpdateActStatus: function(response) {
         var new_status = Ext.decode(response.responseText);
         this.hideWait.defer(500, this);
-        this.startFinishedStep();
+        this.updateStatus('complete',true,this.finUpdateCompleteStatus);
     },
     
     finUpdateCompleteStatus: function(response) {
         var new_status = Ext.decode(response.responseText);
         this.hideWait.defer(500, this);
-        window.location = return_url;
+        this.startFinishedStep();
     },
     
     finSaveNewRoute: function(response) {
@@ -886,7 +886,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     finSaveNewArea: function(response) {
     	var new_feat = Ext.decode(response.responseText);    
     	this.hideWait.defer(500, this);
-        if (this.activity_3_alt == 'Engage in a recreational boating activity at a different location') {
+        if (this.activity_3_alt == 'Engaged in a recreational boating activity at a different location') {
             this.startActivityInfo4Step();
         } else {
             this.startDrawNewAreaStep();
