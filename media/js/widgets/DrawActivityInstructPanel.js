@@ -36,7 +36,8 @@ gwst.widgets.DrawActivityInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
 		});
 
         this.panel_three = new Ext.Panel({
-            html: "Feel free to play around and try it out. Don't worry if you make a mistake.  A 'Redraw' button will appear once you start drawing that will let you restart your area.  You will also be able to edit or restart your area after you finish it.",
+            html: "<p>Feel free to play around and try it out. Don't worry if you make a mistake.  A 'Redraw' button will appear once you start drawing that will let you restart your area.  You will also be able to edit or restart your area after you finish it.</p>\
+            <p>Reminder--  Possible activities include: <b><i>Whale watching, fishing, sightseeing, hunting, bird watching, racing, scuba diving, snorkeling, swimming, waterskiing/wakeboarding, etc...</i></b></p>",
             border: false,
             style: 'padding:5px 5px 5px 10px'
         });
