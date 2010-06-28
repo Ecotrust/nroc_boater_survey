@@ -23,6 +23,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     activity_3_alt_act: null,
     activity_3_alt_other: null,
     alt_act_primary_area: null,
+    activity_shapes_drawn: false,
 
     constructor: function(){
         gwst.DrawManager.superclass.constructor.call(this);
@@ -141,10 +142,20 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     skipActivitiesStep: function() {
         Ext.Msg.show({
-           title:'Save Changes?',
+           title:'Skip Activities?',
            msg: 'Are you sure you want to skip the drawing of your activity areas?',
            buttons: Ext.Msg.YESNO,
            fn: this.skipActivitiesCheck.createDelegate(this),
+           icon: Ext.MessageBox.QUESTION
+        });        
+    },
+    
+    skipDrawingStep: function() {
+        Ext.Msg.show({
+           title:'Stop Drawing?',
+           msg: 'Are you sure you want to stop drawing activity areas? If you have drawn other areas, they are already saved.',
+           buttons: Ext.Msg.YESNO,
+           fn: this.stopDrawingCheck.createDelegate(this),
            icon: Ext.MessageBox.QUESTION
         });        
     },
@@ -152,6 +163,16 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     skipActivitiesCheck: function(id, text, opt) {
         if (id == 'yes') {
             this.updateStatus('act_status','Skipped',this.finUpdateActStatus);
+        }
+    },
+    
+    stopDrawingCheck: function(id, text, opt) {
+        if (id == 'yes') {
+            if (this.activity_shapes_drawn) {
+                this.stopDrawing();
+            } else {
+                this.updateStatus('act_status','Skipped',this.finUpdateActStatus);
+            }
         }
     },
     
@@ -586,7 +607,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     loadDrawActivityInstructPanel: function() {      	
     	if (!this.drawActInstructPanel) {
 	    	this.drawActInstructPanel = new gwst.widgets.DrawActivityInstructPanel();
-	        //When panel fires event saying it's all done, we want to process it and move on 
+	        //When panel fires event saying it's all done, we want to process it and move on
+            this.drawActInstructPanel.on('draw-skip', this.skipDrawingStep, this);            
     	}
         this.viewport.setWestPanel(this.drawActInstructPanel);  
     },    
@@ -865,6 +887,10 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         }
     },     
     
+    stopDrawing: function(response) {
+        this.updateStatus('complete',true,this.finUpdateCompleteStatus);
+    },
+    
     finUpdateActStatus: function(response) {
         var new_status = Ext.decode(response.responseText);
         this.hideWait.defer(500, this);
@@ -886,6 +912,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     finSaveNewArea: function(response) {
     	var new_feat = Ext.decode(response.responseText);    
     	this.hideWait.defer(500, this);
+        this.activity_shapes_drawn = true;
         if (this.activity_3_alt == 'Engaged in a recreational boating activity at a different location') {
             this.startActivityInfo4Step();
         } else {
