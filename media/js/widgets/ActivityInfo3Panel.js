@@ -29,10 +29,10 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
         
         this.answer_one = new Ext.form.ComboBox({
             store: [
-                'Engage in another recreational boating activity at this location',
-                'Engage in a recreational boating activity at a different location',                
-                'Engage in an activity not associated with recreational boating (i.e. go to the movies, go to the beach, etc...)',
-                'Stay at home',
+                'Engaged in another recreational boating activity at this location',
+                'Engaged in a recreational boating activity at a different location',                
+                'Engaged in an activity not associated with recreational boating (i.e. went to the movies, went to the beach, etc...)',
+                'Stayed at home',
                 'Other'
             ],
             emptyText:'Select an alternate...',
@@ -40,7 +40,7 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
             triggerAction: 'all',
             style: 'margin: 0px 0px 10px 10px',
 			border: false,
-            listWidth: 620
+            listWidth: 650
         });
         
         this.answer_one.on('select', this.alternateSelected, this);
@@ -75,7 +75,7 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
                 'Bird watching',
                 'Racing',
                 'Sailing',
-                'Scubadiving/Snorkeling',
+                'Scuba diving/Snorkeling',
                 'Sightseeing',
                 'Swimming',
                 'Waterskiing/Wakeboarding',
@@ -156,8 +156,8 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
             this.other_two.hide();
             this.button_panel.show();
             this.alt_button_panel.hide();
-        } else if (rec.data.text == "Engage in another recreational boating activity at this location" || 
-                    rec.data.text == "Engage in a recreational boating activity at a different location") {
+        } else if (rec.data.text == "Engaged in another recreational boating activity at this location" || 
+                    rec.data.text == "Engaged in a recreational boating activity at a different location") {
             this.other_text_one.hide();
             this.other_one.hide();
             this.question_two.show();
