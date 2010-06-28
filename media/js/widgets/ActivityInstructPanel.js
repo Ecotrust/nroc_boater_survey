@@ -18,7 +18,8 @@ gwst.widgets.ActivityInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         }); 
         
 		this.panel_one = new Ext.Panel({		
-			html: '<p>On the next page you\'re going to draw areas along your route where you participated in different activities. Possible activities include: <i>fishing, sightseeing, hunting, etc...</i></p>',
+			html: '<p>On the next page you\'re going to draw areas along your route where you participated in different activities. Possible activities include:</p>\
+            <p><i>Whale watching, fishing, sightseeing, hunting, bird watching, racing, scuba diving, snorkeling, swimming, waterskiing/wakeboarding, etc...</i></p>',
 			style: 'margin: 10px',
 			border: false
         });

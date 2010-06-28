@@ -18,7 +18,7 @@ gwst.widgets.RouteInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         }); 
         
 		this.panel_one = new Ext.Panel({		
-			html: '<h2>How to Draw Your Route</h2><p><i>On the NEXT page</i>, you\'re going to draw your last trip boat route on the map. Please remember to plot a ROUNDTRIP route.</p>',
+			html: '<h2>How to Draw Your Route</h2><p><i>On the NEXT page</i>, you\'re going to draw the route you took during the trip on which you are reporting.  Please remember to plot a ROUNDTRIP route.</p>',
 			style: 'margin: 10px',
 			border: false
         });
