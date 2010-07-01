@@ -25,7 +25,7 @@ gwst.widgets.ActivityInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         });
     	
 		this.panel_two = new Ext.Panel({		
-			html: '<img style="padding-left:10px; padding-bottom: 10px" src="/media/img/area_intro.png" /><p>Press the \'Continue\' button to begin.  If you don\'t feel it\'s appropriate \
+			html: '<img style="padding-left:10px; padding-bottom: 10px" src="/media/img/area_intro.png" /><p>Press the \'Start Drawing\' button to begin.  If you don\'t feel it\'s appropriate \
                     for you to complete this section press the \'Skip Activities\' button.</p>',
 			style: 'margin: 0px 0px 10px 10px',
 			border: false
