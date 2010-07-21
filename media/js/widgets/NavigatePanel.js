@@ -62,7 +62,7 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
             },{
                 html: '<img src="/media/img/nav_arrows.png">'
             },{
-                html: 'b. Zoom the map in and out by clicking the \'+\' and \'-\' buttons on the map.'
+                html: 'b. Zoom the map in and out by clicking the \'+\' and \'-\' buttons on the map, or the scroll wheel on your mouse, if you have one.'
             },{
                 html: '<img src="/media/img/nav_zoombar.png">'
             },{
