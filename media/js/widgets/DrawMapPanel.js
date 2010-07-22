@@ -2,6 +2,9 @@ Ext.namespace('gwst', 'gwst.widgets');
 
 gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     //Default properties can defined here and overriden by config object passed to contructor
+    
+    defaultZoom: 8,
+    defaultCenter: null,
 	
     initComponent: function(){		
 		//Map region
@@ -13,7 +16,8 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             name: 'Oregon Coast'
         };
 		var map_extent = new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34);
-	    var region_extent = new OpenLayers.Bounds(region.w_bound,region.s_bound,region.e_bound,region.n_bound)
+	    var region_extent = new OpenLayers.Bounds(region.w_bound,region.s_bound,region.e_bound,region.n_bound);
+        this.defaultCenter = region_extent.getCenterLonLat();
 	    	    
 	    //Map base options
         var map_options = {
@@ -148,7 +152,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 		    layers: [nautLayer, hybridLayer, physicalLayer, rampLayer, marinaLayer, this.vectorLayer],
 		    extent: map_extent,
 	        center: region_extent.getCenterLonLat(),
-	        zoom: 8,
+	        zoom: this.defaultZoom,
 	        cls: 'tip-target'
 		});    		
 		
@@ -220,6 +224,11 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     
     cancelLine: function() {
         this.disableLineDraw();
+    },
+    
+    resetMapView: function() {
+        this.map.setCenter(this.defaultCenter);
+        this.map.zoomTo(this.defaultZoom);
     }
 });
  

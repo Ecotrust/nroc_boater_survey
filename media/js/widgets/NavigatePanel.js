@@ -66,7 +66,11 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
             },{
                 html: '<img src="/media/img/nav_zoombar.png">'
             },{
-                html: 'c. Get as close as you can to your starting point, then press the Continue button'
+                html: 'c. You can always reset the zoom level with the \'Reset Map View\' button.'
+            },{
+                html: '<img src="/media/img/nav_reset_map.png">'
+            },{
+                html: 'd. Get as close as you can to your starting point, then press the Continue button'
             }]
         });         
 

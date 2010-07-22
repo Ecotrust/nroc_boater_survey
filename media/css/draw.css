@@ -268,3 +268,11 @@ p.x-panel-static{
 .x-btn-pressed .x-btn-center{
 	background: url(../img/btn-sprite.gif) repeat-x 0 -126px;
 }
+
+.reset-map{
+    background-image: url(../img/world.png) !important;
+}
+
+.olControlLayerSwitcher{
+    top: 60px !important;
+}
