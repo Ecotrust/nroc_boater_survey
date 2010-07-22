@@ -6,10 +6,11 @@ shapes and pennies.  Extends Ext.Observable providing event handling
 */
 gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 	cur_feature: null, //Last drawn feature
-	addRouteWinOffset: [405, 8],
-	addPolyWinOffset: [405, 8],
-	cancelWinOffset: [562, 8],
-    routeCancelWinOffset: [542, 8],
+	addRouteWinOffset: [537, 8],
+	addPolyWinOffset: [533, 8],
+	cancelWinOffset: [690, 8],
+    routeCancelWinOffset: [675, 8],
+    resetMapWinOffset: [380, 8],	//Offset from top left to render
 	activityNum: 0,
     alternateActivity: false,
     route_factors_other: null,
@@ -57,6 +58,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         } else {
             this.enableUnloadWarning();
             this.loadViewport();
+            this.loadResetMapWin();
             this.startNavStep();
         }
     },
@@ -1051,5 +1053,29 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
                 (function(){gwst.error.center();}).createDelegate(this)
             );            
         }
+    },
+    
+    /* Create Reset Map View window*/
+    loadResetMapWin: function() {
+    	if (!this.resetMapWin) {
+			this.resetMapWin = new gwst.widgets.ResetMapWindow();
+			this.resetMapWin.on('reset-map', this.loadResetCheckWin, this);
+		}
+		this.resetMapWin.show();		
+		this.resetMapWin.alignTo(document.body, "tl-tl", this.resetMapWinOffset);    	
+    },
+    
+    /*Show window to check that user wants to leave */
+    loadResetCheckWin: function() {
+        if (!this.resetCheckWin) {
+            this.resetCheckWin = new gwst.widgets.ResetMapCheckWindow();
+            this.resetCheckWin.on('confirm', this.resetMapView, this);
+        }
+        this.resetCheckWin.show();
+    },
+    
+    resetMapView: function() {
+        this.mapPanel.resetMapView();
     }
+    
 });
