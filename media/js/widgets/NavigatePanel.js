@@ -58,7 +58,7 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
             },
             id: 'nav_table_panel',
             items: [{
-                html: 'a. Use the arrow buttons to pan the map North, South, East or West centering the map over your starting location.'
+                html: 'a. Pan the map North, South, East or West using the arrow buttons on the map or your keyboard to center the map over your starting location.'
             },{
                 html: '<img src="/media/img/nav_arrows.png">'
             },{
@@ -66,7 +66,7 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
             },{
                 html: '<img src="/media/img/nav_zoombar.png">'
             },{
-                html: 'c. You can always reset the zoom level with the \'Reset Map View\' button.'
+                html: 'c. Return the map to its original view of the entire coast with the \'Reset Map View\' button.'
             },{
                 html: '<img src="/media/img/nav_reset_map.png">'
             },{
