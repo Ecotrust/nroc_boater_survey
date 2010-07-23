@@ -123,11 +123,6 @@ p.x-panel-static{
 .action-panel-header {
     overflow: none;
     background-color: #E6F1FF;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 8px;
-    color: #000;   
-    border: 1px solid #0066FF; 
 }
 
 .the-footer {

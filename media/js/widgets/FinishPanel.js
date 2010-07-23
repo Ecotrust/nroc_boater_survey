@@ -10,12 +10,14 @@ gwst.widgets.FinishPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
 
     onRender: function(){
-        this.header_panel = new Ext.Container({  
-			autoEl: {tag:'div', cls:'action-panel-header', id:'header_finish', html:'Finished'},
-			style: 'padding:5px',
-            id: 'finish_panel',
-			border: false   
-        }); 
+        this.header_panel = new Ext.Panel({  
+            id: 'finish_header_panel',
+            html: '<img src="/media/img/12_Finished_header.png">',
+			border: 'north',
+            bodyCfg: {            
+                cls: 'action-panel-header'
+            }
+        });
         
 		this.inner_panel = new Ext.Panel({		
 			html: '<p>Your survey is now submitted and complete for the month of '+gwst.settings.month+'.</p>\

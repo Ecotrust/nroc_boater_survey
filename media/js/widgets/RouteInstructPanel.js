@@ -10,12 +10,14 @@ gwst.widgets.RouteInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
 
     onRender: function(){
-        this.header_panel = new Ext.Container({  
-			autoEl: {tag:'div', cls:'action-panel-header', id:'header_route', html:'Instructions Page 3/3'},
-			style: 'padding:5px',
+        this.header_panel = new Ext.Panel({  
             id: 'route_header_panel',
-			border: false   
-        }); 
+            html: '<img src="/media/img/3_Instructions3_header.png">',
+			border: 'north',
+            bodyCfg: {            
+                cls: 'action-panel-header'
+            }
+        });  
         
 		this.panel_one = new Ext.Panel({		
 			html: '<h2>How to Draw Your Route</h2><p><i>On the NEXT page</i>, you\'re going to draw the route you took during the trip on which you are reporting.  Please remember to plot a ROUNDTRIP route.</p>',

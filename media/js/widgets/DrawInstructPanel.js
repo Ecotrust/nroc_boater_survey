@@ -24,10 +24,13 @@ gwst.widgets.DrawInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
 	
     onRender: function(){
     
-        this.header_panel = new Ext.Container({  
-			autoEl: {tag:'div', cls:'action-panel-header', id:'header_draw', html:'Draw Your Route'},
-            id: 'draw_header_panel',
-			border: false   
+        this.header_panel = new Ext.Panel({  
+            id: 'draw_instruct_header_panel',
+            html: '<img src="/media/img/4_DrawRoute_header.png">',
+			border: 'north',
+            bodyCfg: {            
+                cls: 'action-panel-header'
+            }
         }); 
 
 		this.inner_panel = new Ext.Panel({
