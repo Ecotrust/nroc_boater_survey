@@ -52,10 +52,10 @@ def intro(request):
     request.session['vessel'] = vessel
     request.session['month'] = month
     context = RequestContext(request)
-    
-    already_complete = SurveyStatus.objects.filter(survey_id = request.session['interview_id'], complete = True)
+
+    survey_session = SurveyStatus.objects.get_or_create(survey_id=request.session['interview_id'])
         
-    if already_complete:
+    if survey_session[0].complete:
         return HttpResponseRedirect('/complete/')
     else: 
         return render_to_response('intro.html', {'interview_id':interview_id,'vessel':vessel,'month':month})
