@@ -10,11 +10,13 @@ gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
     },
 
     onRender: function(){
-        this.header_panel = new Ext.Container({  
-			autoEl: {tag:'div', cls:'action-panel-header', id:'header_route_info1', html:'Route Questions'},
-			style: 'padding:5px',
-            id: 'route_info1_panel',
-			border: false   
+        this.header_panel = new Ext.Panel({  
+            id: 'route_info1_header_panel',
+            html: '<img src="/media/img/5_RouteQuestions_header.png">',
+			border: 'north',
+            bodyCfg: {            
+                cls: 'action-panel-header'
+            }
         }); 
         
 		this.question_one = new Ext.Panel({		

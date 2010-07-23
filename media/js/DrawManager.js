@@ -289,7 +289,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
 
     startEditAltActivityStep: function() {
-        this.loadEditActivityPanel();
+        this.loadEditAltActivityPanel();
         this.enableFeatureEdit();    
     },
     
@@ -652,6 +652,16 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.editActPanel.on('save-edit-act', this.finEditActivityStep, this);
         }
         this.viewport.setWestPanel(this.editActPanel);
+    },
+    
+    loadEditAltActivityPanel: function() {
+        if (!this.editAltActPanel) {
+            this.editAltActPanel = new gwst.widgets.EditAltActivityPanel();
+            //When panel fires event saying it's all done, we want to process it and move on 
+            this.editAltActPanel.on('redraw-edit-act', this.redrawEditActivity, this);
+            this.editAltActPanel.on('save-edit-act', this.finEditActivityStep, this);
+        }
+        this.viewport.setWestPanel(this.editAltActPanel);
     },
     
     loadActivityInfo1Panel: function() {

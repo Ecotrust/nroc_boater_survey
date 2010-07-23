@@ -32,11 +32,13 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
 	
     onRender: function(){
     
-        this.header_panel = new Ext.Container({  
-			autoEl: {tag:'div', cls:'action-panel-header', id:'header_html_point', html:'Instructions Page 1/3'},
-			style: 'padding:5px',
-            id: 'intro_header_panel',
-			border: false   
+        this.header_panel = new Ext.Panel({  
+            id: 'navigate_header_panel',
+            html: '<img src="/media/img/1_Instructions1_header.png">',
+			border: 'north',
+            bodyCfg: {            
+                cls: 'action-panel-header'
+            }
         }); 
 
 		this.inner_panel = new Ext.Panel({

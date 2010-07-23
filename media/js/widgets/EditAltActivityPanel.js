@@ -1,18 +1,18 @@
 Ext.namespace('gwst', 'gwst.widgets');
 
-gwst.widgets.EditRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
-    id: 'edit-route-panel',
+gwst.widgets.EditAltActivityPanel = Ext.extend(gwst.widgets.WestPanel, {
+    id: 'edit-alt-activity-panel',
 	
     // Constructor Defaults, can be overridden by user's config object
     initComponent: function(){
         // Constructor, config object already applied to 'this' so properties can 
         // be created and added/overridden here: Ext.apply(this, {});
 		
-		this.addEvents('redraw-edit-route');
-        this.addEvents('save-edit-route');
+		this.addEvents('redraw-edit-act');
+        this.addEvents('save-edit-act');
 		
         // Call parent (required)
-        gwst.widgets.EditRoutePanel.superclass.initComponent.apply(
+        gwst.widgets.EditAltActivityPanel.superclass.initComponent.apply(
           this, arguments);                     
     },
     
@@ -22,21 +22,21 @@ gwst.widgets.EditRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     getHtmlText: function() {
-        var html_text = '<h2>Instructions</h2> <p>Edit your boat route by adding, moving, or removing points along its path.</p><h2>How?</h2>';
+        var html_text = '<h2>Instructions:</h2> <p>Edit your area by adding, moving, or removing points along its path.</p><h2>How?</h2>';
         return html_text;
     },
 	
     onRender: function(){
     
         this.header_panel = new Ext.Panel({  
-            id: 'edit_route_header_panel',
-            html: '<img src="/media/img/4a_EditRoute_header.png">',
-			border: 'north',
+            id: 'edit_alt_activity_header_panel',
+            html: '<img src="/media/img/11a_EditSecondary_header.png">',
+            border: 'north',
             bodyCfg: {            
                 cls: 'action-panel-header'
             }
-        }); 
-    
+        });
+        
 		this.inner_panel = new Ext.Panel({
 			html: this.getHtmlText(),
             id: 'edit_shape_inner_panel',
@@ -47,34 +47,34 @@ gwst.widgets.EditRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
         this.table_panel = new Ext.Panel({
             layout: 'table',
             border: false,
-            style: 'margin: 0px 5px 5px 5px; padding: 0px 5px 5px 5px',
+            style: 'margin: 0px 10px 10px 10px',
             defaults: {
                 bodyStyle: 'border: none; padding: 0px 5px 5px 5px'
             },
             layoutConfig: {
                 columns: 2
             },
-            id: 'edit_route_table_panel',
+            id: 'edit_activity_table_panel',
             items: [{
-                html: '<p>The <i>dark orange</i> circles you see on your route are the points you added.</p>'
+                html: '<p>The <i>dark orange</i> circles you see on your area are the points you added.</p>'
             },{
-                html: '<img src="/media/img/edit_route_1.png" />'
+                html: '<img src="/media/img/edit_area_1.png" />'
             },{
                 html: '<p>The <i>light orange</i> circles between your points are \'ghost\' points and are used to create new points.</p>'
             },{
-                html: '<img src="/media/img/edit_route_2.png" />'
+                html: '<img src="/media/img/edit_area_2.png" />'
             },{
-                html: '<p><b><u>Moving</u></b>. To move an existing point, click and drag a dark orange cirle where you want, then release.</p>'
+                html: '<p><b>Moving.</b> To move a point, click the mouse and drag it where you want, then release.</p>'
             }, {
-                html: '<img src="/media/img/edit_route_3.png" />'
+                html: '<img src="/media/img/edit_area_3.png" />'
             },{
-                html: '<p><b><u>Adding</u></b>. To add a point, click a \'ghost\' point and drag it where you want, then release.</p>'
+                html: '<p><b>Adding.</b> To add a point, click a \'ghost\' point and drag it where you want, then release.</p>'
             },{
-                html: '<img src="/media/img/edit_route_4.png" />'
+                html: '<img src="/media/img/edit_area_4.png" />'
             },{
-                html: '<p><b><u>Removing</u></b>. To remove a point hold your mouse over it and press the \'Delete\' key on your keyboard.</p>'
+                html: '<p><b>Removing.</b> To remove a point, hover your mouse over it and press the \'Delete\' key on your keyboard.</p>'
             },{
-                html: '<img src="/media/img/edit_route_5.png" />'
+                html: '<img src="/media/img/edit_area_5.png" />'
             }]
         });       
         
@@ -82,11 +82,11 @@ gwst.widgets.EditRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
             btn1_text: 'Redraw instead',
             btn1_handler: this.redrawClicked.createDelegate(this),
-        	btn1_width: 130,
+        	btn1_width: 145,
         	btn2_text: 'Done editing',        	
-            btn2_handler: this.saveEditRouteClicked.createDelegate(this),
-            btn2_width: 120,
-            left_margin: 15
+            btn2_handler: this.saveEditActivityClicked.createDelegate(this),
+            btn2_width: 110,
+            left_margin: 10
         });
         
         this.add(this.header_panel);
@@ -95,17 +95,17 @@ gwst.widgets.EditRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.button_panel);
         
         // Call parent (required)
-        gwst.widgets.EditRoutePanel.superclass.onRender.apply(this, arguments); 
+        gwst.widgets.EditAltActivityPanel.superclass.onRender.apply(this, arguments); 
 	},
     
 	redrawClicked: function() {
-		this.fireEvent('redraw-edit-route',this);
+		this.fireEvent('redraw-edit-act',this);
     },
     
-    saveEditRouteClicked: function() {
-        this.fireEvent('save-edit-route',this);
+    saveEditActivityClicked: function() {
+        this.fireEvent('save-edit-act',this);
     }
 });
  
 // register xtype to allow for lazy initialization
-Ext.reg('gwst-edit-route-panel', gwst.widgets.EditRoutePanel);
+Ext.reg('gwst-edit-alt-activity-panel', gwst.widgets.EditAltActivityPanel);

@@ -10,12 +10,14 @@ gwst.widgets.ActivityInfo2Panel = Ext.extend(gwst.widgets.WestPanel, {
     },
 
     onRender: function(){
-        this.header_panel = new Ext.Container({  
-			autoEl: {tag:'div', cls:'action-panel-header', id:'header_activity_info2', html:'Activity Questions 2'},
-			style: 'padding:5px',
-            id: 'activity_info2_panel',
-			border: false   
-        }); 
+        this.header_panel = new Ext.Panel({  
+            id: 'activity_info2_header_panel',
+            html: '<img src="/media/img/9_ActivityQuestions2_header.png">',
+			border: 'north',
+            bodyCfg: {            
+                cls: 'action-panel-header'
+            }
+        });
         
 		this.question_one = new Ext.Panel({		
 			html: '<p>Why did you choose this area for this activity? (select all that apply)</p>',

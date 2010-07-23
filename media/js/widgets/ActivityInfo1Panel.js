@@ -10,12 +10,14 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
     },
 
     onRender: function(){
-        this.header_panel = new Ext.Container({  
-			autoEl: {tag:'div', cls:'action-panel-header', id:'header_activity_info1', html:'Activity Information'},
-			style: 'padding:5px',
-            id: 'activity_info1_panel',
-			border: false   
-        }); 
+        this.header_panel = new Ext.Panel({  
+            id: 'activity_info1_header_panel',
+            html: '<img src="/media/img/8_ActivityQuestions1_header.png">',
+			border: 'north',
+            bodyCfg: {            
+                cls: 'action-panel-header'
+            }
+        });
         
 		this.question_one = new Ext.Panel({		
 			html: '<p>In this area, what was the primary activity you were engaged in?</p>',

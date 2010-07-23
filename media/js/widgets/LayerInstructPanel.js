@@ -35,11 +35,13 @@ gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
 	
     onRender: function(){
     
-        this.header_panel = new Ext.Container({  
-			autoEl: {tag:'div', cls:'action-panel-header', id:'header_lyr', html:'Instructions Page 2/3'},
-			style: 'padding:5px',
+        this.header_panel = new Ext.Panel({  
+            html: '<img src="/media/img/2_Instructions2_header.png">',
             id: 'lyr_header_panel',
-			border: false   
+			border: 'north',
+            bodyCfg: {            
+                cls: 'action-panel-header'
+            }
         }); 
 
 		this.inner_panel = new Ext.Panel({

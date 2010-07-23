@@ -10,12 +10,14 @@ gwst.widgets.ActivityInfo4Panel = Ext.extend(gwst.widgets.WestPanel, {
     },
 
     onRender: function(){
-        this.header_panel = new Ext.Container({  
-			autoEl: {tag:'div', cls:'action-panel-header', id:'header_activity_info4', html:'Secondary Location'},
-			style: 'padding:5px',
-            id: 'activity_info4_panel',
-			border: false   
-        }); 
+        this.header_panel = new Ext.Panel({  
+            id: 'activity_info4_header_panel',
+            html: '<img src="/media/img/11_SecondaryLocation_header.png">',
+			border: 'north',
+            bodyCfg: {            
+                cls: 'action-panel-header'
+            }
+        });
         
 		this.question_one = new Ext.Panel({		
 			html: '<p>For the last question, you said you would engage in an activity at a different location if you had to.  At this time, please draw on the map the area you most likely would have gone.</p>',

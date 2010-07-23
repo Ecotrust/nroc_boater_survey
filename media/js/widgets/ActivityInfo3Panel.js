@@ -14,12 +14,14 @@ gwst.widgets.ActivityInfo3Panel = Ext.extend(gwst.widgets.WestPanel, {
         
         var other_selected = false;
         
-        this.header_panel = new Ext.Container({  
-			autoEl: {tag:'div', cls:'action-panel-header', id:'header_activity_info3', html:'Activity Questions 3'},
-			style: 'padding:5px',
-            id: 'activity_info3_panel',
-			border: false   
-        }); 
+        this.header_panel = new Ext.Panel({  
+            id: 'activity_info3_header_panel',
+            html: '<img src="/media/img/10_ActivityQuestions3_header.png">',
+			border: 'north',
+            bodyCfg: {            
+                cls: 'action-panel-header'
+            }
+        });
         
 		this.question_one = new Ext.Panel({		
 			html: '<p>If you could not have used this location for this activity, what would you have done instead?</p>',
