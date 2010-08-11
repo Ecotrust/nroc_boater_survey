@@ -90,10 +90,18 @@ gwst.widgets.DrawInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
             border: false,
             style: 'padding:5px 5px 5px 10px'
         });
+        
+        this.demo_panel = new Ext.Panel({
+			html: '<p class="video-link"><img class="video-img" src="/media/img/film_go.png"/> <a href="'+ gwst.settings.urls.demo +'" target="_blank">Watch Demonstration</a>',
+            id: 'draw_demo_panel',
+			// style: 'margin: 3px 3px 0px 10px',
+			border: false
+		});
 
         this.add(this.header_panel);
 		this.add(this.inner_panel);
 		this.add(this.panel_three);
+		this.add(this.demo_panel);
         this.add(this.table_panel);		
         
         // Call parent (required)

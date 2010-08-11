@@ -43,6 +43,7 @@ gwst.settings.urls = {
     status: '/draw/status/',
     check: '/draw/check/',
 	shape_validate: '/draw/shape/validate/',
+    demo: '/videos/demo',
     complete: '/complete/'
 };
 

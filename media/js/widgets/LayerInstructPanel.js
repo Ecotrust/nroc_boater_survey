@@ -87,7 +87,14 @@ gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
             },{
                 html: ''
             }]
-        });       
+        });   
+
+        this.demo_panel = new Ext.Panel({
+			html: '<p class="video-link"><img class="video-img" src="/media/img/film_go.png"/> <a href="'+ gwst.settings.urls.demo +'" target="_blank">Watch Demonstration</a>',
+            id: 'lyr_demo_panel',
+			// style: 'margin: 3px 3px 0px 10px',
+			border: false
+		});        
 
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
                 btn1_width: 90,
@@ -100,6 +107,7 @@ gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.header_panel);
 		this.add(this.inner_panel);
         this.add(this.table_panel);
+		this.add(this.demo_panel);
         this.add(this.button_panel);
         
         // Call parent (required)
