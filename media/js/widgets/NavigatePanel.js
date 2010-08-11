@@ -73,6 +73,10 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
                 html: '<img src="/media/img/nav_reset_map.png">'
             },{
                 html: 'd. Get as close as you can to your starting point, then press the Continue button'
+            },{
+                html: ''
+            },{
+                html: '<p class="video-link"><img class="video-img" src="/media/img/film_go.png"/> <a href="'+ gwst.settings.urls.demo +'" target="_blank">Watch Demonstration</a>'
             }]
         });         
 

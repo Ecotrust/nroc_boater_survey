@@ -75,6 +75,8 @@ gwst.widgets.EditRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
                 html: '<p><b><u>Removing</u></b>. To remove a point hold your mouse over it and press the \'Delete\' key on your keyboard.</p>'
             },{
                 html: '<img src="/media/img/edit_route_5.png" />'
+            },{
+                html: '<p class="video-link"><img class="video-img" src="/media/img/film_go.png"/> <a href="'+ gwst.settings.urls.demo +'" target="_blank">Watch Demonstration</a>'
             }]
         });       
         
