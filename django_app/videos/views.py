@@ -9,12 +9,19 @@ def listVideos(request, video_template='videos.html'):
     return render_to_response(video_template, context_instance=RequestContext(request, {'MEDIA_URL':settings.MEDIA_URL, 'video_list':Video.objects.all()})) 
 
 def showVideo(request, urlname, demo_template='video.html'):
-    try:
-        video = Video.objects.get(urlname=urlname)
-    except:
-        return HttpResponse( "Video " + urlname + " does not exist.", status=404 )
+    import string
+    video = {
+        'player':settings.MEDIA_URL+'video_player/player.swf',
+        'file':settings.VIDEO_URL+str(urlname)+'.flv',
+        'title':string.capwords(urlname.replace('_',' '))
+    }
+    return render_to_response('demo_video.html', {'video':video}, context_instance=RequestContext(request)) 
+    # try:
+        # video = Video.objects.get(urlname=urlname)
+    # except:
+        # return HttpResponse( "Video " + urlname + " does not exist.", status=404 )
 
-    return render_to_response(demo_template, {'videoplayer':settings.VIDEO_PLAYER, 'video':video}, context_instance=RequestContext(request))
+    # return render_to_response(demo_template, {'videoplayer':settings.VIDEO_PLAYER, 'video':video}, context_instance=RequestContext(request))
 
 
 def showVideoById(request, pk, video_template='video.html'):
