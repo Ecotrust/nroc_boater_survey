@@ -12,7 +12,7 @@ def showVideo(request, urlname, demo_template='video.html'):
     import string
     video = {
         'player':settings.MEDIA_URL+'video_player/player.swf',
-        'file':settings.VIDEO_URL+str(urlname)+'.flv',
+        'file':settings.VIDEO_URL+settings.VIDEO_FILE+'.flv',
         'title':string.capwords(urlname.replace('_',' '))
     }
     return render_to_response('demo_video.html', {'video':video}, context_instance=RequestContext(request)) 
