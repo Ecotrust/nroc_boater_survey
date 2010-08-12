@@ -10,8 +10,9 @@ def listVideos(request, video_template='videos.html'):
 
 def showVideo(request, urlname, demo_template='video.html'):
     import string
+    # 'player':settings.MEDIA_URL+'video_player/player.swf',
     video = {
-        'player':settings.MEDIA_URL+'video_player/player.swf',
+        'player':settings.VIDEO_PLAYER,
         'file':settings.VIDEO_URL+settings.VIDEO_FILE+'.flv',
         'title':string.capwords(urlname.replace('_',' '))
     }
