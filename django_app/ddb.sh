@@ -1,2 +1,2 @@
 #!/bin/bash
-dropdb rbsw
+dropdb nroc_rbs

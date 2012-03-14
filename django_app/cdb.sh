@@ -1,5 +1,5 @@
 #!/bin/bash
-DB="rbsw"
+DB="nroc_rbs"
 
 export PYTHONPATH=$PYTHONPATH:/usr/local/django-trunk/:/usr/local/django-apps/:.
 
