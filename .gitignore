@@ -1,0 +1,8 @@
+media/third-party/**/*
+database/**/*
+*.pyc
+django_app/admin/**/*
+django_app/local_settings.py
+django_app/set-environ.bat
+media/video_player/*
+media/videos/.svn/*
