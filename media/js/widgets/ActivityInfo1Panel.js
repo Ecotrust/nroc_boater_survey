@@ -20,37 +20,96 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
         });
         
 		this.question_one = new Ext.Panel({		
-			html: '<p>In this area, what was the primary activity you were engaged in?</p>',
+			html: '<p>In this area, did you engage in any of the following activities (<i>please check all that apply</i>)?</p>',
 			style: 'margin: 10px 10px 10px 0px',
 			border: false
         });
         
-        this.answer_one = new Ext.form.ComboBox({
-            store: [
-                'Cruising',
-                'Entertaining family/friends',
-                'Fishing or shellfishing',
-                'Hunting',
-                'Whale watching',
-                'Bird watching',
-                'Racing',
-                'Sailing',
-                'Scubadiving/Snorkeling',
-                'Sightseeing',
-                'Swimming',
-                'Waterskiing/Wakeboarding',
-                'Land-based Activity',
-                'Other'
-            ],
-            emptyText:'Select an activity...',
-            editable: false,
-            triggerAction: 'all',
-            style: 'margin: 0px 0px 10px 10px',
-			border: false,
-            width: '150px'
+        this.fishing_box = new Ext.form.Checkbox ({
+            boxLabel: 'Fishing',
+            name: 'fishing'
         });
         
-        this.answer_one.on('select', this.activitySelected, this);
+        this.fishing_box.on('check', this.fishingChecked, this);
+        
+        this.viewing_box = new Ext.form.Checkbox ({
+            boxLabel: 'Wildlife viewing',
+            name: 'wildlife-viewing'
+        });
+        
+        this.viewing_box.on('check', this.viewingChecked, this);
+        
+        this.diving_box = new Ext.form.Checkbox ({
+            boxLabel: 'Diving',
+            name: 'diving'
+        });
+        
+        this.diving_box.on('check', this.divingChecked, this);
+        
+        this.other_box = new Ext.form.Checkbox ({
+            boxLabel: 'Other',
+            name: 'other'
+        });
+        
+        this.other_box.on('check', this.otherChecked, this);
+        
+        this.answer_one = new Ext.form.CheckboxGroup ({
+            id: 'activity-answerOne',
+            xtype: 'checkboxgroup',
+            fieldLabel: 'Reasons List',
+            itemCls: 'x-check-group-alt',
+            style: 'margin: 0px 0px 10px 5px',
+            columns: 1,
+            items: [
+                this.fishing_box,
+                this.viewing_box,
+                this.diving_box,
+                {boxLabel: 'Hanging out', name: 'hanging-out'},
+                this.other_box
+            ]
+        });
+        
+        this.fishing_text_one = new Ext.Panel({
+            html: 'If \'fishing\' please specify:',
+            style: 'margin: 0px 0px 10px 10px',
+            border: false
+        });
+        
+        this.fishing_one = new Ext.form.TextField({
+            id: 'fishing-activity',
+            style: 'margin: 0px 0px 10px 10px',
+            width: '250px',
+            maxLength: 150,
+            maxLengthText: 'Your entry is too long'
+        });
+        
+        this.viewing_text_one = new Ext.Panel({
+            html: 'If \'viewing\' please specify:',
+            style: 'margin: 0px 0px 10px 10px',
+            border: false
+        });
+        
+        this.viewing_one = new Ext.form.TextField({
+            id: 'viewing-activity',
+            style: 'margin: 0px 0px 10px 10px',
+            width: '250px',
+            maxLength: 150,
+            maxLengthText: 'Your entry is too long'
+        });
+        
+        this.diving_text_one = new Ext.Panel({
+            html: 'If \'diving\' please specify:',
+            style: 'margin: 0px 0px 10px 10px',
+            border: false
+        });
+        
+        this.diving_one = new Ext.form.TextField({
+            id: 'diving-activity',
+            style: 'margin: 0px 0px 10px 10px',
+            width: '250px',
+            maxLength: 150,
+            maxLengthText: 'Your entry is too long'
+        });
         
         this.other_text_one = new Ext.Panel({
             html: 'If \'other\' please specify:',
@@ -65,7 +124,7 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
             maxLength: 150,
             maxLengthText: 'Your entry is too long'
         });
-    	
+        
 		this.question_two = new Ext.Panel({		
 			html: '<p>How long did you engage in this activity in this area?</p>',
 			style: 'margin: 0px 0px 10px 0px',
@@ -124,6 +183,18 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.header_panel);        
         this.add(this.question_one);
         this.add(this.answer_one);
+        this.add(this.fishing_text_one);
+        this.fishing_text_one.hide();
+        this.add(this.fishing_one);
+        this.fishing_one.hide();
+        this.add(this.viewing_text_one);
+        this.viewing_text_one.hide();
+        this.add(this.viewing_one);
+        this.viewing_one.hide();
+        this.add(this.diving_text_one);
+        this.diving_text_one.hide();
+        this.add(this.diving_one);
+        this.diving_one.hide();
         this.add(this.other_text_one);
         this.other_text_one.hide();
         this.add(this.other_one);
@@ -138,8 +209,38 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
         gwst.widgets.ActivityInfo1Panel.superclass.onRender.apply(this, arguments);     
 	},
     
-    activitySelected: function(combo, rec, index) {
-        if(rec.data.text == "Other") {
+    fishingChecked: function() {
+        if (this.answer_one.items.item(0).checked) {
+            this.fishing_text_one.show();
+            this.fishing_one.show();
+        } else {
+            this.fishing_text_one.hide();
+            this.fishing_one.hide();
+        }
+    },
+    
+    viewingChecked: function() {
+        if (this.answer_one.items.item(1).checked) {
+            this.viewing_text_one.show();
+            this.viewing_one.show();
+        } else {
+            this.viewing_text_one.hide();
+            this.viewing_one.hide();
+        }
+    },
+    
+    divingChecked: function() {
+        if (this.answer_one.items.item(2).checked) {
+            this.diving_text_one.show();
+            this.diving_one.show();
+        } else {
+            this.diving_text_one.hide();
+            this.diving_one.hide();
+        }
+    },
+    
+    otherChecked: function() {
+        if (this.answer_one.items.item(4).checked) {
             this.other_text_one.show();
             this.other_one.show();
         } else {
@@ -147,9 +248,12 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
             this.other_one.hide();
         }
     },
-    
+
     contBtnClicked: function() {
-        if (this.other_one.isValid()) {
+        if (this.fishing_one.isValid() && 
+        this.viewing_one.isValid() && 
+        this.diving_one.isValid() && 
+        this.other_one.isValid() ) {
             this.fireEvent('activity-info1-cont',this);
         } else {
             alert('Your entry for \'other\' is too long.  Please shorten it.');
@@ -158,9 +262,18 @@ gwst.widgets.ActivityInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
 
     resetPanel: function() {
         this.answer_one.reset();
+        this.fishing_one.reset();
+        this.viewing_one.reset();
+        this.diving_one.reset();
         this.other_one.reset();
         this.answer_two.reset();
         this.answer_three.reset();
+        this.fishing_text_one.hide();
+        this.fishing_one.hide();
+        this.viewing_text_one.hide();
+        this.viewing_one.hide();
+        this.diving_text_one.hide();
+        this.diving_one.hide();
         this.other_text_one.hide();
         this.other_one.hide();
     }
