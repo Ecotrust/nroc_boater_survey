@@ -53,6 +53,10 @@ p.x-panel-static{
     position: static;
 }
 
+ul.instructions {
+    margin: 0 15px;
+}
+
 .west-panel .x-panel-header {
     font-size: 12px;
 }

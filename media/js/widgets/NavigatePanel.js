@@ -26,7 +26,7 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     getHtmlText: function() {
-        var html_text = '<h2>How to Navigate the Map</h2><p>Use the blue navigation controls on the right to zoom to where you started the trip on which you are reporting.</p><h2>Detailed Instructions</h2>';
+        var html_text = '<h2>How to Navigate the Map</h2><p>Use the blue navigation controls in the map\'s upper left corner to zoom to where you started the trip on which you are reporting.</p><h2>Detailed Instructions</h2>';
         return html_text;
     },
 	
@@ -68,7 +68,7 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
             },{
                 html: '<img src="/media/img/nav_zoombar.png">'
             },{
-                html: 'c. Please get as close as you can to your starting point, then click the Continue button'
+                html: 'c. Please get as close as you can to your starting point, then click the Continue button below.'
             },{
                 html: ''
             },{

@@ -20,7 +20,7 @@ gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
         }); 
         
 		this.question_one = new Ext.Panel({		
-			html: '<p>What factors were important to you in <u>selecting your travel route</u>? <i>Check all that apply</i>.</p>',
+			html: '<p>What factors were important to you when you chose <u>the route that you took</u>? <i>Check all that apply</i>.</p>',
 			style: 'margin: 10px 10px 10px 0px',
 			border: false
         });
@@ -41,18 +41,11 @@ gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
             columns: 1,
             items: [
                 {boxLabel: 'Quickest route to my destination', name: 'travel-time'},
-                {boxLabel: 'I am very familiar with this route', name: 'familiar'},
-                {boxLabel: 'Safest route to my destination', name: 'avoid-shallow'},
-                {boxLabel: 'Challenging navigation', name: 'challenge'},
-                {boxLabel: 'Calm waters', name: 'calm-waters'},
+                {boxLabel: 'Safest route to my destination', name: 'safe-route'},
+                {boxLabel: 'Access to shoreside facilities/resources/<br />\
+                amenities (e.g. fuel, dockage, shops, restaurants)', name: 'access'},
                 {boxLabel: 'Scenic beauty', name: 'beauty'},
-                {boxLabel: 'Tranquility', name: 'tranquil'},
-                {boxLabel: 'Absence of other boaters', name: 'solitude'},
-                {boxLabel: 'Presence of other boaters', name: 'popular'},
-                {boxLabel: 'Avoid speed zones', name: 'speed-zones'},
-                {boxLabel: 'Access to shoreside facilities/entertainment', name: 'entertainment'},
-                {boxLabel: 'Access to fuel, marina, mooring, etc.', name: 'amenities'},
-                {boxLabel: 'None of the above. I was just cruising', name: 'no-reason'},
+                {boxLabel: 'I was just cruising around', name: 'cruising'},
                 this.other_box
             ]
         });
@@ -94,7 +87,7 @@ gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
 	},
     
     boxChecked: function() {
-        if (this.answer_one.items.item(13).checked) {
+        if (this.answer_one.items.item(5).checked) {
             this.other_text_one.show();
             this.other_one.show();
         } else {

@@ -20,7 +20,7 @@ gwst.widgets.DrawInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
     getHtmlText: function() {
         var html_text = '<h2>First, Plot Your Route</h2>\
         <p style="padding-bottom:3px">Step 1. Zoom to where you started your trip using a combination of the blue arrows on the screen (or the arrow keys on your keyboard) and the + and - buttons (or the wheel on your mouse).</p>\
-        <p style="padding-bottom:3px">Step 2. Click the "Plot Route" button to start plotting your complete route, including your return lef even if you came back the same way.</p>\
+        <p style="padding-bottom:3px">Step 2. Click the "Plot Route" button to start plotting your complete route, including your return leg even if you came back the same way.</p>\
         <p style="padding-bottom:3px">Step 3. Click once for each turn (or waypoint) and <u>double-click</u> to finish plotting your route.</p>';
         return html_text;
     },

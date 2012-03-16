@@ -15,7 +15,9 @@ gwst.widgets.DrawActivityInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
 
     getHtmlText: function() {
-        var html_text = '<h2>How to Draw an Activity Area</h2><p style="padding-bottom: 5px;">Step 1. Click the "Draw Area" button on the right.</p><p>Step 2. Click once on the map for each \"corner\" of your area and <u>double-click</u> to finish it.</p>';
+        var html_text = '<h2>Draw an Activity Area</h2>\
+        <p style="padding-bottom: 5px;">Step 1. Click the "Draw Area" button on the right.</p>\
+        <p>Step 2. Click once on the map for each \"corner\" of your activity and <u>double-click</u> to finish it.</p>';
         return html_text;
     },
 	
@@ -38,8 +40,17 @@ gwst.widgets.DrawActivityInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
 		});
 
         this.panel_three = new Ext.Panel({
-            html: "<p>Feel free to play around and try it out. Don't worry if you make a mistake.  A 'Redraw' button will appear once you start drawing that will let you restart your area.  You will also be able to edit or restart your area after you finish it.</p>\
-            <p>Reminder--  Possible activities include: <b><i>Whale watching, fishing, sightseeing, hunting, bird watching, racing, scuba diving, snorkeling, swimming, waterskiing/wakeboarding, etc...</i></b></p>",
+            html: '<p>Feel free to play around and try it out. Don\'t worry if you make a mistake. \
+            A \'Redraw\' button will appear once you start drawing - you can use this button to restart your drawing. \
+            You will also be able to edit or restart your area after you finish it.</p>\
+            <p>Reminder: While we are interested in any activities you engaged in, we are particularly interested in:</p>\
+            <ul class="instructions">\
+            <li>Fishing</li>\
+            <li>Wildlife viewing (whale watching, bird watching, etc.)</li>\
+            <li>Diving</li>\
+            <li>General hanging out while not underway</li>\
+            <li>Other</li>\
+            </ul>',
             border: false,
             style: 'padding:5px 5px 5px 10px'
         });

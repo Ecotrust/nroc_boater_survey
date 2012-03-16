@@ -20,15 +20,19 @@ gwst.widgets.ActivityInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         }); 
         
 		this.panel_one = new Ext.Panel({		
-			html: '<p>On the next page you\'re going to draw areas along your route where you participated in different activities. Possible activities include:</p>\
-            <p><i>Whale watching, fishing, sightseeing, hunting, bird watching, racing, scuba diving, snorkeling, swimming, waterskiing/wakeboarding, etc...</i></p>',
+			html: '<p>On the next page we will ask you to draw areas where you participated in different activities during your trip. While there are many activities that you may take part in on the water, we are particularly interested in identifying areas where you were:</p>\
+            <ul class="instructions"><li>Fishing</li>\
+            <li>Wildlife viewing (whale watching, bird watching, etc.)</li>\
+            <li>Diving</li>\
+            <li>General hanging out while not underway</li>\
+            <li>Other</li></ul>',
 			style: 'margin: 10px',
 			border: false
         });
     	
 		this.panel_two = new Ext.Panel({		
-			html: '<img style="padding-left:10px; padding-bottom: 10px" src="/media/img/area_intro.png" /><p>Press the \'Start Drawing\' button to begin.  If you don\'t feel it\'s appropriate \
-                    for you to complete this section press the \'Skip Activities\' button.</p>',
+			html: '<img style="padding-left:10px; padding-bottom: 10px" src="/media/img/area_intro.png" /><p>Please click on the \'Start Drawing\' button to begin drawing your activity areas. \
+            If you didn\'t engage in any activities, click the \'Skip Activities\' button.</p>',
 			style: 'margin: 0px 0px 10px 10px',
 			border: false
         });    	
