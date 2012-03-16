@@ -43,6 +43,10 @@ p {
     margin: 0 0 1.2em 0;
 }
 
+p.imp-note {
+    color:#FF0;
+}
+
 h1,h2,h3,h4,h5,h6 {
     font-weight: normal; 
     margin:0; 

@@ -60,21 +60,21 @@ gwst.widgets.NavigatePanel = Ext.extend(gwst.widgets.WestPanel, {
             },
             id: 'nav_table_panel',
             items: [{
-                html: 'a. Pan the map North, South, East or West using the arrow buttons on the map or your keyboard to center the map over your starting location.'
+                html: 'a. Click on the blue arrow buttons on the screen or use your keyboard arrows to center the map over your starting location.'
             },{
                 html: '<img src="/media/img/nav_arrows.png">'
             },{
-                html: 'b. Zoom the map in and out by clicking the \'+\' and \'-\' buttons on the map, or the scroll wheel on your mouse, if you have one.'
+                html: 'b. Zoom in and out by clicking the \'+\' and \'-\' buttons on the map, or use the scroll wheel on your mouse, if you have one.'
             },{
                 html: '<img src="/media/img/nav_zoombar.png">'
             },{
-                html: 'c. Return the map to its original view of the entire coast with the \'Reset Map View\' button.'
-            },{
-                html: '<img src="/media/img/nav_reset_map.png">'
-            },{
-                html: 'd. Get as close as you can to your starting point, then press the Continue button'
+                html: 'c. Please get as close as you can to your starting point, then click the Continue button'
             },{
                 html: ''
+            },{
+                html: 'You can return the map to its original view of the entire coast with the \'Reset Map View\' button.'
+            },{
+                html: '<img src="/media/img/nav_reset_map.png">'
             },{
                 html: '<p class="video-link"><img class="video-img" src="/media/img/film_go.png"/> <a href="'+ gwst.settings.urls.demo +'" target="_blank">Watch Demonstration</a>'
             }]

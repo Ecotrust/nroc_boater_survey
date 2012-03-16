@@ -27,9 +27,9 @@ gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
     
     getHtmlText: function() {
         var html_text = '<h2>How to Change Your Base Map</h2>\
-        <p>You can change your base map by clicking different base layers in the blue box on the top right of your screen.</p>\
+        <p>To help find your way around, we have provided a number of different types of maps. You can change your map type by clicking different options in the blue box on the top right of your screen.</p>\
         <img src="/media/img/layers.png" style="margin-left: 10px; margin-bottom: 8px" />\
-        <h2 style="margin-bottom: 0px">Available Layers</h2>';
+        <h2 style="margin-bottom: 0px">Available Types of Maps</h2>';
         return html_text;
     },
 	
@@ -73,17 +73,9 @@ gwst.widgets.LayerInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
             },{
                 html: '<p style="margin: 5px 0px 0px 0px">Terrain</p>'
             },{
-                html: '<p style="margin: 5px 0px 0px 0px">Boat Ramps</p>'
-            },{
-                html: '<img src="/media/img/terrain.png" />'
-            },{
-                html: '<img src="/media/img/boat_ramps.png" />'
-            },{
-                html: '<p style="margin: 5px 0px 0px 0px">Marinas</p>'
-            },{
                 html: ''
             },{
-                html: '<img src="/media/img/marinas.png" />'
+                html: '<img src="/media/img/terrain.png" />'
             },{
                 html: ''
             }]

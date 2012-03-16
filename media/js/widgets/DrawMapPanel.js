@@ -78,21 +78,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             url: "http://c1753222.cdn.cloudfiles.rackspacecloud.com/RBSW-DEV_NOAA_Layer_Group/",
             name: 'Nautical Charts',
             isBaseLayer: true
-        });
-        
-        var rampLayer = new OpenLayers.Layer.GeoWebCache({
-            url: "http://c1753222.cdn.cloudfiles.rackspacecloud.com/RBSW-DEV_massgis_ofba_Coastal/",
-            name: 'Boat Ramps',
-            isBaseLayer: false,
-            visibility: false
-        });  
-        
-        var marinaLayer = new OpenLayers.Layer.GeoWebCache({
-            url: "http://c1753222.cdn.cloudfiles.rackspacecloud.com/RBSW-DEV_moris_marina_pt/",
-            name: 'Marinas',
-            isBaseLayer: false,
-            visibility: false
-        });                        	
+        });                       	
         
         this.vectorLayer = new OpenLayers.Layer.Vector(
     		"Vector Layer", 
@@ -122,7 +108,9 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 		map.addControl(new OpenLayers.Control.Navigation());		
 		map.addControl(new OpenLayers.Control.PanZoomBar());
 		map.addControl(new OpenLayers.Control.MousePosition());
-		var layerSwitcher = new OpenLayers.Control.LayerSwitcher();
+		var layerSwitcher = new OpenLayers.Control.LayerSwitcher({
+            'baseLblTitle':"Map Type"
+        });
 		map.addControl(layerSwitcher);
 		map.addControl(new OpenLayers.Control.ScaleLine());
 		layerSwitcher.maximizeControl();
@@ -150,7 +138,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         //Update internal MapPanel properties
 		Ext.apply(this, {
 		    map: map,
-		    layers: [nautLayer, hybridLayer, physicalLayer, rampLayer, marinaLayer, this.vectorLayer],
+		    layers: [nautLayer, hybridLayer, physicalLayer, this.vectorLayer],
 		    extent: map_extent,
 	        center: region_extent.getCenterLonLat(),
 	        zoom: this.defaultZoom,
