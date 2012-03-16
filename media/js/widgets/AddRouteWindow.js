@@ -10,13 +10,13 @@ gwst.widgets.AddRouteWindow = Ext.extend(Ext.Window, {
             height: 25,
             width: 125,
             layout:'fit',
-            html:'blort',
+            html:'',
             resizable: false,
             closable: false,
             collapsible: false,
             draggable: false,
             tbar: [{
-				text: 'Draw Route',
+				text: 'Plot Route',
 				iconCls: 'draw-icon',
 				handler: this.addClicked,
 				scope: this

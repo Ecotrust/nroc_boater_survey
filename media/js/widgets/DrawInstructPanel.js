@@ -18,7 +18,10 @@ gwst.widgets.DrawInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
 
     getHtmlText: function() {
-        var html_text = '<h2>How to Draw Your Route</h2><p style="padding-bottom:3px">Step 1. Zoom to where you started your trip using the blue navigation controls on the right.</p><p style="padding-bottom:3px">Step 2. Click the "Draw Route" button to start drawing your ROUNDTRIP trip.</p><p style="padding-bottom:3px">Step 3. Click once for each waypoint and <u>double-click</u> to finish your route.</p>';
+        var html_text = '<h2>First, Plot Your Route</h2>\
+        <p style="padding-bottom:3px">Step 1. Zoom to where you started your trip using a combination of the blue arrows on the screen (or the arrow keys on your keyboard) and the + and - buttons (or the wheel on your mouse).</p>\
+        <p style="padding-bottom:3px">Step 2. Click the "Plot Route" button to start plotting your complete route, including your return lef even if you came back the same way.</p>\
+        <p style="padding-bottom:3px">Step 3. Click once for each turn (or waypoint) and <u>double-click</u> to finish plotting your route.</p>';
         return html_text;
     },
 	
@@ -55,7 +58,7 @@ gwst.widgets.DrawInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
             },
             id: 'draw_table_panel_2',
             items: [{
-                html: '<p>a. Click the \'Draw Route\' button.</p>'
+                html: '<p>a. Click the \'Plot Route\' button.</p>'
             },{
                 html: '<img src="/media/img/route_1.png" />'
             },{
@@ -79,14 +82,16 @@ gwst.widgets.DrawInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
             },{
                 html: '<img src="/media/img/route_6.png" />'
             },{
-                html: '<p>g. If you made a mistake, click the \'Cancel\' button</p>'
+                html: '<p>g. If you made a mistake, click the \'Redraw\' button</p>'
             },{
                 html: '<img src="/media/img/route_7.png" />'
             }]
         });       
 
         this.panel_three = new Ext.Panel({
-            html: "Feel free to play around and try it out. Don't worry if you make a mistake.  A 'Redraw' button will appear once you start drawing that will let you redraw your route.  You will also be able to edit or restart your route after you finish it.",
+            html: "Feel free to play around and try it out. Don't worry if you make a mistake. \
+                A 'Redraw' button will appear once you start plotting - you can use it to redraw your route. \
+                You will also be able to edit or restart your route after you finish it.",
             border: false,
             style: 'padding:5px 5px 5px 10px'
         });
