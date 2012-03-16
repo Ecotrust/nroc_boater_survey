@@ -20,7 +20,7 @@ gwst.widgets.RouteInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         });  
         
 		this.panel_one = new Ext.Panel({		
-			html: '<h2>How to Draw Your Route</h2><p><i>On the NEXT page</i>, you\'re going to draw the route you took during the trip on which you are reporting.  Please remember to plot a ROUNDTRIP route.</p>',
+			html: '<h2>How to Plot Your Route</h2><p><i>On the NEXT page</i>, you will be asked to plot the route you took during the trip on which you are reporting.  Please remember to plot a complete route, including your return leg even if you came back the same way.</p>',
 			style: 'margin: 10px',
 			border: false
         });
@@ -32,10 +32,10 @@ gwst.widgets.RouteInstructPanel = Ext.extend(gwst.widgets.WestPanel, {
         });    	
         
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
-        	btn1_width: 80,
-        	btn2_text: 'OK, let\'s begin drawing!',        	
+        	btn1_width: 135,
+        	btn2_text: 'OK, let\'s begin!',        	
             btn2_handler: this.contBtnClicked.createDelegate(this),
-            btn2_width: 210,
+            btn2_width: 120,
             left_margin: 40
         });
         
