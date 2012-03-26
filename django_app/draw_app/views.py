@@ -52,7 +52,6 @@ def draw(request):
     params = {
         'interview_id': request.session['interview_id'], 
         'vessel': request.session['vessel'],
-        'GMAPS_API_KEY': settings.GMAPS_API_KEY,
         'month': request.session['month']
     }
     
