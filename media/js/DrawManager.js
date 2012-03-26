@@ -206,21 +206,33 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     finActivityInfoStep: function() {
-        if ( this.activityInfo1Panel.answer_one.getValue()) {
-            this.activity_1_primary = this.activityInfo1Panel.answer_one.getValue();
-            if (this.activityInfo1Panel.other_one.getValue()) {
-                this.activity_1_other = this.activityInfo1Panel.other_one.getValue();
-                if (this.activity_1_primary == 'Other' && this.activity_1_other != "") {
-                    this.activity_1_primary = this.activity_1_other;
-                }
+        // if ( this.activityInfo1Panel.answer_one.items.length > 0) {
+        for (this.i = 0; this.i < this.activityInfo1Panel.answer_one.items.length; i++) {
+            if (this.activityInfo1Panel.answer_one.items.get(this.i).checked) {
+            
+                
+            
             }
+        
+        
+        
         }
-        if (this.activityInfo1Panel.answer_two.getValue()) { 
-            this.activity_1_duration = this.activityInfo1Panel.answer_two.getValue();
-        }
-        if (this.activityInfo1Panel.answer_three.getValue()) {
-            this.activity_1_rank = this.activityInfo1Panel.answer_three.getValue();
-        }
+            
+        
+            // this.activity_1_primary = this.activityInfo1Panel.answer_one.getValue();
+            // if (this.activityInfo1Panel.other_one.getValue()) {
+                // this.activity_1_other = this.activityInfo1Panel.other_one.getValue();
+                // if (this.activity_1_primary == 'Other' && this.activity_1_other != "") {
+                    // this.activity_1_primary = this.activity_1_other;
+                // }
+            // }
+        // }
+        // if (this.activityInfo1Panel.answer_two.getValue()) { 
+            // this.activity_1_duration = this.activityInfo1Panel.answer_two.getValue();
+        // }
+        // if (this.activityInfo1Panel.answer_three.getValue()) {
+            // this.activity_1_rank = this.activityInfo1Panel.answer_three.getValue();
+        // }
         this.activityInfo1Panel.resetPanel();        
         this.startActivityInfo2Step();
     },
