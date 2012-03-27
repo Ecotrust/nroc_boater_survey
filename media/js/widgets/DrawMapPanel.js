@@ -61,7 +61,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         var hybridLayer = new OpenLayers.Layer.Google(
             "Satellite",
             {
-            	type: G_HYBRID_MAP, 
+            	type: google.maps.MapTypeId.HYBRID, 
             	sphericalMercator: true      	
             }
         );             
@@ -69,7 +69,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         var physicalLayer = new OpenLayers.Layer.Google(
             "Terrain",
             {
-            	type: G_PHYSICAL_MAP, 
+            	type: google.maps.MapTypeId.TERRAIN, 
             	sphericalMercator: true    	
             }
         );     
