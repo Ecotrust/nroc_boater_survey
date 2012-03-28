@@ -1,0 +1,104 @@
+<mockup version="1.0" skin="sketch" measuredW="1512" measuredH="795" mockupW="1073" mockupH="760">
+  <controls>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="439" y="35" w="1073" h="760" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>2010%20Massachusetts%20Recreational%20Boater%20Survey%0Ahttp%3A//maboat.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::Canvas" x="439" y="100" w="331" h="664" measuredW="100" measuredH="70" zOrder="2" locked="true" isInGroup="-1"/>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::Button" x="837" y="123" w="-1" h="-1" measuredW="154" measuredH="38" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>WorldIcon%7Cmedium</icon>
+        <text>Reset%20Map%20View</text>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::Image" x="776" y="118" w="38" h="183" measuredW="38" measuredH="303" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/mapping-map-controls.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::Image" x="1336" y="138" w="170" h="110" measuredW="185" measuredH="132" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/map-layerswitcher.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::Canvas" x="441" y="739" w="1071" h="31" measuredW="100" measuredH="70" zOrder="6" locked="false" isInGroup="-1"/>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::Label" x="475" y="743" w="-1" h="-1" measuredW="692" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>If%20you%20need%20help%2C%20call%20617-287-5576%2C%20email%20help@maboatersurvey.com%2C%20or%20refer%20to%20our%20detailed%20%5Bdrawing%20instructions%20page%5D</text>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::Image" x="1385" y="673" w="-1" h="-1" measuredW="121" measuredH="63" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/map-scale-coords.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="68" controlTypeID="com.balsamiq.mockups::Image" x="773" y="103" w="733" h="640" measuredW="572" measuredH="366" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/map-route-drawn.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="74" controlTypeID="com.balsamiq.mockups::Canvas" x="480" y="596" w="232" h="70" measuredW="100" measuredH="70" zOrder="9" locked="false" isInGroup="-1"/>
+    <control controlID="78" controlTypeID="com.balsamiq.mockups::Button" x="549" y="618" w="139" h="27" measuredW="106" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Skip%20This%20Step</text>
+      </controlProperties>
+    </control>
+    <control controlID="80" controlTypeID="__group__" x="475" y="557" w="151" h="23" measuredW="151" measuredH="23" zOrder="11" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Link" x="23" y="1" w="-1" h="-1" measuredW="128" measuredH="21" zOrder="0" locked="false" isInGroup="80">
+          <controlProperties>
+            <text>Watch%20Demonstration</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="0" y="0" w="23" h="23" measuredW="23" measuredH="23" zOrder="1" locked="false" isInGroup="80">
+          <controlProperties>
+            <src>./assets/icon-video.png</src>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="81" controlTypeID="com.balsamiq.mockups::Button" x="460" y="685" w="270" h="27" measuredW="264" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <menuIcon>true</menuIcon>
+        <text>View%20more%20detailed%20drawing%20instructions</text>
+      </controlProperties>
+    </control>
+    <control controlID="83" controlTypeID="com.balsamiq.mockups::Label" x="475" y="132" w="-1" h="-1" measuredW="244" measuredH="21" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Are%20you%20satisfied%20with%20the%20area%20you%20drew%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="84" controlTypeID="com.balsamiq.mockups::Paragraph" x="589" y="200" w="200" h="39" measuredW="200" measuredH="140" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Save%20this%20area</text>
+      </controlProperties>
+    </control>
+    <control controlID="85" controlTypeID="com.balsamiq.mockups::Paragraph" x="589" y="250" w="125" h="43" measuredW="200" measuredH="140" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Make%20some%20edits%20to%20this%20area</text>
+      </controlProperties>
+    </control>
+    <control controlID="86" controlTypeID="com.balsamiq.mockups::Paragraph" x="589" y="294" w="137" h="35" measuredW="200" measuredH="140" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Discard%20this%20area%20and%20draw%20it%20again</text>
+      </controlProperties>
+    </control>
+    <control controlID="87" controlTypeID="com.balsamiq.mockups::Button" x="496" y="200" w="-1" h="-1" measuredW="47" measuredH="27" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Yes</text>
+      </controlProperties>
+    </control>
+    <control controlID="88" controlTypeID="com.balsamiq.mockups::Button" x="494" y="250" w="-1" h="-1" measuredW="69" measuredH="27" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>No%2C%20edit</text>
+      </controlProperties>
+    </control>
+    <control controlID="89" controlTypeID="com.balsamiq.mockups::Button" x="487" y="289" w="-1" h="-1" measuredW="88" measuredH="27" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>No%2C%20redraw</text>
+      </controlProperties>
+    </control>
+    <control controlID="90" controlTypeID="com.balsamiq.mockups::Canvas" x="479" y="181" w="266" h="166" measuredW="100" measuredH="70" zOrder="14" locked="false" isInGroup="-1"/>
+  </controls>
+</mockup>

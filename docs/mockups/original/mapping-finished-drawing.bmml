@@ -1,0 +1,88 @@
+<mockup version="1.0" skin="sketch" measuredW="1512" measuredH="795" mockupW="1073" mockupH="760">
+  <controls>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="439" y="35" w="1073" h="760" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>2010%20Massachusetts%20Recreational%20Boater%20Survey%0Ahttp%3A//maboat.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::Canvas" x="439" y="104" w="331" h="664" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="-1"/>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::Button" x="837" y="123" w="-1" h="-1" measuredW="154" measuredH="38" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>WorldIcon%7Cmedium</icon>
+        <text>Reset%20Map%20View</text>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::Image" x="776" y="118" w="38" h="183" measuredW="38" measuredH="303" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/mapping-map-controls.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::Image" x="1336" y="138" w="170" h="110" measuredW="185" measuredH="132" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/map-layerswitcher.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::Canvas" x="441" y="739" w="1071" h="31" measuredW="100" measuredH="70" zOrder="6" locked="false" isInGroup="-1"/>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::Label" x="475" y="743" w="-1" h="-1" measuredW="692" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>If%20you%20need%20help%2C%20call%20617-287-5576%2C%20email%20help@maboatersurvey.com%2C%20or%20refer%20to%20our%20detailed%20%5Bdrawing%20instructions%20page%5D</text>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::Image" x="1385" y="673" w="-1" h="-1" measuredW="121" measuredH="63" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/map-scale-coords.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="58" controlTypeID="com.balsamiq.mockups::Paragraph" x="467" y="154" w="260" h="86" measuredW="200" measuredH="140" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Are%20you%20satisfied%20with%20this%20route%3F%0A%20%0ADid%20you%20draw%20your%20entire%20ROUNDTRIP%20route%20even%20if%20you%20came%20back%20the%20same%20way%3F%0A%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="59" controlTypeID="com.balsamiq.mockups::Canvas" x="457" y="266" w="272" h="243" measuredW="100" measuredH="70" zOrder="10" locked="false" isInGroup="-1"/>
+    <control controlID="60" controlTypeID="com.balsamiq.mockups::Button" x="484" y="296" w="-1" h="-1" measuredW="105" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Cotinue%20Route</text>
+      </controlProperties>
+    </control>
+    <control controlID="61" controlTypeID="com.balsamiq.mockups::Button" x="484" y="347" w="-1" h="-1" measuredW="83" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Edit%20Route</text>
+      </controlProperties>
+    </control>
+    <control controlID="62" controlTypeID="com.balsamiq.mockups::Button" x="484" y="389" w="-1" h="-1" measuredW="105" measuredH="27" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Redraw%20Route</text>
+      </controlProperties>
+    </control>
+    <control controlID="63" controlTypeID="com.balsamiq.mockups::Button" x="484" y="431" w="-1" h="-1" measuredW="92" measuredH="27" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Save%20Route</text>
+      </controlProperties>
+    </control>
+    <control controlID="64" controlTypeID="com.balsamiq.mockups::Paragraph" x="607" y="297" w="108" h="50" measuredW="200" measuredH="140" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Continue%20where%20you%20left%20off</text>
+      </controlProperties>
+    </control>
+    <control controlID="65" controlTypeID="com.balsamiq.mockups::Paragraph" x="604" y="347" w="141" h="37" measuredW="200" measuredH="140" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Make%20some%20edits%20to%20this%20route</text>
+      </controlProperties>
+    </control>
+    <control controlID="66" controlTypeID="com.balsamiq.mockups::Paragraph" x="599" y="389" w="153" h="45" measuredW="200" measuredH="140" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Discard%20this%20route%20and%20draw%20it%20again</text>
+      </controlProperties>
+    </control>
+    <control controlID="67" controlTypeID="com.balsamiq.mockups::Paragraph" x="601" y="430" w="124" h="44" measuredW="200" measuredH="140" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>I%27m%20done%2C%20save%20this%20route%20and%20move%20on</text>
+      </controlProperties>
+    </control>
+    <control controlID="68" controlTypeID="com.balsamiq.mockups::Image" x="773" y="103" w="733" h="640" measuredW="572" measuredH="366" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/map-route-drawn.png</src>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
