@@ -52,9 +52,10 @@ def draw(request):
     params = {
         'interview_id': request.session['interview_id'], 
         'vessel': request.session['vessel'],
-        'GMAPS_API_KEY': settings.GMAPS_API_KEY,
         'month': request.session['month']
     }
+    if settings.GMAPS_API_KEY.__len__() > 0:
+        params['GMAPS_API_KEY'] = settings.GMAPS_API_KEY
     
     already_complete = SurveyStatus.objects.filter(survey_id = request.session['interview_id'], complete = True)
         

@@ -1,7 +1,10 @@
 #!/bin/bash
+
+export DJANGO_SETTINGS_MODULE=settings
+
 DB="nroc_rbs"
 
-export PYTHONPATH=$PYTHONPATH:/usr/local/django-trunk/:/usr/local/django-apps/:.
+export PYTHONPATH=$PYTHONPATH:/usr/local/src/django/:.
 
-createdb -T gis_template $DB
+createdb -U nroc_rbs -h localhost -W nroc_rbs -T template_postgis $DB
 python manage.py syncdb --noinput
