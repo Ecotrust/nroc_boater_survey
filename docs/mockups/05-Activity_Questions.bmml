@@ -1,4 +1,4 @@
-<mockup version="1.0" skin="sketch" measuredW="1512" measuredH="795" mockupW="1073" mockupH="760">
+<mockup version="1.0" skin="sketch" measuredW="1512" measuredH="795" mockupW="1118" mockupH="760">
   <controls>
     <control controlID="1" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="439" y="35" w="1073" h="760" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
       <controlProperties>
@@ -11,18 +11,13 @@
         <src>./assets/mapping-map-controls.png</src>
       </controlProperties>
     </control>
-    <control controlID="30" controlTypeID="com.balsamiq.mockups::Image" x="1336" y="138" w="170" h="110" measuredW="185" measuredH="132" zOrder="4" locked="false" isInGroup="-1">
-      <controlProperties>
-        <src>./assets/map-layerswitcher.png</src>
-      </controlProperties>
-    </control>
-    <control controlID="31" controlTypeID="com.balsamiq.mockups::Canvas" x="441" y="739" w="1071" h="31" measuredW="100" measuredH="70" zOrder="5" locked="false" isInGroup="-1"/>
-    <control controlID="32" controlTypeID="com.balsamiq.mockups::Label" x="475" y="743" w="-1" h="-1" measuredW="692" measuredH="21" zOrder="6" locked="false" isInGroup="-1">
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::Canvas" x="441" y="739" w="1071" h="31" measuredW="100" measuredH="70" zOrder="4" locked="false" isInGroup="-1"/>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::Label" x="475" y="743" w="-1" h="-1" measuredW="692" measuredH="21" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
         <text>If%20you%20need%20help%2C%20call%20617-287-5576%2C%20email%20help@maboatersurvey.com%2C%20or%20refer%20to%20our%20detailed%20%5Bdrawing%20instructions%20page%5D</text>
       </controlProperties>
     </control>
-    <control controlID="35" controlTypeID="com.balsamiq.mockups::Image" x="1385" y="673" w="-1" h="-1" measuredW="121" measuredH="63" zOrder="7" locked="false" isInGroup="-1">
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::Image" x="1385" y="673" w="-1" h="-1" measuredW="121" measuredH="63" zOrder="6" locked="false" isInGroup="-1">
       <controlProperties>
         <src>./assets/map-scale-coords.png</src>
       </controlProperties>
@@ -32,16 +27,16 @@
         <src>./assets/map-route-drawn.png</src>
       </controlProperties>
     </control>
-    <control controlID="78" controlTypeID="com.balsamiq.mockups::Button" x="586" y="673" w="164" h="49" measuredW="114" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+    <control controlID="78" controlTypeID="com.balsamiq.mockups::Button" x="585" y="408" w="164" h="49" measuredW="114" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>true</bold>
-        <href>alt-activities-followup%26bm%3Balt-activities-followup.bmml%26bm%3Balt-activities-followup.bmml%26bm%3Balt-activities-followup.bmml</href>
-        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22147%2C638%2C311%2C687%22%20href%3D%22alt-activities-followup.bmml%22%20alt%3D%22alt-activities-followup%22%20id%3D%2278%22/%3E</map>
+        <href>05a-Fishing_Questions%26bm%3B05a-Fishing_Questions.bmml%26bm%3B05a-Fishing_Questions.bmml%26bm%3B05a-Fishing_Questions.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22191%2C373%2C355%2C422%22%20href%3D%2205a-Fishing_Questions.bmml%22%20alt%3D%2205a-Fishing_Questions%22%20id%3D%2278%22/%3E</map>
         <size>16</size>
         <text>Continue%20%3E%3E</text>
       </controlProperties>
     </control>
-    <control controlID="91" controlTypeID="__group__" x="445" y="106" w="318" h="57" measuredW="318" measuredH="57" zOrder="9" locked="false" isInGroup="-1">
+    <control controlID="91" controlTypeID="__group__" x="445" y="106" w="318" h="57" measuredW="318" measuredH="57" zOrder="8" locked="false" isInGroup="-1">
       <groupChildrenDescriptors>
         <control controlID="0" controlTypeID="com.balsamiq.mockups::HRule" x="12" y="22" w="306" h="-1" measuredW="100" measuredH="5" zOrder="0" locked="false" isInGroup="91"/>
         <control controlID="1" controlTypeID="__group__" x="0" y="0" w="315" h="57" measuredW="315" measuredH="57" zOrder="1" locked="false" isInGroup="91">
@@ -55,22 +50,22 @@
             </control>
             <control controlID="1" controlTypeID="__group__" x="0" y="9" w="315" h="39" measuredW="315" measuredH="39" zOrder="1" locked="false" isInGroup="1">
               <groupChildrenDescriptors>
-                <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="118" y="2" w="81" h="37" measuredW="114" measuredH="21" zOrder="0" locked="false" isInGroup="1">
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="118" y="2" w="81" h="37" measuredW="108" measuredH="21" zOrder="0" locked="false" isInGroup="1">
                   <controlProperties>
                     <align>center</align>
-                    <text>Instructions%20Layers</text>
+                    <text>Activity%20Questions</text>
                   </controlProperties>
                 </control>
-                <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="234" y="2" w="81" h="37" measuredW="109" measuredH="21" zOrder="1" locked="false" isInGroup="1">
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="234" y="2" w="81" h="37" measuredW="98" measuredH="21" zOrder="1" locked="false" isInGroup="1">
                   <controlProperties>
                     <align>center</align>
-                    <text>Instructions%20Route</text>
+                    <text>More%20Activities%3F</text>
                   </controlProperties>
                 </control>
-                <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="81" h="37" measuredW="133" measuredH="21" zOrder="2" locked="false" isInGroup="1">
+                <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="81" h="37" measuredW="86" measuredH="21" zOrder="2" locked="false" isInGroup="1">
                   <controlProperties>
                     <align>center</align>
-                    <text>Instructions%20Navigation</text>
+                    <text>Activity%20Areas</text>
                   </controlProperties>
                 </control>
               </groupChildrenDescriptors>
@@ -79,15 +74,30 @@
         </control>
       </groupChildrenDescriptors>
     </control>
-    <control controlID="98" controlTypeID="com.balsamiq.mockups::SubTitle" x="477" y="191" w="-1" h="-1" measuredW="236" measuredH="26" zOrder="10" locked="false" isInGroup="-1">
+    <control controlID="98" controlTypeID="com.balsamiq.mockups::SubTitle" x="477" y="191" w="-1" h="-1" measuredW="236" measuredH="26" zOrder="9" locked="false" isInGroup="-1">
       <controlProperties>
         <size>18</size>
         <text>What%20did%20you%20do%20at%20this%20point%3F</text>
       </controlProperties>
     </control>
-    <control controlID="99" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="497" y="223" w="185" h="118" measuredW="116" measuredH="105" zOrder="11" locked="false" isInGroup="-1">
+    <control controlID="99" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="497" y="223" w="185" h="118" measuredW="117" measuredH="105" zOrder="10" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>%5Bx%5D%20fishing%0A%5B%20%5D%20wildlife%20viewing%0A%5B%20%5D%20cruising%20around%0A%5B%20%5D%20diving%0A%5B%20%5D%20other</text>
+        <text>%5Bx%5D%20fishing%0A%5Bx%5D%20wildlife%20viewing%0A%5Bx%5D%20cruising%20around%0A%5Bx%5D%20diving%0A%5Bx%5D%20other</text>
+      </controlProperties>
+    </control>
+    <control controlID="100" controlTypeID="com.balsamiq.mockups::TextInput" x="475" y="366" w="178" h="-1" measuredW="79" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="101" controlTypeID="com.balsamiq.mockups::Paragraph" x="475" y="341" w="163" h="25" measuredW="200" measuredH="140" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>If%20%27other%27%20please%20specify%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="102" controlTypeID="com.balsamiq.mockups::StickyNote" x="394" y="378" w="176" h="108" measuredW="109" measuredH="123" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Only%20shows%20on%20the%20screen%20if%20%27other%27%20is%20selected</text>
       </controlProperties>
     </control>
   </controls>

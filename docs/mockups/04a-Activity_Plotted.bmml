@@ -1,0 +1,77 @@
+<mockup version="1.0" skin="sketch" measuredW="1512" measuredH="795" mockupW="1073" mockupH="760">
+  <controls>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="439" y="35" w="1073" h="760" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>2010%20Massachusetts%20Recreational%20Boater%20Survey%0Ahttp%3A//maboat.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::Canvas" x="439" y="100" w="331" h="664" measuredW="100" measuredH="70" zOrder="2" locked="true" isInGroup="-1"/>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::Image" x="776" y="118" w="38" h="183" measuredW="38" measuredH="303" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/mapping-map-controls.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::Canvas" x="441" y="739" w="1071" h="31" measuredW="100" measuredH="70" zOrder="4" locked="false" isInGroup="-1"/>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::Label" x="475" y="743" w="-1" h="-1" measuredW="692" measuredH="21" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>If%20you%20need%20help%2C%20call%20617-287-5576%2C%20email%20help@maboatersurvey.com%2C%20or%20refer%20to%20our%20detailed%20%5Bdrawing%20instructions%20page%5D</text>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::Image" x="1385" y="673" w="-1" h="-1" measuredW="121" measuredH="63" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/map-scale-coords.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="68" controlTypeID="com.balsamiq.mockups::Image" x="773" y="103" w="733" h="640" measuredW="572" measuredH="366" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/map-route-drawn.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="85" controlTypeID="com.balsamiq.mockups::HRule" x="457" y="128" w="306" h="-1" measuredW="100" measuredH="5" zOrder="7" locked="false" isInGroup="-1"/>
+    <control controlID="89" controlTypeID="com.balsamiq.mockups::Canvas" x="445" y="111" w="83" h="41" measuredW="100" measuredH="70" zOrder="8" locked="false" isInGroup="-1"/>
+    <control controlID="90" controlTypeID="com.balsamiq.mockups::Canvas" x="538" y="106" w="125" h="57" measuredW="100" measuredH="70" zOrder="9" locked="false" isInGroup="-1"/>
+    <control controlID="91" controlTypeID="com.balsamiq.mockups::Canvas" x="673" y="116" w="83" h="41" measuredW="100" measuredH="70" zOrder="10" locked="false" isInGroup="-1"/>
+    <control controlID="92" controlTypeID="com.balsamiq.mockups::Label" x="563" y="117" w="81" h="37" measuredW="86" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <text>Activity%20Areas</text>
+      </controlProperties>
+    </control>
+    <control controlID="93" controlTypeID="com.balsamiq.mockups::Label" x="679" y="117" w="81" h="37" measuredW="108" measuredH="21" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <text>Activity%20Questions</text>
+      </controlProperties>
+    </control>
+    <control controlID="94" controlTypeID="com.balsamiq.mockups::Label" x="445" y="115" w="81" h="37" measuredW="101" measuredH="21" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <text>Route%20Questions</text>
+      </controlProperties>
+    </control>
+    <control controlID="99" controlTypeID="com.balsamiq.mockups::Paragraph" x="494" y="180" w="203" h="26" measuredW="200" measuredH="140" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Are%20you%20satisfied%20with%20this%20point%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="101" controlTypeID="com.balsamiq.mockups::Button" x="542" y="206" w="-1" h="-1" measuredW="111" measuredH="27" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>04-Activity_Areas%26bm%3B04-Activity_Areas.bmml%26bm%3B04-Activity_Areas.bmml%26bm%3B04-Activity_Areas.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22103%2C171%2C214%2C198%22%20href%3D%2204-Activity_Areas.bmml%22%20alt%3D%2204-Activity_Areas%22%20id%3D%22101%22/%3E</map>
+        <text>Re-plot%20activity</text>
+      </controlProperties>
+    </control>
+    <control controlID="102" controlTypeID="com.balsamiq.mockups::Button" x="533" y="240" w="-1" h="-1" measuredW="129" measuredH="27" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>05-Activity_Questions%26bm%3B05-Activity_Questions.bmml%26bm%3B05-Activity_Questions.bmml%26bm%3B05-Activity_Questions.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2294%2C205%2C223%2C232%22%20href%3D%2205-Activity_Questions.bmml%22%20alt%3D%2205-Activity_Questions%22%20id%3D%22102%22/%3E</map>
+        <text>Save%20activity%20point</text>
+      </controlProperties>
+    </control>
+    <control controlID="103" controlTypeID="com.balsamiq.mockups::StickyNote" x="457" y="261" w="140" h="94" measuredW="109" measuredH="123" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Does%20this%20need%20more%20description%3F</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

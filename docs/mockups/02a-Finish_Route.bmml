@@ -1,0 +1,83 @@
+<mockup version="1.0" skin="sketch" measuredW="1512" measuredH="795" mockupW="1073" mockupH="760">
+  <controls>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="439" y="35" w="1073" h="760" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>2010%20Massachusetts%20Recreational%20Boater%20Survey%0Ahttp%3A//maboat.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::Image" x="769" y="114" w="32" h="140" measuredW="38" measuredH="303" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/mapping-map-controls.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::Canvas" x="441" y="739" w="1071" h="31" measuredW="100" measuredH="70" zOrder="3" locked="false" isInGroup="-1"/>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::Label" x="475" y="743" w="-1" h="-1" measuredW="634" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>If%20you%20need%20help%2C%20call%20617-287-5576%2C%20email%20help@seaplan.org%2C%20or%20refer%20to%20our%20detailed%20%5Bdrawing%20instructions%20page%5D</text>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::Image" x="1400" y="689" w="103" h="48" measuredW="121" measuredH="63" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/map-scale-coords.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::HRule" x="448" y="136" w="306" h="-1" measuredW="100" measuredH="5" zOrder="6" locked="false" isInGroup="-1"/>
+    <control controlID="77" controlTypeID="com.balsamiq.mockups::Paragraph" x="494" y="180" w="203" h="26" measuredW="200" measuredH="140" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Are%20you%20satisfied%20with%20this%20route%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="89" controlTypeID="com.balsamiq.mockups::Label" x="673" y="120" w="81" h="37" measuredW="101" measuredH="21" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <text>Route%20Questions</text>
+      </controlProperties>
+    </control>
+    <control controlID="91" controlTypeID="com.balsamiq.mockups::Label" x="561" y="120" w="81" h="37" measuredW="65" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <text>Plot%20Route</text>
+      </controlProperties>
+    </control>
+    <control controlID="104" controlTypeID="com.balsamiq.mockups::Button" x="517" y="206" w="-1" h="-1" measuredW="156" measuredH="27" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>02-Plot_Route%26bm%3B02-Plot_Route.bmml%26bm%3B02-Plot_Route.bmml%26bm%3B02-Plot_Route.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2278%2C171%2C234%2C198%22%20href%3D%2202-Plot_Route.bmml%22%20alt%3D%2202-Plot_Route%22%20id%3D%22104%22/%3E</map>
+        <text>Continue%20Plotting%20Route</text>
+      </controlProperties>
+    </control>
+    <control controlID="107" controlTypeID="com.balsamiq.mockups::Image" x="769" y="108" w="738" h="631" measuredW="872" measuredH="716" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/plotted_route_no_points.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="109" controlTypeID="com.balsamiq.mockups::Button" x="544" y="239" w="-1" h="-1" measuredW="102" measuredH="27" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>02-Plot_Route%26bm%3B02-Plot_Route.bmml%26bm%3B02-Plot_Route.bmml%26bm%3B02-Plot_Route.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22105%2C204%2C207%2C231%22%20href%3D%2202-Plot_Route.bmml%22%20alt%3D%2202-Plot_Route%22%20id%3D%22109%22/%3E</map>
+        <text>Re-plot%20route</text>
+      </controlProperties>
+    </control>
+    <control controlID="110" controlTypeID="com.balsamiq.mockups::Button" x="551" y="273" w="-1" h="-1" measuredW="89" measuredH="27" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>03-Route_Questions%26bm%3B03-Route_Questions.bmml%26bm%3B03-Route_Questions.bmml%26bm%3B03-Route_Questions.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22112%2C238%2C201%2C265%22%20href%3D%2203-Route_Questions.bmml%22%20alt%3D%2203-Route_Questions%22%20id%3D%22110%22/%3E</map>
+        <text>Save%20route</text>
+      </controlProperties>
+    </control>
+    <control controlID="111" controlTypeID="com.balsamiq.mockups::StickyNote" x="475" y="294" w="140" h="94" measuredW="109" measuredH="123" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Does%20this%20need%20more%20description%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="116" controlTypeID="com.balsamiq.mockups::Canvas" x="445" y="115" w="83" h="41" measuredW="100" measuredH="70" zOrder="7" locked="false" isInGroup="-1"/>
+    <control controlID="117" controlTypeID="com.balsamiq.mockups::Canvas" x="538" y="110" w="125" h="57" measuredW="100" measuredH="70" zOrder="8" locked="false" isInGroup="-1"/>
+    <control controlID="118" controlTypeID="com.balsamiq.mockups::Canvas" x="673" y="120" w="83" h="41" measuredW="100" measuredH="70" zOrder="9" locked="false" isInGroup="-1"/>
+    <control controlID="119" controlTypeID="com.balsamiq.mockups::Label" x="448" y="120" w="81" h="37" measuredW="100" measuredH="21" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <text>Map%20Introduction</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
