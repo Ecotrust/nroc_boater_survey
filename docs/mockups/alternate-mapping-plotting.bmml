@@ -1,0 +1,114 @@
+<mockup version="1.0" skin="sketch" measuredW="1512" measuredH="795" mockupW="1073" mockupH="760">
+  <controls>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="439" y="35" w="1073" h="760" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>2010%20Massachusetts%20Recreational%20Boater%20Survey%0Ahttp%3A//maboat.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="23" controlTypeID="__group__" x="459" y="710" w="151" h="23" measuredW="151" measuredH="23" zOrder="1" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Link" x="23" y="1" w="-1" h="-1" measuredW="128" measuredH="21" zOrder="0" locked="false" isInGroup="23">
+          <controlProperties>
+            <text>Watch%20Demonstration</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="0" y="0" w="23" h="23" measuredW="23" measuredH="23" zOrder="1" locked="false" isInGroup="23">
+          <controlProperties>
+            <src>./assets/icon-video.png</src>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::Image" x="763" y="104" w="741" h="635" measuredW="794" measuredH="631" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/mapping-map.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::Image" x="769" y="114" w="32" h="140" measuredW="38" measuredH="303" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/mapping-map-controls.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::Image" x="1361" y="109" w="144" h="84" measuredW="185" measuredH="132" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/map-layerswitcher.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::Canvas" x="441" y="739" w="1071" h="31" measuredW="100" measuredH="70" zOrder="5" locked="false" isInGroup="-1"/>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::Label" x="475" y="743" w="-1" h="-1" measuredW="634" measuredH="21" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>If%20you%20need%20help%2C%20call%20617-287-5576%2C%20email%20help@seaplan.org%2C%20or%20refer%20to%20our%20detailed%20%5Bdrawing%20instructions%20page%5D</text>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::Image" x="1400" y="689" w="103" h="48" measuredW="121" measuredH="63" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/map-scale-coords.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::HRule" x="448" y="136" w="306" h="-1" measuredW="100" measuredH="5" zOrder="8" locked="false" isInGroup="-1"/>
+    <control controlID="40" controlTypeID="__group__" x="445" y="110" w="311" h="57" measuredW="311" measuredH="57" zOrder="9" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="5" w="83" h="41" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="40"/>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="93" y="0" w="125" h="57" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="40"/>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="228" y="10" w="83" h="41" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="40"/>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="47" controlTypeID="__group__" x="443" y="119" w="315" h="39" measuredW="315" measuredH="39" zOrder="10" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="1" controlTypeID="__group__" x="0" y="0" w="315" h="39" measuredW="315" measuredH="39" zOrder="0" locked="false" isInGroup="47">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="118" y="2" w="81" h="37" measuredW="114" measuredH="21" zOrder="0" locked="false" isInGroup="1">
+              <controlProperties>
+                <align>center</align>
+                <text>Instructions%20Layers</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="234" y="2" w="81" h="37" measuredW="109" measuredH="21" zOrder="1" locked="false" isInGroup="1">
+              <controlProperties>
+                <align>center</align>
+                <text>Instructions%20Route</text>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="81" h="37" measuredW="133" measuredH="21" zOrder="2" locked="false" isInGroup="1">
+              <controlProperties>
+                <align>center</align>
+                <text>Instructions%20Navigation</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="77" controlTypeID="com.balsamiq.mockups::Paragraph" x="471" y="230" w="252" h="140" measuredW="200" measuredH="140" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>We%20would%20now%20like%20you%20to%20map%20the%20route%20that%20you%20took%20and%20tell%20us%20what%20you%20did%20during%20that%20trip.%0A%20%0AYou%20will%20plot%20your%20entire%20*roundtrip*%20route%20from%20start%20to%20finish.%0A%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="78" controlTypeID="com.balsamiq.mockups::SubTitle" x="459" y="189" w="-1" h="-1" measuredW="284" measuredH="33" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Plot%20your%20route%20on%20the%20map</text>
+      </controlProperties>
+    </control>
+    <control controlID="82" controlTypeID="com.balsamiq.mockups::Image" x="487" y="402" w="253" h="215" measuredW="155" measuredH="122" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/map-route.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="84" controlTypeID="com.balsamiq.mockups::StickyNote" x="505" y="556" w="141" h="83" measuredW="109" measuredH="123" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>animated%20image</text>
+      </controlProperties>
+    </control>
+    <control controlID="85" controlTypeID="com.balsamiq.mockups::CheckBox" x="628" y="710" w="126" h="22" measuredW="126" measuredH="22" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>show%20help%20on%20map</text>
+      </controlProperties>
+    </control>
+    <control controlID="87" controlTypeID="com.balsamiq.mockups::StickyNote" x="582" y="729" w="219" h="66" measuredW="109" measuredH="123" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>brings%20up%20help%20boxes%20on%20map</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

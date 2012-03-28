@@ -53,9 +53,9 @@
         <text>Continue</text>
       </controlProperties>
     </control>
-    <control controlID="15" controlTypeID="com.balsamiq.mockups::Button" x="841" y="696" w="-1" h="-1" measuredW="166" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::Button" x="841" y="696" w="-1" h="-1" measuredW="187" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Skip%20Mapping%20Completely</text>
+        <text>Skipping%20Mapping%20Completely</text>
       </controlProperties>
     </control>
   </controls>
