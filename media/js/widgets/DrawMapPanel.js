@@ -56,34 +56,35 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             'select': selectStyle,
             'temporary': tempStyle
         }); 
-        
-	    //Map base layers
-        var hybridLayer = new OpenLayers.Layer.Google(
-            "Satellite",
-            {
-            	type: google.maps.MapTypeId.HYBRID, 
-            	sphericalMercator: true      	
-            }
-        );             
 
-        var physicalLayer = new OpenLayers.Layer.Google(
-            "Terrain",
+        var nautLayer = new OpenLayers.Layer.TMS(
+            "Cached",
+            ["http://c3429629.r29.cf0.rackcdn.com/stache/NETiles_layer/"],
             {
-            	type: google.maps.MapTypeId.TERRAIN, 
-            	sphericalMercator: true    	
+                buffer: 1,
+                'isBaseLayer': true,
+                visibility: false,
+                'sphericalMercator': true,
+                getURL: function (bounds) {
+                    var z = map.getZoom();
+                    var url = this.url;
+                    var path = 'blank.png' ;
+                    if ( z <= 15 && z >= 6 ) {
+                        var res = map.getResolution();
+                        var x = Math.round((bounds.left - this.maxExtent.left) / (res * this.tileSize.w));
+                        var y = Math.round((this.maxExtent.top - bounds.top) / (res * this.tileSize.h));
+                        var limit = Math.pow(2, z);
+                        var path = z + "/" + x + "/" + y + ".png";
+                    }
+                    tilepath = url + path;
+                    return url + path;
+                }
             }
-        );     
-        
-        var nautLayer = new OpenLayers.Layer.GeoWebCache({
-            url: "http://c1753222.cdn.cloudfiles.rackspacecloud.com/RBSW-DEV_NOAA_Layer_Group/",
-            name: 'Nautical Charts',
-            isBaseLayer: true
-        });                       	
+        );                       	
         
         this.vectorLayer = new OpenLayers.Layer.Vector(
     		"Vector Layer", 
     		{
-    		    displayInLayerSwitcher: false,
     		    styleMap: myStyle
     		}
         );        
@@ -108,12 +109,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 		map.addControl(new OpenLayers.Control.Navigation());		
 		map.addControl(new OpenLayers.Control.PanZoomBar());
 		map.addControl(new OpenLayers.Control.MousePosition());
-		var layerSwitcher = new OpenLayers.Control.LayerSwitcher({
-            'baseLblTitle':"Map Type"
-        });
-		map.addControl(layerSwitcher);
 		map.addControl(new OpenLayers.Control.ScaleLine());
-		layerSwitcher.maximizeControl();
         map.addControl(new OpenLayers.Control.KeyboardDefaults());        
         
         //Line
@@ -138,7 +134,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         //Update internal MapPanel properties
 		Ext.apply(this, {
 		    map: map,
-		    layers: [nautLayer, hybridLayer, physicalLayer, this.vectorLayer],
+		    layers: [nautLayer, this.vectorLayer],
 		    extent: map_extent,
 	        center: region_extent.getCenterLonLat(),
 	        zoom: this.defaultZoom,
