@@ -52,7 +52,7 @@
     </control>
     <control controlID="76" controlTypeID="com.balsamiq.mockups::RadioButtonGroup" x="501" y="440" w="-1" h="-1" measuredW="119" measuredH="126" zOrder="11" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>%28%20%29New%20York%0A%28%20%29%20Conneticut%0A%28%20%29%20Rhode%20Island%0A%28*%29Massachusetts%0A%28%20%29%20New%20Hampshire%0A%28%20%29%20Maine</text>
+        <text>%28%20%29New%20York%0A%28%20%29%20Connecticut%0A%28%20%29%20Rhode%20Island%0A%28*%29Massachusetts%0A%28%20%29%20New%20Hampshire%0A%28%20%29%20Maine</text>
       </controlProperties>
     </control>
     <control controlID="77" controlTypeID="com.balsamiq.mockups::Paragraph" x="475" y="222" w="252" h="117" measuredW="200" measuredH="140" zOrder="12" locked="false" isInGroup="-1">
