@@ -6,39 +6,39 @@
       </controlProperties>
     </control>
     <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="469" y="92" w="714" h="80" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="-1"/>
-    <control controlID="3" controlTypeID="com.balsamiq.mockups::Title" x="492" y="114" w="-1" h="-1" measuredW="586" measuredH="41" zOrder="2" locked="false" isInGroup="-1">
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Title" x="485" y="112" w="646" h="-1" measuredW="586" measuredH="41" zOrder="2" locked="false" isInGroup="-1">
       <controlProperties>
         <size>32</size>
         <text>New%20England%20Recreational%20Boater%20Survey</text>
       </controlProperties>
     </control>
-    <control controlID="4" controlTypeID="com.balsamiq.mockups::Paragraph" x="492" y="180" w="608" h="70" measuredW="200" measuredH="140" zOrder="3" locked="false" isInGroup="-1">
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Paragraph" x="492" y="172" w="608" h="91" measuredW="200" measuredH="140" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
         <align>left</align>
         <text>Please%20take%20a%20minute%20to%20read%20the%20following%20instructions%20as%20they%20will%20explain%20what%20we%20would%20like%20you%20to%20do.%0A%20%0AWelcome%20to%20the%20mapping%20part%20of%20the%20survey.%20You%20just%20finished%20answering%20questions%20about%20a%20specific%20trip%20you%20took%20out%20on%20the%20water.%20We%20would%20now%20like%20you%20to%20plot%20the%20approximate%20route%20that%20you%20took%20and%20tell%20us%20what%20you%20did%20during%20that%20trip.</text>
       </controlProperties>
     </control>
-    <control controlID="8" controlTypeID="com.balsamiq.mockups::Paragraph" x="509" y="556" w="504" h="40" measuredW="200" measuredH="140" zOrder="4" locked="false" isInGroup="-1">
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Paragraph" x="509" y="566" w="504" h="40" measuredW="200" measuredH="140" zOrder="4" locked="false" isInGroup="-1">
       <controlProperties>
         <text>*%20Finally%2C%20you%20will%20be%20asked%20to%20indicate%20the%20areas%20where%20you%20engaged%20in%20particular%20recreational%20activities%20during%20this%20trip.</text>
       </controlProperties>
     </control>
-    <control controlID="9" controlTypeID="com.balsamiq.mockups::Image" x="547" y="295" w="-1" h="-1" measuredW="159" measuredH="80" zOrder="5" locked="false" isInGroup="-1">
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Image" x="547" y="305" w="-1" h="-1" measuredW="159" measuredH="80" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
         <src>./assets/instructions-zoom-controls.png</src>
       </controlProperties>
     </control>
-    <control controlID="10" controlTypeID="com.balsamiq.mockups::Paragraph" x="509" y="253" w="504" h="40" measuredW="200" measuredH="140" zOrder="6" locked="false" isInGroup="-1">
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Paragraph" x="509" y="263" w="504" h="40" measuredW="200" measuredH="140" zOrder="6" locked="false" isInGroup="-1">
       <controlProperties>
         <text>*%20First%2C%20you%20will%20be%20asked%20to%20zoom%20in%20on%20the%20map%20to%20where%20you%20started%20your%20last%20trip.%20Map%20navigation%20controls%20will%20be%20provided%20for%20this%20purpose.</text>
       </controlProperties>
     </control>
-    <control controlID="11" controlTypeID="com.balsamiq.mockups::Paragraph" x="509" y="381" w="504" h="40" measuredW="200" measuredH="140" zOrder="7" locked="false" isInGroup="-1">
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Paragraph" x="509" y="391" w="504" h="40" measuredW="200" measuredH="140" zOrder="7" locked="false" isInGroup="-1">
       <controlProperties>
         <text>*%20You%20will%20then%20be%20asked%20to%20plot%20the%20route%20you%20took%20during%20your%20last%20trip.%20Please%20plot%20the%20COMPLETE%20trip%20even%20if%20you%20followed%20the%20same%20route%20for%20your%20return%20leg.</text>
       </controlProperties>
     </control>
-    <control controlID="12" controlTypeID="com.balsamiq.mockups::Image" x="546" y="424" w="-1" h="-1" measuredW="155" measuredH="122" zOrder="8" locked="false" isInGroup="-1">
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Image" x="546" y="434" w="-1" h="-1" measuredW="155" measuredH="122" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
         <src>./assets/map-route.png</src>
       </controlProperties>
