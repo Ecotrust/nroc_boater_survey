@@ -5,12 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
     <title>2010 Massachusetts Boater Survey - Last Trip Mapping</title>
     
-    <link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}third-party/extjs2/resources/css/ext-all.css" charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}third-party/extjs3/resources/css/ext-all.css" charset="utf-8"/>
     <link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/draw.css" charset="utf-8"/>
     <link rel="icon" href="/media/img/favicon.ico" type="image/x-icon"> 
 
-    <script type="text/javascript" src="{{MEDIA_URL}}third-party/extjs2/adapter/ext/ext-base.js" charset="utf-8"></script>
-    <script type="text/javascript" src="{{MEDIA_URL}}third-party/extjs2/ext-all.js" charset="utf-8"></script>    
+    <script type="text/javascript" src="{{MEDIA_URL}}third-party/extjs3/adapter/ext/ext-base.js" charset="utf-8"></script>
+    <script type="text/javascript" src="{{MEDIA_URL}}third-party/extjs3/ext-all.js" charset="utf-8"></script>    
     <script src="http://maps.google.com/maps/api/js?key={{GMAPS_API_KEY}}&amp;v=3.6&amp;sensor=false" type="text/javascript" ></script>
 	<script src="{{MEDIA_URL}}third-party/OpenLayers/OpenLayers.js" charset="utf-8"></script>
     
@@ -39,7 +39,7 @@
     <script type="text/javascript" src="{{MEDIA_URL}}js/widgets/CustomButtons.js" charset="utf-8"></script>
     
     <script type="text/javascript" src="{{MEDIA_URL}}js/widgets/LayerInstructPanel.js" charset="utf-8"></script>
-    <script type="text/javascript" src="{{MEDIA_URL}}js/widgets/NavigatePanel.js" charset="utf-8"></script>    
+    <script type="text/javascript" src="{{MEDIA_URL}}js/widgets/01MapIntroductionPanel.js" charset="utf-8"></script>    
     <script type="text/javascript" src="{{MEDIA_URL}}js/widgets/RouteInstructPanel.js" charset="utf-8"></script>
     <script type="text/javascript" src="{{MEDIA_URL}}js/widgets/DrawInstructPanel.js" charset="utf-8"></script>
     <script type="text/javascript" src="{{MEDIA_URL}}js/widgets/AddRouteWindow.js" charset="utf-8"></script>
@@ -73,7 +73,7 @@
         // Hack to support IE. See http://trac.openlayers.org/wiki/FrequentlyAskedQuestions#WhywontmyvectorlayerworkinIEbeforemypageisdoneloading
         document.namespaces;
         // reference local blank image
-        Ext.BLANK_IMAGE_URL = '{{MEDIA_URL}}third-party/extjs2/resources/images/default/s.gif';      
+        Ext.BLANK_IMAGE_URL = '{{MEDIA_URL}}third-party/extjs3/resources/images/default/s.gif';      
         Ext.onReady(function() {
             gwst.settings.interview_id = "{{interview_id}}";
             gwst.settings.vessel = "{{vessel}}";

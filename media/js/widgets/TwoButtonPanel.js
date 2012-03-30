@@ -7,15 +7,15 @@ gwst.widgets.TwoButtonPanel = Ext.extend(Ext.Panel, {
 	btn2_handler: null,
     btn2_enabled: true,
     btn2_width: 100,
-    left_margin: 40,
+    btn_style: 'margin-left: auto; margin-right: auto',
     
     initComponent: function() {
         Ext.apply(this, {
-            style: 'margin: 0px 20px; padding: 5px 0px 5px 5px',
+            style: 'margin-top: 0px; margin-bottom: 15px; margin-left: auto; margin-right: auto; padding: 5px 0px 5px 5px',
             cls: 'gwst-button-panel',
             layout:'table',
             border: false,
-            width: 280,
+            width: 260,
             defaults: {
                 bodyStyle:'border: none'
             },
@@ -33,33 +33,41 @@ gwst.widgets.TwoButtonPanel = Ext.extend(Ext.Panel, {
             // action for the button in the button panel
             this.btn1 = new Ext.Button({
                 text: this.btn1_text,
-                handler: this.btn1_handler
+                handler: this.btn1_handler,
+                width: this.btn1_width
             });
             if (!this.btn1_enabled) {
             	this.btn1.disable();
             }            
             this.add({
                 items: [this.btn1],
-                width: this.btn1_width,
-                style: 'margin-left: '+this.left_margin+'px'
+                width: this.btn1_width + 10,
+                style: this.btn_style
             });
         } else {
             this.add({
                 html: '',
-                width: this.btn1_width
+                width: this.btn1_width + 10
             })
         };
         if (this.btn2_handler) {
             this.btn2 = new Ext.Button({
                 text: this.btn2_text,
-                handler: this.btn2_handler
+                handler: this.btn2_handler,
+                width: this.btn2_width
             });
             if (!this.btn2_enabled) {
             	this.btn2.disable();
             }
             this.add({
                 items: [this.btn2],
-                width: this.btn2_width
+                width: this.btn2_width + 10,
+                style: this.btn_style
+            });
+        } else {
+            this.add({
+                html: '',
+                width: thsi.btn2_width + 10
             });
         }
         // Call parent (required)

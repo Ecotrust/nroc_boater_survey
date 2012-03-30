@@ -59,36 +59,20 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.enableUnloadWarning();
             this.loadViewport();
             this.loadResetMapWin();
-            this.startNavStep();
+            this.startIntroStep();
         }
     },
                     
     /********************** Survey steps ************************/
 
-    startNavStep: function() {
-        this.loadNavPanel();
+    startIntroStep: function() {
+        this.loadIntroPanel();
     },
     
-    finNavStep: function() {    	
-    	this.startLyrInstructStep();
-    },
-    
-    startLyrInstructStep: function() {
-        this.loadLyrInstructPanel();
-    },
-    
-    finLyrInstructStep: function() {
-        this.startRouteInstructStep();
-    },    
-        
-    startRouteInstructStep: function() {
-        this.loadRouteInstructPanel();
-    },
-    
-    finRouteInstructStep: function() {
+    finIntroStep: function() {    	
     	this.startDrawInstructStep();
-    },    
-    
+    },
+
     startDrawInstructStep: function() {
         this.loadDrawInstructPanel();
         this.loadAddRouteWin();
@@ -383,29 +367,13 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     /******************** UI widget handlers ********************/   
     
-    loadLyrInstructPanel: function() {
-        this.lyrInstructPanel = new gwst.widgets.LayerInstructPanel();
+    loadIntroPanel: function() {      	
+        this.introPanel = new gwst.widgets.IntroPanel();
         //When panel fires event saying it's all done, we want to process it and move on 
-        this.lyrInstructPanel.on('lyr-cont', this.finLyrInstructStep, this);
-        this.viewport.setWestPanel(this.lyrInstructPanel);    
-    },
-    
-    loadNavPanel: function() {      	
-        this.navPanel = new gwst.widgets.NavigatePanel();
-        //When panel fires event saying it's all done, we want to process it and move on 
-        this.navPanel.on('nav-cont', this.finNavStep, this);  
-        this.viewport.setWestPanel(this.navPanel);
+        this.introPanel.on('intro-cont', this.finIntroStep, this);  
+        this.viewport.setWestPanel(this.introPanel);
     },    
 
-    loadRouteInstructPanel: function() {      	
-    	if (!this.routeInstructPanel) {
-	    	this.routeInstructPanel = new gwst.widgets.RouteInstructPanel();
-	        //When panel fires event saying it's all done, we want to process it and move on 
-	        this.routeInstructPanel.on('route-cont', this.finRouteInstructStep, this);
-    	}
-        this.viewport.setWestPanel(this.routeInstructPanel);  
-    },      
-    
     loadDrawInstructPanel: function() {      	
     	if (!this.drawInstructPanel) {
 	    	this.drawInstructPanel = new gwst.widgets.DrawInstructPanel();

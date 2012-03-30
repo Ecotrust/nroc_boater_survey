@@ -3,16 +3,16 @@ Ext.namespace('gwst', 'gwst.widgets');
 gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     //Default properties can defined here and overriden by config object passed to contructor
     
-    defaultZoom: 8,
+    defaultZoom: 7,
     defaultCenter: null,
 	
     initComponent: function(){		
 		//Map region
 		var region = {
-            e_bound: -7675000,
-            n_bound: 5301000,
-            s_bound: 5116000,
-            w_bound: -7955000,
+            e_bound: -7436602.79,
+            n_bound: 5611382.66,
+            s_bound: 4925283.89,
+            w_bound: -8256007.73,
             name: 'Oregon Coast'
         };
 		var map_extent = new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34);
@@ -59,7 +59,8 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 
         var nautLayer = new OpenLayers.Layer.TMS(
             "Cached",
-            ["http://c3429629.r29.cf0.rackcdn.com/stache/NETiles_layer/"],
+            // ["http://c3429629.r29.cf0.rackcdn.com/stache/NETiles_layer/"],
+            ["/media/tiles/"],
             {
                 buffer: 1,
                 'isBaseLayer': true,
@@ -69,7 +70,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
                     var z = map.getZoom();
                     var url = this.url;
                     var path = 'blank.png' ;
-                    if ( z <= 15 && z >= 6 ) {
+                    if ( z <= 15 && z >= 0 ) {
                         var res = map.getResolution();
                         var x = Math.round((bounds.left - this.maxExtent.left) / (res * this.tileSize.w));
                         var y = Math.round((this.maxExtent.top - bounds.top) / (res * this.tileSize.h));

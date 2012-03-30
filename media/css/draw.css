@@ -232,6 +232,10 @@ ul.instructions {
     white-space: nowrap;
 }
 
+.x-form-radio-group, .x-form-check-group  {
+    margin: 0 0 4% 10%;
+}
+
 /*     buttons     */
 
 .x-btn button{
