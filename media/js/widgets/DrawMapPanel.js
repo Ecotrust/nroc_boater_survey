@@ -59,8 +59,8 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 
         var nautLayer = new OpenLayers.Layer.TMS(
             "Cached",
-            // ["http://c3429629.r29.cf0.rackcdn.com/stache/NETiles_layer/"],
-            ["/media/tiles/"],
+            ["http://c3429629.r29.cf0.rackcdn.com/stache/NETiles_layer/"],
+            // ["/media/tiles/"],
             {
                 buffer: 1,
                 'isBaseLayer': true,
