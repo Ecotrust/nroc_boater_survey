@@ -147,7 +147,9 @@ ul.instructions {
     border-width: 1px;
     border-color: #999999;
 }
-
+.gwst-button-panel .x-btn {
+    margin: auto;
+}
 .gwst-padded-table{
     padding: 10px;
 }

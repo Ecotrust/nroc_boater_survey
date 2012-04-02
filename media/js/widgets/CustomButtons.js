@@ -3,6 +3,7 @@ Ext.namespace('gwst', 'gwst.widgets');
 gwst.widgets.CustomButtons = Ext.extend(Ext.Panel, {
     element_list: [],
     col_width: 150,
+    num_cols: 2,
     
     initComponent: function(){
 		
@@ -15,7 +16,7 @@ gwst.widgets.CustomButtons = Ext.extend(Ext.Panel, {
                 bodyStyle:'border: none; padding: 5px'
             },
             layoutConfig: {
-                columns: 2
+                columns: this.num_cols
             }
         });
         
@@ -30,7 +31,7 @@ gwst.widgets.CustomButtons = Ext.extend(Ext.Panel, {
         var col_no = 1;
         for (var i = 0;i<this.element_list.length;i++) {
             if (this.element_list[i].type == 'handler') {
-                if ((this.element_list[i+2]) && (this.element_list[i+2].type == 'handler') && (col_no % 2 == 1)) {
+                if ((this.num_cols % 2 == 0) && (this.element_list[i+2]) && (this.element_list[i+2].type == 'handler') && (col_no % this.num_cols == 1)) {
                     btn_action = new Ext.Action({
                         text: this.element_list[i+1].elem,
                         handler: this.element_list[i].elem,

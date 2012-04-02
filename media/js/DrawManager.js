@@ -69,13 +69,15 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.loadIntroPanel();
     },
     
-    finIntroStep: function() {    	
-    	this.startDrawInstructStep();
+    finIntroStep: function() { 
+        this.zoomed = this.checkZoom();
+        if (this.zoomed) {
+            this.startDrawInstructStep();
+        }
     },
 
     startDrawInstructStep: function() {
-        this.loadDrawInstructPanel();
-        this.loadAddRouteWin();
+        this.loadPlotRoutePanel();
     },
     
     finDrawInstructStep: function() {
@@ -374,11 +376,16 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.viewport.setWestPanel(this.introPanel);
     },    
 
-    loadDrawInstructPanel: function() {      	
-    	if (!this.drawInstructPanel) {
-	    	this.drawInstructPanel = new gwst.widgets.DrawInstructPanel();
+    loadPlotRoutePanel: function() {      	
+    	if (!this.plotRoutePanel) {
+	    	this.plotRoutePanel = new gwst.widgets.PlotRoutePanel();
     	}
-        this.viewport.setWestPanel(this.drawInstructPanel);  
+        this.viewport.setWestPanel(this.plotRoutePanel);  
+        Ext.MessageBox.alert('Route Plotting', 
+            '<p>You are now in route plotting mode.</p>\
+            <p>When you click on the map, you will begin plotting your route.</p>\
+            <p>Map navigation buttons will still work.</p>',
+            this.activateRouteDraw, this);
     },      
     
     /* Render viewport with main widgets to document body (right now) */
@@ -387,25 +394,15 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 			mapPanelListeners: this.mapPanelListeners
 		});
     },            
-    
-    loadAddRouteWin: function() {
-    	if (!this.addRouteWin) {
-			this.addRouteWin = new gwst.widgets.AddRouteWindow();
-			this.addRouteWin.on('draw-route-clicked', this.activateRouteDraw, this);
-		}
-		this.addRouteWin.show();		
-		this.addRouteWin.alignTo(document.body, "tl-tl", this.addRouteWinOffset);    	
-    },
-    
+
     activateRouteDraw: function() {
-        if (this.mapPanel.map.getZoom() < gwst.settings.minimum_draw_zoom) {
-            alert(gwst.settings.zoom_error_text);
-        } else {    
-            this.mapPanel.enableLineDraw();
-            this.loadAddRouteTooltip();
-            this.loadRouteCancelWin();
-        }
+        this.mapPanel.enableLineDraw();
+        this.loadAddRouteTooltip();
+        this.loadRouteCancelWin();
     },    
+    
+    
+        
     
     hideAddRouteWin: function() {
     	if (this.addRouteWin) {
@@ -938,6 +935,15 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
                 this.loadSatisfiedActivityPanel();
             }    		
     	}
+    },
+    
+    checkZoom: function() {
+        if (this.mapPanel.map.getZoom() < gwst.settings.minimum_draw_zoom) {
+            alert(gwst.settings.zoom_error_text);
+            return false;
+        } else {
+            return true;
+        }
     },
     
     pauseRoute: function() {

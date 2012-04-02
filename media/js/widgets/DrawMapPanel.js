@@ -91,7 +91,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         );        
         this.vectorLayer.events.on({
             "sketchstarted": this.vecStarted,
-            "skethmodified": this.vecModified,
+            "sketchmodified": this.vecModified,
             "sketchcomplete": this.vecComplete,
             scope: this
         });        
