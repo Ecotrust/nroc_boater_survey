@@ -400,10 +400,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.loadAddRouteTooltip();
         this.loadRouteCancelWin();
     },    
-    
-    
-        
-    
+
     hideAddRouteWin: function() {
     	if (this.addRouteWin) {
     		this.addRouteWin.hide();

@@ -37,13 +37,12 @@ gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
             xtype: 'checkboxgroup',
             fieldLabel: 'Reasons List',
             itemCls: 'x-check-group-alt',
-            style: 'margin: 0px 0px 10px 5px',
             columns: 1,
+            cls: 'x-form-check-group',
             items: [
                 {boxLabel: 'Quickest route to my destination', name: 'travel-time'},
                 {boxLabel: 'Safest route to my destination', name: 'safe-route'},
-                {boxLabel: 'Access to shoreside facilities/resources/<br />\
-                amenities (e.g. fuel, dockage, shops, restaurants)', name: 'access'},
+                {boxLabel: 'Access to shoreside facilities', name: 'access'},
                 {boxLabel: 'Scenic beauty', name: 'beauty'},
                 {boxLabel: 'I was just cruising around', name: 'cruising'},
                 this.other_box
@@ -65,11 +64,8 @@ gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
         });
         
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
-        	btn1_width: 140,
         	btn2_text: 'Continue >>',        	
             btn2_handler: this.contBtnClicked.createDelegate(this),
-            btn2_width: 120,
-            left_margin: 20,
             bottom_margin: 5
         });
         
