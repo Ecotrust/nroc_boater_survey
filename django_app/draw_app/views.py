@@ -226,7 +226,11 @@ def validate_shape(request):
             if new_shape.area == 0:
                 return gen_validate_response(2, 'Shape is not valid', None, type)                
             if (not new_shape.geom_type == 'Polygon') or (not new_shape.valid):
-                return gen_validate_response(2, 'Shape is not valid', new_shape, type)                        
+                return gen_validate_response(2, 'Shape is not valid', new_shape, type)
+        elif type == 'act_point' or type == 'alt_act_point':
+            if (not new_shape.geom_type == 'Point') or (not new_shape.valid):
+                return gen_validate_response(2, 'Activity point is not valid', new_shape, type)
+            
     except Exception, e:
         return gen_validate_response(2, 'Shape is not valid', None, type)
             

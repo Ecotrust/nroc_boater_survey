@@ -6,9 +6,7 @@ shapes and pennies.  Extends Ext.Observable providing event handling
 */
 gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 	cur_feature: null, //Last drawn feature
-	addRouteWinOffset: [540, 8],
-	addPolyWinOffset: [536, 8],
-	cancelWinOffset: [690, 8],
+	cancelWinOffset: [540, 8],
     routeCancelWinOffset: [675, 8],
     resetMapWinOffset: [380, 8],	//Offset from top left to render
 	activityNum: 0,
@@ -119,15 +117,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.routeInfo1Panel.resetPanel();
         this.saveNewRoute();
     },
-    
-    startActivityInstructStep: function() {
-        this.loadActivityInstructPanel();
-    },
-    
-    finActivityInstructStep: function() {
-        this.startDrawActivityInstructStep();
-    },
-    
+
     skipActivitiesStep: function() {
         Ext.Msg.show({
            title:'Skip Activities?',
@@ -156,6 +146,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     stopDrawingCheck: function(id, text, opt) {
         if (id == 'yes') {
+            this.mapPanel.disablePointDraw();
             if (this.activity_shapes_drawn) {
                 this.stopDrawing();
             } else {
@@ -164,15 +155,10 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         }
     },
     
-    startDrawActivityInstructStep: function() {
-        this.loadDrawActivityInstructPanel();
-        this.loadAddPolyWin();
+    startActivityAreasStep: function() {
+        this.loadActivityAreasPanel();
     },
-    
-    finDrawActivityInstructStep: function() {
-        this.startActivityInfoStep();
-    },
-    
+
     startEditActivityStep: function() {
         this.loadEditActivityPanel();
         this.enableFeatureEdit();
@@ -277,7 +263,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     startActivityInfo4Step: function() {
         this.loadActivityInfo4Panel();
-        this.loadAltPolyWin();
         this.alternateActivity = true;
     },
 
@@ -315,7 +300,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.activity_3_alt_act= null;
             this.activity_3_alt_other= null;
             
-    		this.startDrawActivityInstructStep();
+    		this.startActivityAreasStep();
         }    	
     },
     
@@ -363,7 +348,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         if (this.alternateActivity) {
             this.startActivityInfo4Step();
         } else {
-    		this.startDrawActivityInstructStep();
+    		this.startActivityAreasStep();
         }		
     },       
     
@@ -399,22 +384,11 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.mapPanel.enableLineDraw();
         this.loadAddRouteTooltip();
         this.loadRouteCancelWin();
-    },    
+    }, 
 
-    hideAddRouteWin: function() {
-    	if (this.addRouteWin) {
-    		this.addRouteWin.hide();
-    	}
+    activatePointDraw: function() {
+        this.mapPanel.enablePointDraw();
     },
-
-    loadAddPolyWin: function() {
-    	if (!this.addPolyWin) {
-			this.addPolyWin = new gwst.widgets.AddPolyWindow();
-			this.addPolyWin.on('draw-poly-clicked', this.activatePolyDraw, this);		
-		}
-		this.addPolyWin.show();		
-		this.addPolyWin.alignTo(document.body, "tl-tl", this.addPolyWinOffset);    	
-    },   
 
     activatePolyDraw: function() {
         if (this.mapPanel.map.getZoom() < gwst.settings.minimum_draw_zoom) {
@@ -425,15 +399,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.loadCancelWin();
         }
     },
-    
-    loadAltPolyWin: function() {
-    	if (!this.altPolyWin) {
-			this.altPolyWin = new gwst.widgets.AddPolyWindow();
-			this.altPolyWin.on('draw-poly-clicked', this.activateAltPolyDraw, this);		
-		}
-		this.altPolyWin.show();		
-		this.altPolyWin.alignTo(document.body, "tl-tl", this.addPolyWinOffset);    	
-    },   
 
     activateAltPolyDraw: function() {
         if (this.mapPanel.map.getZoom() < gwst.settings.minimum_draw_zoom) {
@@ -444,16 +409,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.loadCancelWin();
         }
     },
-    
-    hideAddPolyWin: function() {
-    	if (this.addPolyWin) {
-    		this.addPolyWin.hide();
-    	}
-        if (this.altPolyWin) {
-            this.altPolyWin.hide();
-        }
-    },
-    
+
     loadRouteCancelWin: function() {
         if (!this.routeCancelWin) {
 			this.routeCancelWin = new gwst.widgets.CancelWindow();
@@ -568,25 +524,19 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         }
         this.viewport.setWestPanel(this.routeInfo1Panel);    
     },
-    
-    /* Load the draw area instructions west panel*/
-    loadActivityInstructPanel: function() {      	
-    	if (!this.drawActivityInstructPanel) {
-	    	this.actInstructPanel = new gwst.widgets.ActivityInstructPanel();
-	        //When panel fires event saying it's all done, we want to process it and move on 
-	        this.actInstructPanel.on('activity-cont', this.finActivityInstructStep, this);
-            this.actInstructPanel.on('activity-skip', this.skipActivitiesStep, this);
-    	}
-        this.viewport.setWestPanel(this.actInstructPanel);  
-    },   
 
-    loadDrawActivityInstructPanel: function() {      	
-    	if (!this.drawActInstructPanel) {
-	    	this.drawActInstructPanel = new gwst.widgets.DrawActivityInstructPanel();
+    loadActivityAreasPanel: function() {      	
+    	if (!this.actAreasPanel) {
+	    	this.actAreasPanel = new gwst.widgets.ActivityAreasPanel();
 	        //When panel fires event saying it's all done, we want to process it and move on
-            this.drawActInstructPanel.on('draw-skip', this.skipDrawingStep, this);            
+            this.actAreasPanel.on('draw-skip', this.skipDrawingStep, this);            
     	}
-        this.viewport.setWestPanel(this.drawActInstructPanel);  
+        this.viewport.setWestPanel(this.actAreasPanel);
+        Ext.MessageBox.alert('Activity Plotting', 
+            '<p>You are now in activity plotting mode.</p>\
+            <p>When you click on the map, you will place an activity marker.</p>\
+            <p>Map navigation buttons will still work.</p>',
+            this.activatePointDraw, this);
     },    
     
     /* Load the satisfied with activity west panel */
@@ -601,12 +551,13 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },   
 
     completeActivity: function() {
-        this.validateShape(this.cur_feature,'act_area');
+        // this.validateShape(this.cur_feature,'act_area');
+        this.validateShape(this.cur_feature,'act_point');
     },
 
     redrawActivity: function() {
         this.mapPanel.removeLastFeature();
-    	this.startDrawActivityInstructStep();
+    	this.startActivityAreasStep();
     },    
     
     redrawEditActivity: function() {
@@ -688,11 +639,11 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     redrawAltActivity: function() {
         this.mapPanel.removeLastFeature();
     	this.loadActivityInfo4Panel();    
-        this.loadAltPolyWin();    	
     },
     
     saveAltActivity: function() {
-        this.validateShape(this.cur_feature,'alt_act_area');
+        // this.validateShape(this.cur_feature,'alt_act_area');
+        this.validateShape(this.cur_feature,'alt_act_point');
     },
     
     loadDrawNewAreaPanel: function() {
@@ -892,7 +843,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     finSaveNewRoute: function(response) {
     	var new_feat = Ext.decode(response.responseText);    
     	this.hideWait.defer(500, this);
-        this.startActivityInstructStep();
+        this.startActivityAreasStep();
     },
     
     finSaveNewArea: function(response) {
@@ -918,14 +869,11 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         //track current feature for referencing later
     	this.cur_feature = feature;
     	if (feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.LineString') {
-            this.hideAddRouteWin();
             this.hideCancelWin();
             this.hideMapTooltip();
             //the route pause handler will handle loading the satisfied panel
     	} else {
-    		this.hideAddPolyWin();
-    		this.hideCancelWin();
-    		this.hideMapTooltip();
+            this.mapPanel.disablePointDraw();
             if (this.alternateActivity) {
                 this.loadSatisfiedAltActivityPanel();
             } else {
@@ -946,7 +894,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     pauseRoute: function() {
     	this.hideMapTooltip();
     	this.hideCancelWin();    	
-        this.hideAddRouteWin(); 
         this.loadSatisfiedRoutePanel();    	    
     },
     
@@ -955,7 +902,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.startDrawInstructStep();
         this.loadRouteCancelWin();
     },
-    
+
     /* 
      * Listen for map panel creation and then create hooks into it and setup 
      * additional map-related widgets 

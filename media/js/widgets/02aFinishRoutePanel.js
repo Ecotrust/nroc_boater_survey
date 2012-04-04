@@ -46,35 +46,26 @@ gwst.widgets.SatisfiedRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
                 elem: 'No, continue plotting route',
                 type: 'text'
             },{
-            	// elem: '',
-            	// type: 'text'            	
-            // },{
-                // elem: this.editClicked.createDelegate(this),
-                // type: 'handler'
-            // },{
-                // elem: 'Edit route',
-                // type: 'text'
-            // },{
-                // elem: 'Make some edits to this route',
-                // type: 'text'
-            // },{
+            	elem: '',
+            	type: 'text'            	
+            },{
+                elem: this.editClicked.createDelegate(this),
+                type: 'handler'
+            },{
+                elem: 'Edit route',
+                type: 'text'
+            },{
                 elem: this.redrawClicked.createDelegate(this),
                 type: 'handler'
             },{
                 elem: 'No, re-plot route',
                 type: 'text'
             },{
-                // elem: '',
-                // type: 'text'
-            // },{
                 elem: this.saveClicked.createDelegate(this),
                 type: 'handler'
             },{
                 elem: 'Yes, save route',
                 type: 'text'
-            // },{
-                // elem: '',
-                // type: 'text'
             }]
         });
         

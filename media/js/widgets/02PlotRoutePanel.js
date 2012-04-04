@@ -8,10 +8,7 @@ gwst.widgets.PlotRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
     initComponent: function(){
         // Constructor, config object already applied to 'this' so properties can 
         // be created and added/overridden here: Ext.apply(this, {});
-		
-		// this.addEvents('route-cont');
-        // this.addEvents('route-back');
-		
+
         // Call parent (required)
         gwst.widgets.PlotRoutePanel.superclass.initComponent.apply(
           this, arguments);                     
@@ -43,51 +40,6 @@ gwst.widgets.PlotRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
 			border: false
 		});
         
-        this.table_panel = new Ext.Panel({
-            title: 'View more detailed drawing instructions',
-            collapsible: true,
-            collapsed: true,          
-            layout: 'table',
-            border: false,
-            style: 'margin: 5px 5px 5px 5px; padding: 0px 5px 5px 5px',
-            defaults: {
-                bodyStyle: 'border: none; padding: 0px 5px 5px 5px'
-            },
-            layoutConfig: {
-                columns: 2
-            },
-            id: 'draw_table_panel_2',
-            items: [{
-                html: '<p>a. Click the \'Plot Route\' button.</p>'
-            },{
-                html: '<img src="/media/img/route_1.png" />'
-            },{
-                html: '<p>b. Click once on the map where you started your trip</p>'
-            },{
-                html: '<img src="/media/img/route_2.png" />'
-            },{
-                html: '<p>c. Move mouse and click to create a second point</p>'
-            }, {
-                html: '<img src="/media/img/route_3.png" />'
-            },{
-                html: '<p>d. Continue clicking along your boat route</p>'
-            },{
-                html: '<img src="/media/img/route_4.png" />'
-            },{
-                html: '<p>e. Use the arrow buttons to move the map as you go</p>'
-            },{
-                html: '<img src="/media/img/route_5.png" />'
-            },{
-                html: '<p>f. Double-click the last point to complete the route</p>'
-            },{
-                html: '<img src="/media/img/route_6.png" />'
-            },{
-                html: '<p>g. If you made a mistake, click the \'Redraw\' button</p>'
-            },{
-                html: '<img src="/media/img/route_7.png" />'
-            }]
-        });       
-
         this.panel_three = new Ext.Panel({
             html: "Feel free to play around and try it out. Don't worry if you make a mistake. \
                 A 'Redraw' button will appear once you start plotting - you can use it to redraw your route. \
@@ -99,7 +51,6 @@ gwst.widgets.PlotRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
         this.demo_panel = new Ext.Panel({
 			html: '<p class="video-link"><img class="video-img" src="/media/img/film_go.png"/> <a href="'+ gwst.settings.urls.demo +'" target="_blank">Watch Demonstration</a>',
             id: 'draw_demo_panel',
-			// style: 'margin: 3px 3px 0px 10px',
 			border: false
 		});
 
@@ -107,7 +58,6 @@ gwst.widgets.PlotRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
 		this.add(this.inner_panel);
 		this.add(this.panel_three);
 		this.add(this.demo_panel);
-        // this.add(this.table_panel);		
         
         // Call parent (required)
         gwst.widgets.PlotRoutePanel.superclass.onRender.apply(this, arguments); 

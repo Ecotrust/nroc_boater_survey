@@ -122,6 +122,15 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 
 		map.addControl(this.drawLineControl);                
         
+        this.drawPointControl = new OpenLayers.Control.DrawFeature(
+            	this.vectorLayer,
+                OpenLayers.Handler.Point
+        );        		
+
+		map.addControl(this.drawPointControl);                
+        
+        
+        
         this.modifyControl = new OpenLayers.Control.ModifyFeature(this.vectorLayer);
         map.addControl(this.modifyControl);
         
@@ -194,6 +203,14 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     
     disableLineDraw: function() {
         this.drawLineControl.deactivate();
+    },
+    
+    enablePointDraw: function () {
+        this.drawPointControl.activate();
+    },
+    
+    disablePointDraw: function() {
+        this.drawPointControl.deactivate();
     },
     
     enablePolyDraw: function() {
