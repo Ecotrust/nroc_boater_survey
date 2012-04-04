@@ -174,13 +174,13 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     startActivityInfoStep: function() {
-        this.loadActivityInfo1Panel();
+        this.loadActivityQuestionsPanel();
     },
     
     finActivityInfoStep: function() {
         // if ( this.activityInfo1Panel.answer_one.items.length > 0) {
-        for (this.i = 0; this.i < this.activityInfo1Panel.answer_one.items.length; i++) {
-            if (this.activityInfo1Panel.answer_one.items.get(this.i).checked) {
+        for (this.i = 0; this.i < this.activityQuestionsPanel.answer_one.items.length; i++) {
+            if (this.activityQuestionsPanel.answer_one.items.get(this.i).checked) {
             
                 
             
@@ -205,7 +205,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         // if (this.activityInfo1Panel.answer_three.getValue()) {
             // this.activity_1_rank = this.activityInfo1Panel.answer_three.getValue();
         // }
-        this.activityInfo1Panel.resetPanel();        
+        this.activityQuestionsPanel.resetPanel();        
         this.startActivityInfo2Step();
     },
     
@@ -589,13 +589,13 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.viewport.setWestPanel(this.editAltActPanel);
     },
     
-    loadActivityInfo1Panel: function() {
-        if (!this.activityInfo1Panel) {
-            this.activityInfo1Panel = new gwst.widgets.ActivityInfo1Panel();
+    loadActivityQuestionsPanel: function() {
+        if (!this.activityQuestionsPanel) {
+            this.activityQuestionsPanel = new gwst.widgets.ActivityQuestionsPanel();
             //When panel fires even saying it's all done, we want to process it and move on
-            this.activityInfo1Panel.on('activity-info1-cont', this.finActivityInfoStep, this);
+            this.activityQuestionsPanel.on('activity-info1-cont', this.finActivityInfoStep, this);
         }
-        this.viewport.setWestPanel(this.activityInfo1Panel);    
+        this.viewport.setWestPanel(this.activityQuestionsPanel);    
     },
     
     loadActivityInfo2Panel: function() {
