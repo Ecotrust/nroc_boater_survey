@@ -2,6 +2,7 @@ Ext.namespace('gwst', 'gwst.widgets');
 
 gwst.widgets.PlotRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
     id: 'plot-route-panel',
+    help_checked: false,
     help_url: gwst.settings.urls.draw_help,
 	
     // Constructor Defaults, can be overridden by user's config object
@@ -9,6 +10,8 @@ gwst.widgets.PlotRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
         // Constructor, config object already applied to 'this' so properties can 
         // be created and added/overridden here: Ext.apply(this, {});
 
+        this.addEvents('show-help');
+        
         // Call parent (required)
         gwst.widgets.PlotRoutePanel.superclass.initComponent.apply(
           this, arguments);                     
@@ -48,20 +51,43 @@ gwst.widgets.PlotRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
             style: 'padding:5px 5px 5px 10px'
         });
         
+        this.help_box = new Ext.form.Checkbox({
+            boxLabel: 'Show help on map',
+            fieldLabel: '(f)Show help on map',
+            checked: this.help_checked,
+            handler: this.helpCheck,
+            id: 'route-help-checkbox',
+            name: 'routeHelpCheckbox'
+        });
+        
         this.demo_panel = new Ext.Panel({
 			html: '<p class="video-link"><img class="video-img" src="/media/img/film_go.png"/> <a href="'+ gwst.settings.urls.demo +'" target="_blank">Watch Demonstration</a>',
             id: 'draw_demo_panel',
 			border: false
 		});
-
+        
+        this.help_panel = new Ext.Panel({
+            layout: {
+                type: 'hbox',
+                padding: '5'
+            },
+        });
+        
+        this.help_panel.add(this.demo_panel);
+        this.help_panel.add(this.help_box);
+        
         this.add(this.header_panel);
 		this.add(this.inner_panel);
 		this.add(this.panel_three);
-		this.add(this.demo_panel);
+		this.add(this.help_panel);
         
         // Call parent (required)
         gwst.widgets.PlotRoutePanel.superclass.onRender.apply(this, arguments); 
-	}
+	},
+    
+    helpCheck: function() {
+        this.fireEvent('show-help', this.checked);
+    }
 });
  
 // register xtype to allow for lazy initialization

@@ -7,8 +7,9 @@ shapes and pennies.  Extends Ext.Observable providing event handling
 gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 	cur_feature: null, //Last drawn feature
 	cancelWinOffset: [540, 8],
-    routeCancelWinOffset: [675, 8],
+    routeCancelWinOffset: [540, 8],
     resetMapWinOffset: [380, 8],	//Offset from top left to render
+    mapNavWinOffset: [380, 60],	    //Offset from top left to render
 	activityNum: 0,
     route_factors_other: null,
     act_list_items: null,
@@ -19,6 +20,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     view_rank: null,
     dive_rank: null,
     activity_shapes_drawn: false,
+    help_on: true,
 
     constructor: function(){
         gwst.DrawManager.superclass.constructor.call(this);
@@ -61,11 +63,14 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 
     startIntroStep: function() {
         this.loadIntroPanel();
+        this.loadMapHelpWindow();
     },
     
     finIntroStep: function() { 
         this.zoomed = this.checkZoom();
         if (this.zoomed) {
+            this.help_on = false;
+            this.showHelp(false);
             this.startDrawInstructStep();
         }
     },
@@ -304,6 +309,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     /* 
      * Setup UI for invalid shape error display step 
      */
+/*
     startInvalidShapeStep: function(status_code) {
         this.loadInvalidShapePanel(status_code);        
         this.mapPanel.disablePolyDraw(); //Turn off drawing
@@ -311,6 +317,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         	this.drawToolWin.hide();
         }
     },
+*/
        
     /*
      * Process and finish Invalid Shape step
@@ -323,25 +330,65 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     /*
      * Process and finish Invalid Shape step
      */
+/*
     finInvalidShapeStep: function() {
 		this.mapPanel.removeLastFeature();
         this.startActivityAreasStep();
     },       
+*/
     
     /******************** UI widget handlers ********************/   
+    
+    showHelp: function(result) {
+        this.help_on = result;
+        if (result) {
+            this.loadMapHelpWindow();
+        } else {
+            if (this.navHelpWin) {
+                this.navHelpWin.hide();
+            }
+        }
+        if (this.plotRoutePanel && !this.plotRoutePanel.hidden) {
+            this.plotRoutePanel.help_box.setValue(result);
+        }
+        if (this.actAreasPanel && !this.actAreasPanel.hidden) {
+            this.actAreasPanel.help_box.setValue(result);
+        }
+    },
+    
+    loadMapHelpWindow: function() {
+        if (!this.navHelpWin) {
+            this.navHelpWin = new gwst.widgets.NavHelpWindow();            
+        }
+        this.navHelpWin.show();
+        this.navHelpWin.alignTo(document.body, "tl-tl", this.mapNavWinOffset);
+        this.navHelpWin.on('view-nav-details', this.loadNavigationDetails, this);
+        this.navHelpWin.on('hide', function(){this.showHelp(false);}, this);
+    },
+    
+    loadNavigationDetails: function() {
+        if (!this.navDetailsWin) {
+            this.navDetailsWin = new gwst.widgets.NavDetailsWindow();
+        }
+        this.navDetailsWin.show();
+    },
     
     loadIntroPanel: function() {      	
         this.introPanel = new gwst.widgets.IntroPanel();
         //When panel fires event saying it's all done, we want to process it and move on 
-        this.introPanel.on('intro-cont', this.finIntroStep, this);  
+        this.introPanel.on('intro-cont', this.finIntroStep, this); 
+        this.introPanel.on('show-help', this.showHelp, this);
         this.viewport.setWestPanel(this.introPanel);
     },    
 
     loadPlotRoutePanel: function() {      	
     	if (!this.plotRoutePanel) {
-	    	this.plotRoutePanel = new gwst.widgets.PlotRoutePanel();
+	    	this.plotRoutePanel = new gwst.widgets.PlotRoutePanel({
+                help_checked: this.help_on
+            });
     	}
         this.viewport.setWestPanel(this.plotRoutePanel);  
+        this.plotRoutePanel.help_box.on('show-help', this.showHelp, this);
         Ext.MessageBox.alert('Route Plotting', 
             '<p>You are now in route plotting mode.</p>\
             <p>When you click on the map, you will begin plotting your route.</p>\
@@ -493,11 +540,14 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 
     loadActivityAreasPanel: function() {      	
     	if (!this.actAreasPanel) {
-	    	this.actAreasPanel = new gwst.widgets.ActivityAreasPanel();
+	    	this.actAreasPanel = new gwst.widgets.ActivityAreasPanel({
+                help_checked: this.help_on
+            });
 	        //When panel fires event saying it's all done, we want to process it and move on
             this.actAreasPanel.on('draw-skip', this.skipDrawingStep, this);            
     	}
         this.viewport.setWestPanel(this.actAreasPanel);
+        this.actAreasPanel.help_box.on('show-help', this.showHelp, this);
         Ext.MessageBox.alert('Activity Plotting', 
             '<p>You are now in activity plotting mode.</p>\
             <p>When you click on the map, you will place an activity marker.</p>\
@@ -926,7 +976,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 			this.resetMapWin.on('reset-map', this.loadResetCheckWin, this);
 		}
 		this.resetMapWin.show();		
-		this.resetMapWin.alignTo(document.body, "tl-tl", this.resetMapWinOffset);    	
+		this.resetMapWin.alignTo(document.body, "tl-tl", this.resetMapWinOffset);
     },
     
     /*Show window to check that user wants to leave */

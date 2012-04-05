@@ -9,6 +9,8 @@ gwst.widgets.ActivityAreasPanel = Ext.extend(gwst.widgets.WestPanel, {
         // Constructor, config object already applied to 'this' so properties can 
         // be created and added/overridden here: Ext.apply(this, {});
 		
+        this.addEvents('show-help');
+        
         // Call parent (required)
         gwst.widgets.ActivityAreasPanel.superclass.initComponent.apply(
           this, arguments);                     
@@ -60,6 +62,22 @@ gwst.widgets.ActivityAreasPanel = Ext.extend(gwst.widgets.WestPanel, {
 			border: false
 		});
         
+        this.help_box = new Ext.form.Checkbox({
+            boxLabel: 'Show help on map',
+            fieldLabel: '(f)Show help on map',
+            checked: this.help_checked,
+            handler: this.helpCheck,
+            id: 'act-help-checkbox',
+            name: 'actHelpCheckbox'
+        });
+        
+        this.help_panel = new Ext.Panel({
+            layout: {
+                type: 'hbox',
+                padding: '5'
+            },
+        });
+
         this.table_panel = new Ext.Panel({
             title: 'View more detailed drawing instructions',
             collapsible: true,
@@ -108,12 +126,16 @@ gwst.widgets.ActivityAreasPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
         	btn2_text: 'Skip this step',        	
             btn2_handler: this.skipStepClicked.createDelegate(this)
-        });        
+        }); 
+
+        
+        this.help_panel.add(this.demo_panel);
+        this.help_panel.add(this.help_box);
 
         this.add(this.header_panel);
 		this.add(this.inner_panel);
         this.add(this.panel_three);
-        this.add(this.demo_panel);
+        this.add(this.help_panel);
         this.add(this.button_panel);
         this.add(this.table_panel);        
         
@@ -123,6 +145,10 @@ gwst.widgets.ActivityAreasPanel = Ext.extend(gwst.widgets.WestPanel, {
     
     skipStepClicked: function() {
         this.fireEvent('draw-skip',this);
+    },
+    
+    helpCheck: function() {
+        this.fireEvent('show-help', this.checked);
     }
 
 });
