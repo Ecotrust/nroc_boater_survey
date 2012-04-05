@@ -84,11 +84,8 @@ gwst.widgets.EditRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
             btn1_text: 'Redraw instead',
             btn1_handler: this.redrawClicked.createDelegate(this),
-        	btn1_width: 130,
         	btn2_text: 'Done editing',        	
-            btn2_handler: this.saveEditRouteClicked.createDelegate(this),
-            btn2_width: 120,
-            left_margin: 15
+            btn2_handler: this.saveEditRouteClicked.createDelegate(this)
         });
         
         this.add(this.header_panel);

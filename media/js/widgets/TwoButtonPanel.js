@@ -67,7 +67,7 @@ gwst.widgets.TwoButtonPanel = Ext.extend(Ext.Panel, {
         } else {
             this.add({
                 html: '',
-                width: thsi.btn2_width + 10
+                width: this.btn2_width + 10
             });
         }
         // Call parent (required)

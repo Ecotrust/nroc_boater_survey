@@ -78,6 +78,7 @@ gwst.widgets.ActivityAreasPanel = Ext.extend(gwst.widgets.WestPanel, {
             },
         });
 
+/*        
         this.table_panel = new Ext.Panel({
             title: 'View more detailed drawing instructions',
             collapsible: true,
@@ -122,6 +123,7 @@ gwst.widgets.ActivityAreasPanel = Ext.extend(gwst.widgets.WestPanel, {
                 html: '<img src="/media/img/area_7.png" />'
             }]
         });      
+*/
 
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
         	btn2_text: 'Skip this step',        	
@@ -137,7 +139,7 @@ gwst.widgets.ActivityAreasPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.panel_three);
         this.add(this.help_panel);
         this.add(this.button_panel);
-        this.add(this.table_panel);        
+        // this.add(this.table_panel);        
         
         // Call parent (required)
         gwst.widgets.ActivityAreasPanel.superclass.onRender.apply(this, arguments); 

@@ -206,7 +206,11 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         if (this.fish_tgts['fish-other']) {
             this.fish_tgts['fish-other'] = this.fishingQuestionsPanel.other_fish.getValue();
         }
-        this.fish_rank = this.fishingQuestionsPanel.fishing_two.getValue().inputValue;
+        if (this.fishingQuestionsPanel.fishing_two.getValue()) {
+            this.fish_rank = this.fishingQuestionsPanel.fishing_two.getValue().inputValue;
+        } else {
+            this.fish_rank = null;
+        }
         this.finFishingQuestionsStep();
     },
     
@@ -232,7 +236,11 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         if (this.view_tgts['view-other']) {
             this.view_tgts['view-other'] = this.viewingQuestionsPanel.other_view.getValue();
         }
-        this.view_rank = this.viewingQuestionsPanel.viewing_two.getValue().inputValue;
+        if (this.viewingQuestionsPanel.viewing_two.getValue()) {
+            this.view_rank = this.viewingQuestionsPanel.viewing_two.getValue().inputValue;
+        } else {
+            this.view_rank = null;
+        }
         this.finViewingQuestionsStep();
     },
     
@@ -258,7 +266,11 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         if (this.dive_tgts['dive-other']) {
             this.dive_tgts['dive-other'] = this.divingQuestionsPanel.other_dive.getValue();
         }
-        this.dive_rank = this.divingQuestionsPanel.diving_two.getValue().inputValue;
+        if (this.divingQuestionsPanel.diving_two.getValue()) {
+            this.dive_rank = this.divingQuestionsPanel.diving_two.getValue().inputValue;
+        } else {
+            this.dive_rank = null;
+        }
         this.finDivingQuestionsStep();
     },
     
@@ -413,6 +425,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.mapPanel.enablePointDraw();
     },
 
+/*
     activatePolyDraw: function() {
         if (this.mapPanel.map.getZoom() < gwst.settings.minimum_draw_zoom) {
             alert(gwst.settings.zoom_error_text);
@@ -422,6 +435,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.loadCancelWin();
         }
     },
+*/
 
     loadRouteCancelWin: function() {
         if (!this.routeCancelWin) {
@@ -453,6 +467,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
 
     /* Load the Invalid Shape west panel */
+/*    
     loadInvalidShapePanel: function(status_code) {
     	if (!this.invalidShapePanel) {
             this.invalidShapePanel = new gwst.widgets.InvalidShapePanel({
@@ -467,7 +482,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         }
         this.viewport.setWestPanel(this.invalidShapePanel);    	
     },    
-    
+*/
+
     /* Load the Invalid Shape west panel */
     loadInvalidRoutePanel: function(status_code) {
     	if (!this.invalidRoutePanel) {

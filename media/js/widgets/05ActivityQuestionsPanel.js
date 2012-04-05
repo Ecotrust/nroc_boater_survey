@@ -11,7 +11,7 @@ gwst.widgets.ActivityQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
 
     onRender: function(){
         this.header_panel = new Ext.Panel({  
-            id: 'activity_info1_header_panel',
+            id: 'activity_questions_header_panel',
             html: '<img src="/media/img/8_ActivityQuestions1_header.png">',
 			border: 'north',
             bodyCfg: {            
