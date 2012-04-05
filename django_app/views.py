@@ -26,7 +26,7 @@ def intro(request):
             #clear out previous answers
             Route.objects.filter(survey_id=request.session['interview_id']).delete()
             ActivityArea.objects.filter(survey_id=request.session['interview_id']).delete()
-            AltActArea.objects.filter(survey_id=request.session['interview_id']).delete()
+            ActivityPoint.objects.filter(survey_id=request.session['interview_id']).delete()
             RouteFactor.objects.filter(survey_id=request.session['interview_id']).delete()
             ActivityFactor.objects.filter(survey_id=request.session['interview_id']).delete()    
         

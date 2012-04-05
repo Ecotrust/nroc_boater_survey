@@ -61,14 +61,22 @@ class ActivityFactor(Model):
     class Meta:
         db_table = u'activity_factors'
         
-class AltActArea(Model):
+class ActivityPoint(Model):
     survey_id = ForeignKey(SurveyStatus)
-    geometry = PolygonField(srid=settings.SERVER_SRID)
-    preferred_area = ForeignKey(ActivityArea)
+    geometry = PointField(srid=settings.SERVER_SRID)
+    activities = CharField( blank=True, null=True, max_length=1500 )
+    fish_tgts = CharField( blank=True, null=True, max_length=1500 )
+    fish_rank = CharField( blank=True, null=True, max_length=1500 )
+    view_tgts = CharField( blank=True, null=True, max_length=1500 )
+    view_rank = CharField( blank=True, null=True, max_length=1500 )
+    dive_tgts = CharField( blank=True, null=True, max_length=1500 )
+    dive_rank = CharField( blank=True, null=True, max_length=1500 )
     objects = GeoManager()
     creation_date = DateTimeField(default=datetime.datetime.now)
     class Meta:
-        db_table = u'alt_act_area'
+        db_table = u'act_point'
+    def __unicode__(self):
+        return unicode('%s' % (self.pk))
         
 ### ADMINS ###        
 
@@ -78,7 +86,7 @@ class SurveyStatusAdmin(admin.ModelAdmin):
         
 class RouteAdmin(OSMGeoAdmin):
     list_display = ('pk', 'survey_id', 'creation_date')
-    odering = ('survey_id',)
+    ordering = ('survey_id',)
     default_lon = -7870000
     default_lat = 5165000
     default_zoom = 8
@@ -87,11 +95,11 @@ class RouteAdmin(OSMGeoAdmin):
     
 class RouteFactorAdmin(admin.ModelAdmin):
     list_display = ('pk', 'survey_id', 'route_pk', 'factor')
-    odering = ('survey_id',)        
+    ordering = ('survey_id',)        
         
 class ActivityAdmin(OSMGeoAdmin):
     list_display = ('pk', 'survey_id', 'creation_date')
-    odering = ('survey_id',)
+    ordering = ('survey_id',)
     default_lon = -7870000
     default_lat = 5165000
     default_zoom = 8
@@ -100,20 +108,12 @@ class ActivityAdmin(OSMGeoAdmin):
         
 class ActivityFactorAdmin(admin.ModelAdmin):
     list_display = ('pk', 'survey_id', 'activity_pk', 'factor')
-    odering = ('survey_id',)                
-    
-class AltActAdmin(OSMGeoAdmin):
-    list_display = ('pk', 'preferred_area', 'survey_id', 'creation_date')
-    odering = ('survey_id',)
-    default_lon = -7870000
-    default_lat = 5165000
-    default_zoom = 8
-    mouse_position = True
-    display_srid = True
+    ordering = ('survey_id',)                
+
     
 admin.site.register(SurveyStatus,SurveyStatusAdmin)
 admin.site.register(Route,RouteAdmin)
 admin.site.register(ActivityArea,ActivityAdmin)
-admin.site.register(AltActArea,AltActAdmin)
+admin.site.register(ActivityPoint,ActivityAdmin)
 admin.site.register(RouteFactor,RouteFactorAdmin)
 admin.site.register(ActivityFactor,ActivityFactorAdmin)

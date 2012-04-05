@@ -73,7 +73,7 @@ def draw(request):
     
     Route.objects.filter(survey_id=request.session['interview_id']).delete()
     ActivityArea.objects.filter(survey_id=request.session['interview_id']).delete()
-    AltActArea.objects.filter(survey_id=request.session['interview_id']).delete()
+    ActivityPoint.objects.filter(survey_id=request.session['interview_id']).delete()
     RouteFactor.objects.filter(survey_id=request.session['interview_id']).delete()
     ActivityFactor.objects.filter(survey_id=request.session['interview_id']).delete()
     
@@ -111,34 +111,32 @@ def shapes(request, id=None):
                 status.map_status = 'Route drawn'
                 status.save()
             elif feat.get('type') == 'act_area':
-                if feat.get('alt_act_type') == 'Engage in a recreational boating activity at a different location' or feat.get('alt_act_type') == 'Engage in another recreational boating activity at this location':
-                    new_shape = ActivityArea(
-                        survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
-                        geometry = geom,
-                        primary_activity = feat.get('primary_act'),
-                        duration = feat.get('duration'),
-                        rank = feat.get('rank'),
-                        alternate_activity_type = feat.get('alt_act_type'),
-                        alternate_activity = feat.get('alt_act'),
-                    )    
-                else:
-                    new_shape = ActivityArea(
-                        survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
-                        geometry = geom,
-                        primary_activity = feat.get('primary_act'),
-                        duration = feat.get('duration'),
-                        rank = feat.get('rank'),
-                        alternate_activity_type = feat.get('alt_act_type'),
-                    )    
+                new_shape = ActivityArea(
+                    survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
+                    geometry = geom,
+                    primary_activity = feat.get('primary_act'),
+                    duration = feat.get('duration'),
+                    rank = feat.get('rank'),
+                    alternate_activity_type = feat.get('alt_act_type'),
+                )    
                 status = SurveyStatus.objects.get(survey_id=feat.get('survey_id'))
                 status.act_status = 'Area drawn'
                 status.save()
-            elif feat.get('type') == 'alt_act_area':
-                new_shape = AltActArea(
+            elif feat.get('type') == 'act_point':
+                new_shape = ActivityPoint(
                     survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
                     geometry = geom,
-                    preferred_area = request.session['preferred_shape'],
+                    activities = feat.get('activities').__str__(),
+                    fish_tgts = feat.get('fish_tgts').__str__(),
+                    fish_rank = feat.get('fish_rank'),
+                    view_tgts = feat.get('view_tgts').__str__(),
+                    view_rank = feat.get('view_rank'),
+                    dive_tgts = feat.get('dive_tgts').__str__(),
+                    dive_rank = feat.get('dive_rank'),
                 )  
+                status = SurveyStatus.objects.get(survey_id=feat.get('survey_id'))
+                status.act_status = 'Area drawn'
+                status.save()
             new_shape.save() 
             
             if feat.get('type') == 'route':

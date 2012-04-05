@@ -10,18 +10,14 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     routeCancelWinOffset: [675, 8],
     resetMapWinOffset: [380, 8],	//Offset from top left to render
 	activityNum: 0,
-    alternateActivity: false,
     route_factors_other: null,
-    activity_1_primary: null,
-    activity_1_other: null,
-    activity_1_duration: null,
-    activity_1_rank: null,
-    activity_factors_other: null,
-    activity_3_alt: null,
-    activity_3_other: null,
-    activity_3_alt_act: null,
-    activity_3_alt_other: null,
-    alt_act_primary_area: null,
+    act_list_items: null,
+    fish_tgts: null,
+    view_tgts: null,
+    dive_tgts: null,
+    fish_rank: null,
+    view_rank: null,
+    dive_rank: null,
     activity_shapes_drawn: false,
 
     constructor: function(){
@@ -159,6 +155,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.loadActivityAreasPanel();
     },
 
+/*
     startEditActivityStep: function() {
         this.loadEditActivityPanel();
         this.enableFeatureEdit();
@@ -166,140 +163,123 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     finEditActivityStep: function() {
         this.disableFeatureEdit();
-        if (this.alternateActivity) {
-            this.validateShape(this.cur_feature, 'alt_act_area');
-        } else {
-            this.validateShape(this.cur_feature, 'act_area');
-        }                
+        this.validateShape(this.cur_feature, 'act_area');
     },
+*/
     
     startActivityInfoStep: function() {
         this.loadActivityQuestionsPanel();
     },
     
     finActivityInfoStep: function() {
-        // if ( this.activityInfo1Panel.answer_one.items.length > 0) {
-        for (this.i = 0; this.i < this.activityQuestionsPanel.answer_one.items.length; i++) {
-            if (this.activityQuestionsPanel.answer_one.items.get(this.i).checked) {
-            
-                
-            
-            }
-        
-        
-        
+        this.act_list_items = {};
+        for (this.i = 0; this.i < this.activityQuestionsPanel.answer_one.items.length; this.i++) {
+            this.act_list_item = this.activityQuestionsPanel.answer_one.items.get(this.i);
+            this.act_list_items[this.act_list_item.name] = this.act_list_item.checked;
         }
-            
-        
-            // this.activity_1_primary = this.activityInfo1Panel.answer_one.getValue();
-            // if (this.activityInfo1Panel.other_one.getValue()) {
-                // this.activity_1_other = this.activityInfo1Panel.other_one.getValue();
-                // if (this.activity_1_primary == 'Other' && this.activity_1_other != "") {
-                    // this.activity_1_primary = this.activity_1_other;
-                // }
-            // }
-        // }
-        // if (this.activityInfo1Panel.answer_two.getValue()) { 
-            // this.activity_1_duration = this.activityInfo1Panel.answer_two.getValue();
-        // }
-        // if (this.activityInfo1Panel.answer_three.getValue()) {
-            // this.activity_1_rank = this.activityInfo1Panel.answer_three.getValue();
-        // }
-        this.activityQuestionsPanel.resetPanel();        
-        this.startActivityInfo2Step();
+        if (this.act_list_items['other']) {
+            this.act_list_items['other'] = this.activityQuestionsPanel.other_one.getValue();
+        }
+        this.activityQuestionsPanel.resetPanel();
+        this.startFishingQuestionsStep();
     },
     
-    startActivityInfo2Step: function() {
-        this.loadActivityInfo2Panel();
-    },
-    
-    finActivityInfo2Step: function() {
-        this.factor_count = this.activityInfo2Panel.answer_one.items.getCount();
-        if (!this.activity_factors) {
-            this.activity_factors = new Array();
+    startFishingQuestionsStep: function() {
+        if (this.act_list_items['fishing']) {
+            this.loadFishingQuestionsPanel();
         } else {
-            this.activity_factors = [];
+            this.startViewingQuestionsStep();
         }
-        for (var i = 0; i < this.factor_count; i++) {
-            if (this.activityInfo2Panel.answer_one.items.get(i).checked) {
-                this.activity_factors.push(this.activityInfo2Panel.answer_one.items.get(i).name);
-            }
+    },
+    
+    getFishingAnswers: function() {
+        this.fish_tgts = {};
+        for (this.i = 0; this.i < this.fishingQuestionsPanel.fishing_one.items.length; this.i++) {
+            this.fish_target = this.fishingQuestionsPanel.fishing_one.items.get(this.i);
+            this.fish_tgts[this.fish_target.name] = this.fish_target.checked;
         }
-        if (this.activityInfo2Panel.answer_one.items.get(this.factor_count-1).checked) {
-            this.activity_factors_other = this.activityInfo2Panel.other_one.getValue();
+        if (this.fish_tgts['fish-other']) {
+            this.fish_tgts['fish-other'] = this.fishingQuestionsPanel.other_fish.getValue();
         }
+        this.fish_rank = this.fishingQuestionsPanel.fishing_two.getValue().inputValue;
+        this.finFishingQuestionsStep();
+    },
+    
+    finFishingQuestionsStep: function() {
+        this.fishingQuestionsPanel.resetPanel();
+        this.startViewingQuestionsStep();
+    },
+    
+    startViewingQuestionsStep: function() {
+        if (this.act_list_items['wildlife-viewing']) {
+            this.loadViewingQuestionsPanel();
+        } else {
+            this.startDivingQuestionsStep();
+        }
+    },
         
-        this.activityInfo2Panel.resetPanel();
-        this.startActivityInfo3Step();
-    },
-    
-    startActivityInfo3Step: function() {
-        this.loadActivityInfo3Panel();
-    },
-    
-    finActivityInfo3Step: function() {
-        if (this.activityInfo3Panel.answer_one.getValue()) {
-            this.activity_3_alt = this.activityInfo3Panel.answer_one.getValue();
-            if (this.activityInfo3Panel.other_one.getValue()) {
-                this.activity_3_other = this.activityInfo3Panel.other_one.getValue();
-                if (this.activity_3_alt == 'Other' && this.activity_3_other != "") {
-                    this.activity_3_alt = this.activity_3_other;
-                }
-            }
+    getViewingAnswers: function() {
+        this.view_tgts = {};
+        for (this.i = 0; this.i < this.viewingQuestionsPanel.viewing_one.items.length; this.i++) {
+            this.view_target = this.viewingQuestionsPanel.viewing_one.items.get(this.i);
+            this.view_tgts[this.view_target.name] = this.view_target.checked;
         }
+        if (this.view_tgts['view-other']) {
+            this.view_tgts['view-other'] = this.viewingQuestionsPanel.other_view.getValue();
+        }
+        this.view_rank = this.viewingQuestionsPanel.viewing_two.getValue().inputValue;
+        this.finViewingQuestionsStep();
+    },
+    
+    finViewingQuestionsStep: function() {
+        this.viewingQuestionsPanel.resetPanel();
+        this.startDivingQuestionsStep();
+    },
+    
+    startDivingQuestionsStep: function() {
+    if (this.act_list_items['diving']) {
+            this.loadDivingQuestionsPanel();
+        } else {
+            this.saveNewPoint();
+        }
+    },
         
-        if (this.activityInfo3Panel.answer_two.getValue()) {
-            this.activity_3_alt_act = this.activityInfo3Panel.answer_two.getValue();
-            if (this.activityInfo3Panel.other_two.getValue()) {
-                this.activity_3_alt_other = this.activityInfo3Panel.other_two.getValue();
-                if (this.activity_3_alt_act == 'Other' && this.activity_3_alt_other != "") {
-                    this.activity_3_alt_act = this.activity_3_alt_other;
-                }
-            }
+    getDivingAnswers: function() {
+        this.dive_tgts = {};
+        for (this.i = 0; this.i < this.divingQuestionsPanel.diving_one.items.length; this.i++) {
+            this.dive_target = this.divingQuestionsPanel.diving_one.items.get(this.i);
+            this.dive_tgts[this.dive_target.name] = this.dive_target.checked;
         }
-        this.activityInfo3Panel.resetPanel();
-        this.saveNewArea(true);
+        if (this.dive_tgts['dive-other']) {
+            this.dive_tgts['dive-other'] = this.divingQuestionsPanel.other_dive.getValue();
+        }
+        this.dive_rank = this.divingQuestionsPanel.diving_two.getValue().inputValue;
+        this.finDivingQuestionsStep();
     },
     
-    startActivityInfo4Step: function() {
-        this.loadActivityInfo4Panel();
-        this.alternateActivity = true;
+    finDivingQuestionsStep: function() {
+        this.divingQuestionsPanel.resetPanel();
+        // this.saveNewArea();
+        this.saveNewPoint();
     },
 
-    finActivityInfo4Step: function() {
-        this.alternateActivity = false;
-        this.saveNewArea(false);
-    },
-
-    startEditAltActivityStep: function() {
-        this.loadEditAltActivityPanel();
-        this.enableFeatureEdit();    
+    startMoreActivitesStep: function() {
+        this.loadMoreActivitiesPanel();
     },
     
-    finEditAltActivityStep: function() {
-        this.saveAltActivity();
-    },    
-    
-    startDrawNewAreaStep: function() {
-        this.loadDrawNewAreaPanel();
-    },
-    
-    finDrawNewAreaStep: function(result) {
+    finMoreActivitiesStep: function(result) {
         if (!result.draw_new) {
             this.updateStatus('complete',true,this.finUpdateCompleteStatus);
     	} else {
         
             this.route_factors_other= null;
-            this.activity_1_primary= null;
-            this.activity_1_other= null;
-            this.activity_1_duration= null;
-            this.activity_1_rank= null;
-            this.activity_factors_other= null;
-            this.activity_3_alt= null;
-            this.activity_3_other= null;
-            this.activity_3_alt_act= null;
-            this.activity_3_alt_other= null;
-            
+            this.act_list_items = null;
+            this.fish_tgts = null;
+            this.view_tgts = null;
+            this.dive_tgts = null;
+            this.fish_rank = null;
+            this.view_rank = null;
+            this.dive_rank = null;
     		this.startActivityAreasStep();
         }    	
     },
@@ -345,11 +325,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
      */
     finInvalidShapeStep: function() {
 		this.mapPanel.removeLastFeature();
-        if (this.alternateActivity) {
-            this.startActivityInfo4Step();
-        } else {
-    		this.startActivityAreasStep();
-        }		
+        this.startActivityAreasStep();
     },       
     
     /******************** UI widget handlers ********************/   
@@ -391,16 +367,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
 
     activatePolyDraw: function() {
-        if (this.mapPanel.map.getZoom() < gwst.settings.minimum_draw_zoom) {
-            alert(gwst.settings.zoom_error_text);
-        } else {    
-            this.mapPanel.enablePolyDraw();
-            this.loadDrawAreaTooltip();
-            this.loadCancelWin();
-        }
-    },
-
-    activateAltPolyDraw: function() {
         if (this.mapPanel.map.getZoom() < gwst.settings.minimum_draw_zoom) {
             alert(gwst.settings.zoom_error_text);
         } else {    
@@ -562,13 +528,10 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     redrawEditActivity: function() {
         this.disableFeatureEdit();
-        if (this.alternateActivity) {
-            this.redrawAltActivity();
-        } else {
-            this.redrawActivity();
-        }
+        this.redrawActivity();
     },
-    
+
+/*    
     loadEditActivityPanel: function() {
         if (!this.editActPanel) {
             this.editActPanel = new gwst.widgets.EditActivityPanel();
@@ -578,81 +541,51 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         }
         this.viewport.setWestPanel(this.editActPanel);
     },
-    
-    loadEditAltActivityPanel: function() {
-        if (!this.editAltActPanel) {
-            this.editAltActPanel = new gwst.widgets.EditAltActivityPanel();
-            //When panel fires event saying it's all done, we want to process it and move on 
-            this.editAltActPanel.on('redraw-edit-act', this.redrawEditActivity, this);
-            this.editAltActPanel.on('save-edit-act', this.finEditActivityStep, this);
-        }
-        this.viewport.setWestPanel(this.editAltActPanel);
-    },
+*/
     
     loadActivityQuestionsPanel: function() {
         if (!this.activityQuestionsPanel) {
             this.activityQuestionsPanel = new gwst.widgets.ActivityQuestionsPanel();
             //When panel fires even saying it's all done, we want to process it and move on
-            this.activityQuestionsPanel.on('activity-info1-cont', this.finActivityInfoStep, this);
+            this.activityQuestionsPanel.on('activity-questions-cont', this.finActivityInfoStep, this);
         }
         this.viewport.setWestPanel(this.activityQuestionsPanel);    
     },
     
-    loadActivityInfo2Panel: function() {
-        if (!this.activityInfo2Panel) {
-            this.activityInfo2Panel = new gwst.widgets.ActivityInfo2Panel();
+    loadFishingQuestionsPanel: function() {
+        if (!this.fishingQuestionsPanel) {
+            this.fishingQuestionsPanel = new gwst.widgets.FishingQuestionsPanel();
             //When panel fires even saying it's all done, we want to process it and move on
-            this.activityInfo2Panel.on('activity-info2-cont', this.finActivityInfo2Step, this);
+            this.fishingQuestionsPanel.on('fishing-questions-cont', this.getFishingAnswers, this);
         }
-        this.viewport.setWestPanel(this.activityInfo2Panel);    
+        this.viewport.setWestPanel(this.fishingQuestionsPanel);    
     },
     
-    loadActivityInfo3Panel: function() {
-        if (!this.activityInfo3Panel) {
-            this.activityInfo3Panel = new gwst.widgets.ActivityInfo3Panel();
+    loadViewingQuestionsPanel: function() {
+        if (!this.viewingQuestionsPanel) {
+            this.viewingQuestionsPanel = new gwst.widgets.ViewingQuestionsPanel();
             //When panel fires even saying it's all done, we want to process it and move on
-            this.activityInfo3Panel.on('activity-info3-cont', this.finActivityInfo3Step, this);
+            this.viewingQuestionsPanel.on('viewing-questions-cont', this.getViewingAnswers, this);
         }
-        this.viewport.setWestPanel(this.activityInfo3Panel);    
+        this.viewport.setWestPanel(this.viewingQuestionsPanel);    
     },
     
-    loadActivityInfo4Panel: function() {
-        if (!this.activityInfo4Panel) {
-            this.activityInfo4Panel = new gwst.widgets.ActivityInfo4Panel();
+    loadDivingQuestionsPanel: function() {
+        if (!this.divingQuestionsPanel) {
+            this.divingQuestionsPanel = new gwst.widgets.DivingQuestionsPanel();
             //When panel fires even saying it's all done, we want to process it and move on
-            this.activityInfo4Panel.on('activity-info4-cont', this.loadSatisfiedAltActivityPanel, this);
+            this.divingQuestionsPanel.on('diving-questions-cont', this.getDivingAnswers, this);
         }
-        this.viewport.setWestPanel(this.activityInfo4Panel);    
+        this.viewport.setWestPanel(this.divingQuestionsPanel);    
     },
 
-    /* Load the satisfied with activity west panel */
-    loadSatisfiedAltActivityPanel: function() {
-    	if (!this.satisfiedAltActPanel) {
-    		this.satisfiedAltActPanel = new gwst.widgets.SatisfiedAltActivityPanel();
-            this.satisfiedAltActPanel.on('edit-act', this.startEditAltActivityStep, this);
-            this.satisfiedAltActPanel.on('redraw-act', this.redrawAltActivity, this);
-            this.satisfiedAltActPanel.on('save-act', this.saveAltActivity, this);
-        }
-        this.viewport.setWestPanel(this.satisfiedAltActPanel);    
-    },    
-    
-    redrawAltActivity: function() {
-        this.mapPanel.removeLastFeature();
-    	this.loadActivityInfo4Panel();    
-    },
-    
-    saveAltActivity: function() {
-        // this.validateShape(this.cur_feature,'alt_act_area');
-        this.validateShape(this.cur_feature,'alt_act_point');
-    },
-    
-    loadDrawNewAreaPanel: function() {
-        if (!this.drawNewAreaPanel) {
-            this.drawNewAreaPanel = new gwst.widgets.DrawNewAreaPanel();
+    loadMoreActivitiesPanel: function() {
+        if (!this.moreActivitiesPanel) {
+            this.moreActivitiesPanel = new gwst.widgets.MoreActivitiesPanel();
             //When panel fires even saying it's all done, we want to process it and move on
-            this.drawNewAreaPanel.on('draw-new', this.finDrawNewAreaStep, this);
+            this.moreActivitiesPanel.on('draw-new', this.finMoreActivitiesStep, this);
         }
-        this.viewport.setWestPanel(this.drawNewAreaPanel);    
+        this.viewport.setWestPanel(this.moreActivitiesPanel);    
     },
     
     loadFinishPanel: function() {
@@ -707,11 +640,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             if (res_obj.type == 'route') {
                 this.finDrawInstructStep();
             } else {
-                if (this.alternateActivity) {                
-                    this.finActivityInfo4Step();
-                } else {
-                    this.startActivityInfoStep();
-                }                    
+                this.startActivityInfoStep();           //TODO!!!
             }
         //Feature is invalid
         } else if (status_code > 0){
@@ -772,57 +701,66 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             scope: this
 	    });  
     },     
-    
-    saveNewArea: function(bool_primary) {        
+
+/*    
+    saveNewArea: function() {        
     	this.loadWait('Saving');
 
-        if (bool_primary) {
-            var data = {
-                geometry: this.cur_feature.geometry.toString(),
-                survey_id: gwst.settings.interview_id,
-                type: 'act_area',
-                primary_act: this.activity_1_primary, 
-                duration: this.activity_1_duration, 
-                rank: this.activity_1_rank, 
-                factors: this.activity_factors, 
-                other_factor: this.activity_factors_other,
-                alt_act_type: this.activity_3_alt,
-                alt_act: this.activity_3_alt_act 
-            };
-            Ext.Ajax.request({
-                url: gwst.settings.urls.shapes,
-                method: 'POST',
-                disableCachingParam: true,
-                params: {feature: Ext.util.JSON.encode(data)},
-                success: this.finSaveNewArea,
-                failure: function(response, opts) {
-                    // Change to error window
-                    this.hideWait.defer(500, this);
-                    gwst.error.load('An error has occurred while trying to save.');
-                },
-                scope: this
-            });  
-        } else {
-            var data = {
-                geometry: this.cur_feature.geometry.toString(),
-                survey_id: gwst.settings.interview_id,
-                type: 'alt_act_area'
-            };
-            Ext.Ajax.request({
-                url: gwst.settings.urls.shapes,
-                method: 'POST',
-                disableCachingParam: true,
-                params: {feature: Ext.util.JSON.encode(data)},
-                success: this.finSaveNewAltArea,
-                failure: function(response, opts) {
-                    // Change to error window
-                    this.hideWait.defer(500, this);
-                    gwst.error.load('An error has occurred while trying to save.');
-                },
-                scope: this
-            });  
-        }
+        var data = {
+            geometry: this.cur_feature.geometry.toString(),
+            survey_id: gwst.settings.interview_id,
+            type: 'act_area',
+            primary_act: this.activity_1_primary, 
+            duration: this.activity_1_duration, 
+            rank: this.activity_1_rank, 
+            factors: this.activity_factors, 
+            other_factor: this.activity_factors_other
+        };
+        Ext.Ajax.request({
+            url: gwst.settings.urls.shapes,
+            method: 'POST',
+            disableCachingParam: true,
+            params: {feature: Ext.util.JSON.encode(data)},
+            success: this.finSaveNewActivity,
+            failure: function(response, opts) {
+                // Change to error window
+                this.hideWait.defer(500, this);
+                gwst.error.load('An error has occurred while trying to save.');
+            },
+            scope: this
+        });  
     },     
+*/
+    
+    saveNewPoint: function() {        
+    	this.loadWait('Saving');
+
+        var data = {
+            geometry: this.cur_feature.geometry.toString(),
+            survey_id: gwst.settings.interview_id,
+            type: 'act_point',
+            activities: this.act_list_items,
+            fish_tgts: this.fish_tgts,
+            fish_rank: this.fish_rank,
+            view_tgts: this.view_tgts,
+            view_rank: this.view_rank,
+            dive_tgts: this.dive_tgts,
+            dive_rank: this.dive_rank
+        };
+        Ext.Ajax.request({
+            url: gwst.settings.urls.shapes,
+            method: 'POST',
+            disableCachingParam: true,
+            params: {feature: Ext.util.JSON.encode(data)},
+            success: this.finSaveNewActivity,
+            failure: function(response, opts) {
+                // Change to error window
+                this.hideWait.defer(500, this);
+                gwst.error.load('An error has occurred while trying to save.');
+            },
+            scope: this
+        });  
+    },
     
     stopDrawing: function(response) {
         this.updateStatus('complete',true,this.finUpdateCompleteStatus);
@@ -846,23 +784,13 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.startActivityAreasStep();
     },
     
-    finSaveNewArea: function(response) {
+    finSaveNewActivity: function(response) {
     	var new_feat = Ext.decode(response.responseText);    
     	this.hideWait.defer(500, this);
         this.activity_shapes_drawn = true;
-        if (this.activity_3_alt == 'Engaged in a recreational boating activity at a different location') {
-            this.startActivityInfo4Step();
-        } else {
-            this.startDrawNewAreaStep();
-        }
+        this.startMoreActivitesStep();
     },
-    
-    finSaveNewAltArea: function(response) {
-    	var new_feat = Ext.decode(response.responseText);    
-    	this.hideWait.defer(500, this);
-        this.startDrawNewAreaStep();
-    },
-    
+
     /******************** Event handlers *******************/   
 
     newFeatureHandler: function(feature) {
@@ -874,11 +802,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             //the route pause handler will handle loading the satisfied panel
     	} else {
             this.mapPanel.disablePointDraw();
-            if (this.alternateActivity) {
-                this.loadSatisfiedAltActivityPanel();
-            } else {
-                this.loadSatisfiedActivityPanel();
-            }    		
+            this.loadSatisfiedActivityPanel();
     	}
     },
     
