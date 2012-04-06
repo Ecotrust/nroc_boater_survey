@@ -107,7 +107,9 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         
         //Create the map and dump everything in
 	    map = new OpenLayers.Map('the-map', map_options);
-		map.addControl(new OpenLayers.Control.Navigation());		
+		map.addControl(new OpenLayers.Control.Navigation({
+            handleRightClicks: true
+        }));		
 		map.addControl(new OpenLayers.Control.PanZoomBar());
 		map.addControl(new OpenLayers.Control.MousePosition());
 		map.addControl(new OpenLayers.Control.ScaleLine());
@@ -129,8 +131,6 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 
 		map.addControl(this.drawPointControl);                
         
-        
-        
         this.modifyControl = new OpenLayers.Control.ModifyFeature(this.vectorLayer);
         map.addControl(this.modifyControl);
         
@@ -139,8 +139,8 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
            	this.vectorLayer,
                OpenLayers.Handler.Polygon
         );        		
-		map.addControl(this.drawPolyControl);                		
-		
+		map.addControl(this.drawPolyControl);
+
         //Update internal MapPanel properties
 		Ext.apply(this, {
 		    map: map,
@@ -232,7 +232,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     cancelLine: function() {
         this.disableLineDraw();
     },
-    
+
     resetMapView: function() {
         this.map.setCenter(this.defaultCenter);
         this.map.zoomTo(this.defaultZoom);
