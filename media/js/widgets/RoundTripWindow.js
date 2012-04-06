@@ -13,7 +13,7 @@ gwst.widgets.RoundTripWindow = Ext.extend(Ext.Window, {
             title: 'Route is not round-trip!',
         	layout:'fit',
             width:350,
-            html: '<p>As drawn, your route dow not return to your departure location. If you did not return to your point of departure on this trip, click \'FINISHED\'. If your return route followed the same route exactly as you have plotted it, click \'THE SAME\'. If you would like to go back and finish plotting your route, click \'PLOT RETURN\'.</p>',
+            html: '<p>As drawn, your route does not return to your departure location. If you did not return to your point of departure on this trip, click \'FINISHED\'. If you went back the same way, click \'SAME WAY\'. If you would like to finish plotting your return route yourself, click \'PLOT RETURN\'.</p>',
             height:300,
             plain: true,
             bodyStyle: 'padding: 8px; font-weight: bold',
@@ -29,7 +29,7 @@ gwst.widgets.RoundTripWindow = Ext.extend(Ext.Window, {
                 },
                 {xtype:'tbfill'},
 				{
-                    text: 'THE SAME',
+                    text: 'SAME WAY',
                     handler: this.sameBtnClicked.createDelegate(this)
                 },
                 {xtype:'tbfill'},
