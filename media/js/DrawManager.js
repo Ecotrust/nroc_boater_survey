@@ -82,7 +82,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     finDrawInstructStep: function() {
         this.startRouteInfoStep();
     },
-    
+
     startEditRouteStep: function() {
         this.loadEditRoutePanel();
         //Finish off the sketch creating the route feature
@@ -500,6 +500,16 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.viewport.setWestPanel(this.invalidRoutePanel);    	
     },     
     
+    loadRoundTripWarningWindow: function() {
+        if (!this.roundTripWindow) {
+            this.roundTripWindow = new gwst.widgets.RoundTripWindow();
+            this.roundTripWindow.on('cont-route', this.resumeRoute, this);
+            this.roundTripWindow.on('auto-return-route', this.autoPlotReturnRoute, this);
+            this.roundTripWindow.on('okay-route', this.satisfiedRoute, this);
+        }
+        this.roundTripWindow.show();
+    },
+    
     /* Load the satisfied with route west panel */
     loadSatisfiedRoutePanel: function() {
     	if (!this.satisfiedRoutePanel) {
@@ -880,11 +890,19 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             return true;
         }
     },
+
+    pauseRoute: function(distance) {
+        if (distance < 1) {
+            this.satisfiedRoute();
+        } else {
+            this.loadRoundTripWarningWindow();
+        }
+    },
     
-    pauseRoute: function() {
-    	this.hideMapTooltip();
-    	this.hideCancelWin();    	
-        this.loadSatisfiedRoutePanel();    	    
+    satisfiedRoute: function() {
+        this.hideMapTooltip();
+        this.hideCancelWin();    	
+        this.loadSatisfiedRoutePanel();
     },
     
     resumeRoute: function() {    
@@ -893,6 +911,12 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.loadRouteCancelWin();
     },
 
+    autoPlotReturnRoute: function() {
+        Ext.MessageBox.alert('Auto-plot feature coming soon!', 
+            '<p>This feature is currently unavailable. For now, please plot the rest of your trip by hand.</p>',
+            this.resumeRoute, this);
+    },
+    
     /* 
      * Listen for map panel creation and then create hooks into it and setup 
      * additional map-related widgets 

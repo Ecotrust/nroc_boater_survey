@@ -157,7 +157,11 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 
     linePaused: function() {
         this.getEl().mask();
-        this.fireEvent('line-paused');
+        this.lineComps = this.drawLineControl.handler.line.geometry.components;
+        this.tripDistance = this.lineComps[0].distanceTo(this.lineComps[this.lineComps.length -1]);
+        //Trip distance is in meters (since we use mercator) - convert to miles:
+        this.milesDistance = this.tripDistance * 0.000621371192;
+        this.fireEvent('line-paused', this.milesDistance);
     },
     
     lineResume: function() {
