@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{%block title %}2010 Massachusetts Boater Survey - Introduction{% endblock %}
+{%block title %}2012 New England Recreational Boater Survey - Introduction{% endblock %}
 {% block styles %}
 <style type="text/css">
 ul, li {
@@ -54,8 +54,8 @@ li {
 <p class="imp-note">Important note: If you exit the mapping application, you will not be able to re-enter the survey.</p>
 
    <form class="gwst-form" method="get" action="/">
-        <input id="continue" name="continue" type="submit" value="Continue" style='margin-right: 360px' />
-        <input id="skip" name="skip" type="submit" value="Skip Mapping Completely" onclick='return confirm("Are you sure you want to skip the mapping portion of the survey?  Click \"Ok\" if Yes, \"Cancel\" if No. Once you skip this, you will not be able to come back.")'/>
+        <input id="skip" name="skip" type="submit" value="Skip Mapping Completely" onclick='return confirm("Are you sure you want to skip the mapping portion of the survey?  Click \"Ok\" if Yes, \"Cancel\" if No. Once you skip this, you will not be able to come back.")'/ style='margin-right: 360px'>
+        <input id="continue" name="continue" type="submit" value="Continue"  />
    </form>
 <br/><br/>
 <div align="center"><img width=666 height=83 src="/media/img/logos.jpg"/></div>

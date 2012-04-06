@@ -53,6 +53,7 @@ h1,h2,h3,h4,h5,h6 {
     color:#FFF;
 }
 
+
 h1 {
     font-size: 1.8em; 
     margin:0 0 .2em 0;
@@ -563,6 +564,12 @@ a.deletelink:hover {
     margin-top: 20px;
 }
 
+#header h1 {
+    text-align: center;
+    font-size: 2.5em;
+}
+
+
 #content-main {
     float: left;
     width: 100%;
@@ -587,9 +594,12 @@ a.deletelink:hover {
 /* HEADER */
 
 #header {
-    background: #07033C;
-    color: #333333;
+    padding: 15px 0px 15px 0px;
+    background: #333365;
+    color: #333365;
     overflow: hidden;
+    border-bottom: solid 1px white;
+   
 }
 
 #menu {
