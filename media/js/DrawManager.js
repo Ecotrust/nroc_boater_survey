@@ -21,6 +21,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     dive_rank: null,
     activity_shapes_drawn: false,
     help_on: true,
+    autoRoundTrip: false,
 
     constructor: function(){
         gwst.DrawManager.superclass.constructor.call(this);
@@ -86,7 +87,9 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     startEditRouteStep: function() {
         this.loadEditRoutePanel();
         //Finish off the sketch creating the route feature
-        this.mapPanel.lineFinish();
+        if (!this.autoRoundTrip) {
+            this.mapPanel.lineFinish();
+        }
         this.enableFeatureEdit();
     },  
     
@@ -521,19 +524,25 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.satisfiedRoutePanel.on('save-route', this.completeRoute, this);
         }
         this.viewport.setWestPanel(this.satisfiedRoutePanel);  
+        this.satisfiedRoutePanel.manageAuto(this.autoRoundTrip);
         this.routeCancelWin.hide();
     },    
     
     completeRoute: function() {
         //Finish off the sketch creating the route feature
-        this.mapPanel.lineFinish();
+        if (!this.autoRoundTrip) {
+            this.mapPanel.lineFinish();
+        }
         this.validateShape(this.cur_feature, 'route');
     },
     
     redrawRoute: function() {
         //Finish off the sketch creating the route feature
-        this.mapPanel.lineFinish();
+        if (!this.autoRoundTrip) {
+            this.mapPanel.lineFinish();
+        }
         this.mapPanel.removeLastFeature();
+        this.autoRoundTrip = false;
     	this.startDrawInstructStep();
     },
     
@@ -541,6 +550,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         //Finish off the sketch creating the route feature
         this.disableFeatureEdit();
         this.mapPanel.removeLastFeature();
+        this.autoRoundTrip = false;
     	this.startDrawInstructStep();    
     },
     
@@ -912,9 +922,9 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
 
     autoPlotReturnRoute: function() {
-        Ext.MessageBox.alert('Auto-plot feature coming soon!', 
-            '<p>This feature is currently unavailable. For now, please plot the rest of your trip by hand.</p>',
-            this.resumeRoute, this);
+        this.mapPanel.autoCompleteRoute();
+        this.autoRoundTrip = true;
+        this.satisfiedRoute();
     },
     
     /* 

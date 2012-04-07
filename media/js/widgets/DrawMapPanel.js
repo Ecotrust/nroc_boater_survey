@@ -172,6 +172,17 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         this.getEl().unmask();
         this.drawLineControl.handler.finishPath();
     },
+    
+    autoCompleteRoute: function() {
+        this.getEl().unmask();
+        this.cur_line = this.drawLineControl.handler.line.geometry;
+        this.lineComps = this.cur_line.components;
+        this.i = this.lineComps.length - 1;
+        for (var j = 0; j <= this.i ; j++) {
+            this.cur_line.addComponent(this.lineComps[this.i - j], this.i + j );
+        }
+        this.drawLineControl.handler.finishPath();
+    },
 
     vecStarted: function(evt) {
     	this.fireEvent('vector-started', evt);

@@ -87,6 +87,14 @@ gwst.widgets.SatisfiedRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
     
     saveClicked: function() {
         this.fireEvent('save-route',this);
+    },
+    
+    manageAuto: function(completed) {
+        if (completed) {
+            this.button_panel.items.get(0).items.get(0).disable();
+        } else {
+            this.button_panel.items.get(0).items.get(0).enable();
+        }
     }
 });
  
