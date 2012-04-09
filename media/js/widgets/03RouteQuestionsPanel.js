@@ -40,8 +40,8 @@ gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
             columns: 1,
             cls: 'x-form-check-group',
             items: [
-                {boxLabel: 'Quickest route to my destination', name: 'travel-time'},
-                {boxLabel: 'Safest route to my destination', name: 'safe-route'},
+                {boxLabel: 'Quickest route to my destination', name: 'quickest'},
+                {boxLabel: 'Safest route to my destination', name: 'safest'},
                 {boxLabel: 'Access to shoreside facilities', name: 'access'},
                 {boxLabel: 'Scenic beauty', name: 'beauty'},
                 {boxLabel: 'I was just cruising around', name: 'cruising'},

@@ -72,10 +72,8 @@ def draw(request):
     started_survey[0].save()
     
     Route.objects.filter(survey_id=request.session['interview_id']).delete()
-    ActivityArea.objects.filter(survey_id=request.session['interview_id']).delete()
+    # ActivityArea.objects.filter(survey_id=request.session['interview_id']).delete()
     ActivityPoint.objects.filter(survey_id=request.session['interview_id']).delete()
-    RouteFactor.objects.filter(survey_id=request.session['interview_id']).delete()
-    ActivityFactor.objects.filter(survey_id=request.session['interview_id']).delete()
     
     return render_to_response('draw.html', RequestContext(request, params))
 
@@ -103,83 +101,107 @@ def shapes(request, id=None):
             geom = GEOSGeometry(feat.get('geometry'), srid=settings.CLIENT_SRID)
             geom.transform(settings.SERVER_SRID)     
             if feat.get('type') == 'route':
+                factors = feat.get('factors')
+                other_factor = feat.get('other_factor')
+                if other_factor == '':
+                    other_factor = None
                 new_shape = Route(
                     survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
                     geometry = geom,
+                    factor_quickest = factors['quickest'],
+                    factor_safest = factors['safest'],
+                    factor_access = factors['access'],
+                    factor_beauty = factors['beauty'],
+                    factor_cruising = factors['cruising'],
+                    factor_other = other_factor
                 )
                 status = SurveyStatus.objects.get(survey_id=feat.get('survey_id'))
                 status.map_status = 'Route drawn'
                 status.save()
-            elif feat.get('type') == 'act_area':
-                new_shape = ActivityArea(
-                    survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
-                    geometry = geom,
-                    primary_activity = feat.get('primary_act'),
-                    duration = feat.get('duration'),
-                    rank = feat.get('rank'),
-                    alternate_activity_type = feat.get('alt_act_type'),
-                )    
-                status = SurveyStatus.objects.get(survey_id=feat.get('survey_id'))
-                status.act_status = 'Area drawn'
-                status.save()
+            # elif feat.get('type') == 'act_area':
+                # new_shape = ActivityArea(
+                    # survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
+                    # geometry = geom,
+                    # primary_activity = feat.get('primary_act'),
+                    # duration = feat.get('duration'),
+                    # rank = feat.get('rank'),
+                    # alternate_activity_type = feat.get('alt_act_type'),
+                # )    
+                # status = SurveyStatus.objects.get(survey_id=feat.get('survey_id'))
+                # status.act_status = 'Area drawn'
+                # status.save()
             elif feat.get('type') == 'act_point':
+                activities = feat.get('activities')
+                if activities['other']:
+                    other_act = activities['other']
+                else:
+                    other_act = None
+                fish_targets = feat.get('fish_tgts')
+                if fish_targets and not fish_targets['fish-other'] == False:
+                    fish_other = fish_targets['fish-other']
+                else:
+                    fish_other = None
+                if not fish_targets:
+                    fish_targets = {
+                        'flounder': False,
+                        'stripers': False,
+                        'cod-haddock': False,
+                        'bluefish': False
+                    }
+                view_targets = feat.get('view_tgts')
+                if view_targets and not view_targets['view-other'] == False:
+                    view_other = view_targets['view-other']
+                else :
+                    view_other = None
+                if not view_targets:
+                    view_targets = {
+                        'whales': False,
+                        'porpoises': False,
+                        'birds': False,
+                        'seals': False
+                    }
+                dive_targets = feat.get('dive_tgts')
+                if dive_targets and not dive_targets['dive-other'] == False:
+                    dive_other = dive_targets['dive-other']
+                else :
+                    dive_other = None
+                if not dive_targets:
+                    dive_targets = {
+                        'exploring': False,
+                        'wrecks': False,
+                        'fishing': False
+                    }
                 new_shape = ActivityPoint(
                     survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
                     geometry = geom,
-                    activities = feat.get('activities').__str__(),
-                    fish_tgts = feat.get('fish_tgts').__str__(),
+                    fishing = activities['fishing'],
+                    viewing = activities['wildlife-viewing'],
+                    diving = activities['diving'],
+                    relaxing = activities['relaxing'],
+                    other_act = other_act,
+                    fish_flounder = fish_targets['flounder'],
+                    fish_stripers = fish_targets['stripers'],
+                    fish_cod_haddock = fish_targets['cod-haddock'],
+                    fish_bluefish = fish_targets['bluefish'],
+                    fish_other = fish_other,
                     fish_rank = feat.get('fish_rank'),
-                    view_tgts = feat.get('view_tgts').__str__(),
+                    view_whales = view_targets['whales'],
+                    view_porpoises = view_targets['porpoises'],
+                    view_birds = view_targets['birds'],
+                    view_seals = view_targets['seals'],
+                    view_other = view_other,
                     view_rank = feat.get('view_rank'),
-                    dive_tgts = feat.get('dive_tgts').__str__(),
-                    dive_rank = feat.get('dive_rank'),
+                    dive_fishing = dive_targets['fishing'],
+                    dive_wrecks = dive_targets['wrecks'],
+                    dive_exploring = dive_targets['exploring'],
+                    dive_other = dive_other,
+                    dive_rank = feat.get('dive_rank')
                 )  
                 status = SurveyStatus.objects.get(survey_id=feat.get('survey_id'))
                 status.act_status = 'Area drawn'
                 status.save()
             new_shape.save() 
-            
-            if feat.get('type') == 'route':
-                factors = feat.get('factors')
-                for factor in factors:
-                    if factor == 'other':
-                        new_factor = RouteFactor(
-                            route = new_shape,
-                            survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
-                            route_pk = new_shape.id,
-                            factor = feat.get('other_factor'),
-                        )
-                    else :
-                        new_factor = RouteFactor(
-                            route = new_shape,
-                            survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
-                            route_pk = new_shape.id,
-                            factor = factor,
-                        )
-                    new_factor.save()
-                    
-            elif feat.get('type') == 'act_area':   
-                factors = feat.get('factors')
-                for factor in factors:
-                    if factor == 'other':
-                        new_factor = ActivityFactor(
-                            activity = new_shape,
-                            survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
-                            activity_pk = new_shape.id,                            
-                            factor = feat.get('other_factor'),
-                        )      
-                    else :
-                        new_factor = ActivityFactor(
-                            activity = new_shape,
-                            survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
-                            activity_pk = new_shape.id,
-                            factor = factor,
-                        )            
-                    new_factor.save()
-                    
-            if feat.get('type') == 'act_area':
-                request.session['preferred_shape'] = new_shape
-                
+
         except Exception, e:
             return HttpResponse(result + e.message, status=500)
 

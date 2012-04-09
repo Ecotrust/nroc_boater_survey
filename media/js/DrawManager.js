@@ -105,15 +105,10 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     finRouteInfoStep: function() {
         this.factor_count = this.routeInfo1Panel.answer_one.items.getCount();
-        if (!this.route_factors) {
-            this.route_factors = new Array();
-        } else {
-            this.route_factors = [];
-        }
+        this.route_factors = {};
         for (var i = 0; i < this.factor_count; i++) {
-            if (this.routeInfo1Panel.answer_one.items.get(i).checked) {
-                this.route_factors.push(this.routeInfo1Panel.answer_one.items.get(i).name);
-            }
+            this.factor = this.routeInfo1Panel.answer_one.items.get(i)
+            this.route_factors[this.factor.getName()] = this.factor.checked;
         }
         if (this.routeInfo1Panel.answer_one.items.get(this.factor_count-1).checked) {
             this.route_factors_other = this.routeInfo1Panel.other_one.getValue();

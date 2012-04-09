@@ -25,52 +25,57 @@ class Route(Model):
     geometry = LineStringField(srid=settings.SERVER_SRID)
     objects = GeoManager()
     creation_date = DateTimeField(default=datetime.datetime.now)
+    factor_quickest = BooleanField( default=False )
+    factor_safest = BooleanField( default=False )
+    factor_access = BooleanField( default=False )
+    factor_beauty = BooleanField( default=False )
+    factor_cruising = BooleanField( default=False )
+    factor_other = CharField( blank=True, null=True, max_length=150 )
     class Meta:
         db_table = u'route'
     def __unicode__(self):
         return unicode('%s' % (self.pk))
-        
-class RouteFactor(Model):
-    route = ForeignKey(Route)
-    survey_id = ForeignKey(SurveyStatus)
-    route_pk = IntegerField()
-    factor = CharField(max_length=150)
-    class Meta:
-        db_table = u'route_factors'
-        
-class ActivityArea(Model):
-    survey_id = ForeignKey(SurveyStatus)
-    geometry = PolygonField(srid=settings.SERVER_SRID)
-    primary_activity = CharField( blank=True, null=True, max_length=150 )
-    duration = CharField( blank=True, null=True, max_length= 100 )
-    rank = CharField( blank=True, null=True, max_length=100 )
-    alternate_activity_type = CharField( blank=True, null=True, max_length=150 )
-    alternate_activity = CharField( blank=True, null=True, max_length=150 )
-    objects = GeoManager()
-    creation_date = DateTimeField(default=datetime.datetime.now)
-    class Meta:
-        db_table = u'act_area'
-    def __unicode__(self):
-        return unicode('%s' % (self.pk))
-        
-class ActivityFactor(Model):
-    activity = ForeignKey(ActivityArea)
-    survey_id = ForeignKey(SurveyStatus)
-    activity_pk = IntegerField()
-    factor = CharField(max_length=150)
-    class Meta:
-        db_table = u'activity_factors'
-        
+
+# class ActivityArea(Model):
+    # survey_id = ForeignKey(SurveyStatus)
+    # geometry = PolygonField(srid=settings.SERVER_SRID)
+    # primary_activity = CharField( blank=True, null=True, max_length=150 )
+    # duration = CharField( blank=True, null=True, max_length= 100 )
+    # rank = CharField( blank=True, null=True, max_length=100 )
+    # alternate_activity_type = CharField( blank=True, null=True, max_length=150 )
+    # alternate_activity = CharField( blank=True, null=True, max_length=150 )
+    # objects = GeoManager()
+    # creation_date = DateTimeField(default=datetime.datetime.now)
+    # class Meta:
+        # db_table = u'act_area'
+    # def __unicode__(self):
+        # return unicode('%s' % (self.pk))
+
 class ActivityPoint(Model):
     survey_id = ForeignKey(SurveyStatus)
     geometry = PointField(srid=settings.SERVER_SRID)
-    activities = CharField( blank=True, null=True, max_length=1500 )
-    fish_tgts = CharField( blank=True, null=True, max_length=1500 )
-    fish_rank = CharField( blank=True, null=True, max_length=1500 )
-    view_tgts = CharField( blank=True, null=True, max_length=1500 )
-    view_rank = CharField( blank=True, null=True, max_length=1500 )
-    dive_tgts = CharField( blank=True, null=True, max_length=1500 )
-    dive_rank = CharField( blank=True, null=True, max_length=1500 )
+    fishing = BooleanField( default=False )
+    viewing = BooleanField( default=False )
+    diving = BooleanField( default=False )
+    relaxing = BooleanField( default=False )
+    other_act = CharField( blank=True, null=True, max_length=150 )
+    fish_flounder = BooleanField( default=False )
+    fish_stripers = BooleanField( default=False )
+    fish_cod_haddock = BooleanField( default=False )
+    fish_bluefish = BooleanField( default=False )
+    fish_other = CharField( blank=True, null=True, max_length=150 )
+    fish_rank = CharField( blank=True, null=True, max_length=150 )
+    view_whales = BooleanField( default=False )
+    view_porpoises = BooleanField( default=False )
+    view_birds = BooleanField( default=False )
+    view_seals = BooleanField( default=False )
+    view_other = CharField( blank=True, null=True, max_length=150 )
+    view_rank = CharField( blank=True, null=True, max_length=150 )
+    dive_exploring = BooleanField( default=False )
+    dive_wrecks = BooleanField( default=False )
+    dive_fishing = BooleanField( default=False )
+    dive_other = CharField( blank=True, null=True, max_length=150 )
+    dive_rank = CharField( blank=True, null=True, max_length=150 )
     objects = GeoManager()
     creation_date = DateTimeField(default=datetime.datetime.now)
     class Meta:
@@ -92,11 +97,7 @@ class RouteAdmin(OSMGeoAdmin):
     default_zoom = 8
     mouse_position = True
     display_srid = True    
-    
-class RouteFactorAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'survey_id', 'route_pk', 'factor')
-    ordering = ('survey_id',)        
-        
+
 class ActivityAdmin(OSMGeoAdmin):
     list_display = ('pk', 'survey_id', 'creation_date')
     ordering = ('survey_id',)
@@ -105,15 +106,8 @@ class ActivityAdmin(OSMGeoAdmin):
     default_zoom = 8
     mouse_position = True
     display_srid = True 
-        
-class ActivityFactorAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'survey_id', 'activity_pk', 'factor')
-    ordering = ('survey_id',)                
 
-    
 admin.site.register(SurveyStatus,SurveyStatusAdmin)
 admin.site.register(Route,RouteAdmin)
-admin.site.register(ActivityArea,ActivityAdmin)
+# admin.site.register(ActivityArea,ActivityAdmin)
 admin.site.register(ActivityPoint,ActivityAdmin)
-admin.site.register(RouteFactor,RouteFactorAdmin)
-admin.site.register(ActivityFactor,ActivityFactorAdmin)
