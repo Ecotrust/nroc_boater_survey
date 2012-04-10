@@ -73,6 +73,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.humanize',
     'django.contrib.gis',
+    'django.contrib.staticfiles',
     'draw_app',
     'videos',
     'faq'

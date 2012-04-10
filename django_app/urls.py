@@ -3,7 +3,7 @@ from django.conf import settings
 
 
 # Uncomment the next two lines to enable the admin:
-from django.contrib import admin
+from django.contrib.gis import admin
 admin.autodiscover()
 from django.contrib import databrowse
 
@@ -22,6 +22,8 @@ urlpatterns = patterns('',
 #Serve media through development server instead of web server (Apache)
 if settings.DEBUG is True:
     urlpatterns += patterns('',
-        (r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root': settings.MEDIA_ROOT, 'show_indexes': True})
+        (r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
+        (r'^admin-media/(?P<path>.*)$','django.views.static.serve',{'document_root': settings.ADMIN_MEDIA_ROOT, 'show_indexes': True}),
+        (r'^admin/(?P<path>.*)$','django.views.static.serve',{'document_root': settings.ADMIN_MEDIA_PREFIX, 'show_indexes': True})
     )
     

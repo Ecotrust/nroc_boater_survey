@@ -7,3 +7,4 @@ django_app/set-environ.bat
 media/video_player/*
 media/videos/.svn/*
 media/tiles/*
+django_app/install-media/**/*
