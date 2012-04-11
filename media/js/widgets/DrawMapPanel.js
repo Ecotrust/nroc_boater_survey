@@ -59,15 +59,24 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             'select': selectStyle,
             'temporary': tempStyle
         }); 
+        
+        var hybridLayer = new OpenLayers.Layer.Google(
+            "Satellite",
+            {
+                type: google.maps.MapTypeId.HYBRID, 
+                sphericalMercator: true        ,
+                isBaseLayer: true
+            }
+         );
 
         var nautLayer = new OpenLayers.Layer.TMS(
-            "Cached",
+            "Nautical Charts",
             ["http://c3429629.r29.cf0.rackcdn.com/stache/NETiles_layer/"],
             // ["/media/tiles/"],
             {
                 buffer: 1,
-                'isBaseLayer': true,
-                visibility: false,
+                'isBaseLayer': false,
+                visibility: true,
                 'sphericalMercator': true,
                 getURL: function (bounds) {
                     var z = map.getZoom();
@@ -89,6 +98,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         this.vectorLayer = new OpenLayers.Layer.Vector(
     		"Vector Layer", 
     		{
+                displayInLayerSwitcher: false,
     		    styleMap: myStyle
     		}
         );        
@@ -112,10 +122,13 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 	    map = new OpenLayers.Map('the-map', map_options);
 		map.addControl(new OpenLayers.Control.Navigation({
             handleRightClicks: true
-        }));		
+        }));
 		map.addControl(new OpenLayers.Control.PanZoomBar());
 		map.addControl(new OpenLayers.Control.MousePosition());
+        var layerSwitcher = new OpenLayers.Control.LayerSwitcher();
+		map.addControl(layerSwitcher);
 		map.addControl(new OpenLayers.Control.ScaleLine());
+        layerSwitcher.maximizeControl();
         map.addControl(new OpenLayers.Control.KeyboardDefaults()); 
 
         this.hoverControl = new OpenLayers.Control.Hover({
@@ -157,7 +170,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         //Update internal MapPanel properties
 		Ext.apply(this, {
 		    map: map,
-		    layers: [nautLayer, this.vectorLayer],
+		    layers: [hybridLayer, nautLayer, this.vectorLayer],
 		    extent: map_extent,
 	        center: region_extent.getCenterLonLat(),
 	        zoom: this.defaultZoom,
