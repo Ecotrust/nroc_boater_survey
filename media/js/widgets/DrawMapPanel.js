@@ -5,6 +5,9 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     
     defaultZoom: 7,
     defaultCenter: null,
+    hoverPanBorderWidth: 35,
+    panPx: 30,
+    panning: false,
 	
     initComponent: function(){		
 		//Map region
@@ -113,8 +116,18 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 		map.addControl(new OpenLayers.Control.PanZoomBar());
 		map.addControl(new OpenLayers.Control.MousePosition());
 		map.addControl(new OpenLayers.Control.ScaleLine());
-        map.addControl(new OpenLayers.Control.KeyboardDefaults());        
-        
+        map.addControl(new OpenLayers.Control.KeyboardDefaults()); 
+
+        this.hoverControl = new OpenLayers.Control.Hover({
+            handlerOptions: {
+                'delay': 200,
+                'pause': this.mousePaused.createDelegate(this),
+                'move': this.mouseMoved.createDelegate(this)
+            }
+        });
+
+        map.addControl(this.hoverControl);
+
         //Line
         this.drawLineControl = new OpenLayers.Control.DrawFeature(
             	this.vectorLayer,
@@ -153,6 +166,50 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 		
         // Call parent (required)
 		gwst.widgets.ResDrawMapPanel.superclass.initComponent.call(this);
+    },
+    
+    startPan: function(x, y){
+        this.panning = true;
+        this.pan(x, y, this.panning);
+    },
+    
+    pan: function(x, y, cont) {
+        if (cont) {
+            setTimeout(function (scope,x,y) {
+                scope.map.pan(x, y, {'animate': false, 'dragging': false});
+                scope.pan(x, y, scope.panning)
+            }, 100, this, x, y);
+        }
+    },
+    
+    mousePaused: function(evt) {
+        if (evt.xy.x < this.hoverPanBorderWidth) {
+            if (evt.xy.y < this.hoverPanBorderWidth) {
+                this.startPan(0 - this.panPx, 0 - this.panPx);
+            } else if (evt.xy.y > this.getHeight() - this.hoverPanBorderWidth) {
+                this.startPan(0 - this.panPx, this.panPx);
+            } else {
+                this.startPan(0 - this.panPx, 0);
+            }
+        } else if (evt.xy.x > this.getWidth() - this.hoverPanBorderWidth) {
+            if (evt.xy.y < this.hoverPanBorderWidth) {
+                this.startPan(this.panPx, 0 - this.panPx);
+            } else if (evt.xy.y > this.getHeight() - this.hoverPanBorderWidth) {
+                this.startPan(this.panPx, this.panPx);
+            } else {
+                this.startPan(this.panPx, 0);
+            }
+        } else if (evt.xy.y < this.hoverPanBorderWidth) {
+            this.startPan(0, 0 - this.panPx);
+        } else if (evt.xy.y > this.getHeight() - this.hoverPanBorderWidth) {
+            this.startPan(0, this.panPx);
+        } else {
+            this.panning = false;
+        }
+    },
+    
+    mouseMoved: function() {
+        this.panning = false;
     },
 
     linePaused: function() {
@@ -214,26 +271,32 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     
     enableLineDraw: function() {
         this.drawLineControl.activate();
+        this.hoverControl.activate();
     },
     
     disableLineDraw: function() {
         this.drawLineControl.deactivate();
+        this.hoverControl.deactivate();
     },
     
     enablePointDraw: function () {
         this.drawPointControl.activate();
+        this.hoverControl.activate();
     },
     
     disablePointDraw: function() {
         this.drawPointControl.deactivate();
+        this.hoverControl.deactivate();
     },
     
     enablePolyDraw: function() {
-        this.drawPolyControl.activate();        
+        this.drawPolyControl.activate();
+        this.hoverControl.activate();
     },
     
     disablePolyDraw: function() {
     	this.drawPolyControl.deactivate();
+        this.hoverControl.deactivate();
     },        
     
     cancelPoly: function() {
