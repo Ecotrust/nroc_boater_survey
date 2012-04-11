@@ -20,7 +20,7 @@ gwst.widgets.PlotRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
     getHtmlText: function() {
         var html_text = '<h2>Plot your route on the map</h2>\
         <p style="padding-bottom:3px">Click on your departure point to begin plotting route.</p>\
-        <p style="padding-bottom:3px">Click once for each turn (or waypoint) and double-click to finish plotting your route.</p>\
+        <p>Click once for each turn (or waypoint) and double-click to finish plotting your route.</p>\
         <p style="padding-bottom:3px">Please remember to plot a complete route, including your return leg even if you came back the same way.</p>';
         return html_text;
     },

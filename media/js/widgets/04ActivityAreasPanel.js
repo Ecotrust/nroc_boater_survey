@@ -45,11 +45,10 @@ gwst.widgets.ActivityAreasPanel = Ext.extend(gwst.widgets.WestPanel, {
             You will have the chance to re-plot your point after you finish it</p>\
             <p>Reminder: While we are interested in any activities you engaged in, we are particularly interested in:</p>\
             <ul class="instructions">\
-            <li>Fishing</li>\
-            <li>Wildlife viewing (whales, birds, etc.)</li>\
-            <li>Diving</li>\
-            <li>Relaxing at anchor</li>\
-            <li>Other</li>\
+                <li>Fishing</li>\
+                <li>Wildlife viewing (whales, birds, etc.)</li>\
+                <li>Diving</li>\
+                <li>Relaxing at anchor</li>\
             </ul>',
             border: false,
             style: 'padding:5px 5px 5px 10px'
