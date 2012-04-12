@@ -6,7 +6,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     defaultZoom: 7,
     defaultCenter: null,
     hoverPanBorderWidth: 35,
-    panPx: 30,
+    panPx: 5,
     panning: false,
 	
     initComponent: function(){		
@@ -188,13 +188,15 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     
     pan: function(x, y, cont) {
         if (cont) {
-            setTimeout(function (scope,x,y) {
+            var scope = this;
+            
+            setTimeout(function(){
                 scope.map.pan(x, y, {'animate': false, 'dragging': false});
-                scope.pan(x, y, scope.panning)
-            }, 100, this, x, y);
+                scope.pan(x, y, scope.panning);
+            }, 10);
         }
     },
-    
+
     mousePaused: function(evt) {
         if (evt.xy.x < this.hoverPanBorderWidth) {
             if (evt.xy.y < this.hoverPanBorderWidth) {
