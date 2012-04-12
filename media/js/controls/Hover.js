@@ -8,32 +8,48 @@
  *
  */
 OpenLayers.Control.Hover = OpenLayers.Class(OpenLayers.Control, {
-    defaultHandlerOptions: {
-        'delay': 500,
-        'pixelTolerance': null,
-        'stopMove': false
+    onMove: this.checkLocation,
+    onOut: this.stop,
+    // targetWidth: 30,
+    // panPx: 10,
+    
+    /**
+     * APIMethod: activate
+     */
+    activate: function() {
+        if (OpenLayers.Control.prototype.activate.apply(this, arguments)) {
+            this.map.events.register('mousemove', this, this.onMove);
+            this.map.events.register('mouseout', this, this.onOut);
+            // this.redraw();
+            return true;
+        } else {
+            return false;
+        }
     },
+    
+    /**
+     * APIMethod: deactivate
+     */
+    deactivate: function() {
+        if (OpenLayers.Control.prototype.deactivate.apply(this, arguments)) {
+            this.map.events.unregister('mousemove', this, this.checkLocation);
+            this.map.events.unregister('mouseout', this, this.stop);
+            this.element.innerHTML = "";
+            return true;
+        } else {
+            return false;
+        }
+    },
+    
     initialize: function(options) {
-        this.handlerOptions = OpenLayers.Util.extend(
-            {}, this.defaultHandlerOptions
-        );
         OpenLayers.Control.prototype.initialize.apply(
             this, arguments
         );
-        this.handler = new OpenLayers.Handler.Hover(
-            this,
-            // {'pause': this.onPause, 'move': this.onMove},
-            this.handlerOptions
-        );
     },
-    onPause: function(evt) {
-        alert('x, y: ' + evt.xy.x + ', ' + evt.xy.y);
-        var output = document.getElementById(this.key + 'Output');
-        var msg = 'pause ' + evt.xy;
-        output.value = output.value + msg + "\r\n";
-        // alert(output.value);
+    checkLocation: function(evt) {
+        // alert('x, y: ' + evt.xy.x + ', ' + evt.xy.y);
     },
-    onMove: function(evt) {
+    stop: function(evt) {
         // if this control sent an Ajax request (e.g. GetFeatureInfo) when
         // the mouse pauses the onMove callback could be used to abort that
         // request.

@@ -132,11 +132,8 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         map.addControl(new OpenLayers.Control.KeyboardDefaults()); 
 
         this.hoverControl = new OpenLayers.Control.Hover({
-            handlerOptions: {
-                'delay': 200,
-                'pause': this.mousePaused.createDelegate(this),
-                'move': this.mouseMoved.createDelegate(this)
-            }
+            onMove: this.mousePaused.createDelegate(this),
+            onOut: this.mouseOut.createDelegate(this)
         });
 
         map.addControl(this.hoverControl);
@@ -223,7 +220,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         }
     },
     
-    mouseMoved: function() {
+    mouseOut: function() {
         this.panning = false;
     },
 
