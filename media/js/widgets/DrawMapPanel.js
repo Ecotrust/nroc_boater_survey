@@ -316,10 +316,12 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     
     cancelPoly: function() {
     	this.disablePolyDraw();        
+    	this.enablePolyDraw();        
     },
     
     cancelLine: function() {
         this.disableLineDraw();
+        this.enableLineDraw();
     },
 
     resetMapView: function() {
