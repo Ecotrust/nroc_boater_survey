@@ -133,6 +133,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
            msg: 'Are you sure you want to stop drawing activity areas? If you have drawn other areas, they are already saved.',
            buttons: Ext.Msg.YESNO,
            fn: this.stopDrawingCheck.createDelegate(this),
+           minWidth: 300,
            icon: Ext.MessageBox.QUESTION
         });        
     },
@@ -399,11 +400,16 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     	}
         this.viewport.setWestPanel(this.plotRoutePanel);  
         this.plotRoutePanel.help_box.on('show-help', this.showHelp, this);
-        Ext.MessageBox.alert('Route Plotting', 
-            '<p>You are now in route plotting mode.</p>\
+        Ext.MessageBox.show({
+            title: 'Route Plotting', 
+            msg: '<p>You are now in route plotting mode.</p>\
             <p>When you click on the map, you will begin plotting your route.</p>\
             <p>Map navigation buttons will still work.</p>',
-            this.activateRouteDraw, this);
+            buttons: Ext.Msg.OK,
+            fn: this.activateRouteDraw, 
+            minWidth: 450,
+            scope: this
+        });
     },      
     
     /* Render viewport with main widgets to document body (right now) */
@@ -579,11 +585,16 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     	}
         this.viewport.setWestPanel(this.actAreasPanel);
         this.actAreasPanel.help_box.on('show-help', this.showHelp, this);
-        Ext.MessageBox.alert('Activity Plotting', 
-            '<p>You are now in activity plotting mode.</p>\
+        Ext.MessageBox.show({
+            title: 'Activity Plotting', 
+            msg: '<p>You are now in activity plotting mode.</p>\
             <p>When you click on the map, you will place an activity marker.</p>\
             <p>Map navigation buttons will still work.</p>',
-            this.activatePointDraw, this);
+            buttons: Ext.Msg.OK,
+            fn: this.activatePointDraw, 
+            minWidth: 450,
+            scope: this
+        });
     },    
     
     /* Load the satisfied with activity west panel */
