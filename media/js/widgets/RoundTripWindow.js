@@ -18,7 +18,7 @@ gwst.widgets.RoundTripWindow = Ext.extend(Ext.Window, {
             plain: true,
             bodyStyle: 'padding: 8px; font-weight: bold',
             closeAction:'hide',
-            closable: true,
+            closable: false,
             modal: true,
             draggable: false,
             bbar: [
