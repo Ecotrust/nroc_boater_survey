@@ -7,8 +7,8 @@ OpenLayers.Control.BorderPan = OpenLayers.Class(OpenLayers.Control, {
     onMove: this.onMove,
     onOut: this.onOut,
     panBorderWidth: 90,     //the buffer around each border that will trigger panning
-    maxPxPan: 5,            //the max number of pixels panned per cycle
-    panRate: 50,            //delay in milliseconds
+    maxPxPan: 3,            //the max number of pixels panned per cycle
+    panRate: 100,            //delay in milliseconds
     panning: false,
     
     /**
@@ -47,7 +47,7 @@ OpenLayers.Control.BorderPan = OpenLayers.Class(OpenLayers.Control, {
         if (cont) {
             var scope = this;
             setTimeout(function(){
-                scope.map.pan(x, y, {'animate': true, 'dragging': true});
+                scope.map.pan(x, y, {'animate': false, 'dragging': false});
                 scope.pan(x, y, scope.panning);
             }, this.panRate);
         }
