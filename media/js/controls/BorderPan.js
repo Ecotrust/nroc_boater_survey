@@ -6,8 +6,9 @@
 OpenLayers.Control.BorderPan = OpenLayers.Class(OpenLayers.Control, {
     onMove: this.onMove,
     onOut: this.onOut,
-    hoverPanBorderWidth: 35,
-    panPx: 5,
+    panBorderWidth: 90,     //the buffer around each border that will trigger panning
+    maxPxPan: 5,            //the max number of pixels panned per cycle
+    panRate: 50,            //delay in milliseconds
     panning: false,
     
     /**
@@ -28,8 +29,8 @@ OpenLayers.Control.BorderPan = OpenLayers.Class(OpenLayers.Control, {
      */
     deactivate: function() {
         if (OpenLayers.Control.prototype.deactivate.apply(this, arguments)) {
-            this.map.events.unregister('mousemove', this, this.checkLocation);
-            this.map.events.unregister('mouseout', this, this.stop);
+            this.map.events.unregister('mousemove', this, this.onMove);
+            this.map.events.unregister('mouseout', this, this.onOut);
             return true;
         } else {
             return false;
@@ -41,52 +42,66 @@ OpenLayers.Control.BorderPan = OpenLayers.Class(OpenLayers.Control, {
             this, arguments
         );
     },
-    
-    
-    startPan: function(x, y){
-        this.panning = true;
-        this.pan(x, y, this.panning);
-    },
-    
+
     pan: function(x, y, cont) {
         if (cont) {
             var scope = this;
-            
             setTimeout(function(){
-                scope.map.pan(x, y, {'animate': false, 'dragging': false});
+                scope.map.pan(x, y, {'animate': true, 'dragging': true});
                 scope.pan(x, y, scope.panning);
-            }, 10);
+            }, this.panRate);
         }
     },
 
     onMove: function(evt) {
-        if (evt.xy.x < this.hoverPanBorderWidth) {
-            if (evt.xy.y < this.hoverPanBorderWidth) {
-                this.startPan(0 - this.panPx, 0 - this.panPx);
-            } else if (evt.xy.y > this.map.getSize().h - this.hoverPanBorderWidth) {
-                this.startPan(0 - this.panPx, this.panPx);
-            } else {
-                this.startPan(0 - this.panPx, 0);
-            }
-        } else if (evt.xy.x > this.map.getSize().w - this.hoverPanBorderWidth) {
-            if (evt.xy.y < this.hoverPanBorderWidth) {
-                this.startPan(this.panPx, 0 - this.panPx);
-            } else if (evt.xy.y > this.map.getSize().h - this.hoverPanBorderWidth) {
-                this.startPan(this.panPx, this.panPx);
-            } else {
-                this.startPan(this.panPx, 0);
-            }
-        } else if (evt.xy.y < this.hoverPanBorderWidth) {
-            this.startPan(0, 0 - this.panPx);
-        } else if (evt.xy.y > this.map.getSize().h - this.hoverPanBorderWidth) {
-            this.startPan(0, this.panPx);
-        } else {
-            this.panning = false;
-        }
+        this.panPx = this.getPanPx(evt.xy);
+        this.panning = false;
+        if (this.panPx['xPx'] != 0 || this.panPx['yPx'] != 0){
+            this.panning = true;
+            this.pan(this.panPx['xPx'], this.panPx['yPx'], this.panning);
+        } 
     },
     
-    onOut: function() {
-        this.panning = false;
+    getPanPx: function(xy) {
+        this.rightBound = this.map.getCurrentSize().w;
+        this.bottomBound = this.map.getCurrentSize().h;
+        this.x = 0;
+        this.y = 0;
+        if(xy.x < 0 || xy.y < 0 || xy.x > this.rightBound || xy.y > this.bottomBound) {
+            this.panning = false;
+        } else {
+            if (!(xy.x > this.panBorderWidth && xy.x < (this.rightBound - this.panBorderWidth))) {  //short circuit if between buffers
+                if (xy.x < this.panBorderWidth) {                                   // inside left buffer
+                    this.x = xy.x - this.panBorderWidth;
+                } else if (xy.x > this.rightBound - this.panBorderWidth) {          // inside right buffer
+                    this.x = xy.x - (this.rightBound - this.panBorderWidth);
+                }
+            }
+            if (!(xy.y > this.panBorderWidth && xy.y < (this.bottomBound - this.panBorderWidth))) {  //short circuit if between buffers
+                if (xy.y < this.panBorderWidth) {                                   // inside top buffer
+                    this.y = xy.y - this.panBorderWidth;
+                } else if (xy.y > this.bottomBound - this.panBorderWidth) {         // inside bottom buffer
+                    this.y = xy.y - (this.bottomBound - this.panBorderWidth);
+                }
+            }
+            if (this.maxPxPan != 0 && this.panBorderWidth != 0) {               //spread max px shift across border width
+                if (this.x != 0) {
+                    this.x = (this.x / this.panBorderWidth) * this.maxPxPan;
+                }
+                if (this.y != 0) {
+                    this.y = (this.y / this.panBorderWidth) * this.maxPxPan;
+                }
+            }
+        }
+        return {'xPx': this.x, 'yPx': this.y};
+    },
+    
+    onOut: function(evt) {
+        this.rightBound = this.map.getCurrentSize().w;
+        this.bottomBound = this.map.getCurrentSize().h;
+        if(evt.xy.x < 0 || evt.xy.y < 0 || evt.xy.x > this.rightBound || evt.xy.y > this.bottomBound) {
+            this.panning = false;
+        }
     },
 
     CLASS_NAME: "OpenLayers.Control.BorderPan"
