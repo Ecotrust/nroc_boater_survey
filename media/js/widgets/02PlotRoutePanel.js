@@ -29,7 +29,7 @@ gwst.widgets.PlotRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
     
         this.header_panel = new Ext.Panel({  
             id: 'draw_instruct_header_panel',
-            html: '<img src="/media/img/4_DrawRoute_header.png">',
+            html: '<img src="/media/img/h_02_plot_route.png">',
 			border: 'north',
             bodyCfg: {            
                 cls: 'action-panel-header'

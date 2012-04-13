@@ -12,7 +12,7 @@ gwst.widgets.FishingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
     onRender: function(){
         this.header_panel = new Ext.Panel({  
             id: 'fishing_questions_header_panel',
-            html: '<img src="/media/img/8_ActivityQuestions1_header.png">',
+            html: '<img src="/media/img/h_05_activity_questions.png">',
 			border: 'north',
             bodyCfg: {            
                 cls: 'action-panel-header'

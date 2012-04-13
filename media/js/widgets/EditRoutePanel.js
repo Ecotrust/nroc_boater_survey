@@ -30,7 +30,7 @@ gwst.widgets.EditRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
     
         this.header_panel = new Ext.Panel({  
             id: 'edit_route_header_panel',
-            html: '<img src="/media/img/4a_EditRoute_header.png">',
+            html: '<img src="/media/img/h_02_plot_route.png">',
 			border: 'north',
             bodyCfg: {            
                 cls: 'action-panel-header'

@@ -12,7 +12,7 @@ gwst.widgets.RouteInfo1Panel = Ext.extend(gwst.widgets.WestPanel, {
     onRender: function(){
         this.header_panel = new Ext.Panel({  
             id: 'route_info1_header_panel',
-            html: '<img src="/media/img/5_RouteQuestions_header.png">',
+            html: '<img src="/media/img/h_03_route_questions.png">',
 			border: 'north',
             bodyCfg: {            
                 cls: 'action-panel-header'

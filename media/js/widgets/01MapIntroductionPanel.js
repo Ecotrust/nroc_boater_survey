@@ -34,7 +34,7 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
     
         this.header_panel = new Ext.Panel({  
             id: 'intro_header_panel',
-            html: '<img src="/media/img/1_Instructions1_header.png">',
+            html: '<img src="/media/img/h_01_map_introduction.png">',
 			border: 'north',
             bodyCfg: {            
                 cls: 'action-panel-header'

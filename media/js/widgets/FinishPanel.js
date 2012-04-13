@@ -12,7 +12,7 @@ gwst.widgets.FinishPanel = Ext.extend(gwst.widgets.WestPanel, {
     onRender: function(){
         this.header_panel = new Ext.Panel({  
             id: 'finish_header_panel',
-            html: '<img src="/media/img/12_Finished_header.png">',
+            html: '<img src="/media/img/h_07_finished.png">',
 			border: 'north',
             bodyCfg: {            
                 cls: 'action-panel-header'

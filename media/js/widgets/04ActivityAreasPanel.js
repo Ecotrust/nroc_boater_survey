@@ -26,7 +26,7 @@ gwst.widgets.ActivityAreasPanel = Ext.extend(gwst.widgets.WestPanel, {
     
         this.header_panel = new Ext.Panel({  
             id: 'draw_header_panel',
-            html: '<img src="/media/img/7_DrawArea_header.png">',
+            html: '<img src="/media/img/h_04_activity_areas.png">',
 			border: 'north',
             bodyCfg: {            
                 cls: 'action-panel-header'
@@ -75,6 +75,7 @@ gwst.widgets.ActivityAreasPanel = Ext.extend(gwst.widgets.WestPanel, {
                 type: 'hbox',
                 padding: '5'
             },
+            border: false
         });
 
 /*        

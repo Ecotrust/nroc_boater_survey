@@ -28,6 +28,15 @@ gwst.widgets.MoreActivitiesPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
 	
     onRender: function(){
+        this.header_panel = new Ext.Panel({  
+            id: 'more_activities_header_panel',
+            html: '<img src="/media/img/h_06_more_activities.png">',
+			border: 'north',
+            bodyCfg: {            
+                cls: 'action-panel-header'
+            }
+        });
+    
 		this.inner_panel = new Ext.Panel({
 			html: this.getHtmlText(),
             id: 'draw_new_area_inner_panel',
@@ -40,6 +49,7 @@ gwst.widgets.MoreActivitiesPanel = Ext.extend(gwst.widgets.WestPanel, {
             no_handler: this.noClicked.createDelegate(this)
         });
         
+        this.add(this.header_panel);
 		this.add(this.inner_panel);
         this.add(this.button_panel);
         
