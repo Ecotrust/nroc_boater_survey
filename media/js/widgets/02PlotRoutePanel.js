@@ -44,11 +44,18 @@ gwst.widgets.PlotRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
 		});
         
         this.panel_three = new Ext.Panel({
-            html: "Feel free to play around and try it out. Don't worry if you make a mistake. \
+            html: "<p>Feel free to play around and try it out. Don't worry if you make a mistake. \
                 A 'Redraw' button will appear once you start plotting - you can use it to redraw your route. \
-                You will also be able to edit or restart your route after you finish it.",
+                You will also be able to edit or restart your route after you finish it.</p>",
             border: false,
-            style: 'padding:5px 5px 5px 10px'
+			style: 'margin: 0 10px 0px 5px'
+        });
+        
+        this.help_img = new Ext.Panel({
+            html: '<img style="margin-left:auto; margin-right:auto" src="/media/img/route_click.gif" id="route_help" />',
+            border: false,
+            bodyStyle: 'text-align: center',
+            style: 'margin-bottom: 8px'
         });
         
         this.help_box = new Ext.form.Checkbox({
@@ -71,6 +78,7 @@ gwst.widgets.PlotRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
                 type: 'hbox',
                 padding: '5'
             },
+            border: false
         });
         
         this.help_panel.add(this.demo_panel);
@@ -79,12 +87,19 @@ gwst.widgets.PlotRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.header_panel);
 		this.add(this.inner_panel);
 		this.add(this.panel_three);
+		this.add(this.help_img);
 		this.add(this.help_panel);
+        
+        setInterval(function () {
+            var img = document.getElementById("route_help"),
+            src=img.getAttribute("src");
+            img.setAttribute("src",src);
+        }, 20000);
         
         // Call parent (required)
         gwst.widgets.PlotRoutePanel.superclass.onRender.apply(this, arguments); 
 	},
-    
+
     helpCheck: function() {
         this.fireEvent('show-help', this.checked);
     }
