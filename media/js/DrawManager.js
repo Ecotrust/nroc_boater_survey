@@ -482,6 +482,9 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     	}
         if (this.routeCancelWin) {
             this.routeCancelWin.hide();
+        } 
+        if (this.routeUndoWin) {
+            this.routeUndoWin.hide();
         }
     },
 
@@ -542,6 +545,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.viewport.setWestPanel(this.satisfiedRoutePanel);  
         this.satisfiedRoutePanel.manageAuto(this.autoRoundTrip);
         this.routeCancelWin.hide();
+        this.routeUndoWin.hide();
     },    
     
     completeRoute: function() {
