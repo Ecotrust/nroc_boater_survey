@@ -77,7 +77,22 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
 
     startDrawInstructStep: function() {
-        this.loadPlotRoutePanel();
+        if (!this.plotRoutePanel) {
+            this.loadPlotRoutePanel();
+            Ext.MessageBox.show({
+                title: 'Route Plotting', 
+                msg: '<p>You are now in route plotting mode.</p>\
+                <p>When you click on the map, you will begin plotting your route.</p>\
+                <p>Map navigation buttons will still work.</p>\
+                <p>Click OK to begin plotting.</p>',
+                buttons: Ext.Msg.OK,
+                // fn: this.activateRouteDraw, 
+                minWidth: 450,
+                scope: this
+            });
+        } else {
+            this.loadPlotRoutePanel();
+        }
     },
     
     finDrawInstructStep: function() {
@@ -138,7 +153,23 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     startActivityAreasStep: function() {
-        this.loadActivityAreasPanel();
+        if (!this.actAreasPanel) {
+            this.loadActivityAreasPanel();
+            Ext.MessageBox.show({
+                title: 'Activity Plotting', 
+                msg: '<p>You are now in activity plotting mode.</p>\
+                <p>When you click on the map, you will place an activity marker.</p>\
+                <p>Map navigation buttons will still work.</p>\
+                <p>Click OK to begin plotting.</p>',
+                buttons: Ext.Msg.OK,
+                // fn: this.activatePointDraw, 
+                minWidth: 450,
+                scope: this
+            });
+        } else {
+            this.loadActivityAreasPanel();
+        }
+        
     },
 
 /*
@@ -382,17 +413,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     	}
         this.viewport.setWestPanel(this.plotRoutePanel);  
         this.plotRoutePanel.help_box.on('show-help', this.showHelp, this);
-        Ext.MessageBox.show({
-            title: 'Route Plotting', 
-            msg: '<p>You are now in route plotting mode.</p>\
-            <p>When you click on the map, you will begin plotting your route.</p>\
-            <p>Map navigation buttons will still work.</p>\
-            <p>Click OK to begin plotting.</p>',
-            buttons: Ext.Msg.OK,
-            fn: this.activateRouteDraw, 
-            minWidth: 450,
-            scope: this
-        });
+        this.activateRouteDraw();
     },      
     
     /* Render viewport with main widgets to document body (right now) */
@@ -559,17 +580,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     	}
         this.viewport.setWestPanel(this.actAreasPanel);
         this.actAreasPanel.help_box.on('show-help', this.showHelp, this);
-        Ext.MessageBox.show({
-            title: 'Activity Plotting', 
-            msg: '<p>You are now in activity plotting mode.</p>\
-            <p>When you click on the map, you will place an activity marker.</p>\
-            <p>Map navigation buttons will still work.</p>\
-            <p>Click OK to begin plotting.</p>',
-            buttons: Ext.Msg.OK,
-            fn: this.activatePointDraw, 
-            minWidth: 450,
-            scope: this
-        });
+        this.activatePointDraw();
     },    
     
     /* Load the satisfied with activity west panel */
@@ -960,7 +971,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             autoHide: false,
             html: text,
             mouseOffset: [25,28],
-            style: 'opacity: 0.6; -moz-opacity: 0.6'
+            style: 'opacity: 0.8; -moz-opacity: 0.8'
     	});
     },
     
