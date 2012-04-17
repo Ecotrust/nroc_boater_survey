@@ -166,6 +166,13 @@ ul.instructions {
     background-image: url(/media/img/cancel.png) !important;
 }
 
+.redraw-icon {
+    background-image: url(/media/img/arrow_refresh.png) !important;
+}
+
+.undo-icon {
+    background-image: url(/media/img/arrow_left.png) !important;
+}
 .olControlMousePosition {
     background-color: #DDDDDD;
     color: black;

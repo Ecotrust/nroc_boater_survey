@@ -268,6 +268,10 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         this.disableLineDraw();
         this.enableLineDraw();
     },
+    
+    undoLine: function() {
+        this.drawLineControl.handler.undo();
+    },
 
     resetMapView: function() {
         this.map.setCenter(this.defaultCenter);

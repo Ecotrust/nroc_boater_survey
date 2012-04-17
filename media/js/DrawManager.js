@@ -8,6 +8,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 	cur_feature: null, //Last drawn feature
 	cancelWinOffset: [540, 8],
     routeCancelWinOffset: [540, 8],
+    routeUndoWinOffset: [650, 8],
     resetMapWinOffset: [380, 8],	//Offset from top left to render
     mapNavWinOffset: [380, 60],	    //Offset from top left to render
 	activityNum: 0,
@@ -427,6 +428,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.mapPanel.enableLineDraw();
         this.loadAddRouteTooltip();
         this.loadRouteCancelWin();
+        this.loadRouteUndoWin();
     }, 
 
     activatePointDraw: function() {
@@ -453,6 +455,15 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 		}
 		this.routeCancelWin.show();		
 		this.routeCancelWin.alignTo(document.body, "tl-tl", this.routeCancelWinOffset);    	
+    },
+    
+    loadRouteUndoWin: function() {
+        if (!this.routeUndoWin) {
+            this.routeUndoWin = new gwst.widgets.UndoWindow();
+            this.routeUndoWin.on('undo-clicked', this.mapPanel.undoLine, this.mapPanel);
+        }
+        this.routeUndoWin.show();
+        this.routeUndoWin.alignTo(document.body, "tl-tl", this.routeUndoWinOffset);
     },
     
     loadCancelWin: function() {
@@ -911,6 +922,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.mapPanel.lineResume();
         this.startDrawInstructStep();
         this.loadRouteCancelWin();
+        this.loadRouteUndoWin();
     },
 
     autoPlotReturnRoute: function() {

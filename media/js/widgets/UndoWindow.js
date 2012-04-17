@@ -1,34 +1,34 @@
 Ext.namespace('gwst', 'gwst.widgets');
 
-gwst.widgets.CancelWindow = Ext.extend(Ext.Window, {
+gwst.widgets.UndoWindow = Ext.extend(Ext.Window, {
     
     // Constructor Defaults, can be overridden by user's config object
     initComponent: function(){		
-		this.addEvents('cancel-vector');
+		this.addEvents('undo-clicked');
 		
 		Ext.apply(this, {          
             height: 25,
-            width: 100,
+            width: 80,
             layout:'fit',
-            html:'blort',
+            html:'',
             resizable: false,
             closable: false,
             collapsible: false,
             draggable: false,
             tbar: [{
-				text: 'Redraw',
-				iconCls: 'redraw-icon',
-				handler: this.cancelShape,
+				text: 'Undo',
+                iconCls: 'undo-icon',
+				handler: this.undoClicked,
 				scope: this
             }]                   
         });
-		gwst.widgets.CancelWindow.superclass.initComponent.call(this);		
+		gwst.widgets.UndoWindow.superclass.initComponent.call(this);		
 	},
 	
-	cancelShape: function() {
-		this.fireEvent('cancel-clicked');
+	undoClicked: function() {
+		this.fireEvent('undo-clicked');
 	}	
 });
 
 //register xtype to allow for lazy initialization
-Ext.reg('gwst-cancel-window', gwst.widgets.CancelWindow);
+Ext.reg('gwst-undo-window', gwst.widgets.UndoWindow);
