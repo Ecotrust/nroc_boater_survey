@@ -107,13 +107,7 @@ def shapes(request, id=None):
                     other_factor = None
                 new_shape = Route(
                     survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
-                    geometry = geom,
-                    factor_quickest = factors['quickest'],
-                    factor_safest = factors['safest'],
-                    factor_access = factors['access'],
-                    factor_beauty = factors['beauty'],
-                    factor_cruising = factors['cruising'],
-                    factor_other = other_factor
+                    geometry = geom
                 )
                 status = SurveyStatus.objects.get(survey_id=feat.get('survey_id'))
                 status.map_status = 'Route drawn'

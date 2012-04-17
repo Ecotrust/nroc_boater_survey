@@ -81,7 +81,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     finDrawInstructStep: function() {
-        this.startRouteInfoStep();
+        this.saveNewRoute();
     },
 
     startEditRouteStep: function() {
@@ -97,24 +97,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.disableFeatureEdit();
         //Now that we're done editing, time to validate
         this.validateShape(this.cur_feature, 'route');
-    },
-    
-    startRouteInfoStep: function() {
-        this.loadRouteInfo1Panel();
-    },
-    
-    finRouteInfoStep: function() {
-        this.factor_count = this.routeInfo1Panel.answer_one.items.getCount();
-        this.route_factors = {};
-        for (var i = 0; i < this.factor_count; i++) {
-            this.factor = this.routeInfo1Panel.answer_one.items.get(i)
-            this.route_factors[this.factor.getName()] = this.factor.checked;
-        }
-        if (this.routeInfo1Panel.answer_one.items.get(this.factor_count-1).checked) {
-            this.route_factors_other = this.routeInfo1Panel.other_one.getValue();
-        }
-        this.routeInfo1Panel.resetPanel();
-        this.saveNewRoute();
     },
 
     skipActivitiesStep: function() {
@@ -566,15 +548,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         }
         this.viewport.setWestPanel(this.editRoutePanel);
     },
-    
-    loadRouteInfo1Panel: function() {
-        if (!this.routeInfo1Panel) {
-            this.routeInfo1Panel = new gwst.widgets.RouteInfo1Panel();
-            //When panel fires even saying it's all done, we want to process it and move on
-            this.routeInfo1Panel.on('route-info1-cont', this.finRouteInfoStep, this);
-        }
-        this.viewport.setWestPanel(this.routeInfo1Panel);    
-    },
 
     loadActivityAreasPanel: function() {      	
     	if (!this.actAreasPanel) {
@@ -734,7 +707,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             if (res_obj.type == 'route') {
                 this.finDrawInstructStep();
             } else {
-                this.startActivityInfoStep();           //TODO!!!
+                this.startActivityInfoStep();
             }
         //Feature is invalid
         } else if (status_code > 0){

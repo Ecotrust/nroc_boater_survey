@@ -25,12 +25,6 @@ class Route(Model):
     geometry = LineStringField(srid=settings.SERVER_SRID)
     objects = GeoManager()
     creation_date = DateTimeField(default=datetime.datetime.now)
-    factor_quickest = BooleanField( default=False )
-    factor_safest = BooleanField( default=False )
-    factor_access = BooleanField( default=False )
-    factor_beauty = BooleanField( default=False )
-    factor_cruising = BooleanField( default=False )
-    factor_other = CharField( blank=True, null=True, max_length=150 )
     class Meta:
         db_table = u'route'
     def __unicode__(self):
