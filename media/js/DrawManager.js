@@ -7,8 +7,8 @@ shapes and pennies.  Extends Ext.Observable providing event handling
 gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 	cur_feature: null, //Last drawn feature
 	cancelWinOffset: [540, 8],
-    routeCancelWinOffset: [540, 8],
-    routeUndoWinOffset: [650, 8],
+    routeCancelWinOffset: [380, 60],
+    routeUndoWinOffset: [380, 112],
     resetMapWinOffset: [380, 8],	//Offset from top left to render
     mapNavWinOffset: [380, 60],	    //Offset from top left to render
 	activityNum: 0,
