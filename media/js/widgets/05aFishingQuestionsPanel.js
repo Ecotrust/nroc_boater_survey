@@ -73,7 +73,7 @@ gwst.widgets.FishingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
             id: 'fishing-activity-2',
             xtype: 'radiogroup',
             fieldlabel: 'Fishing Rank',
-            style: 'margin: 0px 0px 10px 10px',
+            style: 'margin: 0px 0px 10px 15px',
             columns: 1,
             items: [
                 {boxLabel: 'Very good', name: 'fish-rank', inputValue: 'very-good'},

@@ -23,7 +23,7 @@ gwst.widgets.MoreActivitiesPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     getHtmlText: function() {
-        var html_text = '<h3>Do you have more activities to plot?</h3>';
+        var html_text = '<h3>Would you like to plot more activities?</h3>';
         return html_text;
     },
 	

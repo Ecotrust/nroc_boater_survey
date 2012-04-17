@@ -72,7 +72,7 @@ gwst.widgets.DivingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
             id: 'diving-activity-2',
             xtype: 'radiogroup',
             fieldlabel: 'Diving Rank',
-            style: 'margin: 0px 0px 10px 10px',
+            style: 'margin: 0px 0px 10px 15px',
             columns: 1,
             items: [
                 {boxLabel: 'Very good', name: 'dive-rank', inputValue: 'very-good'},

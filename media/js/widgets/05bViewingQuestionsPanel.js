@@ -73,7 +73,7 @@ gwst.widgets.ViewingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
             id: 'viewing-activity-2',
             xtype: 'radiogroup',
             fieldlabel: 'Viewing Rank',
-            style: 'margin: 0px 0px 10px 10px',
+            style: 'margin: 0px 0px 10px 15px',
             columns: 1,
             items: [
                 {boxLabel: 'Very good', name: 'view-rank', inputValue: 'very-good'},

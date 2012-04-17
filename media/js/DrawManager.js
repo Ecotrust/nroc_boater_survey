@@ -404,7 +404,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             title: 'Route Plotting', 
             msg: '<p>You are now in route plotting mode.</p>\
             <p>When you click on the map, you will begin plotting your route.</p>\
-            <p>Map navigation buttons will still work.</p>',
+            <p>Map navigation buttons will still work.</p>\
+            <p>Click OK to begin plotting.</p>',
             buttons: Ext.Msg.OK,
             fn: this.activateRouteDraw, 
             minWidth: 450,
@@ -589,7 +590,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             title: 'Activity Plotting', 
             msg: '<p>You are now in activity plotting mode.</p>\
             <p>When you click on the map, you will place an activity marker.</p>\
-            <p>Map navigation buttons will still work.</p>',
+            <p>Map navigation buttons will still work.</p>\
+            <p>Click OK to begin plotting.</p>',
             buttons: Ext.Msg.OK,
             fn: this.activatePointDraw, 
             minWidth: 450,
