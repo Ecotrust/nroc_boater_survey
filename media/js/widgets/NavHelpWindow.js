@@ -24,6 +24,14 @@ gwst.widgets.NavHelpWindow = Ext.extend(Ext.Window, {
 				{
                     text: 'View detailed instructions',
                     handler: this.instructionsBtnClicked.createDelegate(this)
+                },
+                {
+                    xtype:'tbseparator',
+                    width: 15
+                },
+                {
+                    text: 'Close',
+                    handler: this.closeBtnClicked.createDelegate(this)
                 }
 			]
         });
@@ -32,6 +40,10 @@ gwst.widgets.NavHelpWindow = Ext.extend(Ext.Window, {
 
     instructionsBtnClicked: function() {
         this.fireEvent('view-nav-details', this);
+    },
+    
+    closeBtnClicked: function() {
+        this.hide();
     },
     
     load: function() {
