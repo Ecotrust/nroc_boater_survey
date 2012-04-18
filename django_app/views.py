@@ -43,7 +43,7 @@ def intro(request):
             return HttpResponseRedirect('http://www.maboatersurvey.com/thanks.htm')
 
     if not request.GET.has_key('id'):    
-        return HttpResponse('We\'re sorry, the mapping portion of this survey cannot be opened.  If you believe this is an error, you can call 617-287-5576, or email <a href="mailto:help@maboatersurvey.com">help@maboatersurvey.com</a>.' , status=500)
+        return HttpResponse('We\'re sorry, the mapping portion of this survey cannot be opened.  If you believe this is an error, you can call 617-737-2600 ext. 102, or email <a href="mailto:kstarbuck@seaplan.org">kstarbuck@seaplan.org</a>.' , status=500)
 
     interview_id  = request.GET.get('id')
     vessel  = request.GET.get('vessel')
