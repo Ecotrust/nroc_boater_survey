@@ -3,6 +3,10 @@
     list-style-position: inside;
 }
 
+.x-window li {
+    margin: 2em;
+}
+
 /* Map Style */
 
 .olControlPanZoom {
