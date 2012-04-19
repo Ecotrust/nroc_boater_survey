@@ -15,8 +15,8 @@ gwst.DrawApp = Ext.extend(Ext.util.Observable, {
              * a default image - one that looks like water for example.
              * To show nothing at all, leave the following lines commented out.
              */
-            // this.src = "/media/img/geowebcache-404_RBSW.png";
-            // this.style.display = "";
+            this.src = "/media/img/geowebcache-404_RBSW.png";
+            this.style.display = "";
         };    
     
 		this.draw_manager = new gwst.DrawManager();

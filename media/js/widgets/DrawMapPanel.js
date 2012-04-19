@@ -64,7 +64,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
                 sphericalMercator: true        ,
                 isBaseLayer: true
             }
-         );
+        );
 
         var nautLayer = new OpenLayers.Layer.TMS(
             "Nautical Charts",
@@ -72,8 +72,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             // ["/media/tiles/"],
             {
                 buffer: 1,
-                'isBaseLayer': false,
-                visibility: true,
+                'isBaseLayer': true,
                 'sphericalMercator': true,
                 getURL: function (bounds) {
                     var z = map.getZoom();
@@ -91,7 +90,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
                 }
             }
         );                       	
-        
+
         this.vectorLayer = new OpenLayers.Layer.Vector(
     		"Vector Layer", 
     		{
@@ -128,7 +127,15 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         layerSwitcher.maximizeControl();
         map.addControl(new OpenLayers.Control.KeyboardDefaults()); 
         
-        this.borderPanControl = new OpenLayers.Control.BorderPan();
+        this.borderPanControl = new OpenLayers.Control.BorderPan({
+            'blackoutBoxes': [{
+                'top': 0,
+                'left': 0,
+                'right': 200,
+                'bottom': 300
+            }],
+            panBorderWidth: 60
+        });
         
         map.addControl(this.borderPanControl);
 
@@ -161,7 +168,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         //Update internal MapPanel properties
 		Ext.apply(this, {
 		    map: map,
-		    layers: [hybridLayer, nautLayer, this.vectorLayer],
+		    layers: [nautLayer, hybridLayer, this.vectorLayer],
 		    extent: map_extent,
 	        center: region_extent.getCenterLonLat(),
 	        zoom: this.defaultZoom,

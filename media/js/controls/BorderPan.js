@@ -6,10 +6,11 @@
 OpenLayers.Control.BorderPan = OpenLayers.Class(OpenLayers.Control, {
     onMove: this.onMove,
     onOut: this.onOut,
-    panBorderWidth: 90,     //the buffer (in pixels) around each border that will trigger panning
+    panBorderWidth: 75,     //the buffer (in pixels) around each border that will trigger panning
     maxPxPan: 3,            //the max number of pixels panned per cycle
     panRate: 100,           //delay in milliseconds
     panning: false,
+    blackoutBoxes: [],      //list objects given top, bottom, left and right bounds in pixels where border panning will not occur
     
     /**
      * APIMethod: activate
@@ -67,7 +68,17 @@ OpenLayers.Control.BorderPan = OpenLayers.Class(OpenLayers.Control, {
         this.bottomBound = this.map.getCurrentSize().h;
         this.x = 0;
         this.y = 0;
-        if(xy.x < 0 || xy.y < 0 || xy.x > this.rightBound || xy.y > this.bottomBound) {
+        this.blackout = false;
+        for(var i = 0; i < this.blackoutBoxes.length; i++) {
+            if (xy.x > this.blackoutBoxes[i]['left'] &&
+                xy.x <= this.blackoutBoxes[i]['right'] &&
+                xy.y > this.blackoutBoxes[i]['top'] &&
+                xy.y <= this.blackoutBoxes[i]['bottom']) {
+                this.blackout = true;
+                continue;
+            }
+        }
+        if(xy.x < 0 || xy.y < 0 || xy.x > this.rightBound || xy.y > this.bottomBound || this.blackout) {
             this.panning = false;
         } else {
             if (!(xy.x > this.panBorderWidth && xy.x < (this.rightBound - this.panBorderWidth))) {  //short circuit if between buffers
