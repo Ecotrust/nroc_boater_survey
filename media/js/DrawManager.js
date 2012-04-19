@@ -82,10 +82,10 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.loadPlotRoutePanel();
             Ext.MessageBox.show({
                 title: 'Route Plotting', 
-                msg: '<p>You are now in route plotting mode.</p>\
-                <p>When you click on the map, you will begin plotting your route.</p>\
-                <p>Map navigation buttons will still work.</p>\
-                <p>Click OK to begin plotting.</p>',
+                msg: '<p class="help-win">You are now in route plotting mode.</p>\
+                <p class="help-win">When you click on the map, you will begin plotting your route.</p>\
+                <p class="help-win">Map navigation buttons will still work.</p>\
+                <p class="help-win">Click OK to begin plotting.</p>',
                 buttons: Ext.Msg.OK,
                 // fn: this.activateRouteDraw, 
                 minWidth: 450,
@@ -118,7 +118,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     skipActivitiesStep: function() {
         Ext.Msg.show({
            title:'Skip Activities?',
-           msg: 'Are you sure you want to skip the drawing of your activity areas?',
+           msg: '<p class="help-win">Are you sure you want to skip the drawing of your activity areas?</p>',
            buttons: Ext.Msg.YESNO,
            fn: this.skipActivitiesCheck.createDelegate(this),
            icon: Ext.MessageBox.QUESTION
@@ -128,7 +128,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     skipDrawingStep: function() {
         Ext.Msg.show({
            title:'Stop Drawing?',
-           msg: 'Are you sure you want to stop drawing activity areas? If you have drawn other areas, they are already saved.',
+           msg: '<p class="help-win">Are you sure you want to stop drawing activity areas? If you have drawn other areas, they are already saved.<p>',
            buttons: Ext.Msg.YESNO,
            fn: this.stopDrawingCheck.createDelegate(this),
            minWidth: 300,
@@ -158,10 +158,10 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.loadActivityAreasPanel();
             Ext.MessageBox.show({
                 title: 'Activity Plotting', 
-                msg: '<p>You are now in activity plotting mode.</p>\
-                <p>When you click on the map, you will place an activity marker.</p>\
-                <p>Map navigation buttons will still work.</p>\
-                <p>Click OK to begin plotting.</p>',
+                msg: '<p class="help-win">You are now in activity plotting mode.</p>\
+                <p class="help-win">When you click on the map, you will place an activity marker.</p>\
+                <p class="help-win">Map navigation buttons will still work.</p>\
+                <p class="help-win">Click OK to begin plotting.</p>',
                 buttons: Ext.Msg.OK,
                 // fn: this.activatePointDraw, 
                 minWidth: 450,
