@@ -10,7 +10,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     routeCancelWinOffset: [380, 60],
     routeUndoWinOffset: [380, 112],
     resetMapWinOffset: [380, 8],	//Offset from top left to render
-    mapNavWinOffset: [380, 60],	    //Offset from top left to render
+    mapNavWinOffset: [540, 8],	    //Offset from top left to render
 	activityNum: 0,
     route_factors_other: null,
     act_list_items: null,
