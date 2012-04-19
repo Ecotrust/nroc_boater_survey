@@ -25,10 +25,8 @@ def intro(request):
         else:    
             #clear out previous answers
             Route.objects.filter(survey_id=request.session['interview_id']).delete()
-            ActivityArea.objects.filter(survey_id=request.session['interview_id']).delete()
-            ActivityPoint.objects.filter(survey_id=request.session['interview_id']).delete()
-            RouteFactor.objects.filter(survey_id=request.session['interview_id']).delete()
-            ActivityFactor.objects.filter(survey_id=request.session['interview_id']).delete()    
+            # ActivityArea.objects.filter(survey_id=request.session['interview_id']).delete()
+            ActivityPoint.objects.filter(survey_id=request.session['interview_id']).delete()    
         
             skipped_survey = SurveyStatus.objects.get_or_create(survey_id=request.session['interview_id'])
             #Save skip status here

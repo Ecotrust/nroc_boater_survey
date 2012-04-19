@@ -65,7 +65,7 @@ def draw(request):
     started_survey = SurveyStatus.objects.get_or_create(survey_id=request.session['interview_id'])
     #Save status here
     started_survey[0].user_type=request.session['interview_id'][0]
-    started_survey[0].user_id=request.session['interview_id'][1:7]
+    started_survey[0].user_id=request.session['interview_id'][1:-2]
     started_survey[0].month=request.session['interview_id'][-2:]
     started_survey[0].map_status = 'Started'
     started_survey[0].act_status = 'Not yet started'
@@ -192,7 +192,7 @@ def shapes(request, id=None):
                     dive_rank = feat.get('dive_rank')
                 )  
                 status = SurveyStatus.objects.get(survey_id=feat.get('survey_id'))
-                status.act_status = 'Area drawn'
+                status.act_status = 'Point plotted'
                 status.save()
             new_shape.save() 
 

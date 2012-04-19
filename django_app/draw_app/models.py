@@ -8,7 +8,7 @@ import datetime
 class SurveyStatus(Model):
     survey_id = CharField(primary_key = True, max_length=12)
     user_type = CharField( max_length=1 )
-    user_id = CharField(max_length=6)
+    user_id = CharField(max_length=8)
     month = CharField(max_length=2)
     start_time = DateTimeField(default=datetime.datetime.now)
     map_status = CharField( blank=True, null=True, max_length=30 ) #skipped?  May need to be handled before accessing draw_app
