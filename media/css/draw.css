@@ -62,6 +62,10 @@ p.x-panel-static{
     position: static;
 }
 
+p.help-win {
+    font-size: 1.4em;
+}
+
 ul.instructions {
     margin: 0 15px;
 }
@@ -257,7 +261,7 @@ ul.instructions {
 /*     buttons     */
 
 .x-btn button{
-    font-size: 13px;
+    font-size: 1.3em;
     font-weight: bold;
 }
 

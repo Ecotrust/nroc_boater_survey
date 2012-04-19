@@ -12,7 +12,7 @@ gwst.widgets.NavHelpWindow = Ext.extend(Ext.Window, {
             title: 'Map Navigation Help',
         	layout:'fit',
             width:350,
-            html: '<p>Use the blue navigation controls here to zoom to where you started the trip on which you are reporting.</p>',
+            html: '<p class="help-win">Use the blue navigation controls here to zoom to where you started the trip on which you are reporting.</p>',
             height:150,
             plain: true,
             bodyStyle: 'padding: 8px; font-weight: bold',
