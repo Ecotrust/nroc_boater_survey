@@ -67,8 +67,17 @@ p.help-win {
     font-size: 1.4em;
 }
 
+ul {
+    margin-bottom: .8em;
+}
+
 ul.instructions {
     margin: 0 15px;
+}
+
+li {
+    margin-left: 25px;
+    font-weight: normal;
 }
 
 .west-panel .x-panel-header {

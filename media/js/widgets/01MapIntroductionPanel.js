@@ -26,7 +26,7 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     getHtmlText: function() {
-        var html_text = '<h1>Step 1: Zoom to Boating Area</h1>\
+        var html_text = '<h2>Step 1: Zoom to Boating Area</h2>\
         <p>Zoom in on the map to where you started your last trip.</p>\
         <p>To zoom the map to the area where your trip began, select the state below.</p>';
         return html_text;
