@@ -43,8 +43,9 @@ p {
     margin: 0 0 1.2em 0;
 }
 
-p.imp-note {
-    color:#FF0;
+p.intro-list {
+    margin-left:20px;
+    margin-bottom: 5px;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -299,6 +300,12 @@ table thead th.descending a {
     background: url(../img/admin/arrow-up.gif) right .4em no-repeat;
 }
 
+table.intro-table {
+    border: 0;
+    padding:5px;
+    margin:0 auto 0 20px;
+}
+
 /* ORDERABLE TABLES */
 
 table.orderable tbody tr td:hover {
@@ -353,7 +360,6 @@ legend {
 
 input { 
     font-size:.9em; 
-    margin-bottom:1em; 
 }
 
 /* FORM BUTTONS */

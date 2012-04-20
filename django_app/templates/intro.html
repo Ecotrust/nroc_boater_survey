@@ -17,41 +17,34 @@ li {
 
 {% block content %}
 
-<h2>Please take a minute to read the following instructions as they will explain what we would like you to do.</h2>
+<h2>Welcome to the mapping part of the survey.</h2>
+<p>You just finished answering questions about a specific trip you took out on the water. We would now like you to plot the approximate route you took and tell us what you did during that trip.</p>
 
-<h2>Welcome to the mapping part of the survey.  You just finished answering questions about a specific trip you took out on the water. We would now like you to plot the approximate route that you took and tell us what you did during that trip.</h2>
+<h3>Instructions: 3 Steps Below</h3>
 
-    <table border="0" padding="5px">
-        <col width="160px" />
-        <col width="600px" align="left" />
+    <table class="intro-table">
+        <col width="350px" />
+        <col width="160px" style="text-align: left" />
         <tr>
-            <td colspan="2">
-            </td>
-        </tr><tr>
-            <td colspan="2"><ul><li>First, you will be asked to zoom in on the map to where you started your last trip. Map navigation controls will be provided for this purpose.</li></ul></td> 
-        </tr><tr>
-            <td><img src="/media/img/nav_arrows.png" style="width: 60px; height: 80px; margin-left: 20px;" />
-                <img src="/media/img/nav_zoombar.png" style="width: 60px; height: 80px; margin-left: 30px;" />
+            <td><ul><li>Step 1: Zoom in on the map to where you started your last trip. Map navigation controls will be provided for this purpose.</li></ul></td> 
+            <td><img src="/media/img/nav_arrows.png" style="width: 48px; height: 64px;" />
+                <img src="/media/img/nav_zoombar.png" style="width: 48px; height: 64px; margin-left: 30px;" />
             </td>            
         </tr><tr>
-            <td colspan="2"><ul><li>You will then be asked to plot the route you took during your last trip. Please plot the COMPLETE trip even if you followed the same route for your return leg.</li></ul></td>
+            <td><ul><li>Step 2: Plot the route you took during your last trip. Please plot the COMPLETE trip even if you followed the same route for your return leg.</li></ul></td>
+            <td><img src="/media/img/route_intro.png" style="width: 128px; height: 96px;" /></td>
         </tr><tr>
-            <td><img src="/media/img/route_intro.png" style="width: 160px; height: 120px; margin-left: 20px;" /></td>
-        </tr><tr>
-            <td colspan="2"><ul><li>Finally, you will be asked to draw the areas where you engaged in particular recreational activities during this trip.</li></ul></td>
-        </tr><tr>
-            <td><img src="/media/img/area_intro.png" style="width: 160px; height: 120px; margin-left: 20px;" /></td>
-            <td><ul>
-            </ul></td>
+            <td><ul><li>Step 3: Plot the points where you engaged in particular recreational activities during this trip.</li></ul></td>
+            <td><img src="/media/img/area_intro.png" style="width: 128px; height: 96px;" /></td>
         </tr>
     </table>
 <br />
-<p>If you need additional help, please <b><i>keep your mapping application open</i></b> and either:</p>
-<ol><li>call 617-737-2600 ext. 102</li>
-<li>email <a href="mailto:kstarbuck@seaplan.org">kstarbuck@seaplan.org</a></li>
-<li>refer to our <a target="_blank" href="http://www.maboatersurvey.com/map_faq.htm">detailed drawing instructions</a> page, or</li>
-<li>view our <a target="_blank" href="videos/demo">tutorial video</a>.</li></ol>
-<p class="imp-note">Important note: If you exit the mapping application, you will not be able to re-enter the survey.</p>
+<p style="margin-bottom: 5px">If you need additional help, please <b><i>keep your mapping application open</i></b> and either:</p>
+<p class="intro-list">1) call 617-737-2600 ext. 102,  <br />
+2) email <a href="mailto:help@seaplan.org">help@seaplan.org</a>, <br />
+3) refer to our <a target="_blank" href="http://www.maboatersurvey.com/map_faq.htm">detailed drawing instructions</a> page, or  <br />
+4) view our <a target="_blank" href="videos/demo">tutorial video</a>.</p>
+<p><b>Note: If you exit the mapping application, you will not be able to re-enter the survey.</b></p>
 
    <form class="gwst-form" method="get" action="/">
         <input id="skip" name="skip" type="submit" value="Skip Mapping Completely" onclick='return confirm("Are you sure you want to skip the mapping portion of the survey?  Click \"Ok\" if Yes, \"Cancel\" if No. Once you skip this, you will not be able to come back.")'/ style='margin-right: 360px'>
