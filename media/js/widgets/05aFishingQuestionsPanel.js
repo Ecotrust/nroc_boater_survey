@@ -122,7 +122,12 @@ gwst.widgets.FishingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.other_fish.isValid()) {
             this.fireEvent('fishing-questions-cont',this);
         } else {
-            Ext.Msg.alert('Alert','<p class="help-win">Your entry for \'other\' is too long.  Please shorten it.</p>');
+            Ext.Msg.show({
+                title:'Alert', 
+                msg: '<p class="help-win">Your entry for \'other\' is too long.  Please shorten it.</p>', 
+                buttons: Ext.Msg.OK,
+                minWidth: 300
+            });
         }
     },
 

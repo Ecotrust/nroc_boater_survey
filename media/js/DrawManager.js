@@ -904,7 +904,12 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     checkZoom: function() {
         if (this.mapPanel.map.getZoom() < gwst.settings.minimum_draw_zoom) {
-            Ext.Msg.alert('Attention required', gwst.settings.zoom_error_text);
+            Ext.Msg.show({
+                title:'Attention required', 
+                msg: gwst.settings.zoom_error_text, 
+                buttons: Ext.Msg.OK,
+                minWidth: 300
+            });
             return false;
         } else {
             return true;
