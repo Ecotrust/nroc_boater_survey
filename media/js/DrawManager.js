@@ -894,10 +894,10 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             //the route pause handler will handle loading the satisfied panel
     	} else {
             if (this.checkZoom()) {
-                this.mapPanel.disablePointDraw();
                 this.loadSatisfiedActivityPanel();
             } else {
                 this.cur_feature.destroy();
+                this.mapPanel.enablePointDraw();
             }
     	}
     },

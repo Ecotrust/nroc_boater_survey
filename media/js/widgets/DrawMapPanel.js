@@ -226,10 +226,10 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     },
     
     vecComplete: function(evt) {
-    	this.fireEvent('vector-completed', evt.feature);
     	this.curFeature = evt.feature;
         this.disableLineDraw();
-    	this.disablePolyDraw();
+    	this.disablePointDraw();
+    	this.fireEvent('vector-completed', evt.feature);
     },
     
     modifyFeature: function(feature) {
@@ -265,15 +265,15 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         this.borderPanControl.deactivate();
     },
     
-    enablePolyDraw: function() {
-        this.drawPolyControl.activate();
-        this.borderPanControl.activate();
-    },
+    // enablePolyDraw: function() {
+        // this.drawPolyControl.activate();
+        // this.borderPanControl.activate();
+    // },
     
-    disablePolyDraw: function() {
-    	this.drawPolyControl.deactivate();
-        this.borderPanControl.deactivate();
-    },        
+    // disablePolyDraw: function() {
+    	// this.drawPolyControl.deactivate();
+        // this.borderPanControl.deactivate();
+    // },        
     
     cancelPoly: function() {
     	this.disablePolyDraw();        
