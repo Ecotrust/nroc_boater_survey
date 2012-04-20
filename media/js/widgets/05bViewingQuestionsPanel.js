@@ -122,7 +122,7 @@ gwst.widgets.ViewingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.other_view.isValid()) {
             this.fireEvent('viewing-questions-cont',this);
         } else {
-            alert('Your entry for \'other\' is too long.  Please shorten it.');
+            Ext.Msg.alert('Alert','<p class="help-win">Your entry for \'other\' is too long.  Please shorten it.</p>');
         }
     },
 

@@ -97,7 +97,6 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
 	},
     
     stateChanged: function(radioGroup, state) {
-        // alert(state.boxLabel);
         if (!this.state_center) {
             this.state_center = new OpenLayers.LonLat(0,0);
             this.state_zoom = 8;

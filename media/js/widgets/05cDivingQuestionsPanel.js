@@ -121,7 +121,7 @@ gwst.widgets.DivingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.other_dive.isValid()) {
             this.fireEvent('diving-questions-cont',this);
         } else {
-            alert('Your entry for \'other\' is too long.  Please shorten it.');
+            Ext.Msg.alert('Alert','<p class="help-win">Your entry for \'other\' is too long.  Please shorten it.</p>');
         }
     },
 

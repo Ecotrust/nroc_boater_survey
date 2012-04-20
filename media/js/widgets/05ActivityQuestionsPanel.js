@@ -109,7 +109,7 @@ gwst.widgets.ActivityQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         if (this.other_one.isValid() ) {
             this.fireEvent('activity-questions-cont',this);
         } else {
-            alert('Your entry for \'other\' is too long.  Please shorten it.');
+            Ext.Msg.alert('Alert','<p class="help-win">Your entry for \'other\' is too long.  Please shorten it.</p>');
         }
     },
 

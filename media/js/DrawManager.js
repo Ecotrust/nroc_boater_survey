@@ -169,8 +169,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             });
         } else {
             this.loadActivityAreasPanel();
-        }
-        
+        }        
     },
 
 /*
@@ -894,14 +893,18 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.hideMapTooltip();
             //the route pause handler will handle loading the satisfied panel
     	} else {
-            this.mapPanel.disablePointDraw();
-            this.loadSatisfiedActivityPanel();
+            if (this.checkZoom()) {
+                this.mapPanel.disablePointDraw();
+                this.loadSatisfiedActivityPanel();
+            } else {
+                this.cur_feature.destroy();
+            }
     	}
     },
     
     checkZoom: function() {
         if (this.mapPanel.map.getZoom() < gwst.settings.minimum_draw_zoom) {
-            alert(gwst.settings.zoom_error_text);
+            Ext.Msg.alert('Attention required', gwst.settings.zoom_error_text);
             return false;
         } else {
             return true;
