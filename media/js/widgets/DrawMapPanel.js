@@ -65,6 +65,15 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
                 isBaseLayer: true
             }
         );
+        
+        var roadMapLayer = new OpenLayers.Layer.Google(
+            "Road Map",
+            {
+                type: google.maps.MapTypeId.ROADMAP, 
+                sphericalMercator: true        ,
+                isBaseLayer: true
+            }
+        );
 
         var nautLayer = new OpenLayers.Layer.TMS(
             "Nautical Charts",
@@ -168,7 +177,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         //Update internal MapPanel properties
 		Ext.apply(this, {
 		    map: map,
-		    layers: [nautLayer, hybridLayer, this.vectorLayer],
+		    layers: [nautLayer, hybridLayer, roadMapLayer, this.vectorLayer],
 		    extent: map_extent,
 	        center: region_extent.getCenterLonLat(),
 	        zoom: this.defaultZoom,
