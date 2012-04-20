@@ -26,7 +26,9 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     getHtmlText: function() {
-        var html_text = '<h2>Plot your route on the map</h2><p>Please remember to plot a complete route, including your return leg even if you came back the same way.</p><h2>Zoom to Boating Area</h2><p>To zoom the map to the area where your trip began, select the state below.</p>';
+        var html_text = '<h1>Step 1: Zoom to Boating Area</h1>\
+        <p>Zoom in on the map to where you started your last trip.</p>\
+        <p>To zoom the map to the area where your trip began, select the state below.</p>';
         return html_text;
     },
 	
@@ -65,20 +67,15 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
         
         this.state_radio_group.on('change', this.stateChanged, this);
         
-        this.table_panel = new Ext.Panel({
-            layout: 'table',
+        this.lower_panel = new Ext.Panel({
             border: false,
             style: 'margin-left: 5px; margin-right:5px; padding-left: 5px; padding-right: 5px',
             defaults: {
                 bodyStyle: 'border: none; padding: 5px 5px 5px 10px'
             },
-            layoutConfig: {
-                columns: 1
-            },
-            id: 'intro_table_panel',
-            items: [{
-                html: '<p class="video-link"><img class="video-img" src="/media/img/film_go.png"/> <a href="'+ gwst.settings.urls.demo +'" target="_blank">Watch Demonstration</a>'
-            }]
+            id: 'intro_lower_panel',
+            html:'<p>Please see the blue box at the top of the map for more directions on how to zoom.</p>\
+            <p class="video-link"><img class="video-img" src="/media/img/film_go.png"/> <a href="'+ gwst.settings.urls.demo +'" target="_blank">Watch Demonstration</a></p>'
         });         
 
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
@@ -89,7 +86,7 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.header_panel);
 		this.add(this.inner_panel);
         this.add(this.state_radio_group);
-        this.add(this.table_panel);
+        this.add(this.lower_panel);
         this.add(this.button_panel);
         
         // Call parent (required)
