@@ -48,11 +48,9 @@ def status(request):
 
 def draw(request):   
     if not request.session.has_key('interview_id'):    
-        return HttpResponse('We\'re sorry, the mapping portion of this survey cannot be opened.  If you believe this is an error, you can call 617-737-2600 ext. 102, or email <a href="mailto:kstarbuck@seaplan.org">kstarbuck@seaplan.org</a>.' , status=500)
+        return HttpResponse('We\'re sorry, the mapping portion of this survey cannot be opened.  If you believe this is an error, you can call 617-737-2600 ext. 102, or email <a href="mailto:help@seaplan.org">help@seaplan.org</a>.' , status=500)
     params = {
-        'interview_id': request.session['interview_id'], 
-        'vessel': request.session['vessel'],
-        'month': request.session['month']
+        'interview_id': request.session['interview_id']
     }
     if settings.GMAPS_API_KEY.__len__() > 0:
         params['GMAPS_API_KEY'] = settings.GMAPS_API_KEY
@@ -70,6 +68,9 @@ def draw(request):
     started_survey[0].map_status = 'Started'
     started_survey[0].act_status = 'Not yet started'
     started_survey[0].save()
+    
+    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    params['month'] = months[int(started_survey[0].month) - 1]
     
     Route.objects.filter(survey_id=request.session['interview_id']).delete()
     # ActivityArea.objects.filter(survey_id=request.session['interview_id']).delete()
