@@ -10,6 +10,11 @@
     <meta name="keywords" content=" " />
     <meta name="robots" content="noindex, nofollow" /> 
     <link rel="shortcut icon" href="/media/images/favicon.ico" />
+    <link href="http://recreation.seaplan.org/wp-content/themes/dandelion_v2.5/css/prettyPhoto.css" rel="stylesheet" type="text/css" media="screen" />    
+    <link href="http://recreation.seaplan.org/wp-content/themes/dandelion_v2.5/css/nivo-slider.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="http://recreation.seaplan.org/wp-content/themes/dandelion_v2.5/css/superfish.css" rel="stylesheet" type="text/css" media="screen" />    
+    <link href="http://recreation.seaplan.org/wp-content/themes/dandelion_v2.5/style.css" rel="stylesheet" type="text/css" media="screen" />    
+    <link href="http://recreation.seaplan.org/wp-content/themes/dandelion_v2.5/css/cssLoader.php" rel="stylesheet" type="text/css" media="screen" />    
     <link href="/media/css/base.css" rel="stylesheet" type="text/css" media="screen" />    
     {% block styles %}
     {% endblock %}
@@ -18,18 +23,25 @@
   </head>
   
   <body {% block body_attribs %}{% endblock %}>
-  <div id="wrap">
-  {% block header %}
-  <div id="header">
-    <a href='/'><h1>2012 New England Recreational Boater Survey</h1></a>
-  </div>
-  {% endblock %}
-  <div id="main">  
-	<div id="content">
-	  {% block content %}
-	  {% endblock %}
-	</div>
-  </div>
+    <div class="center">
+      <div id="site">
+        {% block header %}
+        <div id="header">
+          <div id="header-top">
+            <div id="logo-container">
+              <h1>2012 New England Recreational Boater Survey</h1>
+            </div>
+          </div>    <!-- header-top -->
+        </div>      <!-- header -->
+        {% endblock %}
+        <!--<div id="main">  -->
+          <div id="content-container" class="content-gradient">
+            {% block content %}
+            {% endblock %}
+          </div>  <!-- content -->
+        <!--</div>     main -->
+      </div>    <!-- site -->
+    </div>      <!-- center -->
   
 <script type="text/javascript">
   var _gaq = _gaq || [];
