@@ -1,0 +1,456 @@
+{% extends "base.html" %}
+{% block style %}
+<style type="text/css"> 
+</style>
+{% endblock %}
+{% block js %}
+<script language="JavaScript">
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && document.getElementById) x=document.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+</script>
+{% endblock %}
+
+
+{% block body_attribs %} onLoad="MM_preloadImages('/media/img/title_rollover.jpg','/media/img/general_rollover.jpg','/media/img/detailed_rollover.jpg','/media/img/nav_buttons.jpg','/media/img/draw_button.jpg','/media/img/layers_rollover.jpg','/media/img/help_rollover.jpg','/media/img/mapping_window_rollover%20copy.jpg')"
+{% endblock %} 
+{% block content %}
+      <div align="center"> 
+        <table width="755" align="center" cellspacing="2" cellpadding="3" height="70">
+          <tr> 
+            <td height="13" colspan="2"><font face="Arial, Helvetica, sans-serif" size="3" color="#000066"><b>Detailed 
+              Instructions on Using the Online Mapping Application</b></font></td>
+          </tr>
+          <tr> 
+            <td height="14" colspan="2">&nbsp;</td>
+          </tr>
+          <tr> 
+            <td height="26" colspan="2"><font face="Arial, Helvetica, sans-serif" size="2"><b>THE 
+              MAPPING APPLICATION SCREEN - move your mouse around the image below 
+              to highlight the different areas of the screen.</b></font></td>
+
+          </tr>
+          <tr> 
+            <td height="4" colspan="2"><img src="/media/img/map_details.jpg" width="540" height="329" name="screenshot" usemap="#screenshotMap" border="0"></td>
+          </tr>
+          <tr> 
+            <td height="4" colspan="2">&nbsp;</td>
+          </tr>
+          <tr> 
+            <td height="4" colspan="2"><font face="Arial, Helvetica, sans-serif" size="2"><b>For 
+              detailed instructions, click one of the links below:</b></font></td>
+          </tr>
+
+          <tr> 
+            <td height="auto" colspan="2"> 
+              <blockquote> 
+              <ul>
+                <li><font face="Arial, Helvetica, sans-serif" size="2"><a href="#nav"><b>
+                  How to Navigate Around the Map</b></a></font> </li>
+                <li><font face="Arial, Helvetica, sans-serif" size="2"><a href="#map"><b>How 
+                  to Change Your Base Maps</b></a></font></li>
+                <li><font face="Arial, Helvetica, sans-serif" size="2"><b><a href="#draw">How 
+                  to Draw Your Route</a></b></font></li>
+                <li><font face="Arial, Helvetica, sans-serif" size="2"><a href="#route_edit"><b>How 
+                  to Edit your Route Once you have Drawn It</b></a></font></li>
+                <li><font face="Arial, Helvetica, sans-serif" size="2"><a href="#point"><b>How 
+                  to Place an Activity Point</b></a></font></li>
+                <li><font face="Arial, Helvetica, sans-serif" size="2"><b><a href="#help">How 
+                  to Get Additional Help</a></b></font></li>
+              </ul>
+              </blockquote>
+            </td>
+          </tr>
+          <tr> 
+            <td height="17" colspan="2">&nbsp;</td>
+
+          </tr>
+          <tr> 
+            <td height="17" colspan="2"> 
+              <hr>
+              <font face="Arial, Helvetica, sans-serif" size="2"></font></td>
+          </tr>
+          <tr> 
+            <td height="48" colspan="2"> 
+              <p><b><font face="Arial, Helvetica, sans-serif" size="3"><a name="nav"></a>How 
+                to Navigate Around the Map <font size="1">(<a href="#top">Back 
+                to the top of the page</a>)</font></font></b></p>
+
+              <p><b><font face="Arial, Helvetica, sans-serif" size="2">There are 
+                two main tools that allow you to navigate around the map:</font></b></p>
+            </td>
+          </tr>
+          <tr> 
+            <td height="48" width="84"><img src="/media/img/nav_arrows.png" width="75" height="100" name="Image1"><font face="Arial, Helvetica, sans-serif" size="2"></font></td>
+            <td height="48" width="451" valign="top"> 
+              <p><b><font face="Arial, Helvetica, sans-serif" size="2">Use the 
+                arrow buttons in the blue PAN TOOL to move North, South, East 
+                or West. Each time you click an arrow button the map will move 
+                in that direction. To move further, keep clicking the button.</font></b></p>
+              <p><b><font face="Arial, Helvetica, sans-serif" size="2">If you 
+                are trying to zoom to a certain location, center the map on that 
+                location using the PAN TOOL and then use the ZOOM TOOL.</font></b></p>
+
+            </td>
+          </tr>
+          <tr> 
+            <td height="5" colspan="2"><font face="Arial, Helvetica, sans-serif" size="2"></font></td>
+          </tr>
+          <tr> 
+            <td height="105"><img src="/media/img/nav_zoombar.png" width="75" height="100"><font face="Arial, Helvetica, sans-serif" size="2"></font></td>
+            <td height="105" valign="top"><b><font face="Arial, Helvetica, sans-serif" size="2">The 
+              ZOOM TOOL can either be used by clicking on the plus or minus buttons 
+              or by sliding the zoom bar up or down. WARNING: the ZOOM TOOL is 
+              sensitive and it is easy to zoom in or out more than you wish by 
+              sliding the bar.</font></b></td>
+          </tr>
+
+          <tr> 
+            <td height="2" colspan="2"><font face="Arial, Helvetica, sans-serif" size="2"></font></td>
+          </tr>
+          <tr> 
+            <td height="48" colspan="2"> 
+              <p><font face="Arial, Helvetica, sans-serif" size="2"><b>There are 
+                other options to navigate the map. If you have a scroll wheel 
+                on your mouse, this will zoom the map in and out.</b></font></p>
+              <p><b><font face="Arial, Helvetica, sans-serif" size="2">Additionally, 
+                AS LONG AS YOU ARE NOT DRAWING YOUR ROUTE OR ACTIVITY AREA AT 
+                THE TIME, you can place your mouse over the map and then click 
+                and hold your left mouse button. This allows you to drag the map.</font></b></p>
+            </td>
+          </tr>
+
+          <tr> 
+            <td height="6" colspan="2"> 
+              <hr>
+              <font face="Arial, Helvetica, sans-serif" size="2"></font></td>
+          </tr>
+          <tr> 
+            <td height="48" colspan="2"> 
+              <p><font face="Arial, Helvetica, sans-serif" size="3"><b><a name="map"></a>How 
+                to Change Your Base Map <font face="Arial, Helvetica, sans-serif" size="3"><font size="1">(<a href="#top">Back 
+                to the top of the page</a>)</font></font></b></font></p>
+              <p><font face="Arial, Helvetica, sans-serif" size="2"><b>We have 
+                provided a number of different maps (or base layers) to help you 
+                identify your route and your activity areas. You can swap between 
+                these as required.</b></font></p>
+
+            </td>
+          </tr>
+          <tr> 
+            <td height="79"> 
+              <p><img src="/media/img/layers.png" width="80" height="60" align="top"></p>
+            </td>
+            <td height="160" valign="top" rowspan="2"> 
+              <p><b><font face="Arial, Helvetica, sans-serif" size="2">To change 
+                your base map simply click on a different base layer in the blue 
+                box in the top right of your screen.</font></b></p>
+              <p><b><font face="Arial, Helvetica, sans-serif" size="2">There are 
+                three available maps: nautical charts, satellite images and general 
+                terrain.</font></b></p>
+
+              <p><b><font face="Arial, Helvetica, sans-serif" size="2">WARNING: 
+                for technical reasons there are limits to how far you can zoom 
+                in using either the charts or terrain map. If these will not display 
+                as you zoom in, please turn on the satellite map.</font></b></p>
+              <p><b><font face="Arial, Helvetica, sans-serif" size="2">Additionally, 
+                both the satellite and terrain maps can be zoomed out to show 
+                the whole of the US and beyond. The available nautical charts 
+                are limited to the North-east US.</font></b></p>
+            </td>
+          </tr>
+          <tr> 
+            <td height="82"> 
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+
+              <p>&nbsp;</p>
+            </td>
+          </tr>
+          <tr> 
+            <td height="10" colspan="2"> 
+              <hr>
+              <font face="Arial, Helvetica, sans-serif" size="2"></font></td>
+          </tr>
+          <tr> 
+            <td height="48" colspan="2"> 
+              <p><font face="Arial, Helvetica, sans-serif" size="2"><b><font size="3"><a name="draw"></a>How 
+                to Draw Your Route</font></b> </font><font face="Arial, Helvetica, sans-serif" size="3"><b><font face="Arial, Helvetica, sans-serif" size="3"><font size="1">(<a href="#top">Back 
+                to the top of the page</a>)</font></font></b></font></p>
+
+              <p><font face="Arial, Helvetica, sans-serif" size="2"><b>The instructions 
+                on how to draw you route may seem complicated but once you have 
+                tried it, you should find it quite easy.</b></font></p>
+              <p><b><font face="Arial, Helvetica, sans-serif" size="2">NOTE: Feel 
+                free to play around and try it out and don't worry if you make 
+                a mistake. You can restart your route at any time by clicking 
+                the REDRAW BUTTON. YOU WILL ALSO HAVE THE OPPORTUNITY TO EDIT 
+                OR REDRAW YOUR ROUTE BEFORE YOU SAVE IT.</font></b></p>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td height="48"><img src="/media/img/route_2.png" width="50" height="50"></td>
+            <td height="48"><b><font face="Arial, Helvetica, sans-serif" size="2">Click 
+              once on the map where you started your trip.</font></b></td>
+          </tr>
+          <tr valign="top"> 
+            <td height="2" colspan="2">&nbsp;</td>
+          </tr>
+
+          <tr valign="top"> 
+            <td height="48"><img src="/media/img/route_3.png" width="50" height="50"></td>
+            <td height="48"><b><font face="Arial, Helvetica, sans-serif" size="2">Move 
+              mouse and click to create a second point (or waypoint).</font></b></td>
+          </tr>
+          <tr valign="top"> 
+            <td height="9" colspan="2">&nbsp;</td>
+          </tr>
+          <tr valign="top"> 
+            <td height="48"><img src="/media/img/route_4.png" width="50" height="50"></td>
+            <td height="48"><b><font face="Arial, Helvetica, sans-serif" size="2">Continue 
+              clicking to create your route.</font></b></td>
+
+          </tr>
+          <tr valign="top"> 
+            <td height="4" colspan="2">&nbsp;</td>
+          </tr>
+          <tr valign="top"> 
+            <td height="48"> 
+              <p align="left"><img src="/media/img/route_5.png" width="50" height="50"></p>
+              <p>&nbsp;</p>
+            </td>
+            <td height="48"> 
+              <p><b><font face="Arial, Helvetica, sans-serif" size="2">Use the 
+                PAN TOOL and the ZOOM TOOL to move the map as you go. </font></b></p>
+
+              <p><b><font face="Arial, Helvetica, sans-serif" size="2">NOTE: as 
+                you go to use the tools, your route will appear to &quot;follow&quot; 
+                you. When you click on either of the tools, it WILL NOT CREATE 
+                A WAYPOINT. Even if you do create a point by mistake, you will 
+                be able to delete it later by choosing to edit your route.</font></b></p>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td height="2" colspan="2">&nbsp;</td>
+          </tr>
+          <tr valign="top"> 
+            <td height="48"><img src="/media/img/route_6.png" width="50" height="50"></td>
+
+            <td height="48"> 
+              <p><b><font face="Arial, Helvetica, sans-serif" size="2">Once you 
+                have finished drawing your ROUND TRIP, double-click the last point 
+                to complete the route.</font></b></p>
+              <p><b><font face="Arial, Helvetica, sans-serif" size="2">NOTE: if 
+                you double-click by accident before you have completed drawing 
+                your route, you will be offered the opportunity to CONTINUE DRAWING 
+                YOUR ROUTE.</font></b></p>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td height="2" colspan="2">&nbsp;</td>
+          </tr>
+          <tr valign="top"> 
+            <td height="48"><img src="/media/img/route_7.png" width="50" height="50" align="top"></td>
+
+            <td height="48"> 
+              <p><b><font face="Arial, Helvetica, sans-serif" size="2">If you 
+                not happy with your route, click the REDRAW BUTTON. </font></b></p>
+              <p><b><font face="Arial, Helvetica, sans-serif" size="2">NOTE: you 
+                will also have the opportunity to edit or redraw your route before 
+                you save it. </font></b></p>
+            </td>
+          </tr>
+          <tr> 
+            <td height="8" colspan="2"><font face="Arial, Helvetica, sans-serif" size="2"><b>An 
+              example of a completed route can be seen below:</b></font></td>
+          </tr>
+
+          <tr> 
+            <td height="48" colspan="2"><img src="/media/img/route_complete.png" width="200" height="150"></td>
+          </tr>
+          <tr> 
+            <td height="48" colspan="2"> 
+              <hr>
+              <font face="Arial, Helvetica, sans-serif" size="2"></font></td>
+          </tr>
+          <tr> 
+            <td height="48" colspan="2"><font face="Arial, Helvetica, sans-serif" size="2"><b><font size="3"><a name="route_edit"></a>How 
+              to Edit your Route Once you have Drawn It </font><font face="Arial, Helvetica, sans-serif" size="3"><b><font face="Arial, Helvetica, sans-serif" size="3"><font size="1">(<a href="#top">Back 
+              to the top of the page</a>)</font></font></b></font></b></font></td>
+
+          </tr>
+          <tr> 
+            <td height="50" colspan="2"> 
+              <p><font face="Arial, Helvetica, sans-serif" size="2"><b>Once you 
+                have finished drawing your route, you will have a final opportunity 
+                to edit it by adding, moving, or removing waypoints before you 
+                save the final route. </b></font></p>
+              <p><font face="Arial, Helvetica, sans-serif" size="2"><b>NOTE: once 
+                you have saved the route it is not possible to edit it.</b></font></p>
+              <p><b><font face="Arial, Helvetica, sans-serif" size="2">Again, 
+                the instructions may seem <b>complicated but once you have tried 
+                it, you should find it quite easy.</b></font></b></p>
+              <p><font face="Arial, Helvetica, sans-serif" size="2"><b>Once you 
+                have selected to edit your route:</b></font></p>
+
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td height="27"><img src="/media/img/edit_route_1.png" width="50" height="50"></td>
+            <td height="27"><b><font face="Arial, Helvetica, sans-serif" size="2">The 
+              dark circles you see on your route are the waypoints you created 
+              when drawing the route.</font></b></td>
+          </tr>
+          <tr valign="top"> 
+            <td height="12" colspan="2">&nbsp;</td>
+          </tr>
+
+          <tr valign="top"> 
+            <td height="9"><img src="/media/img/edit_route_2.png" width="50" height="50"></td>
+            <td height="9"><b><font face="Arial, Helvetica, sans-serif" size="2">The 
+              light circles between your waypoints are 'ghost' points and are 
+              used to create new waypoints.</font></b></td>
+          </tr>
+          <tr valign="top"> 
+            <td height="14" colspan="2">&nbsp;</td>
+          </tr>
+          <tr valign="top"> 
+            <td height="28"><img src="/media/img/edit_route_3.png" width="50" height="50"></td>
+            <td height="28"><b><font face="Arial, Helvetica, sans-serif" size="2">MOVING 
+              A WAYPOINT - To move to a waypoint, click on it and hold your mouse 
+              button down while dragging it where you want. Then release your 
+              mouse button. Repeat as necessary until you are satisfied with where 
+              the point is.</font></b></td>
+
+          </tr>
+          <tr valign="top"> 
+            <td height="2" colspan="2">&nbsp;</td>
+          </tr>
+          <tr valign="top"> 
+            <td height="24"><img src="/media/img/edit_route_4.png" width="50" height="50"></td>
+            <td height="24"><b><font face="Arial, Helvetica, sans-serif" size="2">ADDING 
+              A WAYPOINT - To add a waypoint click a 'ghost' point and drag it 
+              where you want, then release your mouse button.</font></b></td>
+          </tr>
+          <tr valign="top"> 
+            <td height="2" colspan="2">&nbsp;</td>
+
+          </tr>
+          <tr valign="top"> 
+            <td height="6"><img src="/media/img/edit_route_5.png" width="50" height="50"></td>
+            <td height="6"><b><font face="Arial, Helvetica, sans-serif" size="2">REMOVING 
+              A WAYPOINT - To remove a waypoint place your mouse over it (the 
+              cursor will change to a 4-way arrow) and press the DELETE key on 
+              your keyboard.</font></b></td>
+          </tr>
+          <tr> 
+            <td height="2" colspan="2"><font face="Arial, Helvetica, sans-serif" size="2"><b>Click 
+              the DONE EDITING BUTTON when you are happy with the changes that 
+              you have made. This will save your route. </b></font></td>
+          </tr>
+          <tr> 
+            <td height="2" colspan="2"> 
+              <hr>
+
+              <font face="Arial, Helvetica, sans-serif" size="2"></font></td>
+          </tr>
+          <tr> 
+            <td height="2" colspan="2"><font face="Arial, Helvetica, sans-serif" size="2"><b><font size="3"><a name="point"></a>How 
+              to Place an Activity Point </font><font face="Arial, Helvetica, sans-serif" size="2"><b><font face="Arial, Helvetica, sans-serif" size="3"><b><font face="Arial, Helvetica, sans-serif" size="3"><font size="1">(<a href="#top">Back 
+              to the top of the page</a>)</font></font></b></font></b></font></b></font></td>
+          </tr>
+          <tr> 
+            <td height="48" colspan="2"> 
+              <p><font face="Arial, Helvetica, sans-serif" size="2"><b>Placing
+                an activity point is very similar to how you drew your route except 
+                you only click once.</b></font></p>
+
+              <p><b><font face="Arial, Helvetica, sans-serif" size="2">NOTE: Feel 
+                free to play around and try it out and don't worry if you make 
+                a mistake. YOU WILL HAVE THE OPPORTUNITY TO RE-PLOT YOUR 
+                POINT BEFORE YOU SAVE IT.</font></b></p>
+            </td>
+          </tr>
+          <tr valign="top"> 
+            <td height="48"><b><font face="Arial, Helvetica, sans-serif" size="2"><img src="/media/img/point_2.png" width="50" height="50"></font></b></td>
+            <td height="48"><b><font face="Arial, Helvetica, sans-serif" size="2">Click 
+              once on the map to place your activity point.</font></b></td>
+          </tr>
+          <tr valign="top"> 
+            <td height="10" colspan="2"><b><font face="Arial, Helvetica, sans-serif" size="2"></font></b></td>
+          </tr>
+          <tr valign="top">
+            <td height="48"><b><font face="Arial, Helvetica, sans-serif" size="2"><img src="/media/img/point_4.png" width="50" height="50"></font></b></td>
+            <td height="48"><b><font face="Arial, Helvetica, sans-serif" size="2">When presented with options
+            in the left panel, select which activities you participated in at that location.</font></b></td>
+          </tr>
+
+          <tr valign="top"> 
+            <td height="8" colspan="2"><b><font face="Arial, Helvetica, sans-serif" size="2">An 
+              example of two completed activity points associated with a route can 
+              be seen below:</font></b></td>
+          </tr>
+          <tr valign="top"> 
+            <td height="13" colspan="2"><b><font face="Arial, Helvetica, sans-serif" size="2"><img src="/media/img/area_intro.png" width="200" height="150"></font></b></td>
+          </tr>
+          <tr> 
+            <td height="48" colspan="2"> 
+              <hr>
+              <font face="Arial, Helvetica, sans-serif" size="2"></font></td>
+
+          </tr>
+          <tr> 
+            <td height="18" colspan="2"> 
+              <p><font face="Arial, Helvetica, sans-serif" size="2"><a name="help"></a><b><font size="3">How 
+                to Get Additional Help</font></b><b><font face="Arial, Helvetica, sans-serif" size="2"><b><font size="3"> 
+                </font><font face="Arial, Helvetica, sans-serif" size="2"><b><font face="Arial, Helvetica, sans-serif" size="3"><b><font face="Arial, Helvetica, sans-serif" size="3"><font size="1">(<a href="#top">Back 
+                to the top of the page</a>)</font></font></b></font></b></font></b></font></b></font></p>
+
+            </td>
+          </tr>
+          <tr> 
+            <td height="48" colspan="2"> 
+              <p><font face="Arial, Helvetica, sans-serif" size="2"><b>If you 
+                need additional help, please call 617-737-2600 ext. 102<br>
+                or e-mail <a href="mailto:help@seaplan.org?subject=Advanced%20technical%20help%20needed">help@seaplan.org</a></b></font></p>
+              <p>&nbsp;</p>
+            </td>
+
+          </tr>
+        </table>
+      </div>
+    
+
+<map name="screenshotMap"> 
+  <area shape="rect" coords="2,37,108,53" href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('screenshot','','/media/img/title_rollover.jpg',1)">
+  <area shape="rect" coords="107,39,128,142" href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('screenshot','','/media/img/nav_buttons.jpg',1)">
+  <area shape="rect" coords="128,38,179,61" href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('screenshot','','/media/img/draw_button.jpg',1)">
+  <area shape="rect" coords="468,42,538,100" href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('screenshot','','/media/img/layers_rollover.jpg',1)">
+  <area shape="rect" coords="4,52,105,96" href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('screenshot','','/media/img/general_rollover.jpg',1)">
+  <area shape="rect" coords="5,102,106,263" href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('screenshot','','/media/img/detailed_rollover.jpg',1)">
+  <area shape="rect" coords="2,306,250,321" href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('screenshot','','/media/img/help_rollover.jpg',1)">
+  <area shape="poly" coords="109,302,109,151" href="#">
+  <area shape="poly" coords="138,146,137,70,193,58,192,41,459,41,459,106,534,110,537,306,112,301,113,151" href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('screenshot','','/media/img/mapping_window_rollover%20copy.jpg',1)">
+
+</map>
+{% endblock %}

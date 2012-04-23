@@ -1,4 +1,22 @@
 /*
+    Tables
+*/
+table td {
+    border: 0;
+    vertical-align: top;
+}
+
+/*
+    Formatting
+*/
+blockquote {
+    background: none;
+    border-left: 0;
+    line-height: 1em;
+    margin: 0;
+}
+
+/*
     Header
 */
 
@@ -40,11 +58,6 @@
 */
 
 table.intro-table {
-    border: 0;
-}
-
-table.intro-table  td{
-    vertical-align: bottom;
     border: 0;
 }
 

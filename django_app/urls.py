@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     (r'^videos/', include('videos.urls')),
     (r'^admin/', include(admin.site.urls)),
     (r'^test/', test),
+    (r'^detailed_instructions/', detailed_instructions),
     (r'^complete/', complete),
 )
 

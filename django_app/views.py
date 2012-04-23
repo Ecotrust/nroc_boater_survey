@@ -60,5 +60,8 @@ def intro(request):
 def test(request):    
     return render_to_response('test.html')    
     
+def detailed_instructions(request):
+    return render_to_response('detailed_instructions.html')
+    
 def complete(request):
     return render_to_response('complete.html', {'interview_id':request.session['interview_id'], 'month':request.session['month']})
