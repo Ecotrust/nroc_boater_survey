@@ -4,6 +4,7 @@
 table td {
     border: 0;
     vertical-align: top;
+    text-align: left;
 }
 
 /*
@@ -25,7 +26,7 @@ blockquote {
 }
 
 #logo-container, #logo-container a {
-    width: 580px;
+    width: 585px;
 }
 
 /*
