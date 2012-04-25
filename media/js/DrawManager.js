@@ -65,6 +65,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 
     startIntroStep: function() {
         this.loadIntroPanel();
+        Ext.getCmp('west-panel-container').disable();
         this.loadMapHelpWindow();
     },
     
@@ -372,6 +373,9 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
                 this.navHelpWin.hide();
             }
         }
+        if (this.introPanel && !this.introPanel.hidden) {
+            this.introPanel.help_box.setValue(result);
+        }
         if (this.plotRoutePanel && !this.plotRoutePanel.hidden) {
             this.plotRoutePanel.help_box.setValue(result);
         }
@@ -385,9 +389,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.navHelpWin = new gwst.widgets.NavHelpWindow();            
         }
         this.navHelpWin.show();
-        this.navHelpWin.alignTo(document.body, "tl-tl", this.mapNavWinOffset);
         this.navHelpWin.on('view-nav-details', this.loadNavigationDetails, this);
-        this.navHelpWin.on('hide', function(){this.showHelp(false);}, this);
+        this.navHelpWin.on('hide', function(){this.showHelp(false); Ext.getCmp('west-panel-container').enable();}, this);
     },
     
     loadNavigationDetails: function() {
@@ -403,6 +406,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.introPanel.on('intro-cont', this.finIntroStep, this); 
         this.introPanel.on('show-help', this.showHelp, this);
         this.viewport.setWestPanel(this.introPanel);
+        this.introPanel.help_box.on('show-help', this.showHelp, this);
     },    
 
     loadPlotRoutePanel: function() {      	

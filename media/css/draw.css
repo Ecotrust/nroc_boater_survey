@@ -177,6 +177,10 @@ li {
     padding: 10px;
 }
 
+table.help-table td {
+    padding: 5px;
+}
+
 .draw-icon {
     background-image: url(/media/img/pencil_add.png) ! important;
 }
