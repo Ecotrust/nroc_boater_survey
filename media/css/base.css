@@ -70,6 +70,7 @@ table td:hover {
 #skip, #continue {
     width: 250px;
     height: 35px;
+    cursor: pointer;
 }
 
 #skip {
