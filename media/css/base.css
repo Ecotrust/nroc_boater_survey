@@ -60,6 +60,16 @@ blockquote {
 
 table.intro-table {
     border: 0;
+    margin-bottom: 40px;
+}
+
+table td:hover {
+    background-color: transparent;
+}
+
+#skip, #continue {
+    width: 250px;
+    height: 35px;
 }
 
 #skip {
@@ -69,7 +79,8 @@ table.intro-table {
 
 #continue {
     margin-right: 0;
-    margin-left: 40%;
+    margin-left: 30%;
+    font-weight: bold;
 }
 
 #partner-logos {

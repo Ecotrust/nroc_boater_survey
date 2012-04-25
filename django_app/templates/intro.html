@@ -11,6 +11,7 @@ ul, li {
 li {
     font-size: 14px;
 }
+
 </style>
 <link rel="icon" href="/media/img/favicon.ico" type="image/x-icon"> 
 {% endblock %}
@@ -38,6 +39,10 @@ li {
             <td><img src="/media/img/point_intro_short.png" style="width: 160px; height: 75px;" /></td>
         </tr>
     </table>
+    <form class="gwst-form" method="get" action="/">
+        <input id="skip" name="skip" type="submit" value="Skip Mapping Completely" onclick='return confirm("Are you sure you want to skip the mapping portion of the survey?  Click \"Ok\" if Yes, \"Cancel\" if No. Once you skip this, you will not be able to come back.")'/ >
+        <input id="continue" name="continue" type="submit" value="Continue to Mapping"  />
+    </form>
 </div>  <!-- full-width -->
 <div id="footer-container">
   <div id="footer">
@@ -48,10 +53,6 @@ li {
 4) view our <a target="_blank" href="videos/demo">tutorial video</a>.</p>
 <p><b>Note: If you exit the mapping application, you will not be able to re-enter the survey.</b></p>
 
-   <form class="gwst-form" method="get" action="/">
-        <input id="skip" name="skip" type="submit" value="Skip Mapping Completely" onclick='return confirm("Are you sure you want to skip the mapping portion of the survey?  Click \"Ok\" if Yes, \"Cancel\" if No. Once you skip this, you will not be able to come back.")'/ >
-        <input id="continue" name="continue" type="submit" value="Continue to Mapping"  />
-   </form>
     <img id="partner-logos" width=666 height=83 src="/media/img/logos.jpg"/>
   </div>
 </div>
