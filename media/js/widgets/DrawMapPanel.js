@@ -140,8 +140,8 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             'blackoutBoxes': [{
                 'top': 0,
                 'left': 0,
-                'right': 200,
-                'bottom': 300
+                'right': 215,
+                'bottom': 275
             }],
             panBorderWidth: 60
         });
@@ -194,11 +194,13 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         this.tripDistance = this.lineComps[0].distanceTo(this.lineComps[this.lineComps.length -1]);
         //Trip distance is in meters (since we use mercator) - convert to miles:
         this.milesDistance = this.tripDistance * 0.000621371192;
+        this.borderPanControl.stopInterval();
         this.fireEvent('line-paused', this.milesDistance);
     },
     
     lineResume: function() {
         this.getEl().unmask();
+        this.borderPanControl.startInterval();
     },
     
     lineFinish: function() {
