@@ -130,33 +130,35 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
             this.state_center = new OpenLayers.LonLat(0,0);
             this.state_zoom = 8;
         }
-        if (state.boxLabel == "New York") {
-            this.state_center.lon = -8127077.8008318;
-            this.state_center.lat = 4989347.7643456;
-            this.state_zoom = 9;
-        } else if (state.boxLabel == "Connecticut") {
-            this.state_center.lon = -8099865.8795672;
-            this.state_center.lat = 5044076.507388;
-            this.state_zoom = 9;
-        } else if (state.boxLabel == "Rhode Island") {
-            this.state_center.lon = -7955857.1615036;
-            this.state_center.lat = 5079924.7968473;
-            this.state_zoom = 10;
-        } else if (state.boxLabel == "Massachusetts") {
-            this.state_center.lon = -7870776.9826373;
-            this.state_center.lat = 5194997.8665102;
-            this.state_zoom = 8;
-        } else if (state.boxLabel == "New Hampshire") {
-            this.state_center.lon = -7876581.7871859;
-            this.state_center.lat = 5312326.5053067;
-            this.state_zoom = 11;
-        } else if (state.boxLabel == "Maine") {
-            this.state_center.lon = -7733487.2606617;
-            this.state_center.lat = 5423349.0892709;
-            this.state_zoom = 9;
-        }
+        if (state) {
+            if (state.boxLabel == "New York") {
+                this.state_center.lon = -8127077.8008318;
+                this.state_center.lat = 4989347.7643456;
+                this.state_zoom = 9;
+            } else if (state.boxLabel == "Connecticut") {
+                this.state_center.lon = -8099865.8795672;
+                this.state_center.lat = 5044076.507388;
+                this.state_zoom = 9;
+            } else if (state.boxLabel == "Rhode Island") {
+                this.state_center.lon = -7955857.1615036;
+                this.state_center.lat = 5079924.7968473;
+                this.state_zoom = 10;
+            } else if (state.boxLabel == "Massachusetts") {
+                this.state_center.lon = -7870776.9826373;
+                this.state_center.lat = 5194997.8665102;
+                this.state_zoom = 8;
+            } else if (state.boxLabel == "New Hampshire") {
+                this.state_center.lon = -7876581.7871859;
+                this.state_center.lat = 5312326.5053067;
+                this.state_zoom = 11;
+            } else if (state.boxLabel == "Maine") {
+                this.state_center.lon = -7733487.2606617;
+                this.state_center.lat = 5423349.0892709;
+                this.state_zoom = 9;
+            }
             map.setCenter(this.state_center);
             map.zoomTo(this.state_zoom);
+        }
     },
     
     skipClicked: function() {

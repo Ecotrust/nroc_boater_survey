@@ -10,7 +10,7 @@ gwst.widgets.ResetMapCheckWindow = Ext.extend(Ext.Window, {
         	layout:'fit',
             width:350,
             html: '<p><b>Are you sure you want to reset the map window?</b><br /><br />Your routes and areas will not be lost.</p>',
-            height:120,
+            height:150,
             plain: true,
             bodyStyle: 'padding: 8px',
             closeAction:'hide',

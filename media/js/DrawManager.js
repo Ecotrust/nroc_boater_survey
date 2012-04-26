@@ -1053,6 +1053,9 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     resetMapView: function() {
         this.mapPanel.resetMapView();
+        if (this.introPanel && !this.introPanel.hidden) {
+            Ext.getCmp('state-radio-group').reset();
+        }
     }
     
 });
