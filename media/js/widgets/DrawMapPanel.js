@@ -138,8 +138,8 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         
         this.borderPanControl = new OpenLayers.Control.BorderPan({
             'blackoutBoxes': [{
-                'top': 0,
-                'left': 0,
+                'top': 8,
+                'left': 8,
                 'right': 215,
                 'bottom': 275
             }],
