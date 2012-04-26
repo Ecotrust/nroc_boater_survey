@@ -8,3 +8,4 @@ media/video_player/*
 media/videos/.svn/*
 media/tiles/*
 django_app/install-media/**/*
+media/css/themes/*
