@@ -101,7 +101,7 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.help_panel = new Ext.Panel({
             layout: {
                 type: 'hbox',
-                padding: '5'
+                defaultMargins: {left: 10, top: 0, right: 10, bottom: 0}
             },
             border: false
         });
