@@ -427,7 +427,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 
     activateRouteDraw: function() {
         this.mapPanel.enableLineDraw();
-        this.loadAddRouteTooltip();
         this.loadRouteCancelWin();
         this.loadRouteUndoWin();
     }, 
@@ -452,7 +451,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         if (!this.routeCancelWin) {
 			this.routeCancelWin = new gwst.widgets.CancelWindow();
 			this.routeCancelWin.on('cancel-clicked', this.mapPanel.cancelLine, this.mapPanel);
-			this.routeCancelWin.on('cancel-clicked', this.hideMapTooltip, this);
 		}
 		this.routeCancelWin.show();		
 		this.routeCancelWin.alignTo(document.body, "tl-tl", this.routeCancelWinOffset);    	
@@ -471,7 +469,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     	if (!this.cancelWin) {
 			this.cancelWin = new gwst.widgets.CancelWindow();
 			this.cancelWin.on('cancel-clicked', this.mapPanel.cancelPoly, this.mapPanel);
-			this.cancelWin.on('cancel-clicked', this.hideMapTooltip, this);
 		}
 		this.cancelWin.show();		
 		this.cancelWin.alignTo(document.body, "tl-tl", this.cancelWinOffset);    	
@@ -892,7 +889,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     	this.cur_feature = feature;
     	if (feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.LineString') {
             this.hideCancelWin();
-            this.hideMapTooltip();
             //the route pause handler will handle loading the satisfied panel
     	} else {
             if (this.checkZoom()) {
@@ -927,7 +923,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     satisfiedRoute: function() {
-        this.hideMapTooltip();
         this.hideCancelWin();    	
         this.loadSatisfiedRoutePanel();
     },
