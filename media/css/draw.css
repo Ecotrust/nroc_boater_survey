@@ -63,8 +63,9 @@ p.x-panel-static{
     position: static;
 }
 
-p.help-win {
+.help-win {
     font-size: 1.4em;
+    font-weight: bold;
 }
 
 ul {
