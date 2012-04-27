@@ -63,6 +63,17 @@ gwst.widgets.FishingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
             maxLengthText: 'Your entry is too long'
         });
         
+        this.other_fish_panel = new Ext.Panel({
+            border: false,
+            keys: [{
+                key: [Ext.EventObject.UP, Ext.EventObject.DOWN, Ext.EventObject.LEFT, Ext.EventObject.RIGHT], 
+                handler: function(keyCode, event) {
+                    event.stopPropagation();
+                }
+            }],
+            items: [this.other_fish]
+        });
+        
         this.fishing_text_two = new Ext.Panel({
             html: 'How do you rank this area for fishing?',
             style: 'margin: 0px 0px 10px 10px',
@@ -84,6 +95,17 @@ gwst.widgets.FishingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
             ]
         });
         
+        this.fishing_radio_panel = new Ext.Panel({
+            border: false,
+            keys: [{
+                key: [Ext.EventObject.UP, Ext.EventObject.DOWN, Ext.EventObject.LEFT, Ext.EventObject.RIGHT], 
+                handler: function(keyCode, event) {
+                    event.preventDefault();
+                }
+            }],
+            items: [this.fishing_two]
+        });
+        
         /*---------- END Fishing Checked Questions --------------------*/
         
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
@@ -96,10 +118,10 @@ gwst.widgets.FishingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.fishing_one);
         this.add(this.other_text_fish);
         this.other_text_fish.hide();
-        this.add(this.other_fish);
-        this.other_fish.hide();
+        this.add(this.other_fish_panel);
+        this.other_fish_panel.hide();
         this.add(this.fishing_text_two);
-        this.add(this.fishing_two);
+        this.add(this.fishing_radio_panel);
         this.add(this.button_panel);
     
         // Call parent (required)
@@ -109,10 +131,10 @@ gwst.widgets.FishingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
     fishOtherChecked: function() {
         if (this.fishing_one.items.item(4).checked) {
             this.other_text_fish.show();
-            this.other_fish.show();
+            this.other_fish_panel.show();
         } else {
             this.other_text_fish.hide();
-            this.other_fish.hide();
+            this.other_fish_panel.hide();
         }
     },
     
@@ -136,7 +158,7 @@ gwst.widgets.FishingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.fishing_two.reset();
         this.other_fish.reset();
         this.other_text_fish.hide();
-        this.other_fish.hide();
+        this.other_fish_panel.hide();
     }
 });
  

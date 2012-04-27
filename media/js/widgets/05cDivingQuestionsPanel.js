@@ -62,6 +62,17 @@ gwst.widgets.DivingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
             maxLengthText: 'Your entry is too long'
         });
         
+        this.other_dive_panel = new Ext.Panel({
+            border: false,
+            keys: [{
+                key: [Ext.EventObject.UP, Ext.EventObject.DOWN, Ext.EventObject.LEFT, Ext.EventObject.RIGHT], 
+                handler: function(keyCode, event) {
+                    event.stopPropagation();
+                }
+            }],
+            items: [this.other_dive]
+        });
+        
         this.diving_text_two = new Ext.Panel({
             html: 'How do you rank this area for diving?',
             style: 'margin: 0px 0px 10px 10px',
@@ -82,7 +93,18 @@ gwst.widgets.DivingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
                 {boxLabel: 'Very poor', name: 'dive-rank', inputValue: 'very-poor'}
             ]
         });
-        
+
+        this.diving_radio_panel = new Ext.Panel({
+            border: false,
+            keys: [{
+                key: [Ext.EventObject.UP, Ext.EventObject.DOWN, Ext.EventObject.LEFT, Ext.EventObject.RIGHT], 
+                handler: function(keyCode, event) {
+                    event.preventDefault();
+                }
+            }],
+            items: [this.diving_two]
+        });
+
         /*---------- END Diving Checked Questions --------------------*/
         
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
@@ -95,10 +117,10 @@ gwst.widgets.DivingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.diving_one);
         this.add(this.other_text_dive);
         this.other_text_dive.hide();
-        this.add(this.other_dive);
-        this.other_dive.hide();
+        this.add(this.other_dive_panel);
+        this.other_dive_panel.hide();
         this.add(this.diving_text_two);
-        this.add(this.diving_two);
+        this.add(this.diving_radio_panel);
         this.add(this.button_panel);
     
         // Call parent (required)
@@ -108,10 +130,10 @@ gwst.widgets.DivingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
     diveOtherChecked: function() {
         if (this.diving_one.items.item(3).checked) {
             this.other_text_dive.show();
-            this.other_dive.show();
+            this.other_dive_panel.show();
         } else {
             this.other_text_dive.hide();
-            this.other_dive.hide();
+            this.other_dive_panel.hide();
         }
     },
     
@@ -135,7 +157,7 @@ gwst.widgets.DivingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.diving_two.reset();
         this.other_dive.reset();
         this.other_text_dive.hide();
-        this.other_dive.hide();
+        this.other_dive_panel.hide();
     }
 });
  

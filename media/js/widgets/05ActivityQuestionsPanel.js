@@ -3,7 +3,7 @@ Ext.namespace('gwst', 'gwst.widgets');
 gwst.widgets.ActivityQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
     // Constructor Defaults, can be overridden by user's config object
     initComponent: function(){
-		
+
         // Call parent (required)
         gwst.widgets.ActivityQuestionsPanel.superclass.initComponent.apply(
           this, arguments);                     
@@ -62,7 +62,7 @@ gwst.widgets.ActivityQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
                 this.other_box
             ]
         });
-        
+
         this.other_text_one = new Ext.Panel({
             html: 'If \'other\' please specify:',
             style: 'margin: 0px 0px 10px 10px',
@@ -77,6 +77,17 @@ gwst.widgets.ActivityQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
             maxLengthText: 'Your entry is too long'
         });
 
+        this.other_one_panel = new Ext.Panel({
+            border: false,
+            keys: [{
+                key: [Ext.EventObject.UP, Ext.EventObject.DOWN, Ext.EventObject.LEFT, Ext.EventObject.RIGHT], 
+                handler: function(keyCode, event) {
+                    event.stopPropagation();
+                }
+            }],
+            items: [this.other_one]
+        });
+
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
         	btn2_text: 'Continue >>',        	
             btn2_handler: this.contBtnClicked.createDelegate(this)
@@ -87,8 +98,8 @@ gwst.widgets.ActivityQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.answer_one);
         this.add(this.other_text_one);
         this.other_text_one.hide();
-        this.add(this.other_one);
-        this.other_one.hide();
+        this.add(this.other_one_panel);
+        this.other_one_panel.hide();
         this.add(this.button_panel);
     
         // Call parent (required)
@@ -98,10 +109,10 @@ gwst.widgets.ActivityQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
     otherChecked: function() {
         if (this.answer_one.items.item(4).checked) {
             this.other_text_one.show();
-            this.other_one.show();
+            this.other_one_panel.show();
         } else {
             this.other_text_one.hide();
-            this.other_one.hide();
+            this.other_one_panel.hide();
         }
     },
 
@@ -122,7 +133,7 @@ gwst.widgets.ActivityQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.answer_one.reset();
         this.other_one.reset();
         this.other_text_one.hide();
-        this.other_one.hide();
+        this.other_one_panel.hide();
     }
 });
  

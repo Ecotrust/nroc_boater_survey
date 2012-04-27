@@ -56,7 +56,8 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
             id: 'state-radio-group',
             xtype: 'radiogroup',
             itemCls: 'x-radio-group',
-            columns: 1,
+            width: 250,
+            columns: 2,
             items: [
                 {boxLabel: 'Maine', name: 'state', inputValue: 'maine'},
                 {boxLabel: 'New Hampshire', name: 'state', inputValue: 'new-hampshire'},
@@ -68,7 +69,18 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
         });
         
         this.state_radio_group.on('change', this.stateChanged, this);
-        
+
+        this.state_radio_panel = new Ext.Panel({
+            border: false,
+            keys: [{
+                key: [Ext.EventObject.UP, Ext.EventObject.DOWN, Ext.EventObject.LEFT, Ext.EventObject.RIGHT], 
+                handler: function(keyCode, event) {
+                    event.preventDefault();
+                }
+            }],
+            items: [this.state_radio_group]
+        });
+
         this.lower_panel = new Ext.Panel({
             border: false,
             style: 'margin-left: 5px; margin-right:5px; padding-left: 5px; padding-right: 5px',
@@ -116,7 +128,7 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
         
         this.add(this.header_panel);
 		this.add(this.inner_panel);
-        this.add(this.state_radio_group);
+        this.add(this.state_radio_panel);
         this.add(this.lower_panel);
         this.add(this.help_panel);
         this.add(this.button_panel);
