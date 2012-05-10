@@ -20,8 +20,8 @@ gwst.widgets.FinishPanel = Ext.extend(gwst.widgets.WestPanel, {
         });
         
 		this.inner_panel = new Ext.Panel({		
-			html: '<p>Your survey is now submitted and complete for the month of '+gwst.settings.month+'.</p>\
-            <p>Press the Continue button for more information about this survey.</p>',
+			html: '<p>Thank you for completing the survey for the month of '+gwst.settings.month+'.</p>\
+            <p>Press the Continue button for more information about the prizes.</p>',
 			style: 'margin: 10px',
 			border: false
         });

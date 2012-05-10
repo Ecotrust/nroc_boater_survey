@@ -63,6 +63,17 @@ gwst.widgets.ViewingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
             maxLengthText: 'Your entry is too long'
         });
         
+        this.other_view_panel = new Ext.Panel({
+            border: false,
+            keys: [{
+                key: [Ext.EventObject.UP, Ext.EventObject.DOWN, Ext.EventObject.LEFT, Ext.EventObject.RIGHT], 
+                handler: function(keyCode, event) {
+                    event.stopPropagation();
+                }
+            }],
+            items: [this.other_view]
+        });
+        
         this.viewing_text_two = new Ext.Panel({
             html: 'How do you rank this area for wildlife viewing?',
             style: 'margin: 0px 0px 10px 10px',
@@ -84,6 +95,17 @@ gwst.widgets.ViewingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
             ]
         });
         
+        this.viewing_radio_panel = new Ext.Panel({
+            border: false,
+            keys: [{
+                key: [Ext.EventObject.UP, Ext.EventObject.DOWN, Ext.EventObject.LEFT, Ext.EventObject.RIGHT], 
+                handler: function(keyCode, event) {
+                    event.preventDefault();
+                }
+            }],
+            items: [this.viewing_two]
+        });
+        
         /*---------- END Viewing Checked Questions --------------------*/
         
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
@@ -96,10 +118,10 @@ gwst.widgets.ViewingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.add(this.viewing_one);
         this.add(this.other_text_view);
         this.other_text_view.hide();
-        this.add(this.other_view);
-        this.other_view.hide();
+        this.add(this.other_view_panel);
+        this.other_view_panel.hide();
         this.add(this.viewing_text_two);
-        this.add(this.viewing_two);
+        this.add(this.viewing_radio_panel);
         this.add(this.button_panel);
     
         // Call parent (required)
@@ -109,10 +131,10 @@ gwst.widgets.ViewingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
     viewOtherChecked: function() {
         if (this.viewing_one.items.item(4).checked) {
             this.other_text_view.show();
-            this.other_view.show();
+            this.other_view_panel.show();
         } else {
             this.other_text_view.hide();
-            this.other_view.hide();
+            this.other_view_panel.hide();
         }
     },
     
@@ -136,7 +158,7 @@ gwst.widgets.ViewingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.viewing_two.reset();
         this.other_view.reset();
         this.other_text_view.hide();
-        this.other_view.hide();
+        this.other_view_panel.hide();
     }
 });
  

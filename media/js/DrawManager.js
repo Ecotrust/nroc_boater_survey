@@ -65,6 +65,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 
     startIntroStep: function() {
         this.loadIntroPanel();
+        Ext.getCmp('west-panel-container').disable();
         this.loadMapHelpWindow();
     },
     
@@ -83,8 +84,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             Ext.MessageBox.show({
                 title: 'Route Plotting', 
                 msg: '<p class="help-win">You are now in route plotting mode.</p>\
-                <p class="help-win">When you click on the map, you will begin plotting your route.</p>\
-                <p class="help-win">Map navigation buttons will still work.</p>\
+                <p class="help-win">See panel on left for important instructions.</p>\
                 <p class="help-win">Click OK to begin plotting.</p>',
                 buttons: Ext.Msg.OK,
                 // fn: this.activateRouteDraw, 
@@ -159,8 +159,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             Ext.MessageBox.show({
                 title: 'Activity Plotting', 
                 msg: '<p class="help-win">You are now in activity plotting mode.</p>\
-                <p class="help-win">When you click on the map, you will place an activity marker.</p>\
-                <p class="help-win">Map navigation buttons will still work.</p>\
+                <p class="help-win">See panel on left for important instructions.</p>\
                 <p class="help-win">Click OK to begin plotting.</p>',
                 buttons: Ext.Msg.OK,
                 // fn: this.activatePointDraw, 
@@ -372,6 +371,9 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
                 this.navHelpWin.hide();
             }
         }
+        if (this.introPanel && !this.introPanel.hidden) {
+            this.introPanel.help_box.setValue(result);
+        }
         if (this.plotRoutePanel && !this.plotRoutePanel.hidden) {
             this.plotRoutePanel.help_box.setValue(result);
         }
@@ -385,9 +387,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.navHelpWin = new gwst.widgets.NavHelpWindow();            
         }
         this.navHelpWin.show();
-        this.navHelpWin.alignTo(document.body, "tl-tl", this.mapNavWinOffset);
         this.navHelpWin.on('view-nav-details', this.loadNavigationDetails, this);
-        this.navHelpWin.on('hide', function(){this.showHelp(false);}, this);
+        this.navHelpWin.on('hide', function(){this.showHelp(false); Ext.getCmp('west-panel-container').enable();}, this);
     },
     
     loadNavigationDetails: function() {
@@ -403,6 +404,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         this.introPanel.on('intro-cont', this.finIntroStep, this); 
         this.introPanel.on('show-help', this.showHelp, this);
         this.viewport.setWestPanel(this.introPanel);
+        this.introPanel.help_box.on('show-help', this.showHelp, this);
     },    
 
     loadPlotRoutePanel: function() {      	
@@ -425,7 +427,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
 
     activateRouteDraw: function() {
         this.mapPanel.enableLineDraw();
-        this.loadAddRouteTooltip();
         this.loadRouteCancelWin();
         this.loadRouteUndoWin();
     }, 
@@ -450,7 +451,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         if (!this.routeCancelWin) {
 			this.routeCancelWin = new gwst.widgets.CancelWindow();
 			this.routeCancelWin.on('cancel-clicked', this.mapPanel.cancelLine, this.mapPanel);
-			this.routeCancelWin.on('cancel-clicked', this.hideMapTooltip, this);
 		}
 		this.routeCancelWin.show();		
 		this.routeCancelWin.alignTo(document.body, "tl-tl", this.routeCancelWinOffset);    	
@@ -469,7 +469,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     	if (!this.cancelWin) {
 			this.cancelWin = new gwst.widgets.CancelWindow();
 			this.cancelWin.on('cancel-clicked', this.mapPanel.cancelPoly, this.mapPanel);
-			this.cancelWin.on('cancel-clicked', this.hideMapTooltip, this);
 		}
 		this.cancelWin.show();		
 		this.cancelWin.alignTo(document.body, "tl-tl", this.cancelWinOffset);    	
@@ -890,7 +889,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     	this.cur_feature = feature;
     	if (feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.LineString') {
             this.hideCancelWin();
-            this.hideMapTooltip();
             //the route pause handler will handle loading the satisfied panel
     	} else {
             if (this.checkZoom()) {
@@ -925,7 +923,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     satisfiedRoute: function() {
-        this.hideMapTooltip();
         this.hideCancelWin();    	
         this.loadSatisfiedRoutePanel();
     },
@@ -1056,6 +1053,9 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     resetMapView: function() {
         this.mapPanel.resetMapView();
+        if (this.introPanel && !this.introPanel.hidden) {
+            Ext.getCmp('state-radio-group').reset();
+        }
     }
     
 });

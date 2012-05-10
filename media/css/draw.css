@@ -63,8 +63,9 @@ p.x-panel-static{
     position: static;
 }
 
-p.help-win {
+.help-win {
     font-size: 1.4em;
+    font-weight: bold;
 }
 
 ul {
@@ -177,6 +178,10 @@ li {
     padding: 10px;
 }
 
+table.help-table td {
+    padding: 5px;
+}
+
 .draw-icon {
     background-image: url(/media/img/pencil_add.png) ! important;
 }
@@ -265,7 +270,7 @@ li {
 }
 
 .x-form-radio-group, .x-form-check-group  {
-    margin: 0 0 4% 10%;
+    margin: 0 0 2% 10%;
 }
 
 /*     buttons     */

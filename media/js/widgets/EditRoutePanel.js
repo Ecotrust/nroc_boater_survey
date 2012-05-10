@@ -64,15 +64,15 @@ gwst.widgets.EditRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
             },{
                 html: '<img src="/media/img/edit_route_2.png" />'
             },{
-                html: '<p><b><u>Moving</u></b>. To move an existing point, click and drag a dark orange cirle where you want, then release.</p>'
+                html: '<p><b><u>Moving</u></b>. Click and drag a dark orange cirle where you want, then release.</p>'
             }, {
                 html: '<img src="/media/img/edit_route_3.png" />'
             },{
-                html: '<p><b><u>Adding</u></b>. To add a point, click a \'ghost\' point and drag it where you want, then release.</p>'
+                html: '<p><b><u>Adding</u></b>. Click a \'ghost\' point and drag it where you want, then release.</p>'
             },{
                 html: '<img src="/media/img/edit_route_4.png" />'
             },{
-                html: '<p><b><u>Removing</u></b>. To remove a point hold your mouse over it and press the \'Delete\' key on your keyboard.</p>'
+                html: '<p><b><u>Removing</u></b>. Hold your mouse over a point and press the \'Delete\' key on your keyboard.</p>'
             },{
                 html: '<img src="/media/img/edit_route_5.png" />'
             },{
@@ -84,6 +84,7 @@ gwst.widgets.EditRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
             btn1_text: 'Redraw instead',
             btn1_handler: this.redrawClicked.createDelegate(this),
+            btn1_width: 125,
         	btn2_text: 'Done editing',        	
             btn2_handler: this.saveEditRouteClicked.createDelegate(this)
         });

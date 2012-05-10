@@ -7,10 +7,13 @@ OpenLayers.Control.BorderPan = OpenLayers.Class(OpenLayers.Control, {
     onMove: this.onMove,
     onOut: this.onOut,
     panBorderWidth: 75,     //the buffer (in pixels) around each border that will trigger panning
-    maxPxPan: 3,            //the max number of pixels panned per cycle
-    panRate: 100,           //delay in milliseconds
+    maxPxPan: 5,            //the max number of pixels panned per cycle
+    panRate: 10,           //delay in milliseconds
     panning: false,
     blackoutBoxes: [],      //list objects given top, bottom, left and right bounds in pixels where border panning will not occur
+    intervalId: null,
+    x: 0,
+    y: 0,
     
     /**
      * APIMethod: activate
@@ -19,6 +22,7 @@ OpenLayers.Control.BorderPan = OpenLayers.Class(OpenLayers.Control, {
         if (OpenLayers.Control.prototype.activate.apply(this, arguments)) {
             this.map.events.register('mousemove', this, this.onMove);
             this.map.events.register('mouseout', this, this.onOut);
+            this.startInterval();
             return true;
         } else {
             return false;
@@ -32,10 +36,26 @@ OpenLayers.Control.BorderPan = OpenLayers.Class(OpenLayers.Control, {
         if (OpenLayers.Control.prototype.deactivate.apply(this, arguments)) {
             this.map.events.unregister('mousemove', this, this.onMove);
             this.map.events.unregister('mouseout', this, this.onOut);
+            this.stopInterval();
             return true;
         } else {
             return false;
         }
+    },
+    
+    startInterval: function() {
+        var scope = this;
+        this.intervalId = setInterval(function() {
+            if (scope.panning && (scope.x != 0 || scope.y != 0)) {
+                scope.map.pan(scope.x, scope.y, {'animate': false, 'dragging': false});
+            }
+        }, this.panRate);
+    },
+    
+    stopInterval: function() {
+        this.x = 0;
+        this.y = 0;
+        clearInterval(this.intervalId);
     },
     
     initialize: function(options) {
@@ -44,22 +64,12 @@ OpenLayers.Control.BorderPan = OpenLayers.Class(OpenLayers.Control, {
         );
     },
 
-    pan: function(x, y, cont) {
-        if (cont) {
-            var scope = this;
-            setTimeout(function(){
-                scope.map.pan(x, y, {'animate': false, 'dragging': false});
-                scope.pan(x, y, scope.panning);
-            }, this.panRate);
-        }
-    },
-
     onMove: function(evt) {
         this.panPx = this.getPanPx(evt.xy);
-        this.panning = false;
+        this.x = parseInt(this.panPx['xPx']);
+        this.y = parseInt(this.panPx['yPx']);
         if (this.panPx['xPx'] != 0 || this.panPx['yPx'] != 0){
             this.panning = true;
-            this.pan(this.panPx['xPx'], this.panPx['yPx'], this.panning);
         } 
     },
     
@@ -112,6 +122,8 @@ OpenLayers.Control.BorderPan = OpenLayers.Class(OpenLayers.Control, {
         this.bottomBound = this.map.getCurrentSize().h;
         if(evt.xy.x < 0 || evt.xy.y < 0 || evt.xy.x > this.rightBound || evt.xy.y > this.bottomBound) {
             this.panning = false;
+            this.x = 0;
+            this.y = 0;
         }
     },
 
