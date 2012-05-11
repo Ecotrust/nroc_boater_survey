@@ -1,0 +1,45 @@
+{% extends "admin/base_site.html" %}
+{% load adminmedia admin_list i18n %}
+
+{% if not is_popup %}
+  {% block breadcrumbs %}
+    <div class="breadcrumbs">
+      <a href="../../">
+        {% trans "Home" %}
+      </a>
+      &rsaquo; Port Surveys
+    </div>
+  {% endblock %}
+{% endif %}
+
+{% block coltype %}flex{% endblock %}
+
+{% block content %}
+  <div id="content-main">
+    <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
+      <p>
+      <form action="../export_surveys/" method="post">
+      <b>Export</b> Completed Surveys:   
+      {{ export_form.as_p }}
+      <input type="submit" value="Export Surveys">
+      </form>
+      <form action="../export_shapefile/" method="post">
+      {{ export_form.as_p }}
+      <input type="submit" value="Export Shapefile">
+      </form>
+      <form action="../export_csv/" method="post">
+      {{ export_form.as_p }}
+      <input type="submit" value="Export CSV">
+      </form>
+      </p>
+      <p>
+      <form action="../import_surveys/" method="post" enctype="multipart/form-data">
+      <b>Import</b> Completed Surveys:  
+      {{ import_form.as_p }}
+      <input type="submit" value="Import Surveys" />
+      </form>
+      </p>
+      
+    </div>
+  </div>
+{% endblock %}
