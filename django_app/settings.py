@@ -59,10 +59,11 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'urls'
 
-import os
+import os, sys
 TEMPLATE_DIRS = (
     '/usr/local/django-trunk/django/contrib/gis/templates/',
     os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
+    os.path.abspath(os.path.dirname(sys.argv[0])) +'/admin_utils/templates/',
 )
 
 INSTALLED_APPS = (
@@ -75,9 +76,12 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'django.contrib.staticfiles',
     'draw_app',
+    'admin_utils',
     'videos',
     'faq'
 )
+
+LOGIN_REDIRECT_URL = '/admin/utils/dashboard/'
 
 SELF_REGISTRATION=False
 SELF_SURVEY_RESET=False

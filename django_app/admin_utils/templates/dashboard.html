@@ -1,0 +1,44 @@
+{% extends "admin/base_site.html" %}
+{% load adminmedia admin_list i18n %}
+
+{% if not is_popup %}
+  {% block breadcrumbs %}
+    <div class="breadcrumbs">
+      <a href="../../">
+        {% trans "Admin" %}
+      </a>
+      &rsaquo; Dashboard
+    </div>
+  {% endblock %}
+{% endif %}
+
+{% block coltype %}flex{% endblock %}
+
+{% block content %}
+  <div id="content-main">
+    <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
+      <p>
+      <form action="../export_surveys/" method="post">
+      <b>Export</b> Completed Surveys:   
+      {{ export_form.as_p }}
+      <input type="submit" value="Export JSON">
+      </form>
+      <form action="../export_shapefile/" method="post">
+      {{ export_form.as_p }}
+      <input type="submit" value="Export Shapefile">
+      </form>
+      <form action="../export_csv/" method="post">
+      {{ export_form.as_p }}
+      <input type="submit" value="Export CSV">
+      </form>
+      </p>
+      <!--<p>{{ summary }} </p>-->
+      <ul>
+      {% for s in summary %}
+        <li>{{s.key}}: {{s.value}}</li>
+      {% endfor %}
+      </ul>
+     
+    </div>
+  </div>
+{% endblock %}
