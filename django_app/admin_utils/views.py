@@ -41,8 +41,6 @@ def dashboard(request, time_period='all', template='dashboard.html'):
             else:
                 month.append({'id': record.month, 'name':months[int(record.month)], 'selected': ''})
     if survey_count > 0:
-    
-    
         completes = survey_data.filter(complete = True)
         complete_count = completes.count()
         complete_pct = str(round((float(complete_count) / survey_count) * 100, 2)) + '%'

@@ -12,7 +12,7 @@ from views import *
 
 urlpatterns = patterns('',
     (r'^$', intro),
-    (r'^accounts/login/', login, {'template_name': 'admin\login.html','redirect_field_name':'/admin/utils/dashboard/'}),
+    (r'^accounts/login/', login, {'template_name': 'admin/login.html','redirect_field_name':'/admin/utils/dashboard/'}),
     (r'^draw/', include('draw_app.urls')),
     url(r'^faq/', include('faq.urls'), name='faq'),
     (r'^videos/', include('videos.urls')),
