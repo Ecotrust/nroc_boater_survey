@@ -3,7 +3,8 @@ from views import *
 import os
 
 urlpatterns = patterns('',
-    (r'^dashboard', dashboard ),
+    (r'^dashboard/([A-Za-z0-9_-]+)$', dashboard ),
+    (r'^dashboard/', dashboard ),
     # (r'^', login ),
     # (r'^login/$', login, {'template_name': 'admin\login.html'}),
     # (r'^$', login),

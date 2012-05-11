@@ -1,6 +1,16 @@
 {% extends "admin/base_site.html" %}
 {% load adminmedia admin_list i18n %}
 
+{% block extrahead %}
+  <script type="text/javascript">
+    function updateDash()
+    {
+      var selector=document.getElementById("month");
+      window.location.href="/admin/utils/dashboard/"+selector.value;
+    }
+  </script
+{% endblock %}
+
 {% if not is_popup %}
   {% block breadcrumbs %}
     <div class="breadcrumbs">
@@ -17,27 +27,79 @@
 {% block content %}
   <div id="content-main">
     <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
-      <p>
-      <form action="../export_surveys/" method="post">
-      <b>Export</b> Completed Surveys:   
-      {{ export_form.as_p }}
-      <input type="submit" value="Export JSON">
-      </form>
-      <form action="../export_shapefile/" method="post">
-      {{ export_form.as_p }}
-      <input type="submit" value="Export Shapefile">
-      </form>
-      <form action="../export_csv/" method="post">
-      {{ export_form.as_p }}
-      <input type="submit" value="Export CSV">
-      </form>
-      </p>
-      <!--<p>{{ summary }} </p>-->
-      <ul>
-      {% for s in summary %}
-        <li>{{s.key}}: {{s.value}}</li>
-      {% endfor %}
-      </ul>
+      <table id='dashboard'><tr>
+        <td>
+          <p><!--
+          <form action="../export_surveys/" method="post">
+          <b>Export</b> Completed Surveys:   
+          {{ export_form.as_p }}
+          <input type="submit" value="Export JSON">
+          </form>
+          <form action="../export_shapefile/" method="post">
+          {{ export_form.as_p }}
+          <input type="submit" value="Export Shapefile">
+          </form>
+          <form action="../export_csv/" method="post">
+          {{ export_form.as_p }}
+          <input type="submit" value="Export CSV">
+          </form>-->
+          <form>
+            <select id="month" onchange="updateDash()">
+              <option value="all">All</option>
+              {% for m in month %}
+              <option {{m.selected}} value="{{m.id}}">{{m.name}}</option>
+              {% endfor %}
+            </select>
+          </p>
+        </td>
+        <td>
+          <table id='report'><tr><td style="width: 300px">
+              <h2>Totals for Mapping Portion</h2>
+              <table style="width: 300px"><tr><th>Status</th><th>Count</th><th>Percent</th></tr>
+              {% for s in summary %}
+                <tr><td style="{{s.style}}">{{s.key}}</td><td style="{{s.style}}">{{s.value}}</td><td style="{{s.style}}">{{s.pct}}</td></tr>
+              {% endfor %}
+              </table>
+            </td><td style="width: 300px"></td></tr>
+            <tr><td colspan =2>
+              <h2>Routes</h2>
+            </td></tr>
+            <tr><td>
+              <h3>Complete surveys</h3>
+              <table style="width: 300px"><tr><th>Status</th><th>Count</th><th>Percent</th></tr>
+              {% for s in c_route_summary %}
+                <tr><td style="{{s.style}}">{{s.key}}</td><td style="{{s.style}}">{{s.value}}</td><td style="{{s.style}}">{{s.pct}}</td></tr>
+              {% endfor %}
+              </table>
+            </td><td>              
+              <h3>Incomplete surveys</h3>
+              <table style="width: 300px"><tr><th>Status</th><th>Count</th><th>Percent</th></tr>
+              {% for s in i_route_summary %}
+                <tr><td style="{{s.style}}">{{s.key}}</td><td style="{{s.style}}">{{s.value}}</td><td style="{{s.style}}">{{s.pct}}</td></tr>
+              {% endfor %}
+              </table>
+            </td></tr>
+            <tr><td colspan =2>
+            <h2>Activity Points</h2>
+            </td></tr>
+            <tr><td>
+              <h3>Complete surveys</h3>
+              <table style="width: 300px"><tr><th>Status</th><th>Count</th><th>Percent</th></tr>
+              {% for s in c_point_summary %}
+                <tr><td style="{{s.style}}">{{s.key}}</td><td style="{{s.style}}">{{s.value}}</td><td style="{{s.style}}">{{s.pct}}</td></tr>
+              {% endfor %}
+              </table>
+            </td><td>
+              <h3>Incomplete surveys</h3>
+              <table style="width: 300px"><tr><th>Status</th><th>Count</th><th>Percent</th></tr>
+              {% for s in i_point_summary %}
+                <tr><td style="{{s.style}}">{{s.key}}</td><td style="{{s.style}}">{{s.value}}</td><td style="{{s.style}}">{{s.pct}}</td></tr>
+              {% endfor %}
+              </table>
+            </td></tr>
+          </table>
+        </td>
+      </tr></table>
      
     </div>
   </div>

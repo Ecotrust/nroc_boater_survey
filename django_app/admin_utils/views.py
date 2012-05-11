@@ -20,117 +20,129 @@ from StringIO import StringIO
 import tempfile
 
 @login_required
-def dashboard(request, template='dashboard.html', time_period='all'):
+def dashboard(request, time_period='all', template='dashboard.html'):
     if not request.user.is_staff:
         return HttpResponse('You do not have permission to view this feature', status=401)
     if request.method != 'GET':
         return HttpResponse('Action not permitted', status=403)
     export_form = ExportSurveysForm()
     import_form = ImportSurveysForm()
-    if time_period == 'all':
-        survey_data = SurveyStatus.objects.all()
-    else:
+    if time_period and time_period != 'all':
         survey_data = SurveyStatus.objects.filter(month = time_period)
-    survey_count = survey_data.count()                                          #
+    else:
+        survey_data = SurveyStatus.objects.all()
+    month = []
+    survey_count = survey_data.count()
+    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    for record in SurveyStatus.objects.all().order_by('month'):
+        if not record.month == '' and not month.__contains__({'id': record.month, 'name':months[int(record.month)], 'selected': ''}) and not month.__contains__({'id': record.month, 'name':months[int(record.month)], 'selected': 'selected="selected"'}):
+            if record.month == time_period:
+                month.append({'id': record.month, 'name':months[int(record.month)], 'selected': 'selected="selected"'})
+            else:
+                month.append({'id': record.month, 'name':months[int(record.month)], 'selected': ''})
     if survey_count > 0:
-        complete_count = survey_data.filter(complete = True).count()          #
-        # import pdb
-        # pdb.set_trace()
-        complete_pct = str(round((float(complete_count) / survey_count) * 100, 2)) + '%'         #
-        incomplete_count = survey_count - complete_count                        #
-        incomplete_pct = str(round((float(incomplete_count) / survey_count) * 100, 2)) + '%'     #
+    
+    
+        completes = survey_data.filter(complete = True)
+        complete_count = completes.count()
+        complete_pct = str(round((float(complete_count) / survey_count) * 100, 2)) + '%'
+        skipped_count = survey_data.filter(complete = True, map_status = "Skipped").count()
+        skipped_pct = str(round((float(skipped_count) / survey_count) * 100, 2)) + '%'
+        mapped_count = complete_count - skipped_count
+        mapped_pct = str(round((float(mapped_count) / survey_count) * 100, 2)) + '%'
+        incompletes = survey_data.filter(complete = False)
+        incomplete_count = incompletes.count()
+        incomplete_pct = str(round((float(incomplete_count) / survey_count) * 100, 2)) + '%'
         routes = Route.objects.all()
-        c_route = routes.filter(survey_id__complete = True)
-        c_route_count = c_route.count()                                                             #
-        if c_route_count > 0 :
-            c_route_drawn_count = c_route.filter(survey_id__map_status = "Route drawn").count()      #
-            c_route_drawn_pct = str(round((float(c_route_drawn_count) / c_route_count) * 100, 2) ) + '%'                 #
-            c_route_skipped_count = c_route_count - c_route_drawn_count                                         #
-            c_route_skipped_pct = str(round((float(c_route_skipped_count) / c_route_count) * 100, 2)) + '%'              #
+
+        if complete_count > 0:
+            c_route_drawn_count = completes.filter(map_status = "Route drawn").count()
+            c_route_drawn_pct = str(round((float(c_route_drawn_count) / complete_count) * 100, 2) ) + '%'
+            c_route_skipped_count = completes.filter(map_status = "Skipped").count()
+            c_route_skipped_pct = str(round((float(c_route_skipped_count) / complete_count) * 100, 2)) + '%'
+
+            c_point_drawn_count = completes.filter(act_status = "Point plotted").count()
+            c_point_drawn_pct = str(round((float(c_point_drawn_count) / complete_count) * 100, 2)) + '%'
+            c_point_skip_count = completes.filter(act_status = "Skipped").count()
+            c_point_skip_pct = str(round((float(c_point_skip_count) / complete_count) * 100, 2)) + '%'
         else:
-            c_route_drawn_count = 0      #
-            c_route_drawn_pct = '0%'                 #
-            c_route_skipped_count = 0                                         #
-            c_route_skipped_pct = '0%'              #
-        
-        i_route = routes.filter(survey_id__complete = False)
-        i_route_count = i_route.count()                                                             #
-        if i_route_count > 0:
-            i_route_drawn_count = i_route.filter(survey_id__map_status = "Route drawn").count()      #
-            i_route_drawn_pct = str(round((float(i_route_drawn_count) / i_route_count) * 100, 2)) + '%'                  #
-            i_route_started_count = i_route.filter(survey_id__map_status = "Started").count()        #
-            i_route_started_pct = str(round((float(i_route_started_count) / i_route_count) * 100, 2)) + '%'              #
-            i_route_not_start_count = i_route.filter(survey_id__user_id = '').count()                    #
-            i_route_not_start_pct = str(round((float(i_route_not_start_count) / i_route_count) * 100, 2)) + '%'          #
+            c_route_drawn_count = 0
+            c_route_drawn_pct = '0%'
+            c_route_skipped_count = 0
+            c_route_skipped_pct = '0%'
+
+            c_point_drawn_count = 0
+            c_point_drawn_pct = '0%'
+            c_point_skip_count = 0
+            c_point_skip_pct = '0%'
+        if incomplete_count > 0:
+            i_route_drawn_count = incompletes.filter(map_status = "Route drawn").count()
+            i_route_drawn_pct = str(round((float(i_route_drawn_count) / incomplete_count) * 100, 2)) + '%'
+            i_route_started_count = incompletes.filter(map_status = "Started").count()
+            i_route_started_pct = str(round((float(i_route_started_count) / incomplete_count) * 100, 2)) + '%'
+            i_route_not_start_count = incompletes.filter(user_id = '').count()
+            i_route_not_start_pct = str(round((float(i_route_not_start_count) / incomplete_count) * 100, 2)) + '%'
+
+            i_point_drawn_count = incompletes.filter(act_status = "Point plotted").count()
+            i_point_drawn_pct = str(round((float(i_point_drawn_count) / incomplete_count) * 100, 2)) + '%'
+            i_point_not_start_count = incompletes.filter(act_status = "Not yet started").count()
+            i_point_not_start_count = i_point_not_start_count + incompletes.filter(user_id = '').count()
+            i_point_not_start_pct = str(round((float(i_point_not_start_count) / incomplete_count) * 100, 2)) + '%'
         else:
-            i_route_drawn_count = 0      #
-            i_route_drawn_pct = '0%'                  #
-            i_route_started_count = 0        #
-            i_route_started_pct = '0%'              #
-            i_route_not_start_count = 0                    #
-            i_route_not_start_pct = '0%'          #
-        
-        c_point = ActivityPoint.objects.filter(survey_id__complete = True)
-        c_point_count = c_point.count()                                                             #
-        if c_point_count > 0:
-            c_point_drawn_count = c_point.filter(survey_id__act_status = "Point plotted").count()    #
-            c_point_drawn_pct = str(round((float(c_point_drawn_count) / c_point_count) * 100, 2)) + '%'                  #
-            c_point_skip_count = c_point.filter(survey_id__act_status = "Skipped").count()           #
-            c_point_skip_pct = str(round((float(c_point_skip_count) / c_point_count) * 100, 2)) + '%'                    #
-        else:
-            c_point_drawn_count = 0    #
-            c_point_drawn_pct = '0%'                  #
-            c_point_skip_count = 0           #
-            c_point_skip_pct = '0%'                    #
-            
-        i_point = ActivityPoint.objects.filter(survey_id__complete = False)
-        i_point_count = i_point.count()
-        if i_point_count > 0:
-            i_point_drawn_count = i_point.filter(survey_id__act_status = "Point plotted").count()
-            i_point_drawn_pct = str(round((float(i_point_drawn_count) / i_point_count) * 100, 2)) + '%'
-            i_point_not_start_count = i_point_count - i_point_drawn_count
-            i_point_not_start_pct = str(round((float(i_point_not_start_count) / i_point_count) * 100, 2)) + '%'
-        else:
+            i_route_drawn_count = 0
+            i_route_drawn_pct = '0%'
+            i_route_started_count = 0
+            i_route_started_pct = '0%'
+            i_route_not_start_count = 0
+            i_route_not_start_pct = '0%'
+
             i_point_drawn_count = 0
             i_point_drawn_pct = '0%'
             i_point_not_start_count = 0
             i_point_not_start_pct = '0%'
-        
+
         summary = [
-            {'key': 'survey_count', 'value': survey_count},
-            {'key': 'complete_count', 'value' : complete_count},
-            {'key': 'complete_pct', 'value' : complete_pct},
-            {'key': 'incomplete_count', 'value' : incomplete_count},
-            {'key': 'incomplete_pct', 'value' : incomplete_pct},
-            {'key': 'c_route_count', 'value' : c_route_count},
-            {'key': 'c_route_drawn_count', 'value' : c_route_drawn_count},
-            {'key': 'c_route_drawn_pct', 'value' : c_route_drawn_pct},
-            {'key': 'c_route_skipped_count', 'value' : c_route_skipped_count},
-            {'key': 'c_route_skipped_pct', 'value' : c_route_skipped_pct},
-            {'key': 'i_route_count', 'value' : i_route_count},
-            {'key': 'i_route_drawn_count', 'value': i_route_drawn_count},
-            {'key': 'i_route_drawn_pct', 'value' : i_route_drawn_pct},
-            {'key': 'i_route_started_count', 'value' : i_route_started_count},
-            {'key': 'i_route_started_pct', 'value' : i_route_started_pct},
-            {'key': 'i_route_not_start_count', 'value' : i_route_not_start_count},
-            {'key': 'i_route_not_start_pct', 'value' : i_route_not_start_pct},
-            {'key': 'c_point_count', 'value' : c_point_count},
-            {'key': 'c_point_drawn_count', 'value' : c_point_drawn_count},
-            {'key': 'c_point_drawn_pct', 'value' : c_point_drawn_pct},
-            {'key': 'c_point_skip_count', 'value' : c_point_skip_count},
-            {'key': 'c_point_skip_pct', 'value' : c_point_skip_pct},
-            {'key': 'i_point_count', 'value' : i_point_count},
-            {'key': 'i_point_drawn_count', 'value' : i_point_drawn_count},
-            {'key': 'i_point_drawn_pct', 'value' : i_point_drawn_pct},
-            {'key': 'i_point_not_start_count', 'value' : i_point_not_start_count},
-            {'key': 'i_point_not_start_pct', 'value' : i_point_not_start_pct}
+            {'key': 'Completed', 'value' : complete_count, 'pct': complete_pct, 'style': ''},
+            {'key': 'Mapped (Complete)', 'value' : mapped_count, 'pct': mapped_pct, 'style': 'color: lightGray'},
+            {'key': 'Skipped (Complete)', 'value' : skipped_count, 'pct': skipped_pct, 'style': 'color: lightGray'},
+            {'key': 'Incomplete', 'value' : incomplete_count, 'pct': incomplete_pct, 'style': ''},
+            {'key': 'Total', 'value': survey_count, 'pct': '', 'style': 'font-weight: bold'}
+        ]
+        
+        c_route_summary = [
+            {'key': 'Drawn', 'value' : c_route_drawn_count, 'pct' : c_route_drawn_pct, 'style': '' },
+            {'key': 'Skipped', 'value' : c_route_skipped_count, 'pct': c_route_skipped_pct, 'style': ''},
+            {'key': 'Total', 'value' : complete_count, 'pct': '', 'style': 'font-weight: bold'}
+        ]
+        
+        i_route_summary = [
+            {'key': 'Drawn', 'value': i_route_drawn_count, 'pct': i_route_drawn_pct, 'style': ''},
+            {'key': 'Started', 'value' : i_route_started_count, 'pct': i_route_started_pct, 'style': ''},
+            {'key': 'Not Started', 'value' : i_route_not_start_count, 'pct': i_route_not_start_pct, 'style': ''},
+            {'key': 'Total', 'value' : incomplete_count, 'pct': '', 'style': 'font-weight: bold'}
+        ]
+        
+        c_point_summary = [
+            {'key': 'Placed', 'value' : c_point_drawn_count, 'pct': c_point_drawn_pct, 'style': ''},
+            {'key': 'Skipped', 'value' : c_point_skip_count, 'pct': c_point_skip_pct, 'style': ''},
+            {'key': 'Total', 'value' : complete_count, 'pct': '', 'style': 'font-weight: bold'}
+        ]
+        
+        i_point_summary = [
+            {'key': 'Placed', 'value' : i_point_drawn_count, 'pct': i_point_drawn_pct, 'style': ''},
+            {'key': 'Not Started', 'value' : i_point_not_start_count, 'pct': i_point_not_start_pct, 'style': ''},
+            {'key': 'Total', 'value' : incomplete_count, 'pct': '', 'style': 'font-weight: bold'}
         ]
             
     else:
         summary = []
+        c_route_summary = []
+        i_route_summary = []
+        c_point_summary = []
+        i_point_summary = []
             
     
-    return render_to_response( template, RequestContext(request,{'import_form': import_form, 'export_form': export_form, 'summary': summary}))
+    return render_to_response( template, RequestContext(request,{'import_form': import_form, 'export_form': export_form, 'month': month, 'summary': summary, 'c_route_summary': c_route_summary, 'i_route_summary': i_route_summary, 'c_point_summary': c_point_summary, 'i_point_summary': i_point_summary}))
 
 '''
 Accessed from the Survey Management Admin interface 
