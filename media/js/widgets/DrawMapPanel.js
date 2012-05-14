@@ -5,6 +5,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     
     defaultZoom: 1,
     defaultCenter: null,
+    cachedTiles: true,
 	
     initComponent: function(){		
 		//Map region
@@ -25,10 +26,13 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             projection: new OpenLayers.Projection("EPSG:3857"),
             displayProjection: new OpenLayers.Projection("EPSG:4326"),
             units: "m",
-            numZoomLevels: 9,
+            numZoomLevels: 11,
             // maxResolution: 156543.0339,
             maxResolution: 2445.9849046875,
-            maxExtent: map_extent
+            maxExtent: map_extent,
+            eventListeners: {
+                "zoomend": this.switchChartLayer.createDelegate(this)
+            }
         };        
 
         var defaultStyle = new OpenLayers.Style(OpenLayers.Util.applyDefaults({
@@ -78,10 +82,9 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             }
         );
 
-        var nautLayer = new OpenLayers.Layer.TMS(
+        this.nautLayer = new OpenLayers.Layer.TMS(
             "Nautical Charts",
             ["http://c3429629.r29.cf0.rackcdn.com/stache/NETiles_layer/"],
-            // ["/media/tiles/"],
             {
                 buffer: 1,
                 'isBaseLayer': true,
@@ -102,6 +105,14 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
                 }
             }
         );                       	
+
+        this.naut2Layer = new OpenLayers.Layer.WMS(
+            "Nautical Charts",
+            "http://egisws02.nos.noaa.gov/ArcGIS/services/RNC/NOAA_RNC/ImageServer/WMSServer",
+            {
+                layers: 'null'
+            }
+        );   
 
         this.vectorLayer = new OpenLayers.Layer.Vector(
     		"Vector Layer", 
@@ -180,7 +191,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         //Update internal MapPanel properties
 		Ext.apply(this, {
 		    map: map,
-		    layers: [nautLayer, hybridLayer, roadMapLayer, this.vectorLayer],
+		    layers: [this.nautLayer, hybridLayer, roadMapLayer, this.vectorLayer],
 		    extent: map_extent,
 	        center: region_extent.getCenterLonLat(),
 	        zoom: this.defaultZoom,
@@ -297,6 +308,22 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     resetMapView: function() {
         this.map.setCenter(this.defaultCenter);
         this.map.zoomTo(this.defaultZoom);
+    },
+    
+    switchChartLayer: function() {
+        if (map.getZoom() > 8 && this.cachedTiles == true && map.baseLayer == this.nautLayer) {
+            map.addLayer(this.naut2Layer);
+            map.raiseLayer(this.naut2Layer, 0-(map.layers.length-1))
+            map.setBaseLayer(this.naut2Layer);
+            map.removeLayer(this.nautLayer);
+            this.cachedTiles = false;
+        } else if (map.getZoom() < 9 && this.cachedTiles == false && map.baseLayer == this.naut2Layer) {
+            map.addLayer(this.nautLayer);
+            map.raiseLayer(this.nautLayer, 0-(map.layers.length-1))
+            map.setBaseLayer(this.nautLayer);
+            map.removeLayer(this.naut2Layer);
+            this.cachedTiles = true;
+        }
     }
 });
  
