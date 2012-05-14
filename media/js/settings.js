@@ -8,7 +8,7 @@ Ext.namespace('gwst');
 */
 
 gwst.settings = {	
-    minimum_draw_zoom: 10,
+    minimum_draw_zoom: 4,
     zoom_error_text: '<p class="help-win">For accuracy reasons, you must zoom in further before drawing on the map. Please zoom in and try again.</p>',    
     
     adminEmail: 'fish@ecotrust.org',

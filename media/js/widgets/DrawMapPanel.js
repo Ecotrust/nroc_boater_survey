@@ -25,7 +25,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             projection: new OpenLayers.Projection("EPSG:3857"),
             displayProjection: new OpenLayers.Projection("EPSG:4326"),
             units: "m",
-            numZoomLevels: 11,
+            numZoomLevels: 9,
             // maxResolution: 156543.0339,
             maxResolution: 2445.9849046875,
             maxExtent: map_extent
