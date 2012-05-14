@@ -3,7 +3,7 @@ Ext.namespace('gwst', 'gwst.widgets');
 gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     //Default properties can defined here and overriden by config object passed to contructor
     
-    defaultZoom: 7,
+    defaultZoom: 1,
     defaultCenter: null,
 	
     initComponent: function(){		
@@ -22,11 +22,12 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 	    //Map base options
         var map_options = {
 			controls: [],
-            projection: new OpenLayers.Projection("EPSG:900913"),
+            projection: new OpenLayers.Projection("EPSG:3857"),
             displayProjection: new OpenLayers.Projection("EPSG:4326"),
             units: "m",
-            numZoomLevels: 15,
-            maxResolution: 156543.0339,
+            numZoomLevels: 11,
+            // maxResolution: 156543.0339,
+            maxResolution: 2445.9849046875,
             maxExtent: map_extent
         };        
 
@@ -61,8 +62,9 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             "Satellite",
             {
                 type: google.maps.MapTypeId.HYBRID, 
-                sphericalMercator: true        ,
-                isBaseLayer: true
+                sphericalMercator: true,
+                isBaseLayer: true,
+                minZoomLevel: 6
             }
         );
         
@@ -70,8 +72,9 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             "Road Map",
             {
                 type: google.maps.MapTypeId.ROADMAP, 
-                sphericalMercator: true        ,
-                isBaseLayer: true
+                sphericalMercator: true,
+                isBaseLayer: true,
+                minZoomLevel: 6
             }
         );
 
@@ -87,12 +90,12 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
                     var z = map.getZoom();
                     var url = this.url;
                     var path = 'blank.png' ;
-                    if ( z <= 15 && z >= 0 ) {
+                    if ( z <= 17 && z >= 0 ) {
                         var res = map.getResolution();
                         var x = Math.round((bounds.left - this.maxExtent.left) / (res * this.tileSize.w));
                         var y = Math.round((this.maxExtent.top - bounds.top) / (res * this.tileSize.h));
                         var limit = Math.pow(2, z);
-                        var path = z + "/" + x + "/" + y + ".png";
+                        var path = (z + 6) + "/" + x + "/" + y + ".png";
                     }
                     tilepath = url + path;
                     return url + path;
