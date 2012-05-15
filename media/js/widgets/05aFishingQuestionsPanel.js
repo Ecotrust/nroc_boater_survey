@@ -41,10 +41,18 @@ gwst.widgets.FishingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
             style: 'margin: 0px 0px 10px 15px',
             columns: 1,
             items: [
-                {boxLabel: 'Stripers', name: 'stripers'},
+                {boxLabel: 'Striped Bass', name: 'striped-bass'},
                 {boxLabel: 'Bluefish', name: 'bluefish'},
                 {boxLabel: 'Flounder', name: 'flounder'},
-                {boxLabel: 'Cod/Haddock', name: 'cod-haddock'},
+                {boxLabel: 'Atlantic Cod', name: 'cod'},
+                {boxLabel: 'Haddock', name: 'haddock'},
+                {boxLabel: 'Atlantic Mackerel', name: 'mackerel'},
+                {boxLabel: 'Scup (Porgy)', name: 'scup'},
+                {boxLabel: 'Tautog (Blackfish)', name: 'tautog'},
+                {boxLabel: 'Tuna', name: 'tuna'},
+                {boxLabel: 'Shark', name: 'shark'},
+                {boxLabel: 'Billfish', name: 'billfish'},
+                {boxLabel: 'Wahoo', name: 'wahoo'},
                 this.fish_other_box
             ]
         });

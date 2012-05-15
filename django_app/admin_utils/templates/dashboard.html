@@ -29,20 +29,7 @@
     <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
       <table id='dashboard'><tr>
         <td>
-          <p><!--
-          <form action="../export_surveys/" method="post">
-          <b>Export</b> Completed Surveys:   
-          {{ export_form.as_p }}
-          <input type="submit" value="Export JSON">
-          </form>
-          <form action="../export_shapefile/" method="post">
-          {{ export_form.as_p }}
-          <input type="submit" value="Export Shapefile">
-          </form>
-          <form action="../export_csv/" method="post">
-          {{ export_form.as_p }}
-          <input type="submit" value="Export CSV">
-          </form>-->
+          <p>
           <form>
             <select id="month" onchange="updateDash()">
               <option value="all">All</option>
@@ -50,6 +37,26 @@
               <option {{m.selected}} value="{{m.id}}">{{m.name}}</option>
               {% endfor %}
             </select>
+          </form>
+          <form action="../export_surveys/" method="post">
+          {{ export_form.as_p }}
+          <input type="submit" value="Export JSON">
+          </form>
+          <form action="../export_points_shapefile/{{time_period}}" method="post">
+          {{ export_form.as_p }}
+          <input type="submit" value="Export Points">
+          </form>
+          
+          </form>
+          <form action="../export_routes_shapefile/{{time_period}}" method="post">
+          {{ export_form.as_p }}
+          <input type="submit" value="Export Routes">
+          </form>
+          
+          <form action="../export_csv/" method="post">
+          {{ export_form.as_p }}
+          <input type="submit" value="Export CSV">
+          </form>
           </p>
         </td>
         <td>

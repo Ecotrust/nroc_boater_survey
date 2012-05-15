@@ -24,6 +24,7 @@ gwst.widgets.ActivityAreasPanel = Ext.extend(gwst.widgets.WestPanel, {
             <li>Fishing</li>\
             <li>Wildlife viewing (whales, birds, etc.)</li>\
             <li>Diving</li>\
+            <li>Swimming</li>\
             <li>Relaxing at anchor</li>\
         </ul>';
         return html_text;

@@ -776,7 +776,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             survey_id: gwst.settings.interview_id,
             type: 'route',
             factors: this.route_factors, 
-            other_factor: this.route_factors_other
+            other_factor: this.route_factors_other,
+            zoom_level: this.mapPanel.map.getZoom()
         };
         Ext.Ajax.request({
 	        url: gwst.settings.urls.shapes,
@@ -836,7 +837,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             view_tgts: this.view_tgts,
             view_rank: this.view_rank,
             dive_tgts: this.dive_tgts,
-            dive_rank: this.dive_rank
+            dive_rank: this.dive_rank,
+            zoom_level: this.mapPanel.map.getZoom()
         };
         Ext.Ajax.request({
             url: gwst.settings.urls.shapes,

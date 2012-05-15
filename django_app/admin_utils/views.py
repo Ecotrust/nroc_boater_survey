@@ -28,18 +28,18 @@ def dashboard(request, time_period='all', template='dashboard.html'):
     export_form = ExportSurveysForm()
     import_form = ImportSurveysForm()
     if time_period and time_period != 'all':
-        survey_data = SurveyStatus.objects.filter(month = time_period)
+        survey_data = SurveyStatus.objects.filter(month_id = time_period)
     else:
         survey_data = SurveyStatus.objects.all()
     month = []
     survey_count = survey_data.count()
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    for record in SurveyStatus.objects.all().order_by('month'):
-        if not record.month == '' and not month.__contains__({'id': record.month, 'name':months[int(record.month)], 'selected': ''}) and not month.__contains__({'id': record.month, 'name':months[int(record.month)], 'selected': 'selected="selected"'}):
-            if record.month == time_period:
-                month.append({'id': record.month, 'name':months[int(record.month)], 'selected': 'selected="selected"'})
+    for record in SurveyStatus.objects.all().order_by('month_id'):
+        if not record.month_id == '' and not month.__contains__({'id': record.month_id, 'name':months[int(record.month_id)], 'selected': ''}) and not month.__contains__({'id': record.month_id, 'name':months[int(record.month_id)], 'selected': 'selected="selected"'}):
+            if record.month_id == time_period:
+                month.append({'id': record.month_id, 'name':months[int(record.month_id)], 'selected': 'selected="selected"'})
             else:
-                month.append({'id': record.month, 'name':months[int(record.month)], 'selected': ''})
+                month.append({'id': record.month_id, 'name':months[int(record.month_id)], 'selected': ''})
     if survey_count > 0:
         completes = survey_data.filter(complete = True)
         complete_count = completes.count()
@@ -140,7 +140,7 @@ def dashboard(request, time_period='all', template='dashboard.html'):
         i_point_summary = []
             
     
-    return render_to_response( template, RequestContext(request,{'import_form': import_form, 'export_form': export_form, 'month': month, 'summary': summary, 'c_route_summary': c_route_summary, 'i_route_summary': i_route_summary, 'c_point_summary': c_point_summary, 'i_point_summary': i_point_summary}))
+    return render_to_response( template, RequestContext(request,{'import_form': import_form, 'export_form': export_form, 'month': month, 'summary': summary, 'c_route_summary': c_route_summary, 'i_route_summary': i_route_summary, 'c_point_summary': c_point_summary, 'i_point_summary': i_point_summary, 'time_period': time_period}))
 
 '''
 Accessed from the Survey Management Admin interface 
@@ -183,7 +183,7 @@ Accessed when user clicks the Export Shapefile button
 Creates a shapefile from all the completed surveys' geometries
 Returns a response that contains the shapefile
 '''
-def export_shapefile(request):
+def export_points_shapefile(request, month='all'):
     if not request.user.is_staff:
         return HttpResponse('You do not have permission to view this feature', status=401)
     if request.method != 'POST':
@@ -193,10 +193,32 @@ def export_shapefile(request):
     if not form.is_valid():
         return render_to_response( template, RequestContext( request, {'export_form':form} ) )
     #compile a queryset of shapes from the completed surveys
-    completed_shapes = compile_completed_shapes()    
-    shp_response = ShpResponder(completed_shapes)
+    completed_points = compile_completed_points(month)    
+    shp_response = ShpResponder(completed_points)
     username = clean_username(User.objects.get(username = request.user).first_name)
-    shp_response.file_name = '%s_%s' % (username, datetime.date.today())
+    shp_response.file_name = '%s_%s_points_%s' % (username, month, datetime.date.today())
+
+    return shp_response()
+    
+'''
+Accessed when user clicks the Export Shapefile button
+Creates a shapefile from all the completed surveys' geometries
+Returns a response that contains the shapefile
+'''
+def export_routes_shapefile(request, month='all'):
+    if not request.user.is_staff:
+        return HttpResponse('You do not have permission to view this feature', status=401)
+    if request.method != 'POST':
+        return HttpResponse('Action not permitted', status=403)
+    form = ExportSurveysForm(request.POST)
+        
+    if not form.is_valid():
+        return render_to_response( template, RequestContext( request, {'export_form':form} ) )
+    #compile a queryset of shapes from the completed surveys
+    completed_routes = compile_completed_routes(month)    
+    shp_response = ShpResponder(completed_routes)
+    username = clean_username(User.objects.get(username = request.user).first_name)
+    shp_response.file_name = '%s_%s_routes_%s' % (username, month, datetime.date.today())
     return shp_response()
  
 '''
@@ -297,100 +319,47 @@ Compiles and returns the text of a fixture that embodies all the completed surve
 '''  
 def compile_survey_fixture():
     #get all records from gwst_userstatus (InterviewStatus)
-    interviews = InterviewStatus.objects.filter(completed=True)
+    # interviews = SurveyStatus.objects.filter(complete=True)
     survey_objects = []
-    survey_objects.extend(res for res in Resource.objects.all())
-    survey_objects.extend(User.objects.filter(is_staff = True))
+    survey_objects.extend(status for status in SurveyStatus.objects.all())
+    survey_objects.extend(route for route in Route.objects.all())
+    survey_objects.extend(point for point in ActivityPoint.objects.all())
+    
+    # survey_objects.extend(res for res in Resource.objects.all())
+    # survey_objects.extend(User.objects.filter(is_staff = True))
 
-    for interview in interviews:
+    # for interview in interviews:
         #compile survey entries into one list
-        user = User.objects.get(pk=interview.user_id)
-        survey_objects.extend(UserProfile.objects.filter(user=user))
-        survey_objects.extend([user])
-        survey_objects.extend(InterviewStatus.objects.filter(user=user))
-        survey_objects.extend(InterviewGroupMembership.objects.filter(user=user))
+        # user = User.objects.get(pk=interview.user_id)
+        # survey_objects.extend(UserProfile.objects.filter(user=user))
+        # survey_objects.extend([user])
+        # survey_objects.extend(InterviewStatus.objects.filter(user=user))
+        # survey_objects.extend(InterviewGroupMembership.objects.filter(user=user))
         #survey_objects.extend(GroupMemberResource.objects.all()) #not sure this is what we want...
         #how about the following??
-        survey_objects.extend([gmres for gmres in GroupMemberResource.objects.all() if gmres.user()==user.id])
-        survey_objects.extend(InterviewAnswer.objects.filter(user=user))
-        survey_objects.extend(InterviewShape.objects.filter(user=user))
+        # survey_objects.extend([gmres for gmres in GroupMemberResource.objects.all() if gmres.user()==user.id])
+        # survey_objects.extend(InterviewAnswer.objects.filter(user=user))
+        # survey_objects.extend(InterviewShape.objects.filter(user=user))
         
 
     #serialize the survey objects into json 
     fixture_text = serializers.serialize('json', survey_objects, indent=2)
     return fixture_text
   
-def compile_completed_shapes():
-    #get all shape records from completed interviews
+def compile_completed_points(month):
+    if month == 'all':
+        points = ActivityPoint.objects.filter(survey__complete = True)
+    else:
+        points = ActivityPoint.objects.filter(survey__complete = True, survey__month_id = month)
+    return points
     
-    InterviewShapeShapefile.objects.all().delete()
+def compile_completed_routes(month):
+    if month == 'all':
+        routes = Route.objects.filter(survey__complete = True)
+    else:
+        routes = Route.objects.filter(survey__complete = True, survey__month_id = month)
+    return routes
     
-    for shape in InterviewShape.objects.all():
-        params = {}
-        user = shape.user
-        group = shape.int_group
-        interview = group.interview
-        status = InterviewStatus.objects.get(user=user, interview=interview)
-        if status.completed:
-            new_shapefile_shape = InterviewShapeShapefile()
-            new_shapefile_shape.shape = shape.id
-            new_shapefile_shape.user = user.id
-            new_shapefile_shape.f_name = user.first_name
-            new_shapefile_shape.l_name = user.last_name
-            new_shapefile_shape.interview = interview.id
-            new_shapefile_shape.int_name = interview.name
-            new_shapefile_shape.group = group
-            new_shapefile_shape.grp_name = group.name
-            new_shapefile_shape.resource = shape.resource.verbose_name
-            new_shapefile_shape.res_name = shape.resource.name
-            new_shapefile_shape.res_method = shape.resource.method
-            new_shapefile_shape.geometry = shape.geometry
-            new_shapefile_shape.pennies = shape.pennies
-            new_shapefile_shape.bound_n = shape.boundary_n
-            new_shapefile_shape.bound_s = shape.boundary_s
-            new_shapefile_shape.bound_e = shape.boundary_e
-            new_shapefile_shape.bound_w = shape.boundary_w
-            new_shapefile_shape.note_text = shape.note_text
-            new_shapefile_shape.days_visit = shape.days_visited
-            year = str(shape.creation_date.year)
-            if shape.creation_date.month < 10:
-                month = '0' + str(shape.creation_date.month)
-            else:
-                month = str(shape.creation_date.month)
-            if shape.creation_date.day < 10:
-                day = '0' + str(shape.creation_date.day)
-            else:
-                day = str(shape.creation_date.day)
-            if shape.creation_date.hour < 10:
-                hour = '0' + str(shape.creation_date.hour)
-            else:
-                hour = str(shape.creation_date.hour)
-            if shape.creation_date.minute < 10:
-                minute = '0' + str(shape.creation_date.minute)
-            else:
-                minute = str(shape.creation_date.minute)
-            new_shapefile_shape.date = year + '-' + month + '-' + day + ' ' + hour + ':' + minute
-            lnum_q = InterviewQuestion.objects.filter(code__contains="licnum", int_group__interview=interview)
-            if lnum_q.count() > 0:
-                lnum_a = InterviewAnswer.objects.filter(int_question=lnum_q[0], user=user)
-                if lnum_a.count() > 0:
-                    new_shapefile_shape.l_num = lnum_a[0].text_val
-                else:
-                    new_shapefile_shape.l_num = None
-            else:
-                new_shapefile_shape.l_num = None
-            port_q = InterviewQuestion.objects.filter(code__contains="port11", int_group__interview=interview)
-            if port_q.count() > 0:
-                port_a = InterviewAnswer.objects.filter(int_question=port_q[0], user=user)
-                if port_a.count() > 0:
-                    new_shapefile_shape.home_port = port_a[0].text_val
-                else:
-                    new_shapefile_shape.home_port = None
-            else:
-                new_shapefile_shape.home_port = None
-            new_shapefile_shape.save()
-            
-    return InterviewShapeShapefile.objects.all()
     
 def get_interview_types():
     

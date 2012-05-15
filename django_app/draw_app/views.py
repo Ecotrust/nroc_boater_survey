@@ -64,17 +64,17 @@ def draw(request):
     #Save status here
     started_survey[0].user_type=request.session['interview_id'][0]
     started_survey[0].user_id=request.session['interview_id'][1:-2]
-    started_survey[0].month=request.session['interview_id'][-2:]
+    started_survey[0].month_id=request.session['interview_id'][-2:]
     started_survey[0].map_status = 'Started'
     started_survey[0].act_status = 'Not yet started'
     started_survey[0].save()
     
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    params['month'] = months[int(started_survey[0].month) - 1]
+    params['month'] = months[int(started_survey[0].month_id) - 1]
     
-    Route.objects.filter(survey_id=request.session['interview_id']).delete()
+    Route.objects.filter(survey=request.session['interview_id']).delete()
     # ActivityArea.objects.filter(survey_id=request.session['interview_id']).delete()
-    ActivityPoint.objects.filter(survey_id=request.session['interview_id']).delete()
+    ActivityPoint.objects.filter(survey=request.session['interview_id']).delete()
     
     return render_to_response('draw.html', RequestContext(request, params))
 
@@ -107,8 +107,9 @@ def shapes(request, id=None):
                 if other_factor == '':
                     other_factor = None
                 new_shape = Route(
-                    survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
-                    geometry = geom
+                    survey = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
+                    geometry = geom,
+                    zoom_level = feat.get('zoom_level')
                 )
                 status = SurveyStatus.objects.get(survey_id=feat.get('survey_id'))
                 status.map_status = 'Route drawn'
@@ -138,10 +139,18 @@ def shapes(request, id=None):
                     fish_other = None
                 if not fish_targets:
                     fish_targets = {
+                        'striped-bass': False,
+                        'bluefish': False,
                         'flounder': False,
-                        'stripers': False,
-                        'cod-haddock': False,
-                        'bluefish': False
+                        'cod': False,
+                        'haddock': False,
+                        'mackerel': False,
+                        'scup': False,
+                        'tautog': False,
+                        'tuna': False,
+                        'shark': False,
+                        'billfish': False,
+                        'wahoo': False
                     }
                 view_targets = feat.get('view_tgts')
                 if view_targets and not view_targets['view-other'] == False:
@@ -151,7 +160,8 @@ def shapes(request, id=None):
                 if not view_targets:
                     view_targets = {
                         'whales': False,
-                        'porpoises': False,
+                        'dolphin-porpoises': False,
+                        'sea-turtles': False,
                         'birds': False,
                         'seals': False
                     }
@@ -166,31 +176,43 @@ def shapes(request, id=None):
                         'wrecks': False,
                         'fishing': False
                     }
+  
                 new_shape = ActivityPoint(
-                    survey_id = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
-                    geometry = geom,
-                    fishing = activities['fishing'],
-                    viewing = activities['wildlife-viewing'],
-                    diving = activities['diving'],
-                    relaxing = activities['relaxing'],
-                    other_act = other_act,
-                    fish_flounder = fish_targets['flounder'],
-                    fish_stripers = fish_targets['stripers'],
-                    fish_cod_haddock = fish_targets['cod-haddock'],
-                    fish_bluefish = fish_targets['bluefish'],
-                    fish_other = fish_other,
-                    fish_rank = feat.get('fish_rank'),
-                    view_whales = view_targets['whales'],
-                    view_porpoises = view_targets['porpoises'],
-                    view_birds = view_targets['birds'],
-                    view_seals = view_targets['seals'],
-                    view_other = view_other,
-                    view_rank = feat.get('view_rank'),
-                    dive_fishing = dive_targets['fishing'],
-                    dive_wrecks = dive_targets['wrecks'],
-                    dive_exploring = dive_targets['exploring'],
-                    dive_other = dive_other,
-                    dive_rank = feat.get('dive_rank')
+                    survey     = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
+                    geometry   = geom,
+                    fishing    = activities['fishing'],
+                    viewing    = activities['wildlife-viewing'],
+                    diving     = activities['diving'],
+                    swimming   = activities['swimming'],
+                    relaxing   = activities['relaxing'],
+                    other_act  = other_act,
+                    f_strbass  = fish_targets['striped-bass'],
+                    f_bluefish = fish_targets['bluefish'],
+                    f_flounder = fish_targets['flounder'],
+                    f_atl_cod  = fish_targets['cod'],
+                    f_haddock  = fish_targets['haddock'],
+                    f_mackerel = fish_targets['mackerel'],
+                    f_scup     = fish_targets['scup'],
+                    f_tautog   = fish_targets['tautog'],
+                    f_tuna     = fish_targets['tuna'],
+                    f_shark    = fish_targets['shark'],
+                    f_billfish = fish_targets['billfish'],
+                    f_wahoo    = fish_targets['wahoo'],
+                    f_other    = fish_other,
+                    f_rank     = feat.get('fish_rank'),
+                    v_whales   = view_targets['whales'],
+                    v_dol_porp = view_targets['dolphin-porpoises'],
+                    v_turtles   = view_targets['sea-turtles'],
+                    v_birds    = view_targets['birds'],
+                    v_seals    = view_targets['seals'],
+                    v_other    = view_other,
+                    v_rank     = feat.get('view_rank'),
+                    d_fishing  = dive_targets['fishing'],
+                    d_wrecks   = dive_targets['wrecks'],
+                    d_explore  = dive_targets['exploring'],
+                    d_other    = dive_other,
+                    d_rank     = feat.get('dive_rank'),
+                    zoom_level = feat.get('zoom_level')
                 )  
                 status = SurveyStatus.objects.get(survey_id=feat.get('survey_id'))
                 status.act_status = 'Point plotted'

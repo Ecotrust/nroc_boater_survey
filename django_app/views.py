@@ -24,7 +24,7 @@ def intro(request):
             return HttpResponseRedirect('/complete/')
         else:    
             #clear out previous answers
-            Route.objects.filter(survey_id=request.session['interview_id']).delete()
+            Route.objects.filter(survey=request.session['interview_id']).delete()
             # ActivityArea.objects.filter(survey_id=request.session['interview_id']).delete()
             ActivityPoint.objects.filter(survey_id=request.session['interview_id']).delete()    
         
@@ -32,7 +32,7 @@ def intro(request):
             #Save skip status here
             skipped_survey[0].user_type=request.session['interview_id'][0]
             skipped_survey[0].user_id=request.session['interview_id'][1:-2]
-            skipped_survey[0].month=request.session['interview_id'][-2:]
+            skipped_survey[0].month_id=request.session['interview_id'][-2:]
             skipped_survey[0].map_status = 'Skipped'
             skipped_survey[0].act_status = 'Skipped'
             skipped_survey[0].complete = True

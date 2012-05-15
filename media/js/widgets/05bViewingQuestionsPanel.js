@@ -44,7 +44,8 @@ gwst.widgets.ViewingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
                 {boxLabel: 'Whales', name: 'whales'},
                 {boxLabel: 'Birds', name: 'birds'},
                 {boxLabel: 'Seals', name: 'seals'},
-                {boxLabel: 'Porpoises', name: 'porpoises'},
+                {boxLabel: 'Dolphins/Porpoises', name: 'dolphin-porpoises'},
+                {boxLabel: 'Sea Turtles', name: 'sea-turtles'},
                 this.view_other_box
             ]
         });
