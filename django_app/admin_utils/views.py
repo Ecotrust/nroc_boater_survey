@@ -226,7 +226,7 @@ Accessed when user clicks the Export CSVs button
 Creates a CSV for each interview from all the completed surveys' answers
 Returns a response that contains a zipfile of all of the CSVs.
 '''
-def export_csv(request, template='port_surveys.html'):
+def export_csv(request, month='all', template='port_surveys.html'):
 
     if not request.user.is_staff:
         return HttpResponse('You do not have permission to view this feature', status=401)
@@ -235,73 +235,42 @@ def export_csv(request, template='port_surveys.html'):
     form = ExportSurveysForm(request.POST)
     if not form.is_valid():
         return render_to_response( template, RequestContext( request, {'export_form':form} ) )
-    interviews = get_interview_types()
 
-    zipname = 'survey_csvs_%s.zip' % (datetime.date.today())
-    zipdata = StringIO()
-    zf = zipfile.ZipFile(zipdata, 'w')
-    tempdir = tempfile.mkdtemp()
-    
-    #Create the User Answer CSVs
-    for interview in interviews:
-        #compile a queryset of users from the completed surveys
-        data_rows = compile_data_rows(interview)
+    fields = []
+    for field in SurveyStatus._meta.fields:
+        fields.append({'table': 'survey', 'name': field.name})
         
-        if data_rows.__len__() > 0:
-            if data_rows[0].__class__() != []:
-                return data_rows[0]
-            filename = slugify('USER_ANSWERS_%s_%s' % (interview['group'].header, datetime.date.today())) + '.csv'
-            f = open(tempdir + os.sep + filename, 'wb')
-            csv_file = File(f)
-            writer = csv.writer(csv_file)
-            writer.writerows(data_rows)
-            csv_file.close()
-            zf.write(f.name, filename)
-            os.remove(f.name)
-            
-    #Create the Raw Data CSVs
-    #TODO: add csvs for full answer output, resources, questions, groups, etc...
-    #can use models.get_models() -- needs to be cleaned of old cruft
-    for model in [User, Resource, Interview, InterviewGroup, InterviewGroupMembership, GroupMemberResource, InterviewAnswerOption, InterviewQuestion, InterviewAnswer, InterviewStatus, InterviewShape, UserProfile]:
-        model_rows = []
-        model_fields = []
-        for field in model._meta.fields:
-            model_fields.append(field.name)
-        model_rows.append(model_fields)
-        for entry in model.objects.all().values():
-            entry_row = []
-            for field in model_fields:
-                value = ''
-                if not entry.has_key(field) and entry.has_key(field+'_id'):     #sometimes the field has '_id' appended
-                    field = field + '_id'
-                if entry.has_key(field) and field != 'password':                #Don't export touchy information
-                    if isinstance(entry[field], unicode):                       #Prevent unknown characters from breaking export
-                        value = entry[field].encode('utf-8', 'ignore')
-                    elif isinstance(entry[field], datetime.datetime):           #Make sure date is readable
-                        value = entry[field].isoformat()
-                    else:
-                        value = str(entry[field])
-                entry_row.append(value)
-            model_rows.append(entry_row)
-        filename = slugify('%s_%s' % (model._meta.module_name, datetime.date.today())) + '.csv'
-        f = open(tempdir + os.sep + filename, 'wb')
-        csv_file = File(f)
-        writer = csv.writer(csv_file)
-        writer.writerows(model_rows)
-        csv_file.close()
-        zf.write(f.name, filename)
-        os.remove(f.name)
-            
-    zf.close()
+    for field in Route._meta.fields:
+        fields.append({'table': 'route', 'name': field.name})
+        
+    for field in ActivityPoint._meta.fields:
+        fields.append({'table': 'activity_point', 'name': field.name})
+
+    #compile a queryset of users from the completed surveys
+    data_rows = compile_data_rows(fields, month)
     
-    zipdata.seek(0)
-    response = HttpResponse(zipdata.read())
-    response['Content-Disposition'] = 'attachment; filename=' + zipname
-    response['Content-Type'] = 'application/zip'
+    if data_rows.__len__() > 0:
+        if data_rows[0].__class__() != []:
+            return data_rows[0]
+
+        username = clean_username(User.objects.get(username = request.user).first_name)
+        filename = slugify('%s_%s_map-data_%s' % (username, month, datetime.date.today())) + '.csv'
+        
+        response = HttpResponse(mimetype='text/csv')
+        response['Content-Disposition'] = 'attachment;filename="' + filename + '"'
+
+        writer = csv.writer(response)
+        writer.writerows(data_rows)
+
+        return response
     
-    os.removedirs(tempdir)
-    
-    return response
+    else:
+        months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        if month == 'all':
+            ret_month = month
+        else:
+            ret_month = months[int(month)]
+        return HttpResponse('No complete data available for ' + ret_month + '. Please return to the <a href="../../../">dashboard</a>.' , status=500)
 
 #User input may contain spaces or special characters.
 def clean_username(ugly_str):
@@ -318,29 +287,10 @@ Called from export_survey
 Compiles and returns the text of a fixture that embodies all the completed surveys in the database
 '''  
 def compile_survey_fixture():
-    #get all records from gwst_userstatus (InterviewStatus)
-    # interviews = SurveyStatus.objects.filter(complete=True)
     survey_objects = []
     survey_objects.extend(status for status in SurveyStatus.objects.all())
     survey_objects.extend(route for route in Route.objects.all())
     survey_objects.extend(point for point in ActivityPoint.objects.all())
-    
-    # survey_objects.extend(res for res in Resource.objects.all())
-    # survey_objects.extend(User.objects.filter(is_staff = True))
-
-    # for interview in interviews:
-        #compile survey entries into one list
-        # user = User.objects.get(pk=interview.user_id)
-        # survey_objects.extend(UserProfile.objects.filter(user=user))
-        # survey_objects.extend([user])
-        # survey_objects.extend(InterviewStatus.objects.filter(user=user))
-        # survey_objects.extend(InterviewGroupMembership.objects.filter(user=user))
-        #survey_objects.extend(GroupMemberResource.objects.all()) #not sure this is what we want...
-        #how about the following??
-        # survey_objects.extend([gmres for gmres in GroupMemberResource.objects.all() if gmres.user()==user.id])
-        # survey_objects.extend(InterviewAnswer.objects.filter(user=user))
-        # survey_objects.extend(InterviewShape.objects.filter(user=user))
-        
 
     #serialize the survey objects into json 
     fixture_text = serializers.serialize('json', survey_objects, indent=2)
@@ -359,102 +309,46 @@ def compile_completed_routes(month):
     else:
         routes = Route.objects.filter(survey__complete = True, survey__month_id = month)
     return routes
-    
-    
-def get_interview_types():
-    
-    interviews = []
-    for interview in Interview.objects.all():
-        default_groups = InterviewGroup.objects.filter(interview = interview, is_user_group = False)       #Get groups like "main" that everyone uses or can use
-        user_groups = InterviewGroup.objects.filter(interview = interview, is_user_group = True)       #Get groups like "fishermen" that don't apply to all users
-        default_fields = ['user_id', 'resource']
-        for group in default_groups.order_by('required_group'):
-            for question in InterviewQuestion.objects.filter(int_group = group).order_by('question_set','display_order'):
-                ext_question = getExtendedQuestionFields(question)
-                default_fields.extend(ext_question)
-        if user_groups.count() > 0:
-            for ugroup in user_groups.order_by('id'):
-                int_type = {}
-                group_fields = []
-                group_fields.extend(default_fields)
-                for question in InterviewQuestion.objects.filter(int_group = ugroup).order_by('question_set','display_order'):
-                    ext_question = getExtendedQuestionFields(question)
-                    group_fields.extend(ext_question)
-                int_type['interview'] = interview
-                int_type['type'] = 'user group'
-                int_type['name'] = ugroup.name
-                int_type['group'] = ugroup
-                int_type['fields'] = group_fields
-                interviews.append(int_type)
-        else:
-            main_group = InterviewGroup.objects.get(interview = interview, name = 'Main Questions')
-            int_type = {}
-            int_type['interview'] = interview
-            int_type['type'] = 'default'
-            int_type['name'] = 'main'
-            int_type['group'] = main_group
-            int_type['fields'] = default_fields
-            interviews.append(int_type)
-    return interviews
-    
-def compile_data_rows(interview):
+
+def compile_data_rows(fields, month):
     data_rows = []
     header_row = []
-    for field in interview['fields']:
-        if field.__class__() == '':
-            header_row.append(field)
-        else:
-            header_row.append(field['header'])
+    for field in fields:
+        header_row.append(field['name'])
     data_rows.append(header_row)
-    for survey in InterviewStatus.objects.filter(completed = True, interview = interview['interview']):
-        membership = InterviewGroupMembership.objects.filter(user = survey.user, int_group = interview['group'])
-        if membership.count() == 1:
-            memb = membership[0]
-            if interview['group'].user_draws_shapes:
-                resources = GroupMemberResource.objects.filter(group_membership = memb)
-                for resource in resources:
-                    data_rows.append(create_row({'user': survey.user, 'fields': interview['fields'], 'resource': resource}))
-            else:
-                data_rows.append(create_row({'user': survey.user, 'fields': interview['fields']}))
-        elif membership.count() > 1:
-            return HttpResponse('multiple group memberships found: compile_data_rows', status=500)
+    if month == 'all':
+        surveys = SurveyStatus.objects.filter(complete = True)
+    else :
+        surveys = SurveyStatus.objects.filter(complete = True, month_id = month)
+    for survey in surveys:
+        points = ActivityPoint.objects.filter(survey = survey)
+        if points.count() > 0:
+            for point in points:
+                data_rows.append(create_row({'survey':survey, 'fields':fields, 'point': point}))
+        else:
+            data_rows.append(create_row({'survey':survey, 'fields':fields, 'point': None}))
     return data_rows
     
 def create_row(row_data):
     row = []
-    answers = InterviewAnswer.objects.filter(user = row_data['user'])
-
     for field in row_data['fields']:
-        if field.__class__() == '':
-            if field == 'user_id':
-                row.append(row_data['user'].id)
-            elif field == 'resource':
-                if row_data.keys().__contains__('resource'):
-                    row.append(row_data['resource'].resource.verbose_name)
-                else:
-                    row.append('')
+        if row_data['survey'].map_status == 'Route drawn':
+            route = Route.objects.get(survey = row_data['survey'])
         else:
-            potential_answers = answers.filter(int_question = field['question'])
-            if field['question'].all_resources:
-                potential_answers = potential_answers.filter(resource = row_data['resource'].resource)
-            if field.keys().__contains__('field'):
-                potential_answers = potential_answers.filter(text_val = field['field'])
-            if potential_answers.count() != 1:
-                return HttpResponse('multiple answers found for single question: create_row', status=500)
-            q_ans = potential_answers[0]
-            if field['question'].answer_type == 'integer':
-                ans = q_ans.integer_val
-            elif field['question'].answer_type =='decimal':
-                ans = q_ans.decimal_val
-            elif field['question'].answer_type =='boolean':
-                ans = q_ans.boolean_val
-            elif field['question'].answer_type =='select' or field['question'].answer_type =='text' or field['question'].answer_type =='phone' or field['question'].answer_type =='money' or field['question'].answer_type =='percent' or field['question'].answer_type =='textarea':
-                ans = q_ans.text_val
-            elif field['question'].answer_type =='checkbox' or field['question'].answer_type =='selectmultiple' :
-                ans = q_ans.boolean_val
+            route = None
+
+        if field['table'] == 'survey':
+            row.append(str(row_data['survey'].__getattribute__(field['name'])))
+        if field['table'] == 'route':
+            if route:
+                row.append(str(route.__getattribute__(field['name'])))
             else:
-                ans = ''
-            row.append(ans)
+                row.append('')
+        if field['table'] == 'activity_point':
+            if row_data['point']:
+                row.append(str(row_data['point'].__getattribute__(field['name'])))
+            else:
+                row.append('')
     return row
     
 def getExtendedQuestionFields(question):
@@ -468,14 +362,12 @@ def getExtendedQuestionFields(question):
             question_field['field'] = field.__getitem__(1)
             question_field['display_order'] = question.display_order
             question_fields.append(question_field)
-        
     else :
         question_field = {}
         question_field['question'] = question
         question_field['header'] = str(question.id) + '-' + question.header_name
         question_field['display_order'] = question.display_order
         question_fields.append(question_field)
-        
     return question_fields
     
 '''

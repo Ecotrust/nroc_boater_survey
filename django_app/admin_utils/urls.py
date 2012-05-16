@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     (r'^export_points_shapefile/', export_points_shapefile ),
     (r'^export_routes_shapefile/([A-Za-z0-9_-]+)$', export_routes_shapefile ),
     (r'^export_routes_shapefile/', export_routes_shapefile ),
-    (r'^export_csv', export_csv ),
+    (r'^export_csv/([A-Za-z0-9_-]+)$', export_csv ),
+    (r'^export_csv/', export_csv ),
     (r'^import_surveys', import_surveys ),
 )
