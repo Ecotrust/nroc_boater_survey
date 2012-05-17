@@ -241,10 +241,18 @@ def export_csv(request, month='all', template='port_surveys.html'):
         fields.append({'table': 'survey', 'name': field.name})
         
     for field in Route._meta.fields:
-        fields.append({'table': 'route', 'name': field.name})
+        if field.name != 'survey' and field.name != 'geometry' :
+            if field.name == 'id' or field.name == 'zoom_level' or field.name == 'created':
+                fields.append({'table': 'route', 'name': 'route_' + field.name})
+            else:
+                fields.append({'table': 'route', 'name': field.name})
         
     for field in ActivityPoint._meta.fields:
-        fields.append({'table': 'activity_point', 'name': field.name})
+        if field.name != 'survey' and field.name != 'geometry' :
+            if field.name == 'id' or field.name == 'zoom_level' or field.name == 'created':
+                fields.append({'table': 'route', 'name': 'point_' + field.name})
+            else:
+                fields.append({'table': 'activity_point', 'name': field.name})
 
     #compile a queryset of users from the completed surveys
     data_rows = compile_data_rows(fields, month)
@@ -332,44 +340,66 @@ def compile_data_rows(fields, month):
 def create_row(row_data):
     row = []
     for field in row_data['fields']:
+        if field['name'][:6] == 'point_' or field['name'][:6] == 'route_':
+            name = field['name'][6:]
+        else:
+            name = field['name']
         if row_data['survey'].map_status == 'Route drawn':
             route = Route.objects.get(survey = row_data['survey'])
         else:
             route = None
 
         if field['table'] == 'survey':
-            row.append(str(row_data['survey'].__getattribute__(field['name'])))
+            value = row_data['survey'].__getattribute__(name)
+            if name == 'month_id':
+                months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+                month = months[int(value)]
+                row.append(month)
+            elif type(value) is datetime.datetime:
+                row.append(clean_datetime(value))
+            else:
+                row.append(str(value))
         if field['table'] == 'route':
             if route:
-                row.append(str(route.__getattribute__(field['name'])))
+                value = route.__getattribute__(name)
+                if type(value) is datetime.datetime:
+                    row.append(clean_datetime(value))
+                else:
+                    row.append(str(value))
             else:
                 row.append('')
         if field['table'] == 'activity_point':
             if row_data['point']:
-                row.append(str(row_data['point'].__getattribute__(field['name'])))
+                value = row_data['point'].__getattribute__(name)
+                if type(value) is datetime.datetime:
+                    row.append(clean_datetime(value))
+                else:
+                    row.append(str(value))
             else:
                 row.append('')
     return row
     
-def getExtendedQuestionFields(question):
-    question_fields = []
-    if question.answer_type == 'checkbox' or question.answer_type == 'selectmultiple' :        
-        options = question.options
-        for field in options.values_list():
-            question_field = {}
-            question_field['question'] = question
-            question_field['header'] = str(question.id) + '-' + field.__getitem__(1) + '-' + question.header_name
-            question_field['field'] = field.__getitem__(1)
-            question_field['display_order'] = question.display_order
-            question_fields.append(question_field)
-    else :
-        question_field = {}
-        question_field['question'] = question
-        question_field['header'] = str(question.id) + '-' + question.header_name
-        question_field['display_order'] = question.display_order
-        question_fields.append(question_field)
-    return question_fields
-    
+def clean_datetime(value):
+    year = str(value.year)
+    if value.month < 10:
+        month = '0' + str(value.month)
+    else:
+        month = str(value.month)
+    if value.day < 10:
+        day = '0' + str(value.day)
+    else:
+        day = str(value.day)
+    if value.hour < 10:
+        hour = '0' + str(value.hour)
+    else:
+        hour = str(value.hour)
+    if value.minute < 10:
+        minute = '0' + str(value.minute)
+    else:
+        minute = str(value.minute)
+    date_string = year + '-' + month + '-' + day + ' ' + hour + ':' + minute
+    return date_string
+
 '''
 Uploads a survey fixture file from an admin enabled user.
 Calls loaddata on that fixture, loading into the database.
