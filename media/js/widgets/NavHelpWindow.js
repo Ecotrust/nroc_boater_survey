@@ -53,7 +53,7 @@ gwst.widgets.NavHelpWindow = Ext.extend(Ext.Window, {
             bodyStyle: 'padding: 8px; font-weight: bold',
             closeAction: 'hide',
             closable: false,
-            modal: false,
+            modal: true,
             draggable: false,
             bbar: [
 				{xtype:'tbfill'},
@@ -63,11 +63,13 @@ gwst.widgets.NavHelpWindow = Ext.extend(Ext.Window, {
                 },
                 {
                     xtype:'tbseparator',
-                    width: 15
+                    width: 15,
+                    height: 28
                 },
                 {
-                    text: 'Close',
-                    handler: this.closeBtnClicked.createDelegate(this)
+                    text: '<b>Continue to Mapping</b>',
+                    handler: this.closeBtnClicked.createDelegate(this),
+                    height: 25
                 }
 			]
         });

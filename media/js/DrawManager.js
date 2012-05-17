@@ -10,7 +10,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     routeCancelWinOffset: [380, 60],
     routeUndoWinOffset: [380, 112],
     resetMapWinOffset: [380, 8],	//Offset from top left to render
-    mapNavWinOffset: [540, 8],	    //Offset from top left to render
+    mapHelpWinOffset: [380, 65],	    //Offset from top left to render
 	activityNum: 0,
     route_factors_other: null,
     act_list_items: null,
@@ -66,7 +66,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     startIntroStep: function() {
         this.loadIntroPanel();
         Ext.getCmp('west-panel-container').disable();
-        this.loadMapHelpWindow();
+        this.showHelp(true);
     },
     
     finIntroStep: function() { 
@@ -363,9 +363,15 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     /******************** UI widget handlers ********************/   
     
     showHelp: function(result) {
+        if (!this.navHelpWin) {
+            this.navHelpWin = new gwst.widgets.NavHelpWindow();            
+            this.navHelpWin.on('view-nav-details', this.loadNavigationDetails, this);
+            this.navHelpWin.on('hide', function(){this.showHelp(false); Ext.getCmp('west-panel-container').enable();}, this);
+        }
         this.help_on = result;
         if (result) {
-            this.loadMapHelpWindow();
+            this.navHelpWin.show();
+            this.navHelpWin.alignTo(document.body, "tl-tl", this.mapHelpWinOffset);
         } else {
             if (this.navHelpWin) {
                 this.navHelpWin.hide();
@@ -380,15 +386,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         if (this.actAreasPanel && !this.actAreasPanel.hidden) {
             this.actAreasPanel.help_box.setValue(result);
         }
-    },
-    
-    loadMapHelpWindow: function() {
-        if (!this.navHelpWin) {
-            this.navHelpWin = new gwst.widgets.NavHelpWindow();            
-        }
-        this.navHelpWin.show();
-        this.navHelpWin.on('view-nav-details', this.loadNavigationDetails, this);
-        this.navHelpWin.on('hide', function(){this.showHelp(false); Ext.getCmp('west-panel-container').enable();}, this);
     },
     
     loadNavigationDetails: function() {

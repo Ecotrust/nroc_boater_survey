@@ -309,6 +309,11 @@ table.help-table td {
 	background: url(../img/btn-sprite.gif) repeat-x 0 -126px;
 }
 
+.x-btn-noicon .x-btn-small .x-btn-text {
+    height: 25px;
+    margin: auto 8px;
+}
+
 .reset-map{
     background-image: url(../img/world.png) !important;
 }
