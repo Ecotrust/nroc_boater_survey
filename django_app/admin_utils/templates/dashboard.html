@@ -67,7 +67,14 @@
                 <tr><td style="{{s.style}}">{{s.key}}</td><td style="{{s.style}}">{{s.value}}</td><td style="{{s.style}}">{{s.pct}}</td></tr>
               {% endfor %}
               </table>
-            </td><td style="width: 300px"></td></tr>
+            </td><td style="width: 300px">
+              <h2>Totals for Zoom Levels</h2>
+              <table style="width: 300px"><tr><th>Type</th><th>Count</th><th>Percent</th></tr>
+              {% for s in zoom_level_summary %}
+                <tr><td style="{{s.style}}">{{s.key}}</td><td style="{{s.style}}">{{s.value}}</td><td style="{{s.style}}">{{s.pct}}</td></tr>
+              {% endfor %}
+              </table>
+            </td></tr>
             <tr><td colspan =2>
               <h2>Routes</h2>
             </td></tr>

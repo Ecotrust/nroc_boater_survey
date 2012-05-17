@@ -51,7 +51,56 @@ def dashboard(request, time_period='all', template='dashboard.html'):
         incompletes = survey_data.filter(complete = False)
         incomplete_count = incompletes.count()
         incomplete_pct = str(round((float(incomplete_count) / survey_count) * 100, 2)) + '%'
-        routes = Route.objects.all()
+
+        routes_in_cache = 0
+        route_cache_zoom_total = 0
+        routes_in_NOAA = 0
+        route_NOAA_zoom_total = 0
+        route_cache_zoom_avg = 0
+        route_NOAA_zoom_avg = 0
+        for route in Route.objects.all():
+            if route.zoom_level < 9:
+                routes_in_cache = routes_in_cache + 1
+                route_cache_zoom_total = route_cache_zoom_total + route.zoom_level
+            else:
+                routes_in_NOAA = routes_in_NOAA + 1
+                route_NOAA_zoom_total = route_NOAA_zoom_total + route.zoom_level
+        if routes_in_cache > 0:
+            route_cache_zoom_avg = float(route_cache_zoom_total)/routes_in_cache
+        if routes_in_NOAA > 0:
+            route_NOAA_zoom_avg = float(route_NOAA_zoom_total)/routes_in_NOAA
+        route_count = routes_in_cache + routes_in_NOAA
+        if route_count > 0:
+            route_cache_pct = str(float(routes_in_cache)/route_count * 100) + '%'
+            route_NOAA_pct = str(float(routes_in_NOAA)/route_count * 100) + '%'
+        else:
+            route_cache_pct = '0%'
+            route_cache_pct = '0%'
+        
+        points_in_cache = 0
+        point_cache_zoom_total = 0
+        points_in_NOAA = 0
+        point_NOAA_zoom_total = 0
+        point_cache_zoom_avg = 0
+        point_NOAA_zoom_avg = 0
+        for point in ActivityPoint.objects.all():
+            if point.zoom_level < 9:
+                points_in_cache = points_in_cache + 1
+                point_cache_zoom_total = point_cache_zoom_total + point.zoom_level
+            else:
+                points_in_NOAA = points_in_NOAA + 1
+                point_NOAA_zoom_total = point_NOAA_zoom_total + point.zoom_level
+        if points_in_cache > 0:
+            point_cache_zoom_avg = float(point_cache_zoom_total)/points_in_cache
+        if points_in_NOAA > 0:
+            point_NOAA_zoom_avg = float(point_NOAA_zoom_total)/points_in_NOAA
+        point_count = points_in_cache + points_in_NOAA
+        if route_count > 0:
+            point_cache_pct = str(float(points_in_cache)/point_count * 100) + '%'
+            point_NOAA_pct = str(float(points_in_NOAA)/point_count * 100) + '%'
+        else:
+            point_cache_pct = '0%'
+            point_cache_pct = '0%'
 
         if complete_count > 0:
             c_route_drawn_count = completes.filter(map_status = "Route drawn").count()
@@ -131,6 +180,13 @@ def dashboard(request, time_period='all', template='dashboard.html'):
             {'key': 'Not Started', 'value' : i_point_not_start_count, 'pct': i_point_not_start_pct, 'style': ''},
             {'key': 'Total', 'value' : incomplete_count, 'pct': '', 'style': 'font-weight: bold'}
         ]
+        
+        zoom_level_summary = [
+            {'key': 'Routes drawn in cached map', 'value' : routes_in_cache, 'pct': route_cache_pct, 'style': ''},
+            {'key': 'Routes drawn in NOAA map', 'value' : routes_in_NOAA, 'pct': route_NOAA_pct, 'style': ''},
+            {'key': 'Points drawn in cached map', 'value' : points_in_cache, 'pct': point_cache_pct, 'style': ''},
+            {'key': 'Points drawn in NOAA map', 'value' : points_in_NOAA, 'pct': point_NOAA_pct, 'style': ''}
+        ]
             
     else:
         summary = []
@@ -140,7 +196,7 @@ def dashboard(request, time_period='all', template='dashboard.html'):
         i_point_summary = []
             
     
-    return render_to_response( template, RequestContext(request,{'import_form': import_form, 'export_form': export_form, 'month': month, 'summary': summary, 'c_route_summary': c_route_summary, 'i_route_summary': i_route_summary, 'c_point_summary': c_point_summary, 'i_point_summary': i_point_summary, 'time_period': time_period}))
+    return render_to_response( template, RequestContext(request,{'import_form': import_form, 'export_form': export_form, 'month': month, 'summary': summary, 'c_route_summary': c_route_summary, 'i_route_summary': i_route_summary, 'c_point_summary': c_point_summary, 'i_point_summary': i_point_summary, 'zoom_level_summary': zoom_level_summary, 'time_period': time_period}))
 
 '''
 Accessed from the Survey Management Admin interface 
