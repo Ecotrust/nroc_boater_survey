@@ -306,7 +306,7 @@ def export_csv(request, month='all', template='port_surveys.html'):
     for field in ActivityPoint._meta.fields:
         if field.name != 'survey' and field.name != 'geometry' :
             if field.name == 'id' or field.name == 'zoom_level' or field.name == 'created':
-                fields.append({'table': 'route', 'name': 'point_' + field.name})
+                fields.append({'table': 'activity_point', 'name': 'point_' + field.name})
             else:
                 fields.append({'table': 'activity_point', 'name': field.name})
 
@@ -385,7 +385,7 @@ def compile_data_rows(fields, month):
     else :
         surveys = SurveyStatus.objects.filter(complete = True, month_id = month)
     for survey in surveys:
-        points = ActivityPoint.objects.filter(survey = survey)
+        points = ActivityPoint.objects.filter(survey = survey).order_by('id')
         if points.count() > 0:
             for point in points:
                 data_rows.append(create_row({'survey':survey, 'fields':fields, 'point': point}))
@@ -404,7 +404,6 @@ def create_row(row_data):
             route = Route.objects.get(survey = row_data['survey'])
         else:
             route = None
-
         if field['table'] == 'survey':
             value = row_data['survey'].__getattribute__(name)
             if name == 'month_id':
