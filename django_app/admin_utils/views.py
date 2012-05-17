@@ -71,8 +71,8 @@ def dashboard(request, time_period='all', template='dashboard.html'):
             route_NOAA_zoom_avg = float(route_NOAA_zoom_total)/routes_in_NOAA
         route_count = routes_in_cache + routes_in_NOAA
         if route_count > 0:
-            route_cache_pct = str(float(routes_in_cache)/route_count * 100) + '%'
-            route_NOAA_pct = str(float(routes_in_NOAA)/route_count * 100) + '%'
+            route_cache_pct = str(round(float(routes_in_cache)/route_count * 100, 2)) + '%'
+            route_NOAA_pct = str(round(float(routes_in_NOAA)/route_count * 100, 2)) + '%'
         else:
             route_cache_pct = '0%'
             route_cache_pct = '0%'
@@ -96,8 +96,8 @@ def dashboard(request, time_period='all', template='dashboard.html'):
             point_NOAA_zoom_avg = float(point_NOAA_zoom_total)/points_in_NOAA
         point_count = points_in_cache + points_in_NOAA
         if route_count > 0:
-            point_cache_pct = str(float(points_in_cache)/point_count * 100) + '%'
-            point_NOAA_pct = str(float(points_in_NOAA)/point_count * 100) + '%'
+            point_cache_pct = str(round(float(points_in_cache)/point_count * 100, 2)) + '%'
+            point_NOAA_pct = str(round(float(points_in_NOAA)/point_count * 100, 2)) + '%'
         else:
             point_cache_pct = '0%'
             point_cache_pct = '0%'
