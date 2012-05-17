@@ -52,6 +52,7 @@ blockquote {
 #footer {
     width: 900px;
     margin: 20px 40px;
+    color: #6A6A6A;
 }
 
 /*
@@ -73,6 +74,11 @@ table td:hover {
     cursor: pointer;
 }
 
+#skip:hover, #continue:hover {
+    background-image: none;
+    background-color: #DADADA;
+}
+
 #skip {
     margin-left: 0;
     margin-right: auto;
@@ -82,6 +88,7 @@ table td:hover {
     margin-right: 0;
     margin-left: 30%;
     font-weight: bold;
+    border: thin solid;
 }
 
 #partner-logos {
