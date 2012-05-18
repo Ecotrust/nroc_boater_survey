@@ -154,8 +154,9 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
     
     startActivityAreasStep: function() {
+        this.mapPanel.enable();
+        this.loadActivityAreasPanel();
         if (!this.actAreasPanel) {
-            this.loadActivityAreasPanel();
             Ext.MessageBox.show({
                 title: 'Activity Plotting', 
                 msg: '<p class="help-win">You are now in activity plotting mode.</p>\
@@ -166,9 +167,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
                 minWidth: 450,
                 scope: this
             });
-        } else {
-            this.loadActivityAreasPanel();
-        }        
+        }
     },
 
 /*
@@ -595,6 +594,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     /* Load the satisfied with activity west panel */
     loadSatisfiedActivityPanel: function() {
+        this.mapPanel.disable();
     	if (!this.satisfiedActPanel) {
     		this.satisfiedActPanel = new gwst.widgets.SatisfiedActivityPanel();
             this.satisfiedActPanel.on('edit-act', this.startEditActivityStep, this);
@@ -668,6 +668,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     },
 
     loadMoreActivitiesPanel: function() {
+        this.mapPanel.enable()
         if (!this.moreActivitiesPanel) {
             this.moreActivitiesPanel = new gwst.widgets.MoreActivitiesPanel();
             //When panel fires even saying it's all done, we want to process it and move on

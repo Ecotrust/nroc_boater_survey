@@ -28,7 +28,8 @@ gwst.widgets.ViewingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         
         this.view_other_box = new Ext.form.Checkbox ({
             boxLabel: 'Other',
-            name: 'view-other'
+            name: 'view-other',
+            id: 'other-view-species-box'
         });
         
         this.view_other_box.on('check', this.viewOtherChecked, this);
@@ -130,7 +131,7 @@ gwst.widgets.ViewingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
 	},
     
     viewOtherChecked: function() {
-        if (this.viewing_one.items.item(4).checked) {
+        if (Ext.getCmp('other-view-species-box').checked) {
             this.other_text_view.show();
             this.other_view_panel.show();
         } else {

@@ -28,7 +28,8 @@ gwst.widgets.FishingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         
         this.fish_other_box = new Ext.form.Checkbox ({
             boxLabel: 'Other',
-            name: 'fish-other'
+            name: 'fish-other',
+            id: 'other-fish-species-box'
         });
         
         this.fish_other_box.on('check', this.fishOtherChecked, this);
@@ -39,7 +40,7 @@ gwst.widgets.FishingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
             fieldlabel: 'Fishing Species',
             itemCls: 'x-check-group-alt',
             style: 'margin: 0px 0px 10px 15px',
-            columns: 1,
+            columns: 2,
             items: [
                 {boxLabel: 'Striped Bass', name: 'striped-bass'},
                 {boxLabel: 'Bluefish', name: 'bluefish'},
@@ -137,7 +138,7 @@ gwst.widgets.FishingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
 	},
     
     fishOtherChecked: function() {
-        if (this.fishing_one.items.item(4).checked) {
+        if (Ext.getCmp('other-fish-species-box').checked) {
             this.other_text_fish.show();
             this.other_fish_panel.show();
         } else {

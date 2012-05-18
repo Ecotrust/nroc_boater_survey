@@ -22,13 +22,14 @@ gwst.widgets.DivingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         /*---------- START Diving Checked Questions --------------------*/
         
         this.diving_text_one = new Ext.Panel({
-            html: '<p>What type of diving did you do?</p>',
+            html: '<p>What type of SCUBA diving did you do?</p>',
             border: false
         });
         
         this.dive_other_box = new Ext.form.Checkbox ({
             boxLabel: 'Other',
-            name: 'dive-other'
+            name: 'dive-other',
+            id: 'other-dive-type-box'
         });
         
         this.dive_other_box.on('check', this.diveOtherChecked, this);
@@ -74,7 +75,7 @@ gwst.widgets.DivingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         });
         
         this.diving_text_two = new Ext.Panel({
-            html: 'How do you rank this area for diving?',
+            html: 'How do you rank this area for SCUBA diving?',
             style: 'margin: 0px 0px 10px 10px',
             border: false
         });
@@ -128,7 +129,7 @@ gwst.widgets.DivingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
 	},
     
     diveOtherChecked: function() {
-        if (this.diving_one.items.item(3).checked) {
+        if (Ext.getCmp('other-dive-type-box').checked) {
             this.other_text_dive.show();
             this.other_dive_panel.show();
         } else {

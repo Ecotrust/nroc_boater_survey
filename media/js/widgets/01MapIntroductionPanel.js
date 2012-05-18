@@ -29,8 +29,8 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
     
     getHtmlText: function() {
         var html_text = '<h2>Step 1: Zoom to Boating Area</h2>\
-        <p>Zoom in on the map to where you started your last trip.</p>\
-        <p>A: select the state where you departed:</p>';
+        <p><b>Zoom in on the map to where you started your last trip.</b></p>\
+        <p><b>A: Select the state where you departed:</b></p>';
         return html_text;
     },
 	
@@ -88,11 +88,11 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
                 bodyStyle: 'border: none; padding: 5px 5px 5px 10px'
             },
             id: 'intro_lower_panel',
-            html:'<p>B: Continue zooming in:</p>\
+            html:'<p><b>B: Continue zooming in:</b></p>\
             <table><tr><td><img style="width:39px; height:52px" src="/media/img/nav_arrows.png" /></td>\
-            <td><p>Move Map - Click the buttons on the upper left of the map, click & drag with your mouse, or use your keyboard arrows.</p></td></tr></table>\
+            <td><p><b>Move Map - </b>Click the buttons on the upper left of the map, click & drag with your mouse, or use your keyboard arrows.</p></td></tr></table>\
             <table><tr><td><img style="width:39px; height:52px" src="/media/img/nav_zoombar.png" /></td>\
-            <td><p>Zoom Map - Click the \'+\' and \'-\' buttons on the upper left of the map or use the scroll wheel on your mouse if you have one.</p></td></tr></table>'
+            <td><p><b>Zoom Map - </b>Click the \'+\' and \'-\' buttons on the upper left of the map or use the scroll wheel on your mouse if you have one.</p></td></tr></table>'
         });         
         
         this.help_box = new Ext.form.Checkbox({
@@ -144,28 +144,28 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
         }
         if (state) {
             if (state.boxLabel == "New York") {
-                this.state_center.lon = -8127077.8008318;
-                this.state_center.lat = 4989347.7643456;
+                this.state_center.lon = -8127000;
+                this.state_center.lat = 4989000;
                 this.state_zoom = 3;
             } else if (state.boxLabel == "Connecticut") {
-                this.state_center.lon = -8099865.8795672;
-                this.state_center.lat = 5044076.507388;
+                this.state_center.lon = -8100000;
+                this.state_center.lat = 5044000;
                 this.state_zoom = 3;
             } else if (state.boxLabel == "Rhode Island") {
-                this.state_center.lon = -7955857.1615036;
-                this.state_center.lat = 5079924.7968473;
+                this.state_center.lon = -7956000;
+                this.state_center.lat = 5080000;
                 this.state_zoom = 4;
             } else if (state.boxLabel == "Massachusetts") {
-                this.state_center.lon = -7870776.9826373;
-                this.state_center.lat = 5194997.8665102;
-                this.state_zoom = 2;
+                this.state_center.lon = -7870000;
+                this.state_center.lat = 5170000;
+                this.state_zoom = 3;
             } else if (state.boxLabel == "New Hampshire") {
-                this.state_center.lon = -7876581.7871859;
-                this.state_center.lat = 5312326.5053067;
+                this.state_center.lon = -7877000;
+                this.state_center.lat = 5312000;
                 this.state_zoom = 5;
             } else if (state.boxLabel == "Maine") {
-                this.state_center.lon = -7733487.2606617;
-                this.state_center.lat = 5423349.0892709;
+                this.state_center.lon = -7733000;
+                this.state_center.lat = 5423000;
                 this.state_zoom = 3;
             }
             map.setCenter(this.state_center);

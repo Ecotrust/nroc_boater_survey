@@ -42,8 +42,7 @@ h3 {
 p {
     font-size: 13px;
     margin: 0px 0px 7px 0px;
-    font-weight: bold;
-    
+    font-weight: normal;
 }
 
 p.top_instruct {
@@ -145,7 +144,7 @@ li {
 
 .west-panel {
     font-size: 13px;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .action-panel-header {
@@ -311,7 +310,6 @@ table.help-table td {
 
 .x-btn-noicon .x-btn-small .x-btn-text {
     height: 25px;
-    margin: auto 8px;
 }
 
 .reset-map{

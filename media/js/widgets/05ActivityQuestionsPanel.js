@@ -36,13 +36,14 @@ gwst.widgets.ActivityQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         });
 
         this.diving_box = new Ext.form.Checkbox ({
-            boxLabel: 'Diving',
+            boxLabel: 'SCUBA Diving',
             name: 'diving'
         });
 
         this.other_box = new Ext.form.Checkbox ({
             boxLabel: 'Other',
-            name: 'other'
+            name: 'other',
+            id: 'other-activity-box'
         });
         
         this.other_box.on('check', this.otherChecked, this);
@@ -108,7 +109,7 @@ gwst.widgets.ActivityQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
 	},
     
     otherChecked: function() {
-        if (this.answer_one.items.item(4).checked) {
+        if (Ext.getCmp('other-activity-box').checked) {
             this.other_text_one.show();
             this.other_one_panel.show();
         } else {
