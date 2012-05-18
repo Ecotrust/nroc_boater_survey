@@ -319,3 +319,7 @@ table.help-table td {
 .olControlLayerSwitcher{
     top: 60px !important;
 }
+
+.olLayerGooglePoweredBy.olLayerGoogleV3.gmnoprint {
+visibility:hidden;
+}
