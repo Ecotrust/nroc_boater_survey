@@ -194,7 +194,7 @@ def dashboard(request, time_period='all', template='dashboard.html'):
         i_route_summary = []
         c_point_summary = []
         i_point_summary = []
-            
+        zoom_level_summary = []
     
     return render_to_response( template, RequestContext(request,{'import_form': import_form, 'export_form': export_form, 'month': month, 'summary': summary, 'c_route_summary': c_route_summary, 'i_route_summary': i_route_summary, 'c_point_summary': c_point_summary, 'i_point_summary': i_point_summary, 'zoom_level_summary': zoom_level_summary, 'time_period': time_period}))
 

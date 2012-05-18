@@ -8,7 +8,7 @@ gwst.widgets.ResetMapWindow = Ext.extend(Ext.Window, {
 		
 		Ext.apply(this, {          
             height: 25,
-            width:152,
+            width:156,
             layout:'fit',
             html:'blort',
             closable: false,
