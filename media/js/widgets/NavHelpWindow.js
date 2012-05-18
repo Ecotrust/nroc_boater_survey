@@ -52,7 +52,7 @@ gwst.widgets.NavHelpWindow = Ext.extend(Ext.Window, {
             plain: true,
             bodyStyle: 'padding: 8px; font-weight: bold',
             closeAction: 'hide',
-            closable: false,
+            closable: true,
             modal: true,
             draggable: false,
             bbar: [

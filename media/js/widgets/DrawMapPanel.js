@@ -36,8 +36,8 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         };        
 
         var defaultStyle = new OpenLayers.Style(OpenLayers.Util.applyDefaults({
-            fillColor: "#ee9900",
-            fillOpacity: 0.4,                
+            fillColor: "#ffff00",
+            fillOpacity: 0.6,                
             strokeColor: "#ff6600",
             strokeWidth: 2                
         }, OpenLayers.Feature.Vector.style["default"]));
