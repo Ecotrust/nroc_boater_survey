@@ -39,6 +39,7 @@ blockquote {
 
 #content-container {
     width: 100%;
+    position: relative;
 }
 
 #full-width {
@@ -55,6 +56,10 @@ blockquote {
     color: #6A6A6A;
     font-style: normal;
     font-family: Verdana,Geneva,sans-serif;
+}
+
+#footer-container {
+    bottom: 0;
 }
 
 /*
