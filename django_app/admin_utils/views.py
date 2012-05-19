@@ -29,8 +29,12 @@ def dashboard(request, time_period='all', template='dashboard.html'):
     import_form = ImportSurveysForm()
     if time_period and time_period != 'all':
         survey_data = SurveyStatus.objects.filter(month_id = time_period)
+        routes = Route.objects.filter(survey__month_id = time_period)
+        points = ActivityPoint.objects.filter(survey__month_id = time_period)
     else:
         survey_data = SurveyStatus.objects.all()
+        routes = Route.objects.all()
+        points = ActivityPoint.objects.all()
     month = []
     survey_count = survey_data.count()
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -58,7 +62,7 @@ def dashboard(request, time_period='all', template='dashboard.html'):
         route_NOAA_zoom_total = 0
         route_cache_zoom_avg = 0
         route_NOAA_zoom_avg = 0
-        for route in Route.objects.all():
+        for route in routes:
             if route.zoom_level < 9:
                 routes_in_cache = routes_in_cache + 1
                 route_cache_zoom_total = route_cache_zoom_total + route.zoom_level
@@ -83,7 +87,7 @@ def dashboard(request, time_period='all', template='dashboard.html'):
         point_NOAA_zoom_total = 0
         point_cache_zoom_avg = 0
         point_NOAA_zoom_avg = 0
-        for point in ActivityPoint.objects.all():
+        for point in points:
             if point.zoom_level < 9:
                 points_in_cache = points_in_cache + 1
                 point_cache_zoom_total = point_cache_zoom_total + point.zoom_level
@@ -95,12 +99,12 @@ def dashboard(request, time_period='all', template='dashboard.html'):
         if points_in_NOAA > 0:
             point_NOAA_zoom_avg = float(point_NOAA_zoom_total)/points_in_NOAA
         point_count = points_in_cache + points_in_NOAA
-        if route_count > 0:
+        if point_count > 0:
             point_cache_pct = str(round(float(points_in_cache)/point_count * 100, 2)) + '%'
             point_NOAA_pct = str(round(float(points_in_NOAA)/point_count * 100, 2)) + '%'
         else:
             point_cache_pct = '0%'
-            point_cache_pct = '0%'
+            point_NOAA_pct = '0%'
 
         if complete_count > 0:
             c_route_drawn_count = completes.filter(map_status = "Route drawn").count()
@@ -147,11 +151,25 @@ def dashboard(request, time_period='all', template='dashboard.html'):
             i_point_drawn_pct = '0%'
             i_point_not_start_count = 0
             i_point_not_start_pct = '0%'
+            
+        c_routes_total = routes.filter(survey__complete = True).count()
+        i_routes_total = routes.filter(survey__complete = False).count()
+        c_points_total = points.filter(survey__complete = True).count()
+        i_points_total = points.filter(survey__complete = False).count()
+        
+        if c_routes_total > 0 :
+            c_ratio = round(float(c_points_total)/c_routes_total, 2)
+        else :
+            c_ratio = 0
+        if i_routes_total > 0 :
+            i_ratio = round(float(i_points_total)/i_routes_total, 2)
+        else :
+            i_ratio = 0
 
         summary = [
             {'key': 'Completed', 'value' : complete_count, 'pct': complete_pct, 'style': ''},
-            {'key': 'Mapped (Complete)', 'value' : mapped_count, 'pct': mapped_pct, 'style': 'color: lightGray'},
-            {'key': 'Skipped (Complete)', 'value' : skipped_count, 'pct': skipped_pct, 'style': 'color: lightGray'},
+            {'key': 'Mapped (Complete)', 'value' : mapped_count, 'pct': mapped_pct, 'style': 'color: #AAA'},
+            {'key': 'Skipped (Complete)', 'value' : skipped_count, 'pct': skipped_pct, 'style': 'color: #AAA'},
             {'key': 'Incomplete', 'value' : incomplete_count, 'pct': incomplete_pct, 'style': ''},
             {'key': 'Total', 'value': survey_count, 'pct': '', 'style': 'font-weight: bold'}
         ]
@@ -159,6 +177,7 @@ def dashboard(request, time_period='all', template='dashboard.html'):
         c_route_summary = [
             {'key': 'Drawn', 'value' : c_route_drawn_count, 'pct' : c_route_drawn_pct, 'style': '' },
             {'key': 'Skipped', 'value' : c_route_skipped_count, 'pct': c_route_skipped_pct, 'style': ''},
+            {'key': 'Completed Routes', 'value' : complete_count, 'pct': '', 'style': ''},
             {'key': 'Total', 'value' : complete_count, 'pct': '', 'style': 'font-weight: bold'}
         ]
         
@@ -166,18 +185,21 @@ def dashboard(request, time_period='all', template='dashboard.html'):
             {'key': 'Drawn', 'value': i_route_drawn_count, 'pct': i_route_drawn_pct, 'style': ''},
             {'key': 'Started', 'value' : i_route_started_count, 'pct': i_route_started_pct, 'style': ''},
             {'key': 'Not Started', 'value' : i_route_not_start_count, 'pct': i_route_not_start_pct, 'style': ''},
+            {'key': 'Incompleted Routes', 'value' : incomplete_count, 'pct': '', 'style': ''},
             {'key': 'Total', 'value' : incomplete_count, 'pct': '', 'style': 'font-weight: bold'}
         ]
         
         c_point_summary = [
             {'key': 'Placed', 'value' : c_point_drawn_count, 'pct': c_point_drawn_pct, 'style': ''},
             {'key': 'Skipped', 'value' : c_point_skip_count, 'pct': c_point_skip_pct, 'style': ''},
+            {'key': 'Completed Points', 'value' : points.filter(survey__complete = True).count(), 'pct': '', 'style': ''},
             {'key': 'Total', 'value' : complete_count, 'pct': '', 'style': 'font-weight: bold'}
         ]
         
         i_point_summary = [
             {'key': 'Placed', 'value' : i_point_drawn_count, 'pct': i_point_drawn_pct, 'style': ''},
             {'key': 'Not Started', 'value' : i_point_not_start_count, 'pct': i_point_not_start_pct, 'style': ''},
+            {'key': 'Incompleted Points', 'value' : points.filter(survey__complete = False).count(), 'pct': '', 'style': ''},
             {'key': 'Total', 'value' : incomplete_count, 'pct': '', 'style': 'font-weight: bold'}
         ]
         
@@ -187,6 +209,11 @@ def dashboard(request, time_period='all', template='dashboard.html'):
             {'key': 'Points drawn in cached map', 'value' : points_in_cache, 'pct': point_cache_pct, 'style': ''},
             {'key': 'Points drawn in NOAA map', 'value' : points_in_NOAA, 'pct': point_NOAA_pct, 'style': ''}
         ]
+        
+        ratio_summary = [
+            {'key': 'Points per route (complete)', 'value' : c_ratio, 'pct': '', 'style': ''},
+            {'key': 'Points per route (incomplete)', 'value' : i_ratio, 'pct': '', 'style': ''},
+        ]
             
     else:
         summary = []
@@ -195,8 +222,9 @@ def dashboard(request, time_period='all', template='dashboard.html'):
         c_point_summary = []
         i_point_summary = []
         zoom_level_summary = []
+        ratio_summary = []
     
-    return render_to_response( template, RequestContext(request,{'import_form': import_form, 'export_form': export_form, 'month': month, 'summary': summary, 'c_route_summary': c_route_summary, 'i_route_summary': i_route_summary, 'c_point_summary': c_point_summary, 'i_point_summary': i_point_summary, 'zoom_level_summary': zoom_level_summary, 'time_period': time_period}))
+    return render_to_response( template, RequestContext(request,{'import_form': import_form, 'export_form': export_form, 'month': month, 'summary': summary, 'c_route_summary': c_route_summary, 'i_route_summary': i_route_summary, 'c_point_summary': c_point_summary, 'i_point_summary': i_point_summary, 'zoom_level_summary': zoom_level_summary, 'ratio_summary': ratio_summary, 'time_period': time_period}))
 
 '''
 Accessed from the Survey Management Admin interface 

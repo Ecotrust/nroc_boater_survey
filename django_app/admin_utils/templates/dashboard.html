@@ -111,6 +111,18 @@
               {% endfor %}
               </table>
             </td></tr>
+            <tr><td colspan=2>
+            <h2>Ratio: Points per Route drawn</h2>
+            </td></tr>
+            <tr><td colspan=2>
+            
+            <table><tr><th>Status</th><th>Count</th></tr>
+              {% for s in ratio_summary %}
+                <tr><td style="{{s.style}}">{{s.key}}</td><td style="{{s.style}}">{{s.value}}</td></tr>
+              {% endfor %}
+              </table>
+            </td></tr>
+            
           </table>
         </td>
       </tr></table>
