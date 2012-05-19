@@ -177,7 +177,6 @@ def dashboard(request, time_period='all', template='dashboard.html'):
         c_route_summary = [
             {'key': 'Drawn', 'value' : c_route_drawn_count, 'pct' : c_route_drawn_pct, 'style': '' },
             {'key': 'Skipped', 'value' : c_route_skipped_count, 'pct': c_route_skipped_pct, 'style': ''},
-            {'key': 'Completed Routes', 'value' : complete_count, 'pct': '', 'style': ''},
             {'key': 'Total', 'value' : complete_count, 'pct': '', 'style': 'font-weight: bold'}
         ]
         
@@ -185,21 +184,18 @@ def dashboard(request, time_period='all', template='dashboard.html'):
             {'key': 'Drawn', 'value': i_route_drawn_count, 'pct': i_route_drawn_pct, 'style': ''},
             {'key': 'Started', 'value' : i_route_started_count, 'pct': i_route_started_pct, 'style': ''},
             {'key': 'Not Started', 'value' : i_route_not_start_count, 'pct': i_route_not_start_pct, 'style': ''},
-            {'key': 'Incompleted Routes', 'value' : incomplete_count, 'pct': '', 'style': ''},
             {'key': 'Total', 'value' : incomplete_count, 'pct': '', 'style': 'font-weight: bold'}
         ]
         
         c_point_summary = [
             {'key': 'Placed', 'value' : c_point_drawn_count, 'pct': c_point_drawn_pct, 'style': ''},
             {'key': 'Skipped', 'value' : c_point_skip_count, 'pct': c_point_skip_pct, 'style': ''},
-            {'key': 'Completed Points', 'value' : points.filter(survey__complete = True).count(), 'pct': '', 'style': ''},
             {'key': 'Total', 'value' : complete_count, 'pct': '', 'style': 'font-weight: bold'}
         ]
         
         i_point_summary = [
             {'key': 'Placed', 'value' : i_point_drawn_count, 'pct': i_point_drawn_pct, 'style': ''},
             {'key': 'Not Started', 'value' : i_point_not_start_count, 'pct': i_point_not_start_pct, 'style': ''},
-            {'key': 'Incompleted Points', 'value' : points.filter(survey__complete = False).count(), 'pct': '', 'style': ''},
             {'key': 'Total', 'value' : incomplete_count, 'pct': '', 'style': 'font-weight: bold'}
         ]
         
@@ -211,8 +207,8 @@ def dashboard(request, time_period='all', template='dashboard.html'):
         ]
         
         ratio_summary = [
-            {'key': 'Points per route (complete)', 'value' : c_ratio, 'pct': '', 'style': ''},
-            {'key': 'Points per route (incomplete)', 'value' : i_ratio, 'pct': '', 'style': ''},
+            {'key': 'Complete', 'value' : c_ratio, 'points': c_points_total, 'routes': c_routes_total, 'style': ''},
+            {'key': 'Incomplete', 'value' : i_ratio, 'points': i_points_total, 'routes': i_routes_total , 'style': ''}
         ]
             
     else:

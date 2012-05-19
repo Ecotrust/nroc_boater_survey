@@ -116,9 +116,9 @@
             </td></tr>
             <tr><td colspan=2>
             
-            <table><tr><th>Status</th><th>Ratio</th></tr>
+            <table><tr><th>Status</th><th>Total Points</th><th>Total Routes</th><th>Ratio</th></tr>
               {% for s in ratio_summary %}
-                <tr><td style="{{s.style}}">{{s.key}}</td><td style="{{s.style}}">{{s.value}}</td></tr>
+                <tr><td style="{{s.style}}">{{s.key}}</td><td style="{{s.style}}">{{s.points}}</td><td style="{{s.style}}">{{s.routes}}</td><td style="{{s.style}}">{{s.value}}</td></tr>
               {% endfor %}
               </table>
             </td></tr>
