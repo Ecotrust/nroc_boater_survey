@@ -79,7 +79,7 @@ def dashboard(request, time_period='all', template='dashboard.html'):
             route_NOAA_pct = str(round(float(routes_in_NOAA)/route_count * 100, 2)) + '%'
         else:
             route_cache_pct = '0%'
-            route_cache_pct = '0%'
+            route_NOAA_pct = '0%'
         
         points_in_cache = 0
         point_cache_zoom_total = 0

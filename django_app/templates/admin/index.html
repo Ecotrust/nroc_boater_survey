@@ -1,6 +1,12 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_static %}
 
+{% block title %}{{ title }} | {% trans 'NROC boater survey site admin' %}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{% trans 'NROC Boater Survey administration' %}</h1>
+{% endblock %}
+
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
 
 {% block coltype %}colMS{% endblock %}
