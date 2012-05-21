@@ -31,31 +31,31 @@
         <td>
           <p>
           <form>
-            <select id="month" onchange="updateDash()">
+            <select id="month" onchange="updateDash()" style="width: 100%">
               <option value="all">All</option>
               {% for m in month %}
               <option {{m.selected}} value="{{m.id}}">{{m.name}}</option>
               {% endfor %}
             </select>
           </form>
-          <form action="../export_surveys/" method="post">
+          <!--<form action="../export_surveys/" method="post">
           {{ export_form.as_p }}
           <input type="submit" value="Export JSON">
-          </form>
+          </form>-->
           <form action="../export_points_shapefile/{{time_period}}" method="post">
           {{ export_form.as_p }}
-          <input type="submit" value="Export Points">
+          <input type="submit" value="Export Points" style="width: 100px">
           </form>
           
           </form>
           <form action="../export_routes_shapefile/{{time_period}}" method="post">
           {{ export_form.as_p }}
-          <input type="submit" value="Export Routes">
+          <input type="submit" value="Export Routes" style="width: 100px">
           </form>
           
           <form action="../export_csv/{{time_period}}" method="post">
           {{ export_form.as_p }}
-          <input type="submit" value="Export CSV">
+          <input type="submit" value="Export CSV" style="width: 100px">
           </form>
           </p>
         </td>
