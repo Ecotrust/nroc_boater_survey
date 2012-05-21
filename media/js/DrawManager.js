@@ -155,7 +155,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     
     startActivityAreasStep: function() {
         this.mapPanel.enable();
-        this.loadActivityAreasPanel();
         if (!this.actAreasPanel) {
             Ext.MessageBox.show({
                 title: 'Activity Plotting', 
@@ -168,6 +167,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
                 scope: this
             });
         }
+        this.loadActivityAreasPanel();
     },
 
 /*
