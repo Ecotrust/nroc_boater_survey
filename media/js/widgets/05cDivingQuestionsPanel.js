@@ -73,38 +73,6 @@ gwst.widgets.DivingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
             }],
             items: [this.other_dive]
         });
-        
-        this.diving_text_two = new Ext.Panel({
-            html: 'How do you rank this area for SCUBA diving?',
-            style: 'margin: 0px 0px 10px 10px',
-            border: false
-        });
-        
-        this.diving_two = new Ext.form.RadioGroup({
-            id: 'diving-activity-2',
-            xtype: 'radiogroup',
-            fieldlabel: 'Diving Rank',
-            style: 'margin: 0px 0px 10px 15px',
-            columns: 1,
-            items: [
-                {boxLabel: 'Very good', name: 'dive-rank', inputValue: 'very-good'},
-                {boxLabel: 'Good', name: 'dive-rank', inputValue: 'good'},
-                {boxLabel: 'Average', name: 'dive-rank', inputValue: 'average'},
-                {boxLabel: 'Poor', name: 'dive-rank', inputValue: 'poor'},
-                {boxLabel: 'Very poor', name: 'dive-rank', inputValue: 'very-poor'}
-            ]
-        });
-
-        this.diving_radio_panel = new Ext.Panel({
-            border: false,
-            keys: [{
-                key: [Ext.EventObject.UP, Ext.EventObject.DOWN, Ext.EventObject.LEFT, Ext.EventObject.RIGHT], 
-                handler: function(keyCode, event) {
-                    event.preventDefault();
-                }
-            }],
-            items: [this.diving_two]
-        });
 
         /*---------- END Diving Checked Questions --------------------*/
         
@@ -120,8 +88,6 @@ gwst.widgets.DivingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.other_text_dive.hide();
         this.add(this.other_dive_panel);
         this.other_dive_panel.hide();
-        this.add(this.diving_text_two);
-        this.add(this.diving_radio_panel);
         this.add(this.button_panel);
     
         // Call parent (required)
@@ -140,7 +106,6 @@ gwst.widgets.DivingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
     
     contBtnClicked: function() {
         if (this.diving_one.isValid() && 
-        this.diving_two.isValid() && 
         this.other_dive.isValid()) {
             this.fireEvent('diving-questions-cont',this);
         } else {
@@ -155,7 +120,6 @@ gwst.widgets.DivingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
 
     resetPanel: function() {
         this.diving_one.reset();
-        this.diving_two.reset();
         this.other_dive.reset();
         this.other_text_dive.hide();
         this.other_dive_panel.hide();

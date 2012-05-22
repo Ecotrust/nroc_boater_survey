@@ -17,9 +17,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
     fish_tgts: null,
     view_tgts: null,
     dive_tgts: null,
-    fish_rank: null,
-    view_rank: null,
-    dive_rank: null,
     activity_shapes_drawn: false,
     help_on: true,
     autoRoundTrip: false,
@@ -216,11 +213,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         if (this.fish_tgts['fish-other']) {
             this.fish_tgts['fish-other'] = this.fishingQuestionsPanel.other_fish.getValue();
         }
-        if (this.fishingQuestionsPanel.fishing_two.getValue()) {
-            this.fish_rank = this.fishingQuestionsPanel.fishing_two.getValue().inputValue;
-        } else {
-            this.fish_rank = null;
-        }
         this.finFishingQuestionsStep();
     },
     
@@ -245,11 +237,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         }
         if (this.view_tgts['view-other']) {
             this.view_tgts['view-other'] = this.viewingQuestionsPanel.other_view.getValue();
-        }
-        if (this.viewingQuestionsPanel.viewing_two.getValue()) {
-            this.view_rank = this.viewingQuestionsPanel.viewing_two.getValue().inputValue;
-        } else {
-            this.view_rank = null;
         }
         this.finViewingQuestionsStep();
     },
@@ -276,11 +263,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         if (this.dive_tgts['dive-other']) {
             this.dive_tgts['dive-other'] = this.divingQuestionsPanel.other_dive.getValue();
         }
-        if (this.divingQuestionsPanel.diving_two.getValue()) {
-            this.dive_rank = this.divingQuestionsPanel.diving_two.getValue().inputValue;
-        } else {
-            this.dive_rank = null;
-        }
         this.finDivingQuestionsStep();
     },
     
@@ -304,9 +286,6 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.fish_tgts = null;
             this.view_tgts = null;
             this.dive_tgts = null;
-            this.fish_rank = null;
-            this.view_rank = null;
-            this.dive_rank = null;
     		this.startActivityAreasStep();
         }    	
     },
@@ -831,11 +810,8 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             type: 'act_point',
             activities: this.act_list_items,
             fish_tgts: this.fish_tgts,
-            fish_rank: this.fish_rank,
             view_tgts: this.view_tgts,
-            view_rank: this.view_rank,
             dive_tgts: this.dive_tgts,
-            dive_rank: this.dive_rank,
             zoom_level: this.mapPanel.map.getZoom()
         };
         Ext.Ajax.request({

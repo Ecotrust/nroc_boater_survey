@@ -199,19 +199,16 @@ def shapes(request, id=None):
                     f_billfish = fish_targets['billfish'],
                     f_wahoo    = fish_targets['wahoo'],
                     f_other    = fish_other,
-                    f_rank     = feat.get('fish_rank'),
                     v_whales   = view_targets['whales'],
                     v_dol_porp = view_targets['dolphin-porpoises'],
                     v_turtles   = view_targets['sea-turtles'],
                     v_birds    = view_targets['birds'],
                     v_seals    = view_targets['seals'],
                     v_other    = view_other,
-                    v_rank     = feat.get('view_rank'),
                     d_fishing  = dive_targets['fishing'],
                     d_wrecks   = dive_targets['wrecks'],
                     d_explore  = dive_targets['exploring'],
                     d_other    = dive_other,
-                    d_rank     = feat.get('dive_rank'),
                     zoom_level = feat.get('zoom_level')
                 )  
                 status = SurveyStatus.objects.get(survey_id=feat.get('survey_id'))

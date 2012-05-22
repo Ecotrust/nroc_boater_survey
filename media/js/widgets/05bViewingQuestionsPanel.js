@@ -76,38 +76,6 @@ gwst.widgets.ViewingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
             items: [this.other_view]
         });
         
-        this.viewing_text_two = new Ext.Panel({
-            html: 'How do you rank this area for wildlife viewing?',
-            style: 'margin: 0px 0px 10px 10px',
-            border: false
-        });
-        
-        this.viewing_two = new Ext.form.RadioGroup({
-            id: 'viewing-activity-2',
-            xtype: 'radiogroup',
-            fieldlabel: 'Viewing Rank',
-            style: 'margin: 0px 0px 10px 15px',
-            columns: 1,
-            items: [
-                {boxLabel: 'Very good', name: 'view-rank', inputValue: 'very-good'},
-                {boxLabel: 'Good', name: 'view-rank', inputValue: 'good'},
-                {boxLabel: 'Average', name: 'view-rank', inputValue: 'average'},
-                {boxLabel: 'Poor', name: 'view-rank', inputValue: 'poor'},
-                {boxLabel: 'Very poor', name: 'view-rank', inputValue: 'very-poor'}
-            ]
-        });
-        
-        this.viewing_radio_panel = new Ext.Panel({
-            border: false,
-            keys: [{
-                key: [Ext.EventObject.UP, Ext.EventObject.DOWN, Ext.EventObject.LEFT, Ext.EventObject.RIGHT], 
-                handler: function(keyCode, event) {
-                    event.preventDefault();
-                }
-            }],
-            items: [this.viewing_two]
-        });
-        
         /*---------- END Viewing Checked Questions --------------------*/
         
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
@@ -122,8 +90,6 @@ gwst.widgets.ViewingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.other_text_view.hide();
         this.add(this.other_view_panel);
         this.other_view_panel.hide();
-        this.add(this.viewing_text_two);
-        this.add(this.viewing_radio_panel);
         this.add(this.button_panel);
     
         // Call parent (required)
@@ -142,7 +108,6 @@ gwst.widgets.ViewingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
     
     contBtnClicked: function() {
         if (this.viewing_one.isValid() && 
-        this.viewing_two.isValid() && 
         this.other_view.isValid()) {
             this.fireEvent('viewing-questions-cont',this);
         } else {
@@ -157,7 +122,6 @@ gwst.widgets.ViewingQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
 
     resetPanel: function() {
         this.viewing_one.reset();
-        this.viewing_two.reset();
         this.other_view.reset();
         this.other_text_view.hide();
         this.other_view_panel.hide();
