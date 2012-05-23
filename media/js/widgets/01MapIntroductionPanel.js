@@ -107,6 +107,8 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.demo_panel = new Ext.Panel({
 			html: '<div class="video-link"><img class="video-img" src="/media/img/film_go.png"/> <a href="'+ gwst.settings.urls.demo +'" target="_blank">Watch Demonstration</a></div>',
             id: 'intro_demo_panel',
+            height: 30,
+            width: 120,
 			border: false
 		});
         
