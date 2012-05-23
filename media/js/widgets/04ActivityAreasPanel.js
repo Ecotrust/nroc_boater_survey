@@ -56,15 +56,15 @@ gwst.widgets.ActivityAreasPanel = Ext.extend(gwst.widgets.WestPanel, {
         });
         
         this.demo_panel = new Ext.Panel({
-			html: '<p class="video-link"><img class="video-img" src="/media/img/film_go.png"/> <a href="'+ gwst.settings.urls.demo +'" target="_blank">Watch Demonstration</a>',
+			html: '<div class="video-link"><img class="video-img" src="/media/img/film_go.png"/> <a href="'+ gwst.settings.urls.demo +'" target="_blank">Watch Demonstration</a></div>',
             id: 'area_demo_panel',
 			// style: 'margin: 3px 3px 0px 10px',
 			border: false
 		});
         
         this.help_box = new Ext.form.Checkbox({
-            boxLabel: 'Show help on map',
-            fieldLabel: '(f)Show help on map',
+            boxLabel: 'Show help',
+            fieldLabel: '(f)Show help',
             checked: this.help_checked,
             handler: this.helpCheck,
             id: 'act-help-checkbox',
@@ -72,13 +72,15 @@ gwst.widgets.ActivityAreasPanel = Ext.extend(gwst.widgets.WestPanel, {
         });
         
         this.help_panel = new Ext.Panel({
+            cls: 'help-panel',
             layout: {
                 type: 'hbox',
-                padding: '5'
+                defaultMargins: {left: 10, top: 3, right: 10, bottom: 3}
             },
-            border: false
+            title: 'Having trouble?',
+            border: true
         });
-
+        
 /*        
         this.table_panel = new Ext.Panel({
             title: 'View more detailed drawing instructions',
@@ -132,14 +134,14 @@ gwst.widgets.ActivityAreasPanel = Ext.extend(gwst.widgets.WestPanel, {
         }); 
 
         
-        this.help_panel.add(this.demo_panel);
         this.help_panel.add(this.help_box);
+        this.help_panel.add(this.demo_panel);
 
         this.add(this.header_panel);
 		this.add(this.inner_panel);
         this.add(this.panel_three);
-        this.add(this.help_panel);
         this.add(this.button_panel);
+        this.add(this.help_panel);
         // this.add(this.table_panel);        
         
         // Call parent (required)

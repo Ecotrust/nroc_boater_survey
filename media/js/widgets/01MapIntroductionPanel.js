@@ -94,7 +94,7 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
             <table><tr><td><img style="width:39px; height:52px" src="/media/img/nav_zoombar.png" /></td>\
             <td><p><b>Zoom Map - </b>Click the \'+\' and \'-\' buttons on the upper left of the map or use the scroll wheel on your mouse if you have one.</p></td></tr></table>'
         });         
-        
+
         this.help_box = new Ext.form.Checkbox({
             boxLabel: 'Show help',
             fieldLabel: '(f)Show help',
@@ -105,21 +105,24 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
         });
         
         this.demo_panel = new Ext.Panel({
-			html: '<p class="video-link"><img class="video-img" src="/media/img/film_go.png"/> <a href="'+ gwst.settings.urls.demo +'" target="_blank">Watch Demonstration</a>',
+			html: '<div class="video-link"><img class="video-img" src="/media/img/film_go.png"/> <a href="'+ gwst.settings.urls.demo +'" target="_blank">Watch Demonstration</a></div>',
             id: 'intro_demo_panel',
 			border: false
 		});
         
         this.help_panel = new Ext.Panel({
+            cls: 'help-panel',
             layout: {
                 type: 'hbox',
-                defaultMargins: {left: 10, top: 0, right: 10, bottom: 10}
+                defaultMargins: {left: 10, top: 3, right: 10, bottom: 3}
             },
-            border: false
+            title: 'Having trouble?',
+            border: true
         });
         
-        this.help_panel.add(this.demo_panel);
+        // this.help_panel.add(this.help_text);
         this.help_panel.add(this.help_box);
+        this.help_panel.add(this.demo_panel);
 
         this.button_panel = new gwst.widgets.TwoButtonPanel ({
                 btn2_text: 'Start Plotting',               
@@ -130,8 +133,8 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
 		this.add(this.inner_panel);
         this.add(this.state_radio_panel);
         this.add(this.lower_panel);
-        this.add(this.help_panel);
         this.add(this.button_panel);
+        this.add(this.help_panel);
         
         // Call parent (required)
         gwst.widgets.IntroPanel.superclass.onRender.apply(this, arguments); 

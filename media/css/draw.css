@@ -323,3 +323,8 @@ table.help-table td {
 .olLayerGooglePoweredBy.olLayerGoogleV3.gmnoprint {
 visibility:hidden;
 }
+
+.help-panel {
+    margin: 0 auto 5px auto;
+    width: 260px;
+}

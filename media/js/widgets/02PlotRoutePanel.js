@@ -59,8 +59,8 @@ gwst.widgets.PlotRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
         });
         
         this.help_box = new Ext.form.Checkbox({
-            boxLabel: 'Show help on map',
-            fieldLabel: '(f)Show help on map',
+            boxLabel: 'Show help',
+            fieldLabel: '(f)Show help',
             checked: this.help_checked,
             handler: this.helpCheck,
             id: 'route-help-checkbox',
@@ -68,21 +68,23 @@ gwst.widgets.PlotRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
         });
         
         this.demo_panel = new Ext.Panel({
-			html: '<p class="video-link"><img class="video-img" src="/media/img/film_go.png"/> <a href="'+ gwst.settings.urls.demo +'" target="_blank">Watch Demonstration</a>',
+			html: '<div class="video-link"><img class="video-img" src="/media/img/film_go.png"/> <a href="'+ gwst.settings.urls.demo +'" target="_blank">Watch Demonstration</a></div>',
             id: 'draw_demo_panel',
 			border: false
 		});
         
         this.help_panel = new Ext.Panel({
+            cls: 'help-panel',
             layout: {
                 type: 'hbox',
-                padding: '5'
+                defaultMargins: {left: 10, top: 3, right: 10, bottom: 3}
             },
-            border: false
+            title: 'Having trouble?',
+            border: true
         });
         
-        this.help_panel.add(this.demo_panel);
         this.help_panel.add(this.help_box);
+        this.help_panel.add(this.demo_panel);
         
         this.add(this.header_panel);
 		this.add(this.inner_panel);
