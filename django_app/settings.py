@@ -79,6 +79,7 @@ INSTALLED_APPS = (
     'draw_app',
     'admin_utils',
     'videos',
+    'compress',
     'faq'
 )
 
@@ -89,6 +90,64 @@ SELF_SURVEY_RESET=False
 
 CLIENT_SRID = 4326    #Google projection
 SERVER_SRID = 4326   #Google projection
+
+ENVIRONMENT_TYPE = 'Dev'
+
+COMPRESS_CSS = {}
+
+COMPRESS_JS = {
+    'survey_compressed': {
+        'source_filenames':(
+            'third-party/GeoExt-1.0/GeoExt/lib/GeoExt/widgets/MapPanel.js',	
+            'third-party/GeoExt-1.0/GeoExt/lib/GeoExt/data/LayerRecord.js',
+            'third-party/GeoExt-1.0/GeoExt/lib/GeoExt/data/LayerReader.js',
+            'third-party/GeoExt-1.0/GeoExt/lib/GeoExt/data/LayerStore.js',
+            'third-party/GeoExt-1.0/GeoExt/lib/GeoExt/data/ProtocolProxy.js',	
+            'third-party/GeoExt-1.0/GeoExt/lib/GeoExt/data/FeatureRecord.js',
+            'third-party/GeoExt-1.0/GeoExt/lib/GeoExt/data/FeatureReader.js',
+            'third-party/GeoExt-1.0/GeoExt/lib/GeoExt/data/FeatureStore.js',		
+            'third-party/GeoExt-1.0/GeoExt/lib/GeoExt/widgets/grid/FeatureSelectionModel.js',
+            'js/settings.js', 
+            'js/DrawApp.js', 
+            'js/DrawManager.js',
+            'js/Handler/ResumablePath.js',
+            'js/controls/BorderPan.js',
+            'js/Layer/GeoWebCache.js',
+            'js/widgets/MainViewport.js', 
+            'js/widgets/DrawMapPanel.js', 
+            'js/widgets/WestPanel.js', 
+            'js/widgets/01MapIntroductionPanel.js', 
+            'js/widgets/02PlotRoutePanel.js', 
+            'js/widgets/02aFinishRoutePanel.js', 
+            'js/widgets/04ActivityAreasPanel.js', 
+            'js/widgets/04aActivityPlottedPanel.js', 
+            'js/widgets/05ActivityQuestionsPanel.js', 
+            'js/widgets/05aFishingQuestionsPanel.js', 
+            'js/widgets/05bViewingQuestionsPanel.js', 
+            'js/widgets/05cDivingQuestionsPanel.js', 
+            'js/widgets/06MoreActivitiesPanel.js', 
+            'js/widgets/AddPolyWindow.js', 
+            'js/widgets/CancelWindow.js', 
+            'js/widgets/CustomButtons.js', 
+            'js/widgets/EditRoutePanel.js', 
+            'js/widgets/ErrorWindow.js', 
+            'js/widgets/FinishPanel.js', 
+            'js/widgets/InvalidRoutePanel.js', 
+            'js/widgets/InvalidShapePanel.js', 
+            'js/widgets/NavDetailsWindow.js', 
+            'js/widgets/NavHelpWindow.js', 
+            'js/widgets/RoundTripWindow.js', 
+            'js/widgets/ResetMapCheckWindow.js', 
+            'js/widgets/ResetMapWindow.js', 
+            'js/widgets/SatisfiedShapePanel.js', 
+            'js/widgets/TwoButtonPanel.js', 
+            'js/widgets/UndoWindow.js', 
+            'js/widgets/WaitWindow.js', 
+            'js/widgets/YesNoButtons.js'
+            ), 
+        'output_filename': 'compressed/survey_compressed.js'
+    }
+}
 
 try:
     from local_settings import *

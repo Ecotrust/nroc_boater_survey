@@ -76,7 +76,10 @@ def draw(request):
     # ActivityArea.objects.filter(survey_id=request.session['interview_id']).delete()
     ActivityPoint.objects.filter(survey=request.session['interview_id']).delete()
     
-    return render_to_response('draw.html', RequestContext(request, params))
+    if settings.ENVIRONMENT_TYPE == 'Prod':
+        return render_to_response('draw.html', RequestContext(request, params))
+    else:
+        return render_to_response('draw_dev.html', RequestContext(request, params))
 
 def draw_settings (request):
     pass

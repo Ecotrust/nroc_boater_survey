@@ -28,9 +28,7 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
     
     getHtmlText: function() {
-        var html_text = '<h2>Step 1: Zoom to Boating Area</h2>\
-        <p><b>Zoom in on the map to where you started your last trip.</b></p>\
-        <p><b>A: Select the state where you departed:</b></p>';
+        var html_text = '<h2>Step 1: Zoom to Boating Area</h2><p><b>Zoom in on the map to where you started your last trip.</b></p><p><b>A: Select the state where you departed:</b></p>';
         return html_text;
     },
 	
@@ -88,11 +86,7 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
                 bodyStyle: 'border: none; padding: 5px 5px 5px 10px'
             },
             id: 'intro_lower_panel',
-            html:'<p><b>B: Continue zooming in:</b></p>\
-            <table><tr><td><img style="width:39px; height:52px" src="/media/img/nav_arrows.png" /></td>\
-            <td><p><b>Move Map - </b>Click the buttons on the upper left of the map, click & drag with your mouse, or use your keyboard arrows.</p></td></tr></table>\
-            <table><tr><td><img style="width:39px; height:52px" src="/media/img/nav_zoombar.png" /></td>\
-            <td><p><b>Zoom Map - </b>Click the \'+\' and \'-\' buttons on the upper left of the map or use the scroll wheel on your mouse if you have one.</p></td></tr></table>'
+            html:'<p><b>B: Continue zooming in:</b></p><table><tr><td><img style="width:39px; height:52px" src="/media/img/nav_arrows.png" /></td><td><p><b>Move Map - </b>Click the buttons on the upper left of the map, click & drag with your mouse, or use your keyboard arrows.</p></td></tr></table><table><tr><td><img style="width:39px; height:52px" src="/media/img/nav_zoombar.png" /></td><td><p><b>Zoom Map - </b>Click the \'+\' and \'-\' buttons on the upper left of the map or use the scroll wheel on your mouse if you have one.</p></td></tr></table>'
         });         
 
         this.help_box = new Ext.form.Checkbox({

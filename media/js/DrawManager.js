@@ -80,9 +80,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
             this.loadPlotRoutePanel();
             Ext.MessageBox.show({
                 title: 'Route Plotting', 
-                msg: '<p class="help-win">You are now in route plotting mode.</p>\
-                <p class="help-win">See panel on left for important instructions.</p>\
-                <p class="help-win">Click OK to begin plotting.</p>',
+                msg: '<p class="help-win">You are now in route plotting mode.</p><p class="help-win">See panel on left for important instructions.</p><p class="help-win">Click OK to begin plotting.</p>',
                 buttons: Ext.Msg.OK,
                 // fn: this.activateRouteDraw, 
                 minWidth: 450,
@@ -155,9 +153,7 @@ gwst.DrawManager = Ext.extend(Ext.util.Observable, {
         if (!this.actAreasPanel) {
             Ext.MessageBox.show({
                 title: 'Activity Plotting', 
-                msg: '<p class="help-win">You are now in activity plotting mode.</p>\
-                <p class="help-win">See panel on left for important instructions.</p>\
-                <p class="help-win">Click OK to begin plotting.</p>',
+                msg: '<p class="help-win">You are now in activity plotting mode.</p><p class="help-win">See panel on left for important instructions.</p><p class="help-win">Click OK to begin plotting.</p>',
                 buttons: Ext.Msg.OK,
                 // fn: this.activatePointDraw, 
                 minWidth: 450,

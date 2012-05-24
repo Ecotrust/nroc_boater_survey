@@ -18,10 +18,7 @@ gwst.widgets.PlotRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
     },
 
     getHtmlText: function() {
-        var html_text = '<h2>Step 2: Plot your route on the map</h2>\
-        <p style="padding-bottom:3px">Please remember to plot a complete route, including your return leg even if you came back the same way.</p>\
-        <ul><li type="disc">Click on your departure point to begin plotting route.</li>\
-        <li type="disc">Click once for each turn (or waypoint) and double-click to finish plotting your route.</li></ul>';
+        var html_text = '<h2>Step 2: Plot your route on the map</h2><p style="padding-bottom:3px">Please remember to plot a complete route, including your return leg even if you came back the same way.</p><ul><li type="disc">Click on your departure point to begin plotting route.</li><li type="disc">Click once for each turn (or waypoint) and double-click to finish plotting your route.</li></ul>';
         return html_text;
     },
 	
@@ -44,9 +41,7 @@ gwst.widgets.PlotRoutePanel = Ext.extend(gwst.widgets.WestPanel, {
 		});
         
         this.panel_three = new Ext.Panel({
-            html: "<p>Don't worry if you make a mistake. \
-                You will be able to redraw and/or undo your last point using the blue buttons on the top left of the map. \
-                You will also be able to edit or restart your route after you finish it.</p>",
+            html: "<p>Don't worry if you make a mistake. You will be able to redraw and/or undo your last point using the blue buttons on the top left of the map. You will also be able to edit or restart your route after you finish it.</p>",
             border: false,
 			style: 'margin: 0 10px 0px 5px'
         });
