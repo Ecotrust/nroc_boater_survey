@@ -146,6 +146,9 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
 		map.addControl(new OpenLayers.Control.MousePosition());
         var layerSwitcher = new OpenLayers.Control.LayerSwitcher();
 		map.addControl(layerSwitcher);
+        
+        layerSwitcher.baseLbl.innerHTML = "Maps";
+        
 		map.addControl(new OpenLayers.Control.ScaleLine());
         layerSwitcher.maximizeControl();
         map.addControl(new OpenLayers.Control.KeyboardDefaults()); 

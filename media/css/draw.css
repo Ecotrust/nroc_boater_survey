@@ -328,3 +328,7 @@ visibility:hidden;
     margin: 0 auto 5px auto;
     width: 260px;
 }
+
+.olControlLayerSwitcher {
+    font-size: small !important;
+}
