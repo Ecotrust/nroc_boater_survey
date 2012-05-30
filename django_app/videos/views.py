@@ -13,7 +13,7 @@ def showVideo(request, urlname, demo_template='video.html'):
     # 'player':settings.MEDIA_URL+'video_player/player.swf',
     video = {
         'player':settings.VIDEO_PLAYER,
-        'file':settings.VIDEO_URL+settings.VIDEO_FILE+'.mov',
+        'file':settings.VIDEO_URL+settings.VIDEO_FILE+'.flv',
         'title':string.capwords(urlname.replace('_',' '))
     }
     return render_to_response('demo_video.html', {'video':video}, context_instance=RequestContext(request)) 
