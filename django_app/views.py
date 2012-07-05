@@ -9,6 +9,9 @@ def intro(request):
 
     if request.GET.has_key('continue'):
     
+        if not request.session.has_key('interview_id'):    
+            return HttpResponse('We\'re sorry, the mapping portion of this survey cannot be opened. <br /><b>Please check to be sure that your browser has cookies enabled</b> and use the back button to return to your survey. <br />If you believe this is an error, you can call 617-737-2600 ext. 102, or email <a href="mailto:help@seaplan.org">help@seaplan.org</a>.' , status=500)
+    
         already_complete = SurveyStatus.objects.filter(survey_id = request.session['interview_id'], complete = True)
         
         if already_complete:
@@ -56,6 +59,7 @@ def intro(request):
     if survey_session[0].complete:
         return HttpResponseRedirect('/complete/')
     else: 
+        
         return render_to_response('intro.html', {'interview_id':interview_id,'month':month})
 
 def test(request):    
