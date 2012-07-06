@@ -312,6 +312,10 @@ table.help-table td {
     height: 25px;
 }
 
+.x-form-check-wrap {
+    max-width: 95%;
+}
+
 .reset-map{
     background-image: url(../img/world.png) !important;
 }
