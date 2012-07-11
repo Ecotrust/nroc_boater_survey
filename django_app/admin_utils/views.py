@@ -38,8 +38,9 @@ def dashboard(request, time_period='all', template='dashboard.html'):
     month = []
     survey_count = survey_data.count()
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    month_ids = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11']
     for record in SurveyStatus.objects.all().order_by('month_id'):
-        if not record.month_id == '' and not month.__contains__({'id': record.month_id, 'name':months[int(record.month_id)], 'selected': ''}) and not month.__contains__({'id': record.month_id, 'name':months[int(record.month_id)], 'selected': 'selected="selected"'}):
+        if not record.month_id == '' and month_ids.__contains__(record.month_id) and not int(record.month_id) > 11 and not month.__contains__({'id': record.month_id, 'name':months[int(record.month_id)], 'selected': ''}) and not month.__contains__({'id': record.month_id, 'name':months[int(record.month_id)], 'selected': 'selected="selected"'}):
             if record.month_id == time_period:
                 month.append({'id': record.month_id, 'name':months[int(record.month_id)], 'selected': 'selected="selected"'})
             else:
