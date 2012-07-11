@@ -31,7 +31,8 @@ gwst.widgets.MoreActivitiesPanel = Ext.extend(gwst.widgets.WestPanel, {
         this.header_panel = new Ext.Panel({  
             id: 'more_activities_header_panel',
             html: '<img src="/media/img/h_06_more_activities.png">',
-			border: 'north',
+	    border: 'north',
+	    height: 54,
             bodyCfg: {            
                 cls: 'action-panel-header'
             }
