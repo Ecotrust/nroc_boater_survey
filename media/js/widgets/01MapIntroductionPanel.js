@@ -62,7 +62,8 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
                 {boxLabel: 'Massachusetts', name: 'state', inputValue: 'massachusetts'},
                 {boxLabel: 'Rhode Island', name: 'state', inputValue: 'rhode-island'},
                 {boxLabel: 'Connecticut', name: 'state', inputValue: 'connecticut'},
-                {boxLabel: 'New York', name: 'state', inputValue: 'new-york'}
+                {boxLabel: 'New York', name: 'state', inputValue: 'new-york'},
+                {boxLabel: 'New Jersey', name: 'state', inputValue: 'new-jersey'}
             ]
         });
         
@@ -145,6 +146,10 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
             if (state.boxLabel == "New York") {
                 this.state_center.lon = -8127000;
                 this.state_center.lat = 4989000;
+                this.state_zoom = 3;
+            } else if (state.boxLabel == "New Jersey") {
+                this.state_center.lon = -8210000;
+                this.state_center.lat = 4945000;
                 this.state_zoom = 3;
             } else if (state.boxLabel == "Connecticut") {
                 this.state_center.lon = -8100000;
