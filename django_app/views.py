@@ -41,7 +41,7 @@ def intro(request):
             skipped_survey[0].complete = True
             skipped_survey[0].complete_time = datetime.datetime.now()
             skipped_survey[0].save()
-            return HttpResponseRedirect('http://recreation.seaplan.org/thank-you-2')
+            return HttpResponseRedirect('http://recreation.seaplan.org/thank-you-2.php')
 
     if not request.GET.has_key('id'):    
         # return HttpResponse('We\'re sorry, the mapping portion of this survey cannot be opened.  If you believe this is an error, you can call 617-737-2600 ext. 102, or email <a href="mailto:help@seaplan.org">help@seaplan.org</a>.' , status=500)
