@@ -1,2 +1,2 @@
 #!/bin/bash
-dropdb nroc_rbs
+dropdb marco_rbs

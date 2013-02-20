@@ -1,1 +1,1 @@
-dropdb -U postgres nroc_rbs
+dropdb -U postgres marco_rbs
