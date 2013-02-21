@@ -1,0 +1,8 @@
+south
+psycopg2
+django-registration
+django
+simplejson
+django-flatblocks
+pytz
+django-compress

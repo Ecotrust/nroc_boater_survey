@@ -80,7 +80,8 @@ INSTALLED_APPS = (
     'admin_utils',
     'videos',
     'compress',
-    'faq'
+    'faq',
+    'south'
 )
 
 LOGIN_REDIRECT_URL = '/admin/utils/dashboard/'

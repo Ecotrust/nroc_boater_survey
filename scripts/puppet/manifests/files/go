@@ -1,0 +1,1 @@
+source /usr/local/venv/<%= projectname%>/bin/activate && cd /usr/local/apps/<%= reponame%>/<%= projectname%>
