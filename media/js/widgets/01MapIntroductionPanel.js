@@ -57,13 +57,11 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
             width: 250,
             columns: 2,
             items: [
-                {boxLabel: 'Maine', name: 'state', inputValue: 'maine'},
-                {boxLabel: 'New Hampshire', name: 'state', inputValue: 'new-hampshire'},
-                {boxLabel: 'Massachusetts', name: 'state', inputValue: 'massachusetts'},
-                {boxLabel: 'Rhode Island', name: 'state', inputValue: 'rhode-island'},
-                {boxLabel: 'Connecticut', name: 'state', inputValue: 'connecticut'},
                 {boxLabel: 'New York', name: 'state', inputValue: 'new-york'},
-                {boxLabel: 'New Jersey', name: 'state', inputValue: 'new-jersey'}
+                {boxLabel: 'New Jersey', name: 'state', inputValue: 'new-jersey'},
+                {boxLabel: 'Delaware', name: 'state', inputValue: 'delaware'},
+                {boxLabel: 'Maryland', name: 'state', inputValue: 'maryland'},
+                {boxLabel: 'Virginia', name: 'state', inputValue: 'virginia'}
             ]
         });
         
@@ -149,27 +147,19 @@ gwst.widgets.IntroPanel = Ext.extend(gwst.widgets.WestPanel, {
                 this.state_zoom = 3;
             } else if (state.boxLabel == "New Jersey") {
                 this.state_center.lon = -8210000;
-                this.state_center.lat = 4945000;
+                this.state_center.lat = 4870000;
                 this.state_zoom = 3;
-            } else if (state.boxLabel == "Connecticut") {
-                this.state_center.lon = -8100000;
-                this.state_center.lat = 5044000;
+            } else if (state.boxLabel == "Delaware") {
+                this.state_center.lon = -8300000;
+                this.state_center.lat = 4718000;
                 this.state_zoom = 3;
-            } else if (state.boxLabel == "Rhode Island") {
-                this.state_center.lon = -7956000;
-                this.state_center.lat = 5080000;
-                this.state_zoom = 4;
-            } else if (state.boxLabel == "Massachusetts") {
-                this.state_center.lon = -7870000;
-                this.state_center.lat = 5170000;
+            } else if (state.boxLabel == "Maryland") {
+                this.state_center.lon = -8400000;
+                this.state_center.lat = 4600000;
                 this.state_zoom = 3;
-            } else if (state.boxLabel == "New Hampshire") {
-                this.state_center.lon = -7877000;
-                this.state_center.lat = 5312000;
-                this.state_zoom = 5;
-            } else if (state.boxLabel == "Maine") {
-                this.state_center.lon = -7733000;
-                this.state_center.lat = 5423000;
+            } else if (state.boxLabel == "Virginia") {
+                this.state_center.lon = -8380000;
+                this.state_center.lat = 4480000;
                 this.state_zoom = 3;
             }
             map.setCenter(this.state_center);

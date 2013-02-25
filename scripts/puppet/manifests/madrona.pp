@@ -5,7 +5,7 @@ class install {
     $reponame = "marco_boater_survey"
     $appname = "draw_app"
     $secretkey = "secret"
-    $mapkey = "map_key"
+    $mapkey = "AIzaSyAuGMb83HBophhruCp62MrfvWp1zMoB0nQ"
 
     # ensure that apt update is run before any packages are installed
     class apt {
