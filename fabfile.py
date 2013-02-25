@@ -6,7 +6,7 @@ vars = {
 }
 
 env.forward_agent = True
-# env.key_filename = '~/.vagrant.d/insecure_private_key'
+env.key_filename = '~/.vagrant.d/insecure_private_key'
 
 
 def dev():
@@ -42,7 +42,11 @@ def _install_requirements():
 def _install_django():
     run('cd %(app_dir)s && %(venv)s/bin/python manage.py syncdb --noinput && \
                            %(venv)s/bin/python manage.py migrate --noinput' % vars)
-                           # %(venv)s/bin/python manage.py collectstatic && \
+    collect_static()
+
+
+def collect_static():
+    run('cd %(app_dir)s && %(venv)s/bin/python manage.py collectstatic --noinput' % vars)
 
 
 def create_superuser():
