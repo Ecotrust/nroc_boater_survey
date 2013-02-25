@@ -29,10 +29,11 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
             numZoomLevels: 11,
             // maxResolution: 156543.0339,
             maxResolution: 2445.9849046875,
-            maxExtent: map_extent,
-            eventListeners: {
-                "zoomend": this.switchChartLayer.createDelegate(this)
-            }
+            maxExtent: map_extent
+            //,
+            //eventListeners: {
+            //    "zoomend": this.switchChartLayer.createDelegate(this)
+            //}
         };        
 
         var defaultStyle = new OpenLayers.Style(OpenLayers.Util.applyDefaults({
@@ -194,7 +195,7 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
         //Update internal MapPanel properties
 		Ext.apply(this, {
 		    map: map,
-		    layers: [this.nautLayer, hybridLayer, roadMapLayer, this.vectorLayer],
+		    layers: [this.naut2Layer, hybridLayer, roadMapLayer, this.vectorLayer],
 		    extent: map_extent,
 	        center: region_extent.getCenterLonLat(),
 	        zoom: this.defaultZoom,
