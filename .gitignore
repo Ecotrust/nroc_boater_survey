@@ -12,4 +12,4 @@ media/css/themes/*
 .DS_Store
 
 .vagrant
-django_apphttp/*
+django_apphttp:/*
