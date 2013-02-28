@@ -1,6 +1,8 @@
 class install {
 
     $dbname = "marco_rbs"
+    $dbuser = "marco"
+    $dbpassword = ""
     $projectname = "django_app"
     $reponame = "marco_boater_survey"
     $appname = "draw_app"
@@ -106,7 +108,11 @@ class install {
         shared_buffers => '24MB',
     }
 
-    postgresql::database { $dbname:
+    # postgresql::db { $dbname:
+    #   user     => "${dbuser}",
+    #   password => "${dbpassword}"
+    # }
+    postgresql::db { $dbname:
       owner => "vagrant",
     }
 

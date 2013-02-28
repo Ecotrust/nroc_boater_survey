@@ -1,5 +1,8 @@
 class install {
 
+    $appuser = "www-data"
+    $dbuser = "root"
+    $dbpassword = "{root|db|user}"
     $dbname = "marco_rbs"
     $projectname = "django_app"
     $reponame = "marco_boater_survey"
@@ -106,19 +109,20 @@ class install {
         shared_buffers => '24MB',
     }
 
-    postgresql::database { $dbname:
-      owner => "vagrant",
+    postgresql::db { $dbname:
+      user      => "${dbuser}",
+      password  => "${dbpassword}",
     }
 
     exec { "load postgis":
       command => "/usr/bin/psql -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql -d ${dbname}",
-      user => "vagrant",
+      user => "${appuser}",
       require => Postgresql::Database[$dbname]
     }
 
     exec { "load spatialrefs":
       command => "/usr/bin/psql -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql -d ${dbname}",
-      user => "vagrant",
+      user => "${appuser}",
       require => Postgresql::Database[$dbname]
     }
 
@@ -145,17 +149,17 @@ class install {
       subscribe => [Package['python-virtualenv'], Package['build-essential']]
     }
 
-    file { "settings_local.py":
+    file { "local_settings.py":
       path => "/vagrant/${projectname}/local_settings.py",
-      content => template("settings_vagrant.py"),
+      content => template("local_settings.py"),
       require => Exec['load spatialrefs template1']
     }
 
     file { "go":
       path => "/home/vagrant/go",
       content => template("go"),
-      owner => "vagrant",
-      group => "vagrant",
+      owner => "${appuser}",
+      group => "${appuser}",
       mode => 0775
     }
 
