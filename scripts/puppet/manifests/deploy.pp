@@ -164,7 +164,7 @@ class install {
       mode => 775,
     }
 
-    file { "${appspath}/${projectname}":
+    file { "${appspath}/${reponame}":
       ensure => "directory",
       owner => "${appuser}",
       group => "${appuser}",
@@ -172,10 +172,18 @@ class install {
       require => File["${appspath}"],
     }
 
+    file { "${appspath}/${reponame}/${projectname}":
+      ensure => "directory",
+      owner => "${appuser}",
+      group => "${appuser}",
+      mode => 775,
+      require => File["${appspath}/${reponame}"],
+    }
+
     file { "local_settings.py":
       path => "${appspath}/${projectname}/local_settings.py",
       content => template("local_settings.py"),
-      require => [Exec['load spatialrefs template1'], File["${appspath}/${projectname}"]]
+      require => [Exec['load spatialrefs template1'], File["${appspath}/${reponame}/${projectname}"]]
     }
 
     file { "go":

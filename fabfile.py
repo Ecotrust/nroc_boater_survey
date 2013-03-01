@@ -18,7 +18,7 @@ def dev():
 
 def prod():
     """ Use production server settings """
-    servers = []
+    servers = [ubuntu@127.0.0.1]
     env.hosts = servers
     return servers
 
