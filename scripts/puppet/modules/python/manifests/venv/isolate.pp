@@ -1,9 +1,11 @@
 define python::venv::isolate($ensure=present,
                              $version=latest,
-                             $requirements=undef) {
+                             $requirements=undef,
+                             $owner=$python::venv::owner,
+                             $group=$python::venv::group) {
   $root = $name
-  $owner = "<%= appuser%>"
-  $group = "<%= appuser%>"
+  #$owner = $python::venv::owner
+  #$group = $python::venv::group
   #$python = $python::dev::python
 
   if $ensure == 'present' {

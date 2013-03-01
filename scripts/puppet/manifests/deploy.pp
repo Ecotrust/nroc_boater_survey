@@ -1,9 +1,12 @@
 class install {
 
+    $currentuser = "tim" # todo: automate this 
+    $appuser = "www-data"
+    $dbuser = "root"
+    $dbpassword = "{root|db|user}"
     $dbname = "marco_rbs"
-    $dbuser = "marco"
-    $dbpassword = ""
     $projectname = "django_app"
+    $projectpath = "/usr/local/apps/${projectname}"
     $reponame = "marco_boater_survey"
     $appname = "draw_app"
     $secretkey = "secret"
@@ -109,22 +112,22 @@ class install {
     }
 
     # postgresql::db { $dbname:
-    #   user     => "${dbuser}",
-    #   password => "${dbpassword}"
+    #   user      => "${dbuser}",
+    #   password  => "${dbpassword}",
     # }
     postgresql::database { $dbname:
-      owner => "vagrant",
+      owner => "${appuser}",
     }
 
     exec { "load postgis":
       command => "/usr/bin/psql -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql -d ${dbname}",
-      user => "vagrant",
+      user => "${appuser}",
       require => Postgresql::Database[$dbname]
     }
 
     exec { "load spatialrefs":
       command => "/usr/bin/psql -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql -d ${dbname}",
-      user => "vagrant",
+      user => "${appuser}",
       require => Postgresql::Database[$dbname]
     }
 
@@ -148,20 +151,22 @@ class install {
     #}
         
     python::venv::isolate { "/usr/local/venv/${projectname}":
+      owner => "${appuser}",
+      group => "${appuser}",
       subscribe => [Package['python-virtualenv'], Package['build-essential']]
     }
 
-    file { "settings_local.py":
-      path => "/vagrant/${projectname}/local_settings.py",
-      content => template("settings_vagrant.py"),
+    file { "local_settings.py":
+      path => "${projectpath}/local_settings.py",
+      content => template("local_settings.py"),
       require => Exec['load spatialrefs template1']
     }
 
     file { "go":
-      path => "/home/vagrant/go",
+      path => "/home/${currentuser}/go",
       content => template("go"),
-      owner => "vagrant",
-      group => "vagrant",
+      owner => "${appuser}",
+      group => "${appuser}",
       mode => 0775
     }
 
