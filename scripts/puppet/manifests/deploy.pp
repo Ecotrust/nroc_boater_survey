@@ -6,11 +6,12 @@ class install {
     $dbpassword = "{root|db|user}"
     $dbname = "marco_rbs"
     $projectname = "django_app"
-    $projectpath = "/usr/local/apps/${projectname}"
+    $appspath = "/usr/local/apps"
     $reponame = "marco_boater_survey"
     $appname = "draw_app"
     $secretkey = "secret"
     $mapkey = "AIzaSyAuGMb83HBophhruCp62MrfvWp1zMoB0nQ"
+    $adminemail = "aws-marcoboater@ecotrust.org"
 
     # ensure that apt update is run before any packages are installed
     class apt {
@@ -156,10 +157,25 @@ class install {
       subscribe => [Package['python-virtualenv'], Package['build-essential']]
     }
 
+    file { "${appspath}":
+      ensure => "directory",
+      owner => "${appuser}",
+      group => "${appuser}",
+      mode => 775,
+    }
+
+    file { "${appspath}/${projectname}":
+      ensure => "directory",
+      owner => "${appuser}",
+      group => "${appuser}",
+      mode => 775,
+      require => File["${appspath}"],
+    }
+
     file { "local_settings.py":
-      path => "${projectpath}/local_settings.py",
+      path => "${appspath}/${projectname}/local_settings.py",
       content => template("local_settings.py"),
-      require => Exec['load spatialrefs template1']
+      require => [Exec['load spatialrefs template1'], File["${appspath}/${projectname}"]]
     }
 
     file { "go":
