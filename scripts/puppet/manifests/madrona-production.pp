@@ -112,7 +112,7 @@ class install {
     #   user     => "${dbuser}",
     #   password => "${dbpassword}"
     # }
-    postgresql::db { $dbname:
+    postgresql::database { $dbname:
       owner => "vagrant",
     }
 

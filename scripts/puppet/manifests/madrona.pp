@@ -109,9 +109,12 @@ class install {
         shared_buffers => '24MB',
     }
 
-    postgresql::db { $dbname:
-      user      => "${dbuser}",
-      password  => "${dbpassword}",
+    # postgresql::db { $dbname:
+    #   user      => "${dbuser}",
+    #   password  => "${dbpassword}",
+    # }
+    postgresql::database { $dbname:
+      owner => "${appuser}",
     }
 
     exec { "load postgis":
