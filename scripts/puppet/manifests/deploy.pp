@@ -1,7 +1,6 @@
 class install {
 
     $appuser = "vagrant"
-    $dbuser = "postgres"
     $dbname = "marco_rbs"
     $projectname = "django_app"
     $appspath = "/usr/local/apps"

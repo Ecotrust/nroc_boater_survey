@@ -1,7 +1,6 @@
 from fabric.api import *
 
 vars = {
-    'user': 'vagrant',
     'app_dir': '/usr/local/apps/marco_boater_survey/django_app',
     'venv': '/usr/local/venv/django_app'
 }
@@ -12,7 +11,7 @@ env.forward_agent = True
 
 def dev():
     """ Use development server settings """
-    servers = ['%(user)s@127.0.0.1:2222' % vars]
+    servers = ['vagrant@127.0.0.1:2222' % vars]
     env.hosts = servers
     return servers
 
@@ -74,4 +73,3 @@ def update():
     """ Sync with master git repo """
     run('cd %(app_dir)s && git fetch && git merge origin/master' % vars)
     init()
-    

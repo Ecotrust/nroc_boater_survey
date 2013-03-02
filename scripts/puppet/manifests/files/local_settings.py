@@ -22,7 +22,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG 
 
 ADMINS = (
-        ('Madrona', 'madrona@ecotrust.org')
+        ('Site Admin for MARCO Boater Survey', 'aws-marcoboater@ecotrust.org')
         ) 
 
 import logging
