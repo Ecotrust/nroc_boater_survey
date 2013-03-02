@@ -7,16 +7,16 @@ gwst.widgets.ResDrawMapPanel = Ext.extend(GeoExt.MapPanel, {
     defaultCenter: null,
     cachedTiles: true,
 	
-    initComponent: function(){		
-		//Map region
-		var region = {
-            e_bound: -7436602.79,
-            n_bound: 5611382.66,
-            s_bound: 4925283.89,
+    initComponent: function(){
+                //Map region
+        var region = {
+            e_bound: -8136602.79,
+            n_bound: 5711382.66,
+            s_bound: 3725283.89,
             w_bound: -8256007.73,
-            name: 'Oregon Coast'
+            name: 'Mid-Atantic Regional Coast'
         };
-		var map_extent = new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34);
+        var map_extent = new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34);
 	    var region_extent = new OpenLayers.Bounds(region.w_bound,region.s_bound,region.e_bound,region.n_bound);
         this.defaultCenter = region_extent.getCenterLonLat();
 	    	    
