@@ -64,7 +64,7 @@ Vagrant::Config.run do |config|
   #
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "scripts/puppet/manifests"
-    puppet.manifest_file  = "madrona.pp"
+    puppet.manifest_file  = "deploy.pp"
     puppet.module_path = "scripts/puppet/modules"
     puppet.options = ["--templatedir","/vagrant/scripts/puppet/manifests/files"]
   end

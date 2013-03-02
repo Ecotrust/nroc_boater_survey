@@ -1,24 +1,25 @@
 from fabric.api import *
 
 vars = {
+    'user': 'marco',
     'app_dir': '/usr/local/apps/marco_boater_survey/django_app',
     'venv': '/usr/local/venv/django_app'
 }
 
 env.forward_agent = True
-env.key_filename = '~/.vagrant.d/insecure_private_key'
+#env.key_filename = '~/.vagrant.d/insecure_private_key'
 
 
 def dev():
     """ Use development server settings """
-    servers = ['vagrant@127.0.0.1:2222']
+    servers = ['%(user)s@127.0.0.1:2222' % vars]
     env.hosts = servers
     return servers
 
 
 def prod():
     """ Use production server settings """
-    servers = [ubuntu@127.0.0.1]
+    servers = ['ubuntu@localhost:3022']
     env.hosts = servers
     return servers
 

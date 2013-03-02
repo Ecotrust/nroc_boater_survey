@@ -1,9 +1,7 @@
 class install {
 
-    $currentuser = "tim" # todo: automate this 
-    $appuser = "www-data"
-    $dbuser = "root"
-    $dbpassword = "{root|db|user}"
+    $appuser = "vagrant"
+    $dbuser = "postgres"
     $dbname = "marco_rbs"
     $projectname = "django_app"
     $appspath = "/usr/local/apps"
@@ -112,10 +110,6 @@ class install {
         shared_buffers => '24MB',
     }
 
-    # postgresql::db { $dbname:
-    #   user      => "${dbuser}",
-    #   password  => "${dbpassword}",
-    # }
     postgresql::database { $dbname:
       owner => "${appuser}",
     }
@@ -135,22 +129,16 @@ class install {
 
     exec { "load postgis template1":
       command => "/usr/bin/psql -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql -d template1",
-      user => "postgres",
+      user => "${dbuser}",
       require => Postgresql::Database[$dbname]
     }
 
     exec { "load spatialrefs template1":
       command => "/usr/bin/psql -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql -d template1",
-      user => "postgres",
+      user => "${dbuser}",
       require => Postgresql::Database[$dbname]
     }
 
-    #exec { "load cleangeometry template1":
-    #  command => "/usr/bin/psql -d template1 -f /tmp/vagrant-puppet/manifests/files/cleangeometry.sql",
-    #  user => "postgres",
-    #  require => Postgresql::Database[$dbname]
-    #}
-        
     python::venv::isolate { "/usr/local/venv/${projectname}":
       owner => "${appuser}",
       group => "${appuser}",
@@ -181,17 +169,17 @@ class install {
     }
 
     file { "local_settings.py":
-      path => "${appspath}/${projectname}/local_settings.py",
+      path => "${appspath}/${reponame}/${projectname}/local_settings.py",
       content => template("local_settings.py"),
       require => [Exec['load spatialrefs template1'], File["${appspath}/${reponame}/${projectname}"]]
     }
 
     file { "go":
-      path => "/home/${currentuser}/go",
+      path => "/home/$appuser/go",
       content => template("go"),
       owner => "${appuser}",
       group => "${appuser}",
-      mode => 0775
+      mode => 0775,
     }
 
 }
