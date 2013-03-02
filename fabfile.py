@@ -1,7 +1,7 @@
 from fabric.api import *
 
 vars = {
-    'user': 'marco',
+    'user': 'vagrant',
     'app_dir': '/usr/local/apps/marco_boater_survey/django_app',
     'venv': '/usr/local/venv/django_app'
 }
@@ -64,8 +64,6 @@ def init():
     """ Initialize the forest planner application """
     _install_requirements()
     _install_django()
-    # _install_starspan()
-
 
 def runserver():
     """ Run the django dev server on port 8000 """
@@ -76,28 +74,4 @@ def update():
     """ Sync with master git repo """
     run('cd %(app_dir)s && git fetch && git merge origin/master' % vars)
     init()
-
-
-def _install_starspan():
-    run('mkdir -p ~/src && cd ~/src && \
-        if [ ! -d "starspan" ]; then git clone git://github.com/Ecotrust/starspan.git; fi && \
-        cd starspan && \
-        if [ ! `which starspan` ]; then ./configure && make && sudo make install; fi')
-
-# TODO
-# figure out line b/t puppet and fabric duties
-# run test suite
-# run selenium
-# a "bootstrap_puppet" command to ssh into an arbitrary box, transfer files, set things up and run puppet
-#  .. basically a vagrant up for non virtualbox servers
-
-# TODO celeryd under supervisor control
-"""
-(lot)vagrant@precise32:/usr/local/apps/land_owner_tools$ sudo supervisorctl reload
-Restarted supervisord
-(lot)vagrant@precise32:/usr/local/apps/land_owner_tools$ sudo supervisorctl status
-celeryd                          STARTING
-(lot)vagrant@precise32:/usr/local/apps/land_owner_tools$ sudo supervisorctl restart celeryd
-celeryd: stopped
-celeryd: started
-"""
+    

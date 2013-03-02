@@ -129,13 +129,13 @@ class install {
 
     exec { "load postgis template1":
       command => "/usr/bin/psql -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql -d template1",
-      user => "${dbuser}",
+      user => "${appuser}",
       require => Postgresql::Database[$dbname]
     }
 
     exec { "load spatialrefs template1":
       command => "/usr/bin/psql -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql -d template1",
-      user => "${dbuser}",
+      user => "${appuser}",
       require => Postgresql::Database[$dbname]
     }
 

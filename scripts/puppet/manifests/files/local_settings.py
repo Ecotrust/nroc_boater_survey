@@ -5,7 +5,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': '<%= dbname%>',
-        'USER': '<%= dbuser%>',
+        'USER': '<%= appuser%>',
     }
 }
 
