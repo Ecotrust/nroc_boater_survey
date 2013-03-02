@@ -1,7 +1,7 @@
 south
 psycopg2
 django-registration
-django
+django < 1.5
 simplejson
 django-flatblocks
 pytz
