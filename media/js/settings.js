@@ -35,7 +35,7 @@ gwst.settings = {
     shape_other_overlap_text: '<p>Your new area overlaps one of your other areas. They are not allowed to do this.</p>  <p>If you have two that border each other, just draw the second one along the edge of the first as best as you can.</p><img class="invalid-image" src="/media/img/invalid_overlap.png">',
     invalid_poly_text: '<p>Your area is not valid because it either had less than 3 \'corners\' (the minimum required) or it crosses over itself (a bowtie shape is an example).</p>',    
     route_invalid_text: '<p>Your route is not valid because it only had one point.  You may have accidentally double-clicked and completed it before you were done.  Please try again and create at least two waypoints for your route.</p>',
-    help_text: 'If you need help, call 617-737-2600 ext. 102, email <a href="mailto:help@seaplan.org">help@seaplan.org</a>, or refer to our <a target="_blank" href="/detailed_instructions">detailed instructions</a> page'
+    help_text: 'If you need help, call 732-263-5662, email <a href="mailto:ljordan@monmouth.edu">ljordan@monmouth.edu</a>, or refer to our <a target="_blank" href="/detailed_instructions">detailed instructions</a> page'
 };
 
 gwst.settings.urls = {

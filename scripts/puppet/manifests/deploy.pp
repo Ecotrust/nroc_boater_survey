@@ -1,6 +1,7 @@
 class install {
 
     $appuser = "vagrant"
+    $host = "localhost:8000" # AWS: 54.244.241.138
     $dbname = "marco_rbs"
     $projectname = "django_app"
     $appspath = "/usr/local/apps"

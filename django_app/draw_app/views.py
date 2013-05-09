@@ -48,7 +48,7 @@ def status(request):
 
 def draw(request):   
     if not request.session.has_key('interview_id'):    
-        return HttpResponse('We\'re sorry, the mapping portion of this survey cannot be opened.  If you believe this is an error, you can call 617-737-2600 ext. 102, or email <a href="mailto:help@seaplan.org">help@seaplan.org</a>.' , status=500)
+        return HttpResponse('We\'re sorry, the mapping portion of this survey cannot be opened.  If you believe this is an error, you can call 732-263-5662, or email <a href="mailto:ljordan@monmouth.edu">ljordan@monmouth.edu</a>.' , status=500)
     params = {
         'interview_id': request.session['interview_id']
     }

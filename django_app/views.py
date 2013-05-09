@@ -10,7 +10,7 @@ def intro(request):
     if request.GET.has_key('continue'):
     
         if not request.session.has_key('interview_id'):    
-            return HttpResponse('We\'re sorry, the mapping portion of this survey cannot be opened. <br /><b>Please check to be sure that your browser has cookies enabled</b> and use the back button to return to your survey. <br />If you believe this is an error, you can call 617-737-2600 ext. 102, or email <a href="mailto:help@seaplan.org">help@seaplan.org</a>.' , status=500)
+            return HttpResponse('We\'re sorry, the mapping portion of this survey cannot be opened. <br /><b>Please check to be sure that your browser has cookies enabled</b> and use the back button to return to your survey. <br />If you believe this is an error, you can call 732-263-5662, or email <a href="mailto:ljordan@monmouth.edu">ljordan@monmouth.edu</a>.' , status=500)
     
         already_complete = SurveyStatus.objects.filter(survey_id = request.session['interview_id'], complete = True)
         
@@ -41,10 +41,10 @@ def intro(request):
             skipped_survey[0].complete = True
             skipped_survey[0].complete_time = datetime.datetime.now()
             skipped_survey[0].save()
-            return HttpResponseRedirect('http://recreation.seaplan.org/thank-you-2.php')
+            return HttpResponseRedirect('http://www.monmouth.edu/uciboatersurvey')
 
     if not request.GET.has_key('id'):    
-        # return HttpResponse('We\'re sorry, the mapping portion of this survey cannot be opened.  If you believe this is an error, you can call 617-737-2600 ext. 102, or email <a href="mailto:help@seaplan.org">help@seaplan.org</a>.' , status=500)
+        # return HttpResponse('We\'re sorry, the mapping portion of this survey cannot be opened.  If you believe this is an error, you can call 732-263-5662, or email <a href="mailto:ljordan@monmouth.edu">ljordan@monmouth.edu</a>.' , status=500)
         return HttpResponseRedirect('/admin/utils/dashboard/')
 
     interview_id  = request.GET.get('id')

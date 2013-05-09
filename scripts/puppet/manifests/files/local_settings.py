@@ -12,8 +12,8 @@ DATABASES = {
 # This should be a local folder created for use with the install_media command 
 # MEDIA_ROOT = '/usr/local/apps/<%= reponame%>/mediaroot/'
 MEDIA_ROOT = '/usr/local/apps/<%= reponame%>/media/'
-MEDIA_URL = 'http://localhost:8000/media/'
-STATIC_URL = 'http://localhost:8000/install-media/'
+MEDIA_URL = 'http://<%= host%>/media/'
+STATIC_URL = 'http://<%= host%>/install-media/'
 
 BASE_PATH = '/usr/local/apps/<%= reponame%>/<%= projectname%>'
 
