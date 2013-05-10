@@ -17,7 +17,7 @@ gwst.widgets.ActivityAreasPanel = Ext.extend(gwst.widgets.WestPanel, {
     },
 
     getHtmlText: function() {
-        var html_text = '<h2>Step 3: Plot activities from your trip</h2><p>Click on the map to place a marker near where you participated in an activity while boating.</p><p style="padding-bottom: 0; margin-bottom: 0;">While we are interested in any activities you engaged in, we are particularly interested in:</p><ul class="instructions"><li>Fishing</li><li>Wildlife viewing (whales, birds, etc.)</li><li>SCUBA Diving</li><li>Swimming</li><li>Relaxing at anchor</li></ul>';
+        var html_text = '<h2>Step 3: Plot activities from your trip</h2><p>Click on the map to place a marker near where you participated in an activity while boating.</p><p style="padding-bottom: 0; margin-bottom: 0;">While we are interested in any activities you engaged in, we are particularly interested in:</p><ul class="instructions"><li>Fishing</li><li>Wildlife viewing (whales, birds, etc.)</li><li>Scenic viewing</li><li>SCUBA Diving</li><li>Swimming</li><li>Relaxing at anchor</li></ul>';
         return html_text;
     },
 	

@@ -36,6 +36,11 @@ gwst.widgets.ActivityQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
             name: 'wildlife-viewing'
         });
 
+        this.scenic_viewing_box = new Ext.form.Checkbox ({
+            boxLabel: 'Scenic viewing',
+            name: 'scenic-viewing'
+        });
+
         this.diving_box = new Ext.form.Checkbox ({
             boxLabel: 'SCUBA Diving',
             name: 'diving'

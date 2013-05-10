@@ -51,6 +51,7 @@ class ActivityPoint(Model):
     geometry = PointField(srid=settings.SERVER_SRID)
     fishing = BooleanField( default=False )
     viewing = BooleanField( default=False )
+    scenic_viewing = BooleanField( default=False )
     diving = BooleanField( default=False )
     swimming = BooleanField( default=False )
     relaxing = BooleanField( default=False )
