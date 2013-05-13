@@ -41,7 +41,7 @@ def intro(request):
             skipped_survey[0].complete = True
             skipped_survey[0].complete_time = datetime.datetime.now()
             skipped_survey[0].save()
-            return HttpResponseRedirect('http://www.monmouth.edu/uciboatersurvey')
+            return HttpResponseRedirect('http://www.monmouth.edu/uciboatersurvey/thankyou.asp')
 
     if not request.GET.has_key('id'):    
         # return HttpResponse('We\'re sorry, the mapping portion of this survey cannot be opened.  If you believe this is an error, you can call 732-263-5662, or email <a href="mailto:ljordan@monmouth.edu">ljordan@monmouth.edu</a>.' , status=500)
