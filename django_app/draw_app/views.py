@@ -179,12 +179,13 @@ def shapes(request, id=None):
                         'wrecks': False,
                         'fishing': False
                     }
-  
+                    
                 new_shape = ActivityPoint(
                     survey     = SurveyStatus.objects.get(survey_id=feat.get('survey_id')),
                     geometry   = geom,
                     fishing    = activities['fishing'],
                     viewing    = activities['wildlife-viewing'],
+                    scenic_viewing    = activities['scenic-viewing'],
                     diving     = activities['diving'],
                     swimming   = activities['swimming'],
                     relaxing   = activities['relaxing'],

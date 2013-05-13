@@ -64,6 +64,7 @@ gwst.widgets.ActivityQuestionsPanel = Ext.extend(gwst.widgets.WestPanel, {
             items: [
                 this.fishing_box,
                 this.viewing_box,
+                this.scenic_viewing_box,
                 this.diving_box,
                 {boxLabel: 'Swimming', name: 'swimming'},
                 {boxLabel: 'Relaxing at anchor', name: 'relaxing'},
