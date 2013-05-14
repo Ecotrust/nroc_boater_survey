@@ -6,7 +6,7 @@ import datetime
 from draw_app.models import *
 
 def intro(request):
-
+    
     if request.GET.has_key('continue'):
     
         if not request.session.has_key('interview_id'):    

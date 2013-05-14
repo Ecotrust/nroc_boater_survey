@@ -10,6 +10,7 @@ import datetime
 
 from models import *
 
+
 def status(request):
     if request.method == 'POST':        
         #Make sure we were passed a feature
@@ -146,13 +147,14 @@ def shapes(request, id=None):
                         'bluefish': False,
                         'flounder': False,
                         'cod': False,
-                        'haddock': False,
                         'mackerel': False,
                         'scup': False,
                         'tautog': False,
                         'tuna': False,
                         'shark': False,
                         'billfish': False,
+                        'blackseabass': False,
+                        'tilefish': False,
                         'wahoo': False
                     }
                 view_targets = feat.get('view_tgts')
@@ -194,13 +196,14 @@ def shapes(request, id=None):
                     f_bluefish = fish_targets['bluefish'],
                     f_flounder = fish_targets['flounder'],
                     f_atl_cod  = fish_targets['cod'],
-                    f_haddock  = fish_targets['haddock'],
                     f_mackerel = fish_targets['mackerel'],
                     f_scup     = fish_targets['scup'],
                     f_tautog   = fish_targets['tautog'],
                     f_tuna     = fish_targets['tuna'],
                     f_shark    = fish_targets['shark'],
                     f_billfish = fish_targets['billfish'],
+                    f_blackseabass = fish_targets['blackseabass'],
+                    f_tilefish = fish_targets['tilefish'],
                     f_wahoo    = fish_targets['wahoo'],
                     f_other    = fish_other,
                     v_whales   = view_targets['whales'],
@@ -333,7 +336,7 @@ def report(request):
                 'id':a_poly.kn_user_id,
                 'drew_points':0,    #numeric false
                 'points_drawn':0,
-                'drew_polys':1,     #numeric true
+                'drew_polys':1,     #numneric true
                 'polys_drawn':1,
                 'date':str(a_poly.creation_date)
             }
